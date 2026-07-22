@@ -1,0 +1,140 @@
+using CollegeApp.Configuration;
+using CollegeApp.Data;
+using CollegeApp.MyLogging;
+using Repository.InterfaceOfRepository;
+using CollegeApp.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi;
+using Serilog;
+using System.Text;
+using Repository.ClassOfRepository;
+
+
+
+
+
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Logging.ClearProviders();
+
+builder.Logging.AddLog4Net();
+
+
+#region Serilog Setting 
+//Log.Logger = new LoggerConfiguration().
+//    MinimumLevel.Information()
+//    .WriteTo.File("Log/log.txt",rollingInterval:RollingInterval.Minute)
+//    .CreateLogger();
+////use this line to override the built - in logger
+//builder.Host.UseSerilog();
+
+//// use serilog along with built-in logger
+//builder.Logging.AddSerilog();
+#endregion
+
+
+builder.Services.AddDbContext<CollegeDBContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString ("CollegeAppDBConnection"));
+});
+
+// Add services to the container.
+//builder.Services.AddControllers();
+
+// Swagger Services
+builder.Services.AddEndpointsApiExplorer();
+
+
+
+builder.Services.AddSwaggerGen(options =>
+{
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Enter JWT Token. Example: Bearer eyJhbGciOiJIUzI1NiIs..."
+    });
+
+    options.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+    {
+        [new OpenApiSecuritySchemeReference("Bearer", document)] = new List<string>()
+    });
+});
+
+
+
+
+
+builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
+builder.Services.AddControllers()
+                .AddNewtonsoftJson();
+builder.Services.AddScoped<IMyLogger, LogToServerMemory>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped(typeof(ICollegeRepository<>),typeof(CollegeRepository<>));
+builder.Services.AddScoped(typeof(IUserRepository),typeof(UserRepository));
+
+
+
+
+
+//CORS Policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+});
+
+//# JWT Authentication
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+
+            ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
+            ValidAudience = builder.Configuration["JwtSettings:Audience"],
+
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"]))
+        };
+    });
+builder.Services.AddAuthorization();
+
+
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+
+app.UseCors("AllowFrontend");
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+
+app.MapControllers();
+app.Run();

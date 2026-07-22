@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="CollegeApp/CollegeApp.csproj" />
+  <Project Path="Data/Data.csproj" Id="1833c251-4097-476b-8794-ba3bb2e62d7c" />
+  <Project Path="Model/Model.csproj" Id="485f9877-18f9-475e-b074-3f13b4eab87f" />
+  <Project Path="Repository/Repository.csproj" Id="84f9f3cd-d890-4fac-8ae0-152c57984461" />
+  <Project Path="Service/Service.csproj" Id="bd1f0f57-cb31-48f1-9856-4eec11cf7781" />
+</Solution>
