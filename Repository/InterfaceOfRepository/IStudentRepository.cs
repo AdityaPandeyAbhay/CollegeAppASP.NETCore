@@ -1,4 +1,5 @@
 ﻿using CollegeApp.Data;
+using Data.Data;
 
 namespace Repository.InterfaceOfRepository
 {

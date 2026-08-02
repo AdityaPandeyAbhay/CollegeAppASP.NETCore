@@ -1,14 +1,16 @@
 ﻿using AutoMapper;
 using CollegeApp.Data;
 using CollegeApp.Models;
-using Repository.InterfaceOfRepository;
+using Data.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.EntityFrameworkCore;
+using Model.Models.Student_Model;
+using Repository.InterfaceOfRepository;
 using System.Net;
-using Microsoft.AspNetCore.Authorization;
 
 
 namespace CollegeApp.Controllers
@@ -45,8 +47,8 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("All", Name = "GetAllStudents")]
-        //[Authorize(Roles = "Super Admin,Admin,Teacher")]
-        [ProducesResponseType(typeof(StudentDTO), StatusCodes.Status200OK)]
+        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [ProducesResponseType(typeof(GetStudentDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> GetStudentName()
         {
@@ -68,7 +70,7 @@ namespace CollegeApp.Controllers
 
                 // Automapping 
                 var student = await _studentRepository.GetAllAsync();
-                _apiResponse.Data = _mapper.Map<List<StudentDTO>>(student);
+                _apiResponse.Data = _mapper.Map<List<GetStudentDTO>>(student);
                 _apiResponse.Status = true;
                 _apiResponse.StatusCode = HttpStatusCode.OK;
 
@@ -92,7 +94,8 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("id/{Id}", Name = "GetStudentById")]
-        // [ProducesResponseType(typeof(Student), StatusCodes.Status200OK)]
+        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [ProducesResponseType(typeof(Student), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> GetStudentById(int Id)
         {
@@ -122,7 +125,7 @@ namespace CollegeApp.Controllers
                 //};
                 // Automapping 
 
-                _apiResponse.Data = _mapper.Map<StudentDTO>(student);
+                _apiResponse.Data = _mapper.Map<GetStudentDTO>(student);
                 _apiResponse.Status = true;
                 _apiResponse.StatusCode = HttpStatusCode.OK;
 
@@ -147,7 +150,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("Name/{Name}", Name = "GetStudentByName")]
-         // [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
         [ProducesResponseType(typeof(Student), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> GetStudentByName(string Name)
@@ -156,7 +159,12 @@ namespace CollegeApp.Controllers
             try
             {
 
-                var student = await _studentRepository.GetAsync(student => student.StudentName.ToLower().Contains(Name.ToLower()));
+                var student = await _studentRepository.GetAsync(s =>
+            s.FirstName.ToLower().Contains(Name.ToLower()) ||
+            (s.MiddleName != null && s.MiddleName.ToLower().Contains(Name.ToLower())) ||
+            s.LastName.ToLower().Contains(Name.ToLower())
+        );
+
                 if (student == null)
                     return NotFound($"The student with Name {Name} not found");
                 //var studentDTO = new StudentDTO
@@ -170,7 +178,7 @@ namespace CollegeApp.Controllers
                 //};
 
 
-                _apiResponse.Data = _mapper.Map<StudentDTO>(student);
+                _apiResponse.Data = _mapper.Map<GetStudentDTO>(student);
                 _apiResponse.Status = true;
                 _apiResponse.StatusCode = HttpStatusCode.OK;
 
@@ -193,10 +201,10 @@ namespace CollegeApp.Controllers
 
         [HttpPost]
         [Route("Create")]
-        //[Authorize(Roles = "Super Admin,Admin,Teacher")]
-        [ProducesResponseType(typeof(StudentDTO), StatusCodes.Status201Created)]
+        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [ProducesResponseType(typeof(CreateStudentDTO), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<APIResponse>> CreateStudent([FromBody] StudentDTO dto)
+        public async Task<ActionResult<APIResponse>> CreateStudent([FromBody] CreateStudentDTO dto)
         {
 
             try
@@ -225,12 +233,12 @@ namespace CollegeApp.Controllers
 
 
                 var studentAfterCreation = await _studentRepository.CreateAsync(student);
-                dto.Id = studentAfterCreation.Id;
+                
                 _apiResponse.Data = dto;
                 _apiResponse.Status = true;
                 _apiResponse.StatusCode = HttpStatusCode.OK;
 
-                return CreatedAtRoute("GetStudentById", new { id = dto.Id }, _apiResponse);
+                return Ok( _apiResponse);
             }
             catch (Exception ex)
             {
@@ -247,23 +255,22 @@ namespace CollegeApp.Controllers
 
 
 
-        [HttpPut]
-        [Route("Update")]
-        //[Authorize(Roles = "Super Admin,Admin")]
+        [HttpPut("Update/{id:int}")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<APIResponse>> UpdateStudent([FromBody] StudentDTO dto)
+        public async Task<ActionResult<APIResponse>> UpdateStudent(int id,[FromBody] UpdateStudentDTO dto)
         {
             try
             {
 
-                if (dto == null || dto.Id <= 0)
+                if (dto == null || id <= 0)
                 {
                     return BadRequest();
 
                 }
-                var existingStudent = await _studentRepository.GetAsync(student => student.Id == dto.Id, true);
+                var existingStudent = await _studentRepository.GetAsync(student => student.Id == id, true);
                 if (existingStudent == null)
                 {
                     return NotFound();
@@ -286,9 +293,8 @@ namespace CollegeApp.Controllers
                 //existingStudent.DOB = model.DOB;
 
 
-                var newStudent = _mapper.Map<Student>(dto);
-
-                await _studentRepository.UpdateAsync(newStudent);
+                _mapper.Map(dto, existingStudent);
+                await _studentRepository.UpdateAsync(existingStudent);
 
 
 
@@ -307,49 +313,44 @@ namespace CollegeApp.Controllers
 
 
 
-
-        [HttpPatch("PartialUpdate/{Id}")]
-        //[Authorize(Roles = "Super Admin,Admin")]
+        [HttpPatch("PartialStudentUpdate/{id}")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<APIResponse >> PartialUpdateStudent(
-    int Id,
-    [FromBody] JsonPatchDocument<StudentDTO> patchDocument)
+        public async Task<ActionResult<APIResponse>> PartialUpdateStudent(
+            int id,
+            [FromBody] JsonPatchDocument<PatchStudentDTO> patchDocument)
         {
             try
             {
-                if (patchDocument == null || Id <= 0)
+                if (patchDocument == null || id <= 0)
                 {
                     return BadRequest();
-
                 }
-                var existingStudent = await _studentRepository.GetAsync(student => student.Id == Id, true);
+
+                var existingStudent = await _studentRepository.GetAsync(
+                    s => s.Id == id, true);
+
                 if (existingStudent == null)
                 {
                     return NotFound();
                 }
-                //var studentDTO = new StudentDTO
-                //{
-                //    Id = existingStudent.Id,
-                //    StudentName = existingStudent.StudentName,
-                //    Email = existingStudent.Email,
-                //    DOB = existingStudent.DOB,
-                //};
 
-                var studentDTO = _mapper.Map<StudentDTO>(existingStudent);
-                patchDocument.ApplyTo(studentDTO, ModelState);
+                var patchStudentDTO = _mapper.Map<PatchStudentDTO>(existingStudent);
 
-                //existingStudent.StudentName = studentDTO.StudentName;
-                //existingStudent.Email = studentDTO.Email;
-                //existingStudent.Address = studentDTO.Address;
-                //existingStudent.DOB = studentDTO.DOB;
+                patchDocument.ApplyTo(patchStudentDTO, ModelState);
 
-                _mapper.Map(studentDTO, existingStudent);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                _mapper.Map(patchStudentDTO, existingStudent);
 
                 await _studentRepository.UpdateAsync(existingStudent);
-                return NoContent();
 
+                return NoContent();
             }
             catch (Exception ex)
             {
@@ -358,16 +359,15 @@ namespace CollegeApp.Controllers
                 _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
                 return _apiResponse;
             }
-
         }
-        
+
 
 
 
 
 
         [HttpDelete("{Id}", Name = "DeleteStudentById")]
-        //[Authorize(Roles = "Super Admin,Admin")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [ProducesResponseType(typeof(Student), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> DeleteStudentById(int Id)

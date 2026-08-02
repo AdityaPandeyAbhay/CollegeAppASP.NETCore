@@ -39,7 +39,9 @@ namespace CollegeApp.Data.Config
                   .HasForeignKey(x => x.UserId)
                   .HasConstraintName("FK_UserRoleMappings_Users")
                   .OnDelete(DeleteBehavior.Cascade);
-           
+            builder.Property(x => x.UserId)
+                   .HasMaxLength(450);
+
         }
     
     }

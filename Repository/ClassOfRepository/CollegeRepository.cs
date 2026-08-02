@@ -13,8 +13,7 @@ namespace Repository.ClassOfRepository
         { 
 
             _dbContext = dbContext;
-            _dbSet = _dbContext.Set<T>(); 
-        }
+            _dbSet = _dbContext.Set<T>();          }
 
 
 

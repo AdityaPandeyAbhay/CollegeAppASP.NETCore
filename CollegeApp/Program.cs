@@ -1,15 +1,17 @@
 using CollegeApp.Configuration;
 using CollegeApp.Data;
 using CollegeApp.MyLogging;
-using Repository.InterfaceOfRepository;
 using CollegeApp.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
-using Serilog;
-using System.Text;
 using Repository.ClassOfRepository;
+using Repository.InterfaceOfRepository;
+using Serilog;
+using Service.ClassOfService;
+using Service.InterfaceOfService;
+using System.Text;
 
 
 
@@ -69,16 +71,54 @@ builder.Services.AddSwaggerGen(options =>
 
 
 
-
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
 builder.Services.AddControllers()
                 .AddNewtonsoftJson();
 builder.Services.AddScoped<IMyLogger, LogToServerMemory>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITeacherService, TeacherService>();
+
+builder.Services.AddScoped<ICurrentUserServices, CurrentUserServices>();
+
 builder.Services.AddScoped(typeof(ICollegeRepository<>),typeof(CollegeRepository<>));
 builder.Services.AddScoped(typeof(IUserRepository),typeof(UserRepository));
+builder.Services.AddScoped(typeof(ITeacherRepository), typeof(TeacherRepository));
 
+
+builder.Services.AddScoped(typeof(INonTeachingStaffRepository), typeof(NonTeachingStaffRepository));
+builder.Services.AddScoped<INonTeachingStaffService, NonTeachingStaffService>();
+
+
+builder.Services.AddScoped(typeof(IDepartmentRepository), typeof(DepartmentRepository));
+builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+
+
+builder.Services.AddScoped(typeof(IAcademicYearRepository), typeof( AcademicYearRepository));
+builder.Services.AddScoped<IAcademicYearService, AcademicYearService>();
+
+
+builder.Services.AddScoped(typeof(IFeeCategoryRepository), typeof(FeeCategoryRepository));
+builder.Services.AddScoped<IFeeCategoryService, IFeeCategoryService>();
+
+builder.Services.AddScoped(typeof(IFeeStructureRepository), typeof(FeeStructureRepository));
+builder.Services.AddScoped<IFeeStructureService, IFeeStructureService>();
+
+builder.Services.AddScoped(typeof(IStudentFeeRepository), typeof(StudentFeeRepository));
+builder.Services.AddScoped<IStudentFeeService, StudentFeeService>();
+
+builder.Services.AddScoped(typeof(ISchoolClassRepository), typeof(SchoolClassRepository));
+builder.Services.AddScoped<IClassService, ClassService>();
+
+builder.Services.AddScoped(typeof(ISectionRepository), typeof(SectionRepository));
+builder.Services.AddScoped<ISectionService, SectionService>();
+
+builder.Services.AddScoped(typeof(ISubjectRepository), typeof(SubjectRepository));
+builder.Services.AddScoped<ISubjectService, SubjectService>();
+
+builder.Services.AddScoped(typeof(ITeacherAssignmentRepository), typeof(TeacherAssignmentRepository));
+builder.Services.AddScoped<ITeacherAssignmentService, TeacherAssignmentService>();
 
 
 

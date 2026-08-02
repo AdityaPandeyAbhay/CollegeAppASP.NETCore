@@ -1,9 +1,11 @@
-﻿namespace CollegeApp.Data
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CollegeApp.Data
 {
     public class UserRoleMapping
     {
         public int Id { get; set; }
-
+        [StringLength(450)]
         public string UserId { get; set; } = string.Empty;
 
         public int RoleId { get; set; }

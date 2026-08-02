@@ -1,7 +1,11 @@
-﻿namespace CollegeApp.Data
+﻿using Data.Data;
+using System.ComponentModel.DataAnnotations;
+
+namespace CollegeApp.Data
 {
     public class User
     {
+        [StringLength(450)]
         public string Id { get; set; }
         public string Username { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
@@ -22,6 +26,16 @@
         public virtual UserType UserType { get; set; } // Navigation property for user type
 
         public virtual ICollection<UserRoleMapping> UserRoleMappings { get; set; } // Navigation property for user-role mappings
+
+        // Teacher account
+        public virtual Teacher? Teacher { get; set; }
+
+        // Audit
+        public virtual ICollection<Teacher> CreatedTeachers { get; set; } = new List<Teacher>();
+
+        public virtual ICollection<Teacher> UpdatedTeachers { get; set; } = new List<Teacher>();
+
+        public virtual NonTeachingStaff? NonTeachingStaff { get; set; }
 
     }
 }

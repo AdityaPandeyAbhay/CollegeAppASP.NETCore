@@ -16,7 +16,7 @@ namespace CollegeApp.Data.Config
 
             // Id
             builder.Property(x => x.Id)
-                   .HasMaxLength(50)
+                   .HasMaxLength(450)
                    .IsRequired();
 
             // Username

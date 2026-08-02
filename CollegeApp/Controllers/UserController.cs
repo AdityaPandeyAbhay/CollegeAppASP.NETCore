@@ -241,7 +241,7 @@ namespace CollegeApp.Controllers
 
 
                 _apiResponse.Data = user;
-                _apiResponse.Status = true;
+                _apiResponse.Status = true; 
                 _apiResponse.StatusCode = HttpStatusCode.OK;
 
 

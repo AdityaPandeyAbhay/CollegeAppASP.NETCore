@@ -1,0 +1,326 @@
+﻿using AutoMapper;
+using CollegeApp.Models;
+using CollegeApp.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Model.Models.Teacher_Model;
+using Service.ClassOfService;
+using Service.InterfaceOfService;
+using System.Net;
+using System.Security.Claims;
+
+
+
+
+namespace CollegeApp.Controllers
+{
+
+    [Route("api/[controller]")]
+    [ApiController]
+    [Authorize]
+
+    public class TeacherController : ControllerBase
+    {
+        private readonly IMapper _mapper;
+        private readonly ILogger _logger;
+        private readonly ITeacherService _service;
+        private readonly APIResponse _apiResponse;
+        private readonly ICurrentUserServices _currentUserService;
+
+        public TeacherController(IMapper mapper, ILogger logger, ITeacherService service, ICurrentUserServices currentUserService)
+        {
+            _apiResponse = new();
+            _mapper = mapper;
+            _service = service;
+            _logger = logger;
+            _currentUserService = currentUserService;
+
+        }
+
+        [HttpPost]
+        [Route("CreateTeacher")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
+        [ProducesResponseType(StatusCodes.Status200OK)]          // Success
+
+        [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
+
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]  // Invalid Request
+
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)] // Authentication Failed
+
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]   // Access Denied
+
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)] // Server Error
+
+        public async Task<ActionResult<APIResponse>> CreateTeacherApiAsync(CreateTeacherDTO dto)
+        {
+            try
+            {
+                if (dto == null)
+                {
+                    throw new Exception("Invalid request");
+                }
+
+                var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                var teacher = await _service.CreateTeacherAsync(dto);
+
+
+                _apiResponse.Data = teacher;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode = HttpStatusCode.Created;
+                return Ok(_apiResponse);
+            }
+            catch (Exception ex)
+            {
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+
+                return _apiResponse;
+
+            }
+        }
+
+
+        [HttpGet]
+        [Route("AllTeacher")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
+        [ProducesResponseType(StatusCodes.Status200OK)]          // Success
+
+        [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
+
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]  // Invalid Request
+
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)] // Authentication Failed
+
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]   // Access Denied
+
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)] // Server Error
+
+        public async Task<ActionResult<APIResponse>> GetAllTeacherAsync()
+        {
+            try
+            {
+                var teachet = await _service.GetAllTeacherAsync();
+                _apiResponse.Data = teachet;
+                _apiResponse.StatusCode = HttpStatusCode.OK;
+                _apiResponse.Status = true;
+                return _apiResponse;
+
+            }
+            catch (Exception ex)
+            {
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+
+                return _apiResponse;
+
+            }
+        }
+
+
+        [HttpGet("TeacherCode/{Code}")]
+        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+
+        [ProducesResponseType(StatusCodes.Status200OK)]          // Success
+
+        [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
+
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]  // Invalid Request
+
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)] // Authentication Failed
+
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]   // Access Denied
+
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)] // Server Error
+
+        public async Task<ActionResult<APIResponse>> GetTeacherByCodeAsync(string code)
+        {
+            try
+            {
+                
+                var teacher = await _service.GetByTeacherCodeAsync(code);
+
+                if (teacher == null)
+                {
+                    throw new Exception($"User are not found on {code} code");
+                }
+
+                // SuperAdmin/Admin can access all teachers
+                if (!_currentUserService.IsInRole("SuperAdmin") &&
+                    !_currentUserService.IsInRole("Admin"))
+                {
+                    // Teacher can access only their own record
+                    if (teacher.UserId != _currentUserService.UserId)
+                    {
+                        return Forbid();
+                    }
+                }
+
+
+                _apiResponse.Data = teacher;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode = HttpStatusCode.OK;
+
+                return Ok(_apiResponse);
+            }
+            catch (Exception ex)
+            {
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+
+                return _apiResponse;
+            }
+        }
+
+
+
+        [HttpGet("Name/{Name}")]
+        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [ProducesResponseType(StatusCodes.Status200OK)]          // Success
+
+        [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
+
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]  // Invalid Request
+
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)] // Authentication Failed
+
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]   // Access Denied
+
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)] // Server Error
+
+        public async Task<ActionResult<APIResponse>> GetTeacherByNameAsync(string Name)
+        {
+            try
+            {
+                var teachers = await _service.GetTeacherByNameAsync(Name);
+
+                if (teachers == null || !teachers.Any())
+                {
+                    return NotFound();
+                }
+
+                if (!_currentUserService.IsInRole("SuperAdmin") &&
+                    !_currentUserService.IsInRole("Admin"))
+                {
+                    if (teachers.Any(x => x.UserId != _currentUserService.UserId))
+                    {
+                        return Forbid();
+                    }
+                }
+
+                _apiResponse.Data = teachers;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode = HttpStatusCode.OK;
+
+                return Ok(_apiResponse);
+            }
+            catch (Exception ex) {
+
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+
+                return _apiResponse;
+            }
+        }
+
+
+
+
+
+
+        [HttpPut("UpdateTeacher/{id:int}")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
+        [ProducesResponseType(StatusCodes.Status200OK)]          // Success
+
+        [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
+
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]  // Invalid Request
+
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)] // Authentication Failed
+
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]   // Access Denied
+
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)] // Server Error
+
+        public async Task<ActionResult<APIResponse>> UpdateTeacherAsync(int id,UpdateTeacherDTO dto)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
+                var teacher = await _service.UpdateTeacherAsync(id,dto);
+                _apiResponse.Data = teacher;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode = HttpStatusCode.OK; 
+                return Ok(_apiResponse);
+            }
+            catch (Exception ex) {
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+
+                return _apiResponse;
+            }
+
+        }
+
+
+
+
+        [HttpDelete("DeleteTeacher/{code}")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
+        [ProducesResponseType(StatusCodes.Status200OK)]          // Success
+
+        [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
+
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]  // Invalid Request
+
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)] // Authentication Failed
+
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]   // Access Denied
+
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)] // Server Error
+
+        public async Task<ActionResult<APIResponse>> DeleteTeacherAsync(string code)
+        {
+            try
+            {
+
+               
+                await _service.DeleteTeacherAsync(code);
+
+
+
+                _apiResponse.Data = true;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode =
+                    HttpStatusCode.OK;
+
+
+                return Ok(_apiResponse);
+
+            }
+            catch (Exception ex)
+            {
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode =
+                    HttpStatusCode.InternalServerError;
+
+
+                return _apiResponse;
+            }
+        }
+
+
+
+
+
+    }
+}

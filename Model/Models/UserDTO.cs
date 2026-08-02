@@ -4,7 +4,7 @@ namespace CollegeApp.Models
 {
     public class UserDTO
     {
-        public string Id { get; set; }
+        public string Id { get; set; } 
         [Required]
         public string Username { get; set; } = string.Empty;
         [Required]
