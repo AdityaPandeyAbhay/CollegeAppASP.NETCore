@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using CollegeApp.Data;
 using CollegeApp.Models;
-using Repository.InterfaceOfRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Model.Models;
+using Repository.InterfaceOfRepository;
 using System.Net;
 
 namespace CollegeApp.Controllers
@@ -184,7 +186,46 @@ namespace CollegeApp.Controllers
 
 
 
+        [HttpGet("Dropdown")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<APIResponse>> GetRolePrivilegeDropdown()
+        {
+            try
+            {
+                var result = (await _rolePrivilegeRepository.GetAllAsync())
+                    .Where(x => x.IsActive && !x.IsDeleted)
+                    .Select(x => new DropdownDTO
+                    {
+                        Id = x.Id,
+                        Code = null,
+                        Text = x.RolePrivilegeName
+                    })
+                    .OrderBy(x => x.Text)
+                    .ToList();
 
+                if (!result.Any())
+                {
+                    return NotFound();
+                }
+
+                _apiResponse.Data = result;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode = HttpStatusCode.OK;
+
+                return Ok(_apiResponse);
+            }
+            catch (Exception ex)
+            {
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+
+                return _apiResponse;
+            }
+        }
 
 
 

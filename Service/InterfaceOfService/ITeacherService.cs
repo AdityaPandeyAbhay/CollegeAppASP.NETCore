@@ -1,4 +1,5 @@
-﻿using Model.Models.Teacher_Model;
+﻿using Model.Models;
+using Model.Models.Teacher_Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,5 +14,9 @@ namespace Service.InterfaceOfService
         Task<GetTeacherDTO> GetByTeacherCodeAsync(string code);
         Task<List<GetTeacherDTO>> GetTeacherByNameAsync(string name);
         Task<bool> UpdateTeacherAsync(int id, UpdateTeacherDTO dto);
+
+        Task<List<DropdownDTO>> GetTeacherDropdownAsync(
+    int? schoolClassId,
+    int? subjectId);
     }
 }

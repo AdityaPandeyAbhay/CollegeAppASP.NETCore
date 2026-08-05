@@ -79,6 +79,9 @@ builder.Services.AddControllers()
 builder.Services.AddScoped<IMyLogger, LogToServerMemory>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITeacherService, TeacherService>();
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+
+
 
 builder.Services.AddScoped<ICurrentUserServices, CurrentUserServices>();
 
@@ -100,10 +103,10 @@ builder.Services.AddScoped<IAcademicYearService, AcademicYearService>();
 
 
 builder.Services.AddScoped(typeof(IFeeCategoryRepository), typeof(FeeCategoryRepository));
-builder.Services.AddScoped<IFeeCategoryService, IFeeCategoryService>();
+builder.Services.AddScoped<IFeeCategoryService, FeeCategoryService>();
 
 builder.Services.AddScoped(typeof(IFeeStructureRepository), typeof(FeeStructureRepository));
-builder.Services.AddScoped<IFeeStructureService, IFeeStructureService>();
+builder.Services.AddScoped<IFeeStructureService, FeeStructureService>();
 
 builder.Services.AddScoped(typeof(IStudentFeeRepository), typeof(StudentFeeRepository));
 builder.Services.AddScoped<IStudentFeeService, StudentFeeService>();
@@ -119,6 +122,10 @@ builder.Services.AddScoped<ISubjectService, SubjectService>();
 
 builder.Services.AddScoped(typeof(ITeacherAssignmentRepository), typeof(TeacherAssignmentRepository));
 builder.Services.AddScoped<ITeacherAssignmentService, TeacherAssignmentService>();
+
+builder.Services.AddScoped<IAttendanceRepository, AttendanceRepository>();
+builder.Services.AddScoped<IAttendanceService, AttendanceService>();
+
 
 
 

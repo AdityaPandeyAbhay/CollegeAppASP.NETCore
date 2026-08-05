@@ -166,6 +166,37 @@ namespace CollegeApp.Controllers
 
         #endregion
 
+
+        #region Class Dropdown
+
+        [HttpGet]
+        [Route("Dropdown")]
+        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<APIResponse>> GetDropdown()
+        {
+            try
+            {
+                _response.Data = await _classService.GetClassDropdownAsync();
+                _response.Status = true;
+                _response.StatusCode = HttpStatusCode.OK;
+
+                return Ok(_response);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+
+                _response.Status = false;
+                _response.Errors.Add(ex.Message);
+                _response.StatusCode = HttpStatusCode.InternalServerError;
+
+                return StatusCode(StatusCodes.Status500InternalServerError, _response);
+            }
+        }
+
+        #endregion
+
         #region Update Class
 
         [HttpPut]

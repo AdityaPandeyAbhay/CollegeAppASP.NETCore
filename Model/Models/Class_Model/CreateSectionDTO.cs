@@ -17,6 +17,7 @@ namespace Model.Models.Class_Model
         [Required]
         [StringLength(50)]
         public string SectionName { get; set; } = string.Empty;
+        public int DisplayOrder { get; set; } = 1;
 
         [Range(1, 500)]
         public int Capacity { get; set; }

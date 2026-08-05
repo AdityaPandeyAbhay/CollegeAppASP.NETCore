@@ -1,4 +1,5 @@
-﻿using Model.Models.Subject_model;
+﻿using Model.Models;
+using Model.Models.Subject_model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,5 +14,9 @@ namespace Service.InterfaceOfService
         Task<List<GetSubjectDTO>> GetSubjectByNameAsync(string name);
         Task<bool> UpdateSubjectAsync(int id, UpdateSubjectDTO dto);
         Task<bool> DeleteSubjectAsync(string code);
+
+        Task<List<DropdownDTO>> GetSubjectDropdownAsync();
+
+        Task<List<DropdownDTO>> GetSubjectDropdownByDepartmentAsync(int departmentId);
     }
 }

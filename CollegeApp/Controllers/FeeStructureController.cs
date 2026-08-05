@@ -174,6 +174,42 @@ namespace CollegeApp.Controllers
 
         #endregion
 
+
+
+        #region Fee Structure Dropdown
+
+        [HttpGet]
+        [Route("Dropdown")]
+        [Authorize(Roles = "SuperAdmin,Admin,Accountant")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<APIResponse>> GetFeeStructureDropdown()
+        {
+            try
+            {
+                _response.Data = await _feeStructureService.GetFeeStructureDropdownAsync();
+                _response.Status = true;
+                _response.StatusCode = HttpStatusCode.OK;
+
+                return Ok(_response);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+
+                _response.Status = false;
+                _response.Errors.Add(ex.Message);
+                _response.StatusCode = HttpStatusCode.InternalServerError;
+
+                return StatusCode(StatusCodes.Status500InternalServerError, _response);
+            }
+        }
+
+        #endregion
+
+
+
+
+
         #region Update Fee Structure
 
         [HttpPut]

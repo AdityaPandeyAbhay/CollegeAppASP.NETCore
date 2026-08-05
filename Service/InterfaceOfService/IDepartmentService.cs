@@ -1,4 +1,5 @@
-﻿using Model.Models.Department_model;
+﻿using Model.Models;
+using Model.Models.Department_model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,5 +19,6 @@ namespace Service.InterfaceOfService
         Task<bool> UpdateDepartmentAsync(int id, UpdateDepartmentDTO dto);
 
         Task<bool> DeleteDepartmentAsync(string code);
+        Task<List<DropdownDTO>> GetDepartmentDropdownAsync();
     }
 }

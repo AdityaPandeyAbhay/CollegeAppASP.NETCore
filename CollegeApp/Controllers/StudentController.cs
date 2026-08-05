@@ -30,14 +30,23 @@ namespace CollegeApp.Controllers
 
         private readonly IMapper _mapper;
         private APIResponse _apiResponse;
+        private readonly ICollegeRepository<Department> _departmentRepository;
+        private readonly ICollegeRepository<SchoolClass> _classRepository;
+        private readonly ICollegeRepository<Section> _sectionRepository;
 
-
-        public StudentController(ILogger<StudentController> logger, ICollegeRepository<Student> studentRepository, IMapper mapper)
+        public StudentController(ILogger<StudentController> logger, ICollegeRepository<Student> studentRepository, IMapper mapper, ICollegeRepository<Department> departmentRepository,
+    ICollegeRepository<SchoolClass> classRepository,
+    ICollegeRepository<Section> sectionRepository)
         {
             _logger = logger;
             _studentRepository = studentRepository;
             _mapper = mapper;
             _apiResponse = new APIResponse();
+
+            _departmentRepository = departmentRepository;
+            _classRepository = classRepository;
+            _sectionRepository = sectionRepository;
+
 
         }
 
@@ -250,6 +259,206 @@ namespace CollegeApp.Controllers
             }
 
         }
+
+
+        [HttpGet("dropdown/department")]
+        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<APIResponse>> GetDepartmentDropdown()
+        {
+            try
+            {
+                var departments = await _departmentRepository.GetAllAsync();
+
+
+                var result = departments.Select(d => new
+                {
+                    id = d.Id,
+                    name = d.DepartmentName
+                });
+
+
+                _apiResponse.Data = result;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode = HttpStatusCode.OK;
+
+
+                return Ok(_apiResponse);
+            }
+            catch (Exception ex)
+            {
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.Status = false;
+                _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+
+                return _apiResponse;
+            }
+        }
+
+
+
+        [HttpGet("dropdown/class")]
+        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<APIResponse>> GetClassDropdown(
+    int departmentId)
+        {
+            try
+            {
+                if (departmentId <= 0)
+                    return BadRequest();
+
+
+                var classes = await _classRepository.GetAllByFilterAsync(
+                    c => c.DepartmentId == departmentId
+                );
+
+
+                var result = classes.Select(c => new
+                {
+                    id = c.Id,
+                    name = c.ClassName
+                });
+
+
+                _apiResponse.Data = result;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode = HttpStatusCode.OK;
+
+
+                return Ok(_apiResponse);
+
+            }
+            catch (Exception ex)
+            {
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.Status = false;
+                _apiResponse.StatusCode =
+                HttpStatusCode.InternalServerError;
+
+
+                return _apiResponse;
+            }
+        }
+
+
+
+
+        [HttpGet("dropdown/section")]
+        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<APIResponse>> GetSectionDropdown(
+    int classId)
+        {
+            try
+            {
+
+                if (classId <= 0)
+                    return BadRequest();
+
+
+                var sections =
+                    await _sectionRepository.GetAllByFilterAsync(
+                        s => s.SchoolClassId == classId
+                    );
+
+
+                var result = sections.Select(s => new
+                {
+                    id = s.Id,
+                    name = s.SectionName
+                });
+
+
+
+                _apiResponse.Data = result;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode = HttpStatusCode.OK;
+
+
+                return Ok(_apiResponse);
+
+            }
+            catch (Exception ex)
+            {
+
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.Status = false;
+                _apiResponse.StatusCode =
+                HttpStatusCode.InternalServerError;
+
+
+                return _apiResponse;
+
+            }
+        }
+
+
+
+        [HttpGet("dropdown/student")]
+        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<APIResponse>> GetStudentDropdown(
+    int departmentId,
+    int classId,
+    int sectionId)
+        {
+            try
+            {
+
+                var students =
+                    await _studentRepository.GetAllByFilterAsync(
+                    s =>
+                    s.DepartmentId == departmentId &&
+                    s.SchoolClassId == classId &&
+                    s.SectionId == sectionId
+                    );
+
+
+                var result = students.Select(s => new
+                {
+                    id = s.Id,
+
+                    name =
+                    s.FirstName + " " +
+                    (s.MiddleName ?? "") +
+                    " " +
+                    s.LastName
+                });
+
+
+                _apiResponse.Data = result;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode = HttpStatusCode.OK;
+
+
+                return Ok(_apiResponse);
+
+
+            }
+            catch (Exception ex)
+            {
+
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.Status = false;
+                _apiResponse.StatusCode =
+                HttpStatusCode.InternalServerError;
+
+
+                return _apiResponse;
+
+            }
+        }
+
+
 
 
 

@@ -77,6 +77,10 @@ namespace CollegeApp.Data.Config
                     "CK_Section_Capacity",
                     "[Capacity] > 0");
             });
+
+            builder.Property(x => x.DisplayOrder)
+       .IsRequired()
+       .HasDefaultValue(1);
         }
     }
 }

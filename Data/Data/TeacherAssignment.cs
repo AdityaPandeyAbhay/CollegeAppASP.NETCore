@@ -36,5 +36,12 @@ namespace Data.Data
 
         public string? UpdatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
+
+        public virtual ICollection<Attendance> Attendances { get; set; }
+           = new List<Attendance>();
+
+
+
+
     }
 }

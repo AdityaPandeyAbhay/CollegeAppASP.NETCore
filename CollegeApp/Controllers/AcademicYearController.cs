@@ -20,8 +20,11 @@ namespace CollegeApp.Controllers
         private readonly APIResponse _apiResponse;
         private readonly ICurrentUserServices _currentUserService;
 
-        public AcademicYearController(IMapper mapper, ILogger<AcademicYearController> logger,
-            IAcademicYearService service, ICurrentUserServices currentUserService)
+        public AcademicYearController(
+            IMapper mapper,
+            ILogger<AcademicYearController> logger,
+            IAcademicYearService service,
+            ICurrentUserServices currentUserService)
         {
             _mapper = mapper;
             _logger = logger;
@@ -30,62 +33,209 @@ namespace CollegeApp.Controllers
             _apiResponse = new APIResponse();
         }
 
-        [HttpPost("CreateAcademicYear")]
+        #region Create Academic Year
+
+        [HttpPost]
+        [Route("CreateAcademicYear")]
         [Authorize(Roles = "SuperAdmin,Admin")]
-        public async Task<ActionResult<APIResponse>> Create(AcademicYearDTO dto)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<APIResponse>> CreateAcademicYearAsync(AcademicYearDTO dto)
         {
             try
             {
-                _apiResponse.Data = await _service.CreateAcademicYearAsync(dto);
+                if (dto == null)
+                    throw new Exception("Invalid request.");
+
+                var result = await _service.CreateAcademicYearAsync(dto);
+
+                _apiResponse.Data = result;
                 _apiResponse.Status = true;
                 _apiResponse.StatusCode = HttpStatusCode.Created;
+
                 return Ok(_apiResponse);
             }
             catch (Exception ex)
             {
-                _apiResponse.Status = false; _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
                 _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+
                 return _apiResponse;
             }
         }
 
-        [HttpGet("AllAcademicYear")]
-        public async Task<ActionResult<APIResponse>> GetAll()
+        #endregion
+
+        #region Get All Academic Years
+
+        [HttpGet]
+        [Route("AllAcademicYear")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<APIResponse>> GetAllAcademicYearAsync()
         {
-            _apiResponse.Data = await _service.GetAllAcademicYearAsync();
-            _apiResponse.Status = true;
-            _apiResponse.StatusCode = HttpStatusCode.OK;
-            return Ok(_apiResponse);
+            try
+            {
+                var result = await _service.GetAllAcademicYearAsync();
+
+                _apiResponse.Data = result;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode = HttpStatusCode.OK;
+
+                return Ok(_apiResponse);
+            }
+            catch (Exception ex)
+            {
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+
+                return _apiResponse;
+            }
         }
+
+        #endregion
+
+        #region Dropdown
+
+        [HttpGet]
+        [Route("Dropdown")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<APIResponse>> GetDropdownAsync()
+        {
+            try
+            {
+                var result = await _service.GetDropdownAsync();
+
+                _apiResponse.Data = result;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode = HttpStatusCode.OK;
+
+                return Ok(_apiResponse);
+            }
+            catch (Exception ex)
+            {
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+
+                return _apiResponse;
+            }
+        }
+
+        #endregion
+
+        #region Get By Year Name
 
         [HttpGet("Year/{yearName}")]
-        public async Task<ActionResult<APIResponse>> Get(string yearName)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<APIResponse>> GetAcademicYearByNameAsync(string yearName)
         {
-            _apiResponse.Data = await _service.GetByYearNameAsync(yearName);
-            _apiResponse.Status = true;
-            _apiResponse.StatusCode = HttpStatusCode.OK;
-            return Ok(_apiResponse);
+            try
+            {
+                var result = await _service.GetByYearNameAsync(yearName);
+
+                if (result == null)
+                    return NotFound();
+
+                _apiResponse.Data = result;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode = HttpStatusCode.OK;
+
+                return Ok(_apiResponse);
+            }
+            catch (Exception ex)
+            {
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+
+                return _apiResponse;
+            }
         }
 
-        [HttpPut("UpdateAcademicYear/{id:int}")]
+        #endregion
+
+        #region Update Academic Year
+
+        [HttpPut]
+        [Route("UpdateAcademicYear/{id:int}")]
         [Authorize(Roles = "SuperAdmin,Admin")]
-        public async Task<ActionResult<APIResponse>> Update(int id, AcademicYearDTO dto)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<APIResponse>> UpdateAcademicYearAsync(int id, AcademicYearDTO dto)
         {
-            _apiResponse.Data = await _service.UpdateAcademicYearAsync(id, dto);
-            _apiResponse.Status = true;
-            _apiResponse.StatusCode = HttpStatusCode.OK;
-            return Ok(_apiResponse);
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
+                var result = await _service.UpdateAcademicYearAsync(id, dto);
+
+                _apiResponse.Data = result;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode = HttpStatusCode.OK;
+
+                return Ok(_apiResponse);
+            }
+            catch (Exception ex)
+            {
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+
+                return _apiResponse;
+            }
         }
 
-        [HttpDelete("DeleteAcademicYear/{yearName}")]
+        #endregion
+
+        #region Delete Academic Year
+
+        [HttpDelete]
+        [Route("DeleteAcademicYear/{yearName}")]
         [Authorize(Roles = "SuperAdmin,Admin")]
-        public async Task<ActionResult<APIResponse>> Delete(string yearName)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<APIResponse>> DeleteAcademicYearAsync(string yearName)
         {
-            _apiResponse.Data = await _service.DeleteAcademicYearAsync(yearName);
-            _apiResponse.Status = true;
-            _apiResponse.StatusCode = HttpStatusCode.OK;
-            return Ok(_apiResponse);
+            try
+            {
+                await _service.DeleteAcademicYearAsync(yearName);
+
+                _apiResponse.Data = true;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode = HttpStatusCode.OK;
+
+                return Ok(_apiResponse);
+            }
+            catch (Exception ex)
+            {
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+
+                return _apiResponse;
+            }
         }
+
+        #endregion
     }
-
 }

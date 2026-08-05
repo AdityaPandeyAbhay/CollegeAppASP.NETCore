@@ -14,6 +14,7 @@ namespace Service.InterfaceOfService
         Task<List<GetFeeStructureDTO>> GetFeeStructureByClassAsync(int classId);
         Task<bool> UpdateFeeStructureAsync(int id, UpdateFeeStructureDTO dto);
         Task<bool> DeleteFeeStructureAsync(int id);
+        Task<List<FeeStructureDropdownDTO>> GetFeeStructureDropdownAsync();
 
     }
 }

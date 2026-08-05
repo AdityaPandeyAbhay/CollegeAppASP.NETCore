@@ -17,6 +17,7 @@ namespace Service.InterfaceOfService
         Task<bool> UpdateAcademicYearAsync(int id, AcademicYearDTO dto);
 
         Task<bool> DeleteAcademicYearAsync(string yearName);
+        Task<List<DropdownDTO>> GetDropdownAsync();
     }
 
 

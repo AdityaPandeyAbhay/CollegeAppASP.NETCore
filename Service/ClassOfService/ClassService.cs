@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Data.Data;
+using Model.Models;
 using Model.Models.Class_Model;
 using Repository.InterfaceOfRepository;
 using Service.InterfaceOfService;
@@ -105,6 +106,20 @@ namespace Service.ClassOfService
                 x.ClassName.ToLower().Contains(className.ToLower()));
 
             return _mapper.Map<List<SchoolClassDTO>>(classes);
+        }
+        public async Task<List<DropdownDTO>> GetClassDropdownAsync()
+        {
+            var classes = await _classRepository.GetAllByFilterAsync(x => x.IsActive);
+
+            return classes
+                .OrderBy(x => x.DisplayOrder)
+                .Select(x => new DropdownDTO
+                {
+                    Id = x.Id,
+                    Text = x.ClassName,
+                    Code = x.ClassCode
+                })
+                .ToList();
         }
 
         public async Task<bool> UpdateClassAsync(int id, SchoolClassDTO dto)

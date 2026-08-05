@@ -14,6 +14,7 @@ namespace Service.InterfaceOfService
         Task<bool> UpdateStudentFeeAsync(int id, UpdateStudentFeeDTO dto);
         Task<bool> DeleteStudentFeeAsync(int id);
         Task<List<GetStudentFeeDTO>> GetStudentFeeByStudentNameAsync(string studentName);
+        Task<List<StudentFeeDropdownDTO>> GetStudentFeeDropdownAsync();
 
     }
 }

@@ -126,6 +126,25 @@ namespace CollegeApp.Data.Config
                    .HasForeignKey(x => x.DepartmentId)
                    .OnDelete(DeleteBehavior.Restrict);
 
+            // Student -> SchoolClass
+            builder.HasOne(x => x.SchoolClass)
+                   .WithMany(x => x.Students)
+                   .HasForeignKey(x => x.SchoolClassId)
+                   .OnDelete(DeleteBehavior.Restrict);
+
+            // Student -> Section
+            builder.HasOne(x => x.Section)
+                   .WithMany(x => x.Students)
+                   .HasForeignKey(x => x.SectionId)
+                   .OnDelete(DeleteBehavior.Restrict);
+
+
+            builder.HasIndex(x => new
+            {
+                x.SchoolClassId,
+                x.SectionId
+            });
+
             // CreatedBy User
             builder.HasOne(x => x.CreatedByUser)
                    .WithMany()

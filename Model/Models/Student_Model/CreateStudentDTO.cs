@@ -13,7 +13,14 @@ namespace Model.Models.Student_Model
             [Required]
             public int DepartmentId { get; set; }
 
-            [Required]
+             [Required]
+            public int SchoolClassId { get; set; }
+
+
+             [Required]
+             public int SectionId { get; set; }
+
+        [Required]
             [StringLength(20)]
             public string AdmissionNumber { get; set; } = string.Empty;
 

@@ -182,6 +182,37 @@ namespace CollegeApp.Controllers
 
         #endregion
 
+
+        #region Student Fee Dropdown
+
+        [HttpGet]
+        [Route("Dropdown")]
+        [Authorize(Roles = "SuperAdmin,Admin,Accountant")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<APIResponse>> GetStudentFeeDropdown()
+        {
+            try
+            {
+                _response.Data = await _studentFeeService.GetStudentFeeDropdownAsync();
+                _response.Status = true;
+                _response.StatusCode = HttpStatusCode.OK;
+
+                return Ok(_response);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+
+                _response.Status = false;
+                _response.Errors.Add(ex.Message);
+                _response.StatusCode = HttpStatusCode.InternalServerError;
+
+                return StatusCode(StatusCodes.Status500InternalServerError, _response);
+            }
+        }
+
+        #endregion
+
         #region Update Student Fee
 
         [HttpPut]

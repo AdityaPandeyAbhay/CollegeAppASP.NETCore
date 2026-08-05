@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using AutoMapper;
+﻿using AutoMapper;
 using Data.Data;
+using Model.Models;
 using Model.Models.Fee_Model;
 using Repository.InterfaceOfRepository;
 using Service.InterfaceOfService;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Service.ClassOfService
 {
@@ -138,6 +138,21 @@ namespace Service.ClassOfService
             await _feeCategoryRepository.DeleteAsync(category);
 
             return true;
+        }
+
+        public async Task<List<DropdownDTO>> GetFeeCategoryDropdownAsync()
+        {
+            var categories = await _feeCategoryRepository.GetAllByFilterAsync(x => x.IsActive);
+
+            return categories
+                .OrderBy(x => x.CategoryName)
+                .Select(x => new DropdownDTO
+                {
+                    Id = x.Id,
+                    Code = null,
+                    Text = x.CategoryName
+                })
+                .ToList();
         }
     }
 }

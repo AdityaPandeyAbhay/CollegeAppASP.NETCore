@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Data.Data;
+using Model.Models;
 using Model.Models.Subject_model;
 
 using Repository.InterfaceOfRepository;
@@ -179,6 +180,38 @@ namespace Service.ClassOfService
             await _subjectRepository.DeleteAsync(subject);
 
             return true;
+        }
+
+        public async Task<List<DropdownDTO>> GetSubjectDropdownAsync()
+        {
+            var subjects = await _subjectRepository.GetAllByFilterAsync(x => x.IsActive);
+
+            return subjects
+                .OrderBy(x => x.SubjectName)
+                .Select(x => new DropdownDTO
+                {
+                    Id = x.Id,
+                    Text = x.SubjectName,
+                    Code = x.SubjectCode
+                })
+                .ToList();
+        }
+
+        public async Task<List<DropdownDTO>> GetSubjectDropdownByDepartmentAsync(int departmentId)
+        {
+            var subjects = await _subjectRepository.GetAllByFilterAsync(x =>
+                x.IsActive &&
+                x.DepartmentId == departmentId);
+
+            return subjects
+                .OrderBy(x => x.SubjectName)
+                .Select(x => new DropdownDTO
+                {
+                    Id = x.Id,
+                    Text = x.SubjectName,
+                    Code = x.SubjectCode
+                })
+                .ToList();
         }
     }
 }

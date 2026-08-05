@@ -139,5 +139,21 @@ namespace Service.ClassOfService
             return true;
         }
 
+        public async Task<List<DropdownDTO>> GetDropdownAsync()
+        {
+            var academicYears = await _academicYearRepository.GetAllByFilterAsync(
+                x => x.IsActive,
+                true);
+
+            return academicYears
+                .OrderByDescending(x => x.StartDate)
+                .Select(x => new DropdownDTO
+                {
+                    Id = x.Id,
+                    Text = x.YearName
+                })
+                .ToList();
+        }
+
     }
 }

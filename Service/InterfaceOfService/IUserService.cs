@@ -1,4 +1,5 @@
 ﻿using CollegeApp.Models;
+using Model.Models;
 
 namespace CollegeApp.Services
 {
@@ -14,5 +15,6 @@ namespace CollegeApp.Services
 
         Task<bool> DeleteUserAsync(string Id);
         (string passwordHash, string salt) CreatePasswordHashWithSalt(string password);
+        Task<List<DropdownDTO>> GetUserDropdownAsync();
     }
 }

@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using CollegeApp.Data;
 using CollegeApp.Models;
-using Repository.InterfaceOfRepository;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Model.Models;
+using Repository.InterfaceOfRepository;
 using System.Data.SqlTypes;
 using System.Security.Cryptography;
 
@@ -154,6 +155,24 @@ namespace CollegeApp.Services
             await _userRepository.DeleteAsync(user);
             return true;
 
+        }
+
+        public async Task<List<DropdownDTO>> GetUserDropdownAsync()
+        {
+            var users = await _userRepository.GetAllByFilterAsync(
+                x => x.IsActive && !x.IsDeleted
+            );
+
+
+            return users.Select(x => new DropdownDTO
+            {
+                Id = 0,
+
+                Code = x.Id,
+
+                Text = x.Username
+
+            }).ToList();
         }
     }
 }

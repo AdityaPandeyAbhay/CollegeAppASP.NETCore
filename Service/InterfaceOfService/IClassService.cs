@@ -1,4 +1,5 @@
-﻿using Model.Models.Class_Model;
+﻿using Model.Models;
+using Model.Models.Class_Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,5 +15,6 @@ namespace Service.InterfaceOfService
         Task<bool> UpdateClassAsync(int id, SchoolClassDTO dto);
 
         Task<bool> DeleteClassAsync(string classCode);
+        Task<List<DropdownDTO>> GetClassDropdownAsync();
     }
 }

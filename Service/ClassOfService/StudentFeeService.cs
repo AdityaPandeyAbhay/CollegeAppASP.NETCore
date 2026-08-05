@@ -252,5 +252,17 @@ namespace Service.ClassOfService
 
             return true;
         }
+
+
+        public async Task<List<StudentFeeDropdownDTO>> GetStudentFeeDropdownAsync()
+        {
+            var studentFees = await _studentFeeRepository.GetAllByFilterAsync(x => true);
+
+            return studentFees.Select(x => new StudentFeeDropdownDTO
+            {
+                Id = x.Id,
+                DisplayName = $"{x.InvoiceNo} - {x.Student.FirstName} {x.Student.LastName}"
+            }).ToList();
+        }
     }
 }

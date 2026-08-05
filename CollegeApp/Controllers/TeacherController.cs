@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CollegeApp.Models;
 using CollegeApp.Services;
+using Data.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Model.Models.Teacher_Model;
@@ -229,6 +230,51 @@ namespace CollegeApp.Controllers
         }
 
 
+
+
+        [HttpGet("dropdown")]
+        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<APIResponse>> GetTeacherDropdown(
+    int? schoolClassId,
+    int? subjectId)
+        {
+            try
+            {
+                var result =
+                    await _service.GetTeacherDropdownAsync(
+                        schoolClassId,
+                        subjectId
+                    );
+
+
+                if (result == null || !result.Any())
+                {
+                    return NotFound();
+                }
+
+
+                _apiResponse.Data = result;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode = HttpStatusCode.OK;
+
+
+                return Ok(_apiResponse);
+
+            }
+            catch (Exception ex)
+            {
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode =
+                    HttpStatusCode.InternalServerError;
+
+
+                return _apiResponse;
+            }
+        }
 
 
 

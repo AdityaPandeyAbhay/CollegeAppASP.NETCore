@@ -67,6 +67,9 @@ namespace CollegeApp.Configuration
 
             // Academic Year
             CreateMap<AcademicYear, AcademicYearDTO>().ReverseMap();
+            CreateMap<AcademicYear, DropdownDTO>()
+                    .ForMember(dest => dest.Text,
+                     opt => opt.MapFrom(src => src.YearName));
 
 
             //. Fee 

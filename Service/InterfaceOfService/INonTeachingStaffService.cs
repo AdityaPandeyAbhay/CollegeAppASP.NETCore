@@ -1,4 +1,5 @@
-﻿using Model.Models.NonTeachingStaff;
+﻿using Model.Models;
+using Model.Models.NonTeachingStaff;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,6 +16,7 @@ namespace Service.InterfaceOfService
         Task<bool> UpdateNonTeachingStaffAsync(int id, UpdateNonTeachingStaffDTO dto);
 
         Task<bool> DeleteNonTeachingStaffAsync(string code);
+        Task<List<DropdownDTO>> GetNonTeachingStaffDropdownAsync();
 
     }
 }

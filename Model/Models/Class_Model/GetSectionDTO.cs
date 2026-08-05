@@ -15,6 +15,7 @@ namespace Model.Models.Class_Model
         public string SectionCode { get; set; } = string.Empty;
 
         public string SectionName { get; set; } = string.Empty;
+        public int DisplayOrder { get; set; } = 1;
 
         public int Capacity { get; set; }
 

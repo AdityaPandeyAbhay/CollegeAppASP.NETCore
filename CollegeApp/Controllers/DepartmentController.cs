@@ -20,7 +20,8 @@ namespace CollegeApp.Controllers
         private readonly APIResponse _apiResponse;
         private readonly ICurrentUserServices _currentUserService;
 
-        public DepartmentController(IMapper mapper,
+        public DepartmentController(
+            IMapper mapper,
             ILogger<DepartmentController> logger,
             IDepartmentService service,
             ICurrentUserServices currentUserService)
@@ -32,15 +33,30 @@ namespace CollegeApp.Controllers
             _apiResponse = new APIResponse();
         }
 
-        [HttpPost("CreateDepartment")]
+        #region Create Department
+
+        [HttpPost]
+        [Route("CreateDepartment")]
         [Authorize(Roles = "SuperAdmin,Admin")]
-        public async Task<ActionResult<APIResponse>> CreateDepartment(CreateDepartmentDTO dto)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<APIResponse>> CreateDepartmentAsync(CreateDepartmentDTO dto)
         {
             try
             {
-                _apiResponse.Data = await _service.CreateDepartmentAsync(dto);
+                if (dto == null)
+                    throw new Exception("Invalid request.");
+
+                var department = await _service.CreateDepartmentAsync(dto);
+
+                _apiResponse.Data = department;
                 _apiResponse.Status = true;
                 _apiResponse.StatusCode = HttpStatusCode.Created;
+
                 return Ok(_apiResponse);
             }
             catch (Exception ex)
@@ -48,55 +64,212 @@ namespace CollegeApp.Controllers
                 _apiResponse.Status = false;
                 _apiResponse.Errors.Add(ex.Message);
                 _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+
                 return _apiResponse;
             }
         }
 
-        [HttpGet("AllDepartment")]
-        public async Task<ActionResult<APIResponse>> GetAllDepartment()
+        #endregion
+
+        #region Get All Department
+
+        [HttpGet]
+        [Route("AllDepartment")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<APIResponse>> GetAllDepartmentAsync()
         {
-            _apiResponse.Data = await _service.GetAllDepartmentAsync();
-            _apiResponse.Status = true;
-            _apiResponse.StatusCode = HttpStatusCode.OK;
-            return Ok(_apiResponse);
+            try
+            {
+                var departments = await _service.GetAllDepartmentAsync();
+
+                _apiResponse.Data = departments;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode = HttpStatusCode.OK;
+
+                return Ok(_apiResponse);
+            }
+            catch (Exception ex)
+            {
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+
+                return _apiResponse;
+            }
         }
+
+        #endregion
+
+        #region Get Department By Code
 
         [HttpGet("DepartmentCode/{code}")]
-        public async Task<ActionResult<APIResponse>> GetByCode(string code)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<APIResponse>> GetDepartmentByCodeAsync(string code)
         {
-            _apiResponse.Data = await _service.GetByDepartmentCodeAsync(code);
-            _apiResponse.Status = true;
-            _apiResponse.StatusCode = HttpStatusCode.OK;
-            return Ok(_apiResponse);
+            try
+            {
+                var department = await _service.GetByDepartmentCodeAsync(code);
+
+                if (department == null)
+                    return NotFound();
+
+                _apiResponse.Data = department;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode = HttpStatusCode.OK;
+
+                return Ok(_apiResponse);
+            }
+            catch (Exception ex)
+            {
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+
+                return _apiResponse;
+            }
         }
+
+        #endregion
+
+        #region Get Department By Name
 
         [HttpGet("Name/{name}")]
-        public async Task<ActionResult<APIResponse>> GetByName(string name)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<APIResponse>> GetDepartmentByNameAsync(string name)
         {
-            _apiResponse.Data = await _service.GetDepartmentByNameAsync(name);
-            _apiResponse.Status = true;
-            _apiResponse.StatusCode = HttpStatusCode.OK;
-            return Ok(_apiResponse);
+            try
+            {
+                var departments = await _service.GetDepartmentByNameAsync(name);
+
+                if (departments == null || !departments.Any())
+                    return NotFound();
+
+                _apiResponse.Data = departments;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode = HttpStatusCode.OK;
+
+                return Ok(_apiResponse);
+            }
+            catch (Exception ex)
+            {
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+
+                return _apiResponse;
+            }
         }
 
-        [HttpPut("UpdateDepartment/{id:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
-        public async Task<ActionResult<APIResponse>> Update(int id, UpdateDepartmentDTO dto)
+        #endregion
+
+        #region Department Dropdown
+
+        [HttpGet]
+        [Route("Dropdown")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<APIResponse>> GetDepartmentDropdownAsync()
         {
-            _apiResponse.Data = await _service.UpdateDepartmentAsync(id, dto);
-            _apiResponse.Status = true;
-            _apiResponse.StatusCode = HttpStatusCode.OK;
-            return Ok(_apiResponse);
+            try
+            {
+                var dropdown = await _service.GetDepartmentDropdownAsync();
+
+                _apiResponse.Data = dropdown;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode = HttpStatusCode.OK;
+
+                return Ok(_apiResponse);
+            }
+            catch (Exception ex)
+            {
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+
+                return _apiResponse;
+            }
         }
 
-        [HttpDelete("DeleteDepartment/{code}")]
+        #endregion
+
+        #region Update Department
+
+        [HttpPut]
+        [Route("UpdateDepartment/{id:int}")]
         [Authorize(Roles = "SuperAdmin,Admin")]
-        public async Task<ActionResult<APIResponse>> Delete(string code)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<APIResponse>> UpdateDepartmentAsync(int id, UpdateDepartmentDTO dto)
         {
-            _apiResponse.Data = await _service.DeleteDepartmentAsync(code);
-            _apiResponse.Status = true;
-            _apiResponse.StatusCode = HttpStatusCode.OK;
-            return Ok(_apiResponse);
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
+                var department = await _service.UpdateDepartmentAsync(id, dto);
+
+                _apiResponse.Data = department;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode = HttpStatusCode.OK;
+
+                return Ok(_apiResponse);
+            }
+            catch (Exception ex)
+            {
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+
+                return _apiResponse;
+            }
         }
+
+        #endregion
+
+        #region Delete Department
+
+        [HttpDelete]
+        [Route("DeleteDepartment/{code}")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<APIResponse>> DeleteDepartmentAsync(string code)
+        {
+            try
+            {
+                await _service.DeleteDepartmentAsync(code);
+
+                _apiResponse.Data = true;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode = HttpStatusCode.OK;
+
+                return Ok(_apiResponse);
+            }
+            catch (Exception ex)
+            {
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+
+                return _apiResponse;
+            }
+        }
+
+        #endregion
     }
 }

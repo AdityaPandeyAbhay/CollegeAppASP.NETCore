@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using CollegeApp.Data;
 using CollegeApp.Models;
-using Repository.InterfaceOfRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Model.Models;
+using Repository.InterfaceOfRepository;
 using System.Net
 ;
 namespace CollegeApp.Controllers
@@ -168,6 +170,44 @@ namespace CollegeApp.Controllers
         }
 
 
+
+        [HttpGet]
+        [Route("dropdown")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<APIResponse>> GetRoleDropdown()
+        {
+            try
+            {
+                var roles = await _roleRepository.GetAllByFilterAsync(x =>
+                    x.IsActive && !x.IsDeleted);
+
+                var dropdown = roles
+                    .Select(x => new DropdownDTO
+                    {
+                        Id = x.Id,
+                        Code = null,
+                        Text = x.RoleName
+                    })
+                    .OrderBy(x => x.Text)
+                    .ToList();
+
+                _apiResponse.Data = dropdown;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode = HttpStatusCode.OK;
+
+                return Ok(_apiResponse);
+            }
+            catch (Exception ex)
+            {
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+
+                return _apiResponse;
+            }
+        }
 
 
         [HttpPut]

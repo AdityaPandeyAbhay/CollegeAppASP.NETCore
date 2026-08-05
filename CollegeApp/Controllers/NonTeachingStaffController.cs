@@ -225,6 +225,50 @@ namespace CollegeApp.Controllers
         }
 
 
+        [HttpGet("dropdown")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
+
+        [Authorize(Roles = "SuperAdmin,Admin,NonTeachingStaff")]
+        [ProducesResponseType(StatusCodes.Status200OK)]          // Success
+
+        [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
+
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]  // Invalid Request
+
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)] // Authentication Failed
+
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]   // Access Denied
+
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)] // Server Error
+
+        public async Task<ActionResult<APIResponse>> GetNonTeachingStaffDropdown()
+        {
+            try
+            {
+                var staff =
+                    await _service.GetNonTeachingStaffDropdownAsync();
+
+
+                _apiResponse.Data = staff;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode = HttpStatusCode.OK;
+
+
+                return Ok(_apiResponse);
+            }
+            catch (Exception ex)
+            {
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode =
+                    HttpStatusCode.InternalServerError;
+
+
+                return _apiResponse;
+            }
+        }
+
+
 
 
 

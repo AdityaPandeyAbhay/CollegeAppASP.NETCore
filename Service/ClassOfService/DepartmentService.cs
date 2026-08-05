@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Data.Data;
+using Model.Models;
 using Model.Models.Department_model;
 using Repository.InterfaceOfRepository;
 using Service.InterfaceOfService;
@@ -69,6 +70,22 @@ namespace Service.ClassOfService
                 ?? throw new Exception("Department not found.");
             await _departmentRepository.DeleteAsync(entity);
             return true;
+        }
+
+
+        public async Task<List<DropdownDTO>> GetDepartmentDropdownAsync()
+        {
+            var departments = await _departmentRepository.GetAllByFilterAsync(x => x.IsActive);
+
+            return departments
+                .OrderBy(x => x.DisplayOrder)
+                .Select(x => new DropdownDTO
+                {
+                    Id = x.Id,
+                    Text = x.DepartmentName,
+                    Code = x.DepartmentCode
+                })
+                .ToList();
         }
     }
 }

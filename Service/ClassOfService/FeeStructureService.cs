@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using AutoMapper;
+﻿using AutoMapper;
 using Data.Data;
 using Model.Models.Fee_Model;
 using Repository.InterfaceOfRepository;
 using Service.InterfaceOfService;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Service.ClassOfService
 {
@@ -213,6 +212,17 @@ namespace Service.ClassOfService
             await _feeStructureRepository.DeleteAsync(feeStructure);
 
             return true;
+        }
+
+        public async Task<List<FeeStructureDropdownDTO>> GetFeeStructureDropdownAsync()
+        {
+            var feeStructures = await _feeStructureRepository.GetAllByFilterAsync(x => x.IsActive);
+
+            return feeStructures.Select(x => new FeeStructureDropdownDTO
+            {
+                Id = x.Id,
+                Name = $"{x.FeeCategory.CategoryName} - {x.Amount}"
+            }).ToList();
         }
     }
 }

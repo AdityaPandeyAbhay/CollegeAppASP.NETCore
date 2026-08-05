@@ -13,6 +13,7 @@ namespace Data.Data
         public string SectionCode { get; set; } = string.Empty;
 
         public string SectionName { get; set; } = string.Empty;
+        public int DisplayOrder { get; set; }
 
         public int Capacity { get; set; }
 
@@ -45,5 +46,8 @@ namespace Data.Data
 
         //public virtual ICollection<TimeTable> TimeTables { get; set; }
         //    = new List<TimeTable>();
+
+        public virtual ICollection<Student> Students { get; set; }
+             = new List<Student>();
     }
 }

@@ -304,6 +304,98 @@ namespace Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Data.Data.Attendance", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateOnly>("AttendanceDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Remarks")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<int>("TeacherAssignmentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeacherAssignmentId", "AttendanceDate")
+                        .IsUnique();
+
+                    b.ToTable("Attendances", (string)null);
+                });
+
+            modelBuilder.Entity("Data.Data.AttendanceDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AttendanceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AttendanceStatus")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Remarks")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("AttendanceId", "StudentId")
+                        .IsUnique();
+
+                    b.ToTable("AttendanceDetails", (string)null);
+                });
+
             modelBuilder.Entity("Data.Data.Department", b =>
                 {
                     b.Property<int>("Id")
@@ -687,6 +779,11 @@ namespace Data.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<int>("DisplayOrder")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
+
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
@@ -827,6 +924,12 @@ namespace Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int>("SchoolClassId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SectionId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UpdatedBy")
                         .HasMaxLength(450)
                         .HasColumnType("nvarchar(450)");
@@ -855,10 +958,14 @@ namespace Data.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
+                    b.HasIndex("SectionId");
+
                     b.HasIndex("UpdatedBy");
 
                     b.HasIndex("UserId")
                         .IsUnique();
+
+                    b.HasIndex("SchoolClassId", "SectionId");
 
                     b.ToTable("Students", (string)null);
                 });
@@ -1237,6 +1344,36 @@ namespace Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Data.Data.Attendance", b =>
+                {
+                    b.HasOne("Data.Data.TeacherAssignment", "TeacherAssignment")
+                        .WithMany("Attendances")
+                        .HasForeignKey("TeacherAssignmentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("TeacherAssignment");
+                });
+
+            modelBuilder.Entity("Data.Data.AttendanceDetail", b =>
+                {
+                    b.HasOne("Data.Data.Attendance", "Attendance")
+                        .WithMany("AttendanceDetails")
+                        .HasForeignKey("AttendanceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Data.Data.Student", "Student")
+                        .WithMany("AttendanceDetails")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Attendance");
+
+                    b.Navigation("Student");
+                });
+
             modelBuilder.Entity("Data.Data.FeeStructure", b =>
                 {
                     b.HasOne("Data.Data.AcademicYear", "AcademicYear")
@@ -1319,6 +1456,18 @@ namespace Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("Data.Data.SchoolClass", "SchoolClass")
+                        .WithMany("Students")
+                        .HasForeignKey("SchoolClassId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Data.Data.Section", "Section")
+                        .WithMany("Students")
+                        .HasForeignKey("SectionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("CollegeApp.Data.User", "UpdatedByUser")
                         .WithMany()
                         .HasForeignKey("UpdatedBy")
@@ -1333,6 +1482,10 @@ namespace Data.Migrations
                     b.Navigation("CreatedByUser");
 
                     b.Navigation("Department");
+
+                    b.Navigation("SchoolClass");
+
+                    b.Navigation("Section");
 
                     b.Navigation("UpdatedByUser");
 
@@ -1490,6 +1643,11 @@ namespace Data.Migrations
                     b.Navigation("TeacherAssignments");
                 });
 
+            modelBuilder.Entity("Data.Data.Attendance", b =>
+                {
+                    b.Navigation("AttendanceDetails");
+                });
+
             modelBuilder.Entity("Data.Data.Department", b =>
                 {
                     b.Navigation("FeeStructures");
@@ -1521,16 +1679,22 @@ namespace Data.Migrations
 
                     b.Navigation("Sections");
 
+                    b.Navigation("Students");
+
                     b.Navigation("TeacherAssignments");
                 });
 
             modelBuilder.Entity("Data.Data.Section", b =>
                 {
+                    b.Navigation("Students");
+
                     b.Navigation("TeacherAssignments");
                 });
 
             modelBuilder.Entity("Data.Data.Student", b =>
                 {
+                    b.Navigation("AttendanceDetails");
+
                     b.Navigation("StudentFees");
                 });
 
@@ -1542,6 +1706,11 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Data.Teacher", b =>
                 {
                     b.Navigation("TeacherAssignments");
+                });
+
+            modelBuilder.Entity("Data.Data.TeacherAssignment", b =>
+                {
+                    b.Navigation("Attendances");
                 });
 #pragma warning restore 612, 618
         }

@@ -50,5 +50,7 @@ namespace Data.Data
         //    = new List<TimeTable>();
         public virtual ICollection<FeeStructure> FeeStructures { get; set; }
                 = new List<FeeStructure>();
+        public virtual ICollection<Student> Students { get; set; }
+               = new List<Student>();
     }
 }

@@ -14,6 +14,17 @@ namespace Data.Data
         public int DepartmentId { get; set; }
         public virtual Department Department { get; set; } = null!;
 
+        // Class
+        public int SchoolClassId { get; set; }
+
+        public virtual SchoolClass SchoolClass { get; set; } = null!;
+
+
+        // Section
+        public int SectionId { get; set; }
+
+        public virtual Section Section { get; set; } = null!;
+
         // Admission
         public string AdmissionNumber { get; set; } = string.Empty;
 
@@ -86,5 +97,8 @@ namespace Data.Data
 
         //public virtual ICollection<Document> Documents { get; set; }
         //    = new List<Document>();
+
+        public virtual ICollection<AttendanceDetail> AttendanceDetails { get; set; }
+         = new List<AttendanceDetail>();
     }
 }

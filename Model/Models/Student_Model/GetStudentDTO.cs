@@ -12,6 +12,10 @@ namespace Model.Models.Student_Model
 
         public int DepartmentId { get; set; }
 
+        public int SchoolClassId { get; set; }
+
+        public int SectionId { get; set; }
+
         public string AdmissionNumber { get; set; } = string.Empty;
 
         public DateTime AdmissionDate { get; set; }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Data.Data;
+using Model.Models;
 using Model.Models.NonTeachingStaff;
 using Repository.InterfaceOfRepository;
 using Service.InterfaceOfService;
@@ -143,7 +144,32 @@ namespace Service.ClassOfService
             return true;
 
         }
+        public async Task<List<DropdownDTO>> GetNonTeachingStaffDropdownAsync()
+        {
+            var staff = await _nonTeachingStaffRepository.GetAllAsync();
 
+
+            if (staff == null || !staff.Any())
+            {
+                return new List<DropdownDTO>();
+            }
+
+
+            var dropdown = staff
+                .Where(x => x.IsActive)
+                .Select(x => new DropdownDTO
+                {
+                    Id = x.Id,
+
+                    Code = x.StaffCode,
+
+                    Text = $"{x.FirstName} {x.LastName}"
+                })
+                .ToList();
+
+
+            return dropdown;
+        }
 
     }
 }

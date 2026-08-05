@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AutoMapper;
+﻿using AutoMapper;
 using Data.Data;
+using Model.Models;
 using Model.Models.TeacherAssignment_Model;
 using Repository.InterfaceOfRepository;
 using Service.InterfaceOfService;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Service.ClassOfService
 {
@@ -258,6 +259,56 @@ namespace Service.ClassOfService
             await _teacherAssignmentRepository.DeleteAsync(assignment);
 
             return true;
+        }
+
+
+        public async Task<List<DropdownDTO>> GetTeacherDropdownAsync(
+    int? departmentId,
+    int? schoolClassId,
+    int? sectionId,
+    int? subjectId,
+    int? academicYearId)
+        {
+
+            var assignments =
+                await _teacherAssignmentRepository.GetAllByFilterAsync(x =>
+                    (!departmentId.HasValue ||
+                        x.DepartmentId == departmentId) &&
+
+                    (!schoolClassId.HasValue ||
+                        x.SchoolClassId == schoolClassId) &&
+
+                    (!sectionId.HasValue ||
+                        x.SectionId == sectionId) &&
+
+                    (!subjectId.HasValue ||
+                        x.SubjectId == subjectId) &&
+
+                    (!academicYearId.HasValue ||
+                        x.AcademicYearId == academicYearId) &&
+
+                    x.IsActive
+                );
+
+
+            var teachers = assignments
+                .Select(x => x.Teacher)
+                .Distinct()
+                .Select(t => new DropdownDTO
+                {
+                    Id = t.Id,
+
+                    Code = t.TeacherCode,
+
+                    Text =
+                    t.FirstName + " " +
+                    t.LastName
+
+                })
+                .ToList();
+
+
+            return teachers;
         }
     }
 }

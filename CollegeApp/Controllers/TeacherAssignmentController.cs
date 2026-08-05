@@ -229,6 +229,56 @@ namespace CollegeApp.Controllers
 
         #endregion
 
+
+        [HttpGet]
+        [Route("dropdown/teacher")]
+        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<APIResponse>> GetTeacherDropdown(
+         int? departmentId,
+         int? schoolClassId,
+         int? sectionId,
+         int? subjectId,
+         int? academicYearId)
+        {
+            try
+            {
+
+                var result =
+                    await _teacherAssignmentService
+                    .GetTeacherDropdownAsync(
+                        departmentId,
+                        schoolClassId,
+                        sectionId,
+                        subjectId,
+                        academicYearId
+                    );
+
+
+                _response.Status = true;
+                _response.Data = result;
+                _response.StatusCode = HttpStatusCode.OK;
+
+
+                return Ok(_response);
+
+            }
+            catch (Exception ex)
+            {
+                _response.Status = false;
+                _response.Errors.Add(ex.Message);
+                _response.StatusCode =
+                    HttpStatusCode.InternalServerError;
+
+
+                return _response;
+            }
+        }
+
+
+
         #region Update Teacher Assignment
 
         [HttpPut]

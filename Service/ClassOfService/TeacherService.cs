@@ -2,6 +2,7 @@
 using CollegeApp.Data;
 using CollegeApp.Models;
 using Data.Data;
+using Model.Models;
 using Model.Models.Teacher_Model;
 using Repository.InterfaceOfRepository;
 using Service.InterfaceOfService;
@@ -11,27 +12,27 @@ using System.Text;
 
 namespace Service.ClassOfService
 {
-     public class TeacherService : ITeacherService
+    public class TeacherService : ITeacherService
     {
         private readonly ITeacherRepository _teacherRepository;
         private IMapper _mapper;
         private readonly IUserRepository _userRepository;
         private readonly ICurrentUserServices _currentUserService;
 
-        public TeacherService(ITeacherRepository teacherRepository,IMapper mapper,IUserRepository userRepository, ICurrentUserServices currentUserService)
+        public TeacherService(ITeacherRepository teacherRepository, IMapper mapper, IUserRepository userRepository, ICurrentUserServices currentUserService)
         {
             _teacherRepository = teacherRepository;
             _mapper = mapper;
             _userRepository = userRepository;
             _currentUserService = currentUserService;
-            
+
         }
 
 
 
         public async Task<GetTeacherDTO> CreateTeacherAsync(CreateTeacherDTO dto)
         {
-            var user  = await _userRepository.GetAllByFilterAsync(u =>u.Id == dto.UserId);
+            var user = await _userRepository.GetAllByFilterAsync(u => u.Id == dto.UserId);
             if (user == null)
             {
                 throw new Exception("User not found.");
@@ -74,7 +75,7 @@ namespace Service.ClassOfService
         }
 
 
-        public async Task<GetTeacherDTO> GetByTeacherCodeAsync(string code) 
+        public async Task<GetTeacherDTO> GetByTeacherCodeAsync(string code)
         {
 
             var teacher = await _teacherRepository.GetAllByFilterAsync(t => t.TeacherCode == code, true);
@@ -134,7 +135,7 @@ namespace Service.ClassOfService
             teacher.UpdatedBy = currentUserId;
             teacher.UpdatedDate = DateTime.UtcNow;
 
-            
+
 
             await _teacherRepository.UpdateAsync(teacher);
 
@@ -155,6 +156,58 @@ namespace Service.ClassOfService
 
             return true;
 
+        }
+
+        public async Task<List<DropdownDTO>> GetTeacherDropdownAsync(
+    int? schoolClassId,
+    int? subjectId)
+        {
+
+            var teachers = await _teacherRepository.GetAllByFilterAsync(
+                t =>
+                t.IsActive &&
+
+                (
+                    schoolClassId == null ||
+
+                    t.TeacherAssignments.Any(
+                        ta => ta.SchoolClassId == schoolClassId
+                    )
+                )
+
+                &&
+
+                (
+                    subjectId == null ||
+
+                    t.TeacherAssignments.Any(
+                        ta => ta.SubjectId == subjectId
+                    )
+                )
+
+            );
+
+
+            return teachers.Select(t => new DropdownDTO
+            {
+                Id = t.Id,
+
+                Code = t.TeacherCode,
+
+                Text =
+                    t.FirstName
+                    +
+                    (
+                        string.IsNullOrEmpty(t.MiddleName)
+                        ? ""
+                        : " " + t.MiddleName
+                    )
+                    +
+                    " "
+                    +
+                    t.LastName
+
+            }).ToList();
 
         }
     }

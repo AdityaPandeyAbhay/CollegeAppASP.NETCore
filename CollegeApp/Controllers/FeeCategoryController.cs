@@ -145,6 +145,41 @@ namespace CollegeApp.Controllers
 
         #endregion
 
+
+        [HttpGet("Dropdown")]
+        [Authorize(Roles = "SuperAdmin,Admin,Accountant")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<APIResponse>> GetFeeCategoryDropdown()
+        {
+            try
+            {
+                var result = await _feeCategoryService.GetFeeCategoryDropdownAsync();
+
+                if (result == null || !result.Any())
+                {
+                    return NotFound();
+                }
+
+                _response.Data = result;
+                _response.Status = true;
+                _response.StatusCode = HttpStatusCode.OK;
+
+                return Ok(_response);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+
+                _response.Status = false;
+                _response.Errors.Add(ex.Message);
+                _response.StatusCode = HttpStatusCode.InternalServerError;
+
+                return StatusCode(StatusCodes.Status500InternalServerError, _response);
+            }
+        }
+
         #region Update
 
         [HttpPut]
