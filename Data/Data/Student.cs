@@ -100,5 +100,7 @@ namespace Data.Data
 
         public virtual ICollection<AttendanceDetail> AttendanceDetails { get; set; }
          = new List<AttendanceDetail>();
+        public ICollection<Result> Results { get; set; }
+            = new List<Result>();
     }
 }

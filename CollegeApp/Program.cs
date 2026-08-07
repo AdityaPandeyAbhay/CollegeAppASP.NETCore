@@ -126,6 +126,8 @@ builder.Services.AddScoped<ITeacherAssignmentService, TeacherAssignmentService>(
 builder.Services.AddScoped<IAttendanceRepository, AttendanceRepository>();
 builder.Services.AddScoped<IAttendanceService, AttendanceService>();
 
+builder.Services.AddScoped<IResultRepository, ResultRepository>();
+builder.Services.AddScoped<IResultService, ResultService>();
 
 
 

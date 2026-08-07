@@ -44,5 +44,7 @@ namespace Data.Data
 
         //public virtual ICollection<TimeTable> TimeTables { get; set; }
         //    = new List<TimeTable>();
+        public ICollection<ResultDetail> ResultDetails { get; set; }
+           = new List<ResultDetail>();
     }
 }

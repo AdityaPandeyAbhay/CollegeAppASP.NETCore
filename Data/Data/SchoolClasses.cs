@@ -52,5 +52,7 @@ namespace Data.Data
                 = new List<FeeStructure>();
         public virtual ICollection<Student> Students { get; set; }
                = new List<Student>();
+        public ICollection<ResultBatch> ResultBatches { get; set; } = new List<ResultBatch>();
+       
     }
 }

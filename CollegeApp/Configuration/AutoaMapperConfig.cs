@@ -8,6 +8,7 @@ using Model.Models.Class_Model;
 using Model.Models.Department_model;
 using Model.Models.Fee_Model;
 using Model.Models.NonTeachingStaff;
+using Model.Models.Result_Model;
 using Model.Models.Student_Model;
 using Model.Models.Subject_model;
 using Model.Models.Teacher_Model;
@@ -178,6 +179,158 @@ namespace CollegeApp.Configuration
 
                 .ForMember(dest => dest.AcademicYear,
                     opt => opt.MapFrom(src => src.AcademicYear.YearName)).ReverseMap();
+
+
+
+            #region Exam
+
+
+            CreateMap<CreateExamDTO, Exam>();
+
+
+            CreateMap<UpdateExamDTO, Exam>();
+
+
+            CreateMap<Exam, ExamResponseDTO>();
+
+
+            CreateMap<Exam, ExamDropdownDTO>();
+
+
+            #endregion
+
+
+
+            #region Result Batch
+
+
+            CreateMap<CreateResultBatchDTO, ResultBatch>()
+                .ForMember(dest => dest.Results,
+                    opt => opt.Ignore());
+
+
+            CreateMap<ResultBatch, ResultBatchResponseDTO>()
+                .ForMember(dest => dest.AcademicYear,
+                    opt => opt.MapFrom(src =>
+                        src.AcademicYear.YearName))
+
+                .ForMember(dest => dest.ClassName,
+                    opt => opt.MapFrom(src =>
+                        src.SchoolClass.ClassName))
+
+                .ForMember(dest => dest.SectionName,
+                    opt => opt.MapFrom(src =>
+                        src.Section.SectionName))
+
+                .ForMember(dest => dest.ExamName,
+                    opt => opt.MapFrom(src =>
+                        src.Exam.ExamName));
+
+
+            #endregion
+
+
+
+            #region Result
+
+
+            CreateMap<Result, StudentResultDTO>()
+
+                .ForMember(dest => dest.ResultId,
+                    opt => opt.MapFrom(src =>
+                        src.Id))
+
+                .ForMember(dest => dest.StudentId,
+                    opt => opt.MapFrom(src =>
+                        src.StudentId))
+
+                .ForMember(dest => dest.StudentName,
+                    opt => opt.MapFrom(src =>
+                        src.Student.FirstName + " " +
+                        src.Student.LastName))
+
+                .ForMember(dest => dest.AdmissionNumber,
+                    opt => opt.MapFrom(src =>
+                        src.Student.AdmissionNumber))
+
+                .ForMember(dest => dest.Subjects,
+                    opt => opt.MapFrom(src =>
+                        src.ResultDetails));
+
+
+            CreateMap<StudentResultDTO, Result>()
+                .ForMember(dest => dest.Id,
+                    opt => opt.MapFrom(src =>
+                        src.ResultId))
+
+                .ForMember(dest => dest.Student,
+                    opt => opt.Ignore())
+
+                .ForMember(dest => dest.ResultBatch,
+                    opt => opt.Ignore())
+
+                .ForMember(dest => dest.ResultDetails,
+                    opt => opt.Ignore());
+
+
+            #endregion
+
+
+
+            #region Result Detail
+
+
+            CreateMap<ResultDetail, ResultDetailDTO>()
+
+                .ForMember(dest => dest.SubjectName,
+                    opt => opt.MapFrom(src =>
+                        src.Subject.SubjectName));
+
+
+            CreateMap<ResultDetailDTO, ResultDetail>()
+
+                .ForMember(dest => dest.Id,
+                    opt => opt.Ignore())
+
+                .ForMember(dest => dest.Result,
+                    opt => opt.Ignore())
+
+                .ForMember(dest => dest.Subject,
+                    opt => opt.Ignore());
+
+
+            #endregion
+
+
+
+            #region Result Upload
+
+
+            CreateMap<ResultUploadDTO, Result>()
+                .ForMember(dest => dest.Id,
+                    opt => opt.MapFrom(src =>
+                        src.ResultId))
+
+                .ForMember(dest => dest.ResultDetails,
+                    opt => opt.Ignore());
+
+
+            #endregion
+
+
+
+            #region Student Mark
+
+
+            CreateMap<StudentMarkDTO, Result>()
+                .ForMember(dest => dest.Id,
+                    opt => opt.Ignore())
+
+                .ForMember(dest => dest.ResultDetails,
+                    opt => opt.Ignore());
+
+
+            #endregion
 
 
 

@@ -39,5 +39,6 @@ namespace Data.Data
         public string? ModifiedBy { get; set; }
 
         public DateTime? ModifiedDate { get; set; }
+        
     }
 }

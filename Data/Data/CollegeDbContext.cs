@@ -2,6 +2,7 @@
 using CollegeApp.Models;          // Change this if Student is in a different namespace
 using Data.Config;
 using Data.Configuration;
+using Data.Configurations;
 using Data.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,6 +41,13 @@ namespace CollegeApp.Data
         public DbSet<Attendance> Attendances { get; set; }
 
         public DbSet<AttendanceDetail> AttendanceDetails { get; set; }
+        public DbSet<Exam> Exams { get; set; }
+
+
+        public DbSet<ResultBatch> ResultBatches { get; set; }
+        public DbSet<Result> Results { get; set; }
+
+        public DbSet<ResultDetail> ResultDetails { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -65,7 +73,10 @@ namespace CollegeApp.Data
             modelBuilder.ApplyConfiguration(new StudentFeeConfig());
             modelBuilder.ApplyConfiguration(new AttendanceConfig());
             modelBuilder.ApplyConfiguration(new AttendanceDetailConfig());
-
+            modelBuilder.ApplyConfiguration(new ExamConfig());
+            modelBuilder.ApplyConfiguration(new ResultBatchConfig());
+            modelBuilder.ApplyConfiguration(new ResultConfig());
+            modelBuilder.ApplyConfiguration(new ResultDetailConfig());
 
         }
     }

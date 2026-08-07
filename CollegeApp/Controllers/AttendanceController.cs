@@ -7,14 +7,19 @@ using System.Net;
 
 namespace CollegeApp.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
+
     public class AttendanceController : ControllerBase
     {
+
         private readonly IAttendanceService _service;
         private readonly APIResponse _apiResponse;
         private readonly ILogger<AttendanceController> _logger;
+
+
 
         public AttendanceController(
             IAttendanceService service,
@@ -25,159 +30,490 @@ namespace CollegeApp.Controllers
             _apiResponse = new APIResponse();
         }
 
-        //==================================================
-        // Get Students For Attendance
-        //==================================================
 
-        [HttpGet("GetStudents/{teacherAssignmentId:int}")]
-        [Authorize(Roles = "Teacher")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<APIResponse>> GetStudents(int teacherAssignmentId)
-        {
-            try
-            {
-                var students =
-                    await _service.GetStudentsForAttendanceAsync(teacherAssignmentId);
 
-                _apiResponse.Data = students;
-                _apiResponse.Status = true;
-                _apiResponse.StatusCode = HttpStatusCode.OK;
 
-                return Ok(_apiResponse);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, ex.Message);
+        //=========================================================
+        // CREATE / TAKE ATTENDANCE
+        //=========================================================
 
-                _apiResponse.Status = false;
-                _apiResponse.Errors.Add(ex.Message);
-                _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
-
-                return _apiResponse;
-            }
-        }
-
-        //==================================================
-        // Take Attendance
-        //==================================================
 
         [HttpPost("TakeAttendance")]
         [Authorize(Roles = "Teacher")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> TakeAttendance(
             TakeAttendanceDTO dto)
         {
+
             try
             {
+
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-                var attendance =
+
+
+                var result =
                     await _service.TakeAttendanceAsync(dto);
 
-                _apiResponse.Data = attendance;
+
+
+                _apiResponse.Data = result;
                 _apiResponse.Status = true;
-                _apiResponse.StatusCode = HttpStatusCode.Created;
+                _apiResponse.StatusCode =
+                    HttpStatusCode.Created;
+
+
 
                 return Ok(_apiResponse);
+
+
             }
             catch (Exception ex)
             {
+
                 _logger.LogError(ex, ex.Message);
+
 
                 _apiResponse.Status = false;
                 _apiResponse.Errors.Add(ex.Message);
-                _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+                _apiResponse.StatusCode =
+                    HttpStatusCode.InternalServerError;
+
 
                 return _apiResponse;
+
             }
+
         }
 
-        //==================================================
-        // Get Attendance
-        //==================================================
 
-        [HttpGet("GetAttendance/{teacherAssignmentId:int}/{attendanceDate}")]
+
+
+
+
+        //=========================================================
+        // GET ALL ATTENDANCE
+        //=========================================================
+
+
+        [HttpGet("AllAttendance")]
+        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        public async Task<ActionResult<APIResponse>> GetAllAttendance()
+        {
+
+            try
+            {
+
+                var result =
+                    await _service.GetAllAttendanceAsync();
+
+
+
+                _apiResponse.Data = result;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode =
+                    HttpStatusCode.OK;
+
+
+
+                return Ok(_apiResponse);
+
+
+            }
+            catch (Exception ex)
+            {
+
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode =
+                    HttpStatusCode.InternalServerError;
+
+
+                return _apiResponse;
+
+            }
+
+        }
+
+
+
+
+
+
+        //=========================================================
+        // GET ATTENDANCE BY ID
+        //=========================================================
+
+
+        [HttpGet("{id:int}")]
+        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        public async Task<ActionResult<APIResponse>> GetAttendanceById(
+            int id)
+        {
+
+            try
+            {
+
+                var result =
+                    await _service.GetAttendanceByIdAsync(id);
+
+
+
+                if (result == null)
+                    return NotFound();
+
+
+
+                _apiResponse.Data = result;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode =
+                    HttpStatusCode.OK;
+
+
+
+                return Ok(_apiResponse);
+
+
+            }
+            catch (Exception ex)
+            {
+
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode =
+                    HttpStatusCode.InternalServerError;
+
+
+                return _apiResponse;
+
+            }
+
+        }
+
+
+
+
+
+
+
+        //=========================================================
+        // GET ATTENDANCE BY DATE
+        //=========================================================
+
+
+        [HttpGet("ByDate")]
         [Authorize(Roles = "Teacher")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<APIResponse>> GetAttendance(
+        public async Task<ActionResult<APIResponse>> GetAttendanceByDate(
             int teacherAssignmentId,
             DateOnly attendanceDate)
         {
+
             try
             {
-                var attendance =
+
+                var result =
                     await _service.GetAttendanceAsync(
                         teacherAssignmentId,
                         attendanceDate);
 
-                if (attendance == null)
+
+
+                if (result == null)
                     return NotFound();
 
-                _apiResponse.Data = attendance;
+
+
+                _apiResponse.Data = result;
                 _apiResponse.Status = true;
-                _apiResponse.StatusCode = HttpStatusCode.OK;
+                _apiResponse.StatusCode =
+                    HttpStatusCode.OK;
+
+
 
                 return Ok(_apiResponse);
+
+
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, ex.Message);
 
                 _apiResponse.Status = false;
                 _apiResponse.Errors.Add(ex.Message);
-                _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+                _apiResponse.StatusCode =
+                    HttpStatusCode.InternalServerError;
+
+
 
                 return _apiResponse;
+
             }
+
         }
 
-        //==================================================
-        // Update Attendance
-        //==================================================
+
+
+
+
+
+        //=========================================================
+        // GET TEACHER ATTENDANCE
+        //=========================================================
+
+
+        [HttpGet("Teacher/{teacherId:int}")]
+        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        public async Task<ActionResult<APIResponse>> GetTeacherAttendance(
+            int teacherId)
+        {
+
+            try
+            {
+
+                var result =
+                    await _service.GetTeacherAttendanceAsync(
+                        teacherId);
+
+
+
+                _apiResponse.Data = result;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode =
+                    HttpStatusCode.OK;
+
+
+
+                return Ok(_apiResponse);
+
+
+            }
+            catch (Exception ex)
+            {
+
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode =
+                    HttpStatusCode.InternalServerError;
+
+
+                return _apiResponse;
+
+            }
+
+        }
+
+
+
+
+
+
+
+        //=========================================================
+        // UPDATE ATTENDANCE
+        //=========================================================
+
 
         [HttpPut("UpdateAttendance")]
         [Authorize(Roles = "Teacher")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> UpdateAttendance(
             UpdateAttendanceDTO dto)
         {
+
             try
             {
+
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
+
+
 
                 var result =
                     await _service.UpdateAttendanceAsync(dto);
 
+
+
                 _apiResponse.Data = result;
                 _apiResponse.Status = true;
-                _apiResponse.StatusCode = HttpStatusCode.OK;
+                _apiResponse.StatusCode =
+                    HttpStatusCode.OK;
+
+
 
                 return Ok(_apiResponse);
+
+
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, ex.Message);
 
                 _apiResponse.Status = false;
                 _apiResponse.Errors.Add(ex.Message);
-                _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+                _apiResponse.StatusCode =
+                    HttpStatusCode.InternalServerError;
+
 
                 return _apiResponse;
+
             }
+
         }
+
+
+
+
+
+
+        //=========================================================
+        // DELETE ATTENDANCE
+        //=========================================================
+
+
+        [HttpDelete("DeleteAttendance/{id:int}")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
+        public async Task<ActionResult<APIResponse>> DeleteAttendance(
+            int id)
+        {
+
+            try
+            {
+
+                var result =
+                    await _service.DeleteAttendanceAsync(id);
+
+
+
+                _apiResponse.Data = result;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode =
+                    HttpStatusCode.OK;
+
+
+
+                return Ok(_apiResponse);
+
+
+            }
+            catch (Exception ex)
+            {
+
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode =
+                    HttpStatusCode.InternalServerError;
+
+
+
+                return _apiResponse;
+
+            }
+
+        }
+
+
+
+
+
+
+
+        //=========================================================
+        // GET ATTENDANCE DETAILS
+        //=========================================================
+
+
+        [HttpGet("Details/{attendanceId:int}")]
+        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        public async Task<ActionResult<APIResponse>> GetAttendanceDetails(
+            int attendanceId)
+        {
+
+            try
+            {
+
+                var result =
+                    await _service.GetAttendanceDetailsAsync(
+                        attendanceId);
+
+
+
+                _apiResponse.Data = result;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode =
+                    HttpStatusCode.OK;
+
+
+
+                return Ok(_apiResponse);
+
+
+            }
+            catch (Exception ex)
+            {
+
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode =
+                    HttpStatusCode.InternalServerError;
+
+
+
+                return _apiResponse;
+
+            }
+
+        }
+
+
+
+
+
+
+
+        //=========================================================
+        // DELETE ATTENDANCE DETAIL
+        //=========================================================
+
+
+        [HttpDelete("DeleteDetail/{id:int}")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
+        public async Task<ActionResult<APIResponse>> DeleteAttendanceDetail(
+            int id)
+        {
+
+            try
+            {
+
+                var result =
+                    await _service.DeleteAttendanceDetailAsync(id);
+
+
+
+                _apiResponse.Data = result;
+                _apiResponse.Status = true;
+                _apiResponse.StatusCode =
+                    HttpStatusCode.OK;
+
+
+
+                return Ok(_apiResponse);
+
+
+            }
+            catch (Exception ex)
+            {
+
+                _apiResponse.Status = false;
+                _apiResponse.Errors.Add(ex.Message);
+                _apiResponse.StatusCode =
+                    HttpStatusCode.InternalServerError;
+
+
+                return _apiResponse;
+
+            }
+
+        }
+
+
+
     }
+
 }

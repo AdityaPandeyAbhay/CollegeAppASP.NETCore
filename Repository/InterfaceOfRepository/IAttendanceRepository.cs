@@ -1,21 +1,87 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using Data.Data;
+﻿using Data.Data;
 
 namespace Repository.InterfaceOfRepository
 {
-    public interface IAttendanceRepository : ICollegeRepository<Attendance>
+    public interface IAttendanceRepository
+        : ICollegeRepository<Attendance>
     {
-        Task<bool> AttendanceExistsAsync(int teacherAssignmentId, DateOnly attendanceDate);
 
-        Task<List<Student>> GetStudentsByTeacherAssignmentAsync(int teacherAssignmentId);
 
-        Task<Attendance?> GetAttendanceWithDetailsAsync(int attendanceId);
+        #region Attendance
 
-        Task<Attendance?> GetAttendanceByDateAsync(int teacherAssignmentId, DateOnly attendanceDate);
 
-        Task<List<Attendance>> GetTeacherAttendanceAsync(int teacherId);
+        Task<bool> AttendanceExistsAsync(
+            int teacherAssignmentId,
+            DateOnly attendanceDate);
+
+
+
+        Task<List<Attendance>> GetAllAttendanceAsync();
+
+
+
+        Task<Attendance?> GetAttendanceByIdAsync(
+            int attendanceId);
+
+
+
+        Task<Attendance?> GetAttendanceWithDetailsAsync(
+            int attendanceId);
+
+
+
+        Task<Attendance?> GetAttendanceByDateAsync(
+            int teacherAssignmentId,
+            DateOnly attendanceDate);
+
+
+
+        Task<List<Attendance>> GetTeacherAttendanceAsync(
+            int teacherId);
+
+
+
+        #endregion
+
+
+
+
+
+        #region Student
+
+
+        Task<List<Student>> GetStudentsByTeacherAssignmentAsync(
+            int teacherAssignmentId);
+
+
+
+        #endregion
+
+
+
+
+
+
+        #region Attendance Detail
+
+
+        Task<List<AttendanceDetail>> GetAttendanceDetailsAsync(
+            int attendanceId);
+
+
+
+        Task<AttendanceDetail?> GetAttendanceDetailByIdAsync(
+            int detailId);
+
+
+
+        Task<bool> DeleteAttendanceDetailAsync(
+            int detailId);
+
+
+
+        #endregion
+
+
     }
 }
