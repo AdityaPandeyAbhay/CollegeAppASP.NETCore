@@ -23,12 +23,12 @@ namespace CollegeApp.Controllers
     public class TeacherController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly ILogger _logger;
+        private readonly ILogger<TeacherController> _logger;
         private readonly ITeacherService _service;
         private readonly APIResponse _apiResponse;
         private readonly ICurrentUserServices _currentUserService;
 
-        public TeacherController(IMapper mapper, ILogger logger, ITeacherService service, ICurrentUserServices currentUserService)
+        public TeacherController(IMapper mapper, ILogger<TeacherController> logger, ITeacherService service, ICurrentUserServices currentUserService)
         {
             _apiResponse = new();
             _mapper = mapper;
@@ -40,7 +40,7 @@ namespace CollegeApp.Controllers
 
         [HttpPost]
         [Route("CreateTeacher")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
 
         [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
@@ -86,7 +86,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("AllTeacher")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
 
         [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
@@ -122,44 +122,33 @@ namespace CollegeApp.Controllers
         }
 
 
-        [HttpGet("TeacherCode/{Code}")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
-
-        [ProducesResponseType(StatusCodes.Status200OK)]          // Success
-
-        [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
-
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]  // Invalid Request
-
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)] // Authentication Failed
-
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]   // Access Denied
-
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)] // Server Error
-
+        [HttpGet("TeacherCode/{code}")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> GetTeacherByCodeAsync(string code)
         {
             try
             {
-                
                 var teacher = await _service.GetByTeacherCodeAsync(code);
 
                 if (teacher == null)
                 {
-                    throw new Exception($"User are not found on {code} code");
+                    return NotFound();
                 }
 
-                // SuperAdmin/Admin can access all teachers
-                if (!_currentUserService.IsInRole("SuperAdmin") &&
+                if (!_currentUserService.IsInRole("Super Admin") &&
                     !_currentUserService.IsInRole("Admin"))
                 {
-                    // Teacher can access only their own record
                     if (teacher.UserId != _currentUserService.UserId)
                     {
                         return Forbid();
                     }
                 }
-
 
                 _apiResponse.Data = teacher;
                 _apiResponse.Status = true;
@@ -180,7 +169,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("Name/{Name}")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
 
         [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
@@ -204,7 +193,7 @@ namespace CollegeApp.Controllers
                     return NotFound();
                 }
 
-                if (!_currentUserService.IsInRole("SuperAdmin") &&
+                if (!_currentUserService.IsInRole("Super Admin") &&
                     !_currentUserService.IsInRole("Admin"))
                 {
                     if (teachers.Any(x => x.UserId != _currentUserService.UserId))
@@ -233,7 +222,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("dropdown")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -280,7 +269,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpPut("UpdateTeacher/{id:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
 
         [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
@@ -320,7 +309,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpDelete("DeleteTeacher/{code}")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
 
         [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created

@@ -39,7 +39,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpPost("TakeAttendance")]
-        [Authorize(Roles = "Teacher")]
+        [Authorize(Roles = "Teacher,Super Admin")]
         public async Task<ActionResult<APIResponse>> TakeAttendance(
             TakeAttendanceDTO dto)
         {
@@ -97,7 +97,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("AllAttendance")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         public async Task<ActionResult<APIResponse>> GetAllAttendance()
         {
 
@@ -146,7 +146,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("{id:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         public async Task<ActionResult<APIResponse>> GetAttendanceById(
             int id)
         {
@@ -202,7 +202,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("ByDate")]
-        [Authorize(Roles = "Teacher")]
+        [Authorize(Roles = "Teacher,Super Admin")]
         public async Task<ActionResult<APIResponse>> GetAttendanceByDate(
             int teacherAssignmentId,
             DateOnly attendanceDate)
@@ -261,7 +261,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("Teacher/{teacherId:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         public async Task<ActionResult<APIResponse>> GetTeacherAttendance(
             int teacherId)
         {
@@ -313,7 +313,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpPut("UpdateAttendance")]
-        [Authorize(Roles = "Teacher")]
+        [Authorize(Roles = "Teacher,Super Admin")]
         public async Task<ActionResult<APIResponse>> UpdateAttendance(
             UpdateAttendanceDTO dto)
         {
@@ -368,7 +368,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpDelete("DeleteAttendance/{id:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         public async Task<ActionResult<APIResponse>> DeleteAttendance(
             int id)
         {
@@ -420,7 +420,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("Details/{attendanceId:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         public async Task<ActionResult<APIResponse>> GetAttendanceDetails(
             int attendanceId)
         {
@@ -473,7 +473,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpDelete("DeleteDetail/{id:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         public async Task<ActionResult<APIResponse>> DeleteAttendanceDetail(
             int id)
         {

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Data.Data;
+using Microsoft.EntityFrameworkCore;
 using Model.Models;
 using Model.Models.TeacherAssignment_Model;
 using Repository.InterfaceOfRepository;
@@ -269,46 +270,30 @@ namespace Service.ClassOfService
     int? subjectId,
     int? academicYearId)
         {
+            var teachers =
+                await _teacherAssignmentRepository
+                    .GetTeachersForDropdownAsync(
+                        departmentId,
+                        schoolClassId,
+                        sectionId,
+                        subjectId,
+                        academicYearId);
 
-            var assignments =
-                await _teacherAssignmentRepository.GetAllByFilterAsync(x =>
-                    (!departmentId.HasValue ||
-                        x.DepartmentId == departmentId) &&
-
-                    (!schoolClassId.HasValue ||
-                        x.SchoolClassId == schoolClassId) &&
-
-                    (!sectionId.HasValue ||
-                        x.SectionId == sectionId) &&
-
-                    (!subjectId.HasValue ||
-                        x.SubjectId == subjectId) &&
-
-                    (!academicYearId.HasValue ||
-                        x.AcademicYearId == academicYearId) &&
-
-                    x.IsActive
-                );
-
-
-            var teachers = assignments
-                .Select(x => x.Teacher)
-                .Distinct()
+            return teachers
                 .Select(t => new DropdownDTO
                 {
                     Id = t.Id,
-
                     Code = t.TeacherCode,
-
-                    Text =
-                    t.FirstName + " " +
+                    Text = string.Join(" ",
+                        new[]
+                        {
+                    t.FirstName,
+                    t.MiddleName,
                     t.LastName
-
+                        }
+                        .Where(x => !string.IsNullOrWhiteSpace(x)))
                 })
                 .ToList();
-
-
-            return teachers;
         }
     }
 }

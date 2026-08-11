@@ -32,7 +32,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetAllFeeCategory")]
-        [Authorize(Roles = "SuperAdmin,Admin,Accountant")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetAllFeeCategory()
         {
@@ -62,7 +62,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetFeeCategoryById/{id:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin,Accountant")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant")]
         public async Task<ActionResult<APIResponse>> GetFeeCategoryById(int id)
         {
             try
@@ -91,7 +91,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetFeeCategoryByName/{name}")]
-        [Authorize(Roles = "SuperAdmin,Admin,Accountant")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant")]
         public async Task<ActionResult<APIResponse>> GetFeeCategoryByName(string name)
         {
             try
@@ -120,7 +120,7 @@ namespace CollegeApp.Controllers
 
         [HttpPost]
         [Route("CreateFeeCategory")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         public async Task<ActionResult<APIResponse>> CreateFeeCategory(FeeCategoryDTO dto)
         {
             try
@@ -147,7 +147,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("Dropdown")]
-        [Authorize(Roles = "SuperAdmin,Admin,Accountant")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -184,7 +184,7 @@ namespace CollegeApp.Controllers
 
         [HttpPut]
         [Route("UpdateFeeCategory/{id:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         public async Task<ActionResult<APIResponse>> UpdateFeeCategory(int id, FeeCategoryDTO dto)
         {
             try
@@ -213,7 +213,7 @@ namespace CollegeApp.Controllers
 
         [HttpDelete]
         [Route("DeleteFeeCategory/{id:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         public async Task<ActionResult<APIResponse>> DeleteFeeCategory(int id)
         {
             try

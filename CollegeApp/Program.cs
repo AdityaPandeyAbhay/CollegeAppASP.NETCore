@@ -73,6 +73,7 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddHttpContextAccessor();
 
+
 builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
 builder.Services.AddControllers()
                 .AddNewtonsoftJson();
@@ -81,6 +82,9 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITeacherService, TeacherService>();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 
+
+builder.Services.AddScoped<INoticeRepository, NoticeRepository>();
+builder.Services.AddScoped<INoticeService, NoticeService>();
 
 
 builder.Services.AddScoped<ICurrentUserServices, CurrentUserServices>();
@@ -180,7 +184,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseCors("AllowFrontend");
-
+app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
 

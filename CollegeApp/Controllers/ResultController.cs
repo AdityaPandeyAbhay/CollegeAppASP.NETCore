@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using CollegeApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Model.Models.Result_Model;
+using Service.ClassOfService;
 using Service.InterfaceOfService;
-using CollegeApp.Models;
 using System.Net;
 
 
@@ -27,7 +28,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpPost("CreateExam")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         public async Task<ActionResult<APIResponse>> CreateExam(CreateExamDTO dto)
         {
             try
@@ -53,7 +54,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("AllExam")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         public async Task<ActionResult<APIResponse>> GetAllExam()
         {
             try
@@ -79,7 +80,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("Exam/{id:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         public async Task<ActionResult<APIResponse>> GetExamById(int id)
         {
             try
@@ -108,7 +109,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpPut("UpdateExam/{id:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         public async Task<ActionResult<APIResponse>> UpdateExam(
             int id,
             UpdateExamDTO dto)
@@ -138,7 +139,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpDelete("DeleteExam/{id:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         public async Task<ActionResult<APIResponse>> DeleteExam(int id)
         {
             try
@@ -173,7 +174,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpPost("CreateResultBatch")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         public async Task<ActionResult<APIResponse>> CreateResultBatch(
             CreateResultBatchDTO dto)
         {
@@ -203,7 +204,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("AllResultBatch")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         public async Task<ActionResult<APIResponse>> GetAllResultBatch()
         {
             try
@@ -233,7 +234,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("ResultBatch/{id:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         public async Task<ActionResult<APIResponse>> GetResultBatchById(int id)
         {
             try
@@ -262,7 +263,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpPut("PublishResultBatch/{id:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         public async Task<ActionResult<APIResponse>> PublishResultBatch(int id)
         {
             try
@@ -297,7 +298,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpPost("UploadStudentResult")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         public async Task<ActionResult<APIResponse>> UploadStudentResult(
             ResultUploadDTO dto)
         {
@@ -328,7 +329,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpPut("UpdateStudentResult")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         public async Task<ActionResult<APIResponse>> UpdateStudentResult(
             ResultUploadDTO dto)
         {
@@ -366,7 +367,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("StudentResult/{resultBatchId}/{studentId}")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher,Student")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Student")]
         public async Task<ActionResult<APIResponse>> GetStudentResult(
             int resultBatchId,
             int studentId)
@@ -400,7 +401,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("BatchResult/{resultBatchId:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         public async Task<ActionResult<APIResponse>> GetBatchResult(
             int resultBatchId)
         {
@@ -430,7 +431,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("PreviousResult/{studentId:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin,Student")]
+        [Authorize(Roles = "Super Admin,Admin,Student")]
         public async Task<ActionResult<APIResponse>> PreviousResult(
             int studentId)
         {
@@ -467,7 +468,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("ResultDetails/{resultId:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         public async Task<ActionResult<APIResponse>> GetResultDetails(int resultId)
         {
             try
@@ -495,6 +496,59 @@ namespace CollegeApp.Controllers
 
 
         #endregion
+
+
+
+        [HttpGet("Dropdown/Exam")]
+        public async Task<IActionResult> GetExamDropdown()
+        {
+            var data = await _service.GetExamDropdownAsync();
+
+            return Ok(new
+            {
+                status = true,
+                statusCode = 200,
+                data,
+                errors = Array.Empty<string>()
+            });
+        }
+
+        [HttpGet("Dropdown/ResultBatch/{examId}")]
+        public async Task<IActionResult> GetResultBatchDropdown(
+         int examId)
+        {
+            var data =
+                await _service
+                    .GetResultBatchDropdownAsync(examId);
+
+            return Ok(new
+            {
+                status = true,
+                statusCode = 200,
+                data,
+                errors = Array.Empty<string>()
+            });
+        }
+
+        [HttpGet("Dropdown/Result/{resultBatchId}")]
+        public async Task<IActionResult> GetResultDropdown(
+        int resultBatchId)
+        {
+            var data =
+                await _service
+                    .GetResultDropdownAsync(resultBatchId);
+
+            return Ok(new
+            {
+                status = true,
+                statusCode = 200,
+                data,
+                errors = Array.Empty<string>()
+            });
+        }
+
+
+
 
     }
 }

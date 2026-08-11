@@ -27,6 +27,7 @@ namespace CollegeApp.Controllers
         private readonly ILogger<StudentController> _logger;
 
         private readonly ICollegeRepository<Student> _studentRepository;
+        private readonly ICollegeRepository<User> _userRepository;
 
         private readonly IMapper _mapper;
         private APIResponse _apiResponse;
@@ -36,7 +37,7 @@ namespace CollegeApp.Controllers
 
         public StudentController(ILogger<StudentController> logger, ICollegeRepository<Student> studentRepository, IMapper mapper, ICollegeRepository<Department> departmentRepository,
     ICollegeRepository<SchoolClass> classRepository,
-    ICollegeRepository<Section> sectionRepository)
+    ICollegeRepository<Section> sectionRepository, ICollegeRepository<User> userRepository)
         {
             _logger = logger;
             _studentRepository = studentRepository;
@@ -46,6 +47,7 @@ namespace CollegeApp.Controllers
             _departmentRepository = departmentRepository;
             _classRepository = classRepository;
             _sectionRepository = sectionRepository;
+            _userRepository = userRepository;
 
 
         }
@@ -56,7 +58,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("All", Name = "GetAllStudents")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         [ProducesResponseType(typeof(GetStudentDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> GetStudentName()
@@ -103,7 +105,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("id/{Id}", Name = "GetStudentById")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         [ProducesResponseType(typeof(Student), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> GetStudentById(int Id)
@@ -159,7 +161,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("Name/{Name}", Name = "GetStudentByName")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         [ProducesResponseType(typeof(Student), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> GetStudentByName(string Name)
@@ -210,59 +212,111 @@ namespace CollegeApp.Controllers
 
         [HttpPost]
         [Route("Create")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         [ProducesResponseType(typeof(CreateStudentDTO), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<APIResponse>> CreateStudent([FromBody] CreateStudentDTO dto)
+        public async Task<ActionResult<APIResponse>> CreateStudent(
+     [FromBody] CreateStudentDTO dto)
         {
-
             try
             {
-                //    if (!ModelState.IsValid)
-                //    {
-                //        return BadRequest(ModelState);
-                //    }
                 if (dto == null)
                 {
                     return BadRequest();
                 }
 
-                //Student student = new Student
-                //{
+                // ============================================
+                // GET LOGGED-IN USER ID FROM JWT
+                // ============================================
 
-                //    StudentName = model.StudentName,
-                //    Email = model.Email,
-                //    Address = model.Address,
-                //    DOB = model.DOB,
+                var currentUserId = User.FindFirst("UserId")?.Value;
 
-                //};
+                if (string.IsNullOrWhiteSpace(currentUserId))
+                {
+                    return Unauthorized("Logged-in UserId not found.");
+                }
+
+                // ============================================
+                // CHECK WHETHER LOGGED-IN USER EXISTS
+                // ============================================
+
+                var currentUser = await HttpContext.RequestServices
+                    .GetRequiredService<ICollegeRepository<User>>()
+                    .GetAsync(u => u.Id == currentUserId);
+
+                if (currentUser == null)
+                {
+                    return Unauthorized("Logged-in user does not exist.");
+                }
+
+                // ============================================
+                // MAP DTO → STUDENT
+                // ============================================
 
                 Student student = _mapper.Map<Student>(dto);
 
+                // ============================================
+                // SET AUDIT FIELDS
+                // ============================================
 
+                student.CreatedBy = currentUserId;
+                student.CreatedDate = DateTime.UtcNow;
+                student.IsActive = true;
 
-                var studentAfterCreation = await _studentRepository.CreateAsync(student);
-                
-                _apiResponse.Data = dto;
+                // ============================================
+                // CREATE STUDENT
+                // ============================================
+
+                var studentAfterCreation =
+                    await _studentRepository.CreateAsync(student);
+
+                // ============================================
+                // RESPONSE
+                // ============================================
+
+                _apiResponse.Data = _mapper.Map<GetStudentDTO>(
+                    studentAfterCreation
+                );
+
                 _apiResponse.Status = true;
-                _apiResponse.StatusCode = HttpStatusCode.OK;
+                _apiResponse.StatusCode = HttpStatusCode.Created;
 
-                return Ok( _apiResponse);
+                return StatusCode(
+                    StatusCodes.Status201Created,
+                    _apiResponse
+                );
             }
             catch (Exception ex)
             {
-                _apiResponse.Errors.Add(ex.Message);
                 _apiResponse.Status = false;
-                _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+                _apiResponse.StatusCode =
+                    HttpStatusCode.InternalServerError;
+
+                _apiResponse.Errors.Add(ex.Message);
+
+                if (ex.InnerException != null)
+                {
+                    _apiResponse.Errors.Add(
+                        "Inner Exception: " +
+                        ex.InnerException.Message
+                    );
+
+                    if (ex.InnerException.InnerException != null)
+                    {
+                        _apiResponse.Errors.Add(
+                            "Database Error: " +
+                            ex.InnerException.InnerException.Message
+                        );
+                    }
+                }
+
                 return _apiResponse;
-
             }
-
         }
 
 
         [HttpGet("dropdown/department")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -300,7 +354,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("dropdown/class")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -349,7 +403,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("dropdown/section")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -402,7 +456,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("dropdown/student")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -465,7 +519,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpPut("Update/{id:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -523,7 +577,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpPatch("PartialStudentUpdate/{id}")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -576,7 +630,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpDelete("{Id}", Name = "DeleteStudentById")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         [ProducesResponseType(typeof(Student), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> DeleteStudentById(int Id)

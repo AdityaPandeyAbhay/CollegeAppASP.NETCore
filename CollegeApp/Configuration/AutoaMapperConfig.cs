@@ -1,13 +1,15 @@
-﻿using AutoMapper;
+﻿
+using AutoMapper;
 using CollegeApp.Data;
 using CollegeApp.Models;
 using Data.Data;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Model.Models;
+using Model.Models.Attendance_Model;
 using Model.Models.Class_Model;
 using Model.Models.Department_model;
 using Model.Models.Fee_Model;
 using Model.Models.NonTeachingStaff;
+using Model.Models.Notice_Model;
 using Model.Models.Result_Model;
 using Model.Models.Student_Model;
 using Model.Models.Subject_model;
@@ -20,194 +22,268 @@ namespace CollegeApp.Configuration
     {
         public AutoMapperConfig()
         {
-            //CreateMap<Student, StudentDTO>(); below code samework as above line but with reverse mapping.
-            //CreateMap<StudentDTO, Student>();
+            // =====================================================
+            // Department
+            // =====================================================
 
-            //Department
-            CreateMap<Department, GetDepartmentDTO>().ReverseMap();
+            CreateMap<Department, GetDepartmentDTO>()
+                .ReverseMap();
 
-            CreateMap<Department, CreateDepartmentDTO>().ReverseMap();
+            CreateMap<Department, CreateDepartmentDTO>()
+                .ReverseMap();
 
-            CreateMap<Department, UpdateDepartmentDTO>().ReverseMap();
+            CreateMap<Department, UpdateDepartmentDTO>()
+                .ReverseMap();
 
 
-            //Student
-            CreateMap<Student, CreateStudentDTO>().ReverseMap();
+            // =====================================================
+            // Student
+            // =====================================================
 
-            CreateMap<Student, UpdateStudentDTO>().ReverseMap();
-            
-            CreateMap<Student, GetStudentDTO>().ReverseMap();
-            
-            CreateMap<Student, PatchStudentDTO>().ReverseMap();
+            CreateMap<Student, CreateStudentDTO>()
+                .ReverseMap();
 
-            //Role
-            
-            CreateMap<Role, RoleDTO>().ReverseMap();
-            
-            CreateMap<RolePrivilege, RolePrivilegeDTO>().ReverseMap();
+            CreateMap<Student, UpdateStudentDTO>()
+                .ReverseMap();
 
-            //User
+            CreateMap<Student, GetStudentDTO>()
+                .ReverseMap();
 
-            CreateMap<User, UserDTO>().ReverseMap();
+            CreateMap<Student, PatchStudentDTO>()
+                .ReverseMap();
 
-            //Teacher
-            
-            CreateMap<Teacher, CreateTeacherDTO>().ReverseMap();
-            
-            CreateMap<Teacher, UpdateTeacherDTO>().ReverseMap();
-            
-            CreateMap<Teacher, GetTeacherDTO>().ReverseMap();
 
-            //Non Teaching Staff
-            
-            CreateMap<NonTeachingStaff, GetNonTeachingStaffDTO>().ReverseMap();
-            
-            CreateMap<NonTeachingStaff, CreateNonTeachingStaffDTO>().ReverseMap();
-            
-            CreateMap<NonTeachingStaff, UpdateNonTeachingStaffDTO>().ReverseMap();
+            // =====================================================
+            // Role
+            // =====================================================
 
+            CreateMap<Role, RoleDTO>()
+                .ReverseMap();
+
+            CreateMap<RolePrivilege, RolePrivilegeDTO>()
+                .ReverseMap();
+
+
+            // =====================================================
+            // User
+            // =====================================================
+
+            CreateMap<User, UserDTO>()
+                .ReverseMap();
+
+
+            // =====================================================
+            // Teacher
+            // =====================================================
+
+            CreateMap<Teacher, CreateTeacherDTO>()
+                .ReverseMap();
+
+            CreateMap<Teacher, UpdateTeacherDTO>()
+                .ReverseMap();
+
+            CreateMap<Teacher, GetTeacherDTO>()
+                .ReverseMap();
+
+
+            // =====================================================
+            // Non Teaching Staff
+            // =====================================================
+
+            CreateMap<NonTeachingStaff, GetNonTeachingStaffDTO>()
+                .ReverseMap();
+
+            CreateMap<NonTeachingStaff, CreateNonTeachingStaffDTO>()
+                .ReverseMap();
+
+            CreateMap<NonTeachingStaff, UpdateNonTeachingStaffDTO>()
+                .ReverseMap();
+
+
+            // =====================================================
             // Academic Year
-            CreateMap<AcademicYear, AcademicYearDTO>().ReverseMap();
+            // =====================================================
+
+            CreateMap<AcademicYear, AcademicYearDTO>()
+                .ReverseMap();
+
             CreateMap<AcademicYear, DropdownDTO>()
-                    .ForMember(dest => dest.Text,
-                     opt => opt.MapFrom(src => src.YearName));
+                .ForMember(dest => dest.Text,
+                    opt => opt.MapFrom(src => src.YearName));
 
 
-            //. Fee 
-            //Category
+            // =====================================================
+            // Fee Category
+            // =====================================================
 
-            CreateMap<FeeCategory, FeeCategoryDTO>().ReverseMap();
+            CreateMap<FeeCategory, FeeCategoryDTO>()
+                .ReverseMap();
 
-            //Stucture
-            CreateMap<FeeStructure, CreateFeeStructureDTO>().ReverseMap();
+
+            // =====================================================
+            // Fee Structure
+            // =====================================================
+
+            CreateMap<FeeStructure, CreateFeeStructureDTO>()
+                .ReverseMap();
 
             CreateMap<FeeStructure, GetFeeStructureDTO>()
-                .ForMember(d => d.AcademicYearName, o => o.MapFrom(s => s.AcademicYear.YearName))
-                .ForMember(d => d.DepartmentName, o => o.MapFrom(s => s.Department.DepartmentName))
-                .ForMember(d => d.ClassName, o => o.MapFrom(s => s.SchoolClass.ClassName))
-                .ForMember(d => d.FeeCategoryName, o => o.MapFrom(s => s.FeeCategory.CategoryName)).ReverseMap();
+                .ForMember(dest => dest.AcademicYearName,
+                    opt => opt.MapFrom(src =>
+                        src.AcademicYear.YearName))
 
-            CreateMap<FeeStructure, UpdateFeeStructureDTO>().ReverseMap();
+                .ForMember(dest => dest.DepartmentName,
+                    opt => opt.MapFrom(src =>
+                        src.Department.DepartmentName))
 
-            // StudentFee Mapping
+                .ForMember(dest => dest.ClassName,
+                    opt => opt.MapFrom(src =>
+                        src.SchoolClass.ClassName))
 
-            CreateMap<CreateStudentFeeDTO, StudentFee>().ReverseMap();
+                .ForMember(dest => dest.FeeCategoryName,
+                    opt => opt.MapFrom(src =>
+                        src.FeeCategory.CategoryName))
 
-            CreateMap<UpdateStudentFeeDTO, StudentFee>().ReverseMap();
+                .ReverseMap();
+
+            CreateMap<FeeStructure, UpdateFeeStructureDTO>()
+                .ReverseMap();
+
+
+            // =====================================================
+            // Student Fee
+            // =====================================================
+
+            CreateMap<CreateStudentFeeDTO, StudentFee>()
+                .ReverseMap();
+
+            CreateMap<UpdateStudentFeeDTO, StudentFee>()
+                .ReverseMap();
 
             CreateMap<StudentFee, GetStudentFeeDTO>()
                 .ForMember(dest => dest.StudentName,
                     opt => opt.MapFrom(src =>
-                        src.Student.FirstName + " " +
-                        (src.Student.MiddleName ?? "") + " " +
-                        src.Student.LastName)).ReverseMap();
-
-           
-           
-
-
+                        src.Student.FirstName
+                        + " "
+                        + (src.Student.MiddleName ?? "")
+                        + " "
+                        + src.Student.LastName))
+                .ReverseMap();
 
 
-            // Class related 
+            // =====================================================
+            // School Class
+            // =====================================================
 
             CreateMap<SchoolClass, SchoolClassDTO>()
-            .ForMember(dest => dest.DepartmentName,
-             opt => opt.MapFrom(src => src.Department != null ? src.Department.DepartmentName : null))
-            .ReverseMap();
+                .ForMember(dest => dest.DepartmentName,
+                    opt => opt.MapFrom(src =>
+                        src.Department != null
+                            ? src.Department.DepartmentName
+                            : null))
+                .ReverseMap();
 
 
-            // =========================
-            // Section Mapping
-            // =========================
+            // =====================================================
+            // Section
+            // =====================================================
 
-            // Create
-            CreateMap<CreateSectionDTO, Section>().ReverseMap();
+            CreateMap<CreateSectionDTO, Section>()
+                .ReverseMap();
 
-            // Update
-            CreateMap<UpdateSectionDTO, Section>().ReverseMap();
+            CreateMap<UpdateSectionDTO, Section>()
+                .ReverseMap();
 
-            // Get
             CreateMap<Section, GetSectionDTO>()
                 .ForMember(dest => dest.ClassName,
-                    opt => opt.MapFrom(src => src.SchoolClass != null
-                        ? src.SchoolClass.ClassName
-                        : string.Empty)).ReverseMap();
+                    opt => opt.MapFrom(src =>
+                        src.SchoolClass != null
+                            ? src.SchoolClass.ClassName
+                            : string.Empty))
+                .ReverseMap();
 
 
-            // =====================
-            // Subject Mapping
-            // =====================
+            // =====================================================
+            // Subject
+            // =====================================================
 
-            CreateMap<CreateSubjectDTO, Subject>().ReverseMap();
+            CreateMap<CreateSubjectDTO, Subject>()
+                .ReverseMap();
 
-            CreateMap<UpdateSubjectDTO, Subject>().ReverseMap();
+            CreateMap<UpdateSubjectDTO, Subject>()
+                .ReverseMap();
 
             CreateMap<Subject, GetSubjectDTO>()
                 .ForMember(dest => dest.DepartmentName,
-                    opt => opt.MapFrom(src => src.Department != null
-                        ? src.Department.DepartmentName
-                        : string.Empty)).ReverseMap();
+                    opt => opt.MapFrom(src =>
+                        src.Department != null
+                            ? src.Department.DepartmentName
+                            : string.Empty))
+                .ReverseMap();
 
 
+            // =====================================================
+            // Teacher Assignment
+            // =====================================================
 
-            //=============================
-            // Teacher Assignment Mapping
-            //=============================
+            CreateMap<CreateTeacherAssignmentDTO, TeacherAssignment>()
+                .ReverseMap();
 
-            CreateMap<CreateTeacherAssignmentDTO, TeacherAssignment>().ReverseMap();
-
-            CreateMap<UpdateTeacherAssignmentDTO, TeacherAssignment>().ReverseMap();
+            CreateMap<UpdateTeacherAssignmentDTO, TeacherAssignment>()
+                .ReverseMap();
 
             CreateMap<TeacherAssignment, GetTeacherAssignmentDTO>()
                 .ForMember(dest => dest.TeacherName,
                     opt => opt.MapFrom(src =>
-                        src.Teacher.FirstName + " " +
-                        (src.Teacher.MiddleName ?? "") + " " +
-                        src.Teacher.LastName))
+                        src.Teacher.FirstName
+                        + " "
+                        + (src.Teacher.MiddleName ?? "")
+                        + " "
+                        + src.Teacher.LastName))
 
                 .ForMember(dest => dest.DepartmentName,
-                    opt => opt.MapFrom(src => src.Department.DepartmentName))
+                    opt => opt.MapFrom(src =>
+                        src.Department.DepartmentName))
 
                 .ForMember(dest => dest.ClassName,
-                    opt => opt.MapFrom(src => src.SchoolClass.ClassName))
+                    opt => opt.MapFrom(src =>
+                        src.SchoolClass.ClassName))
 
                 .ForMember(dest => dest.SectionName,
-                    opt => opt.MapFrom(src => src.Section.SectionName))
+                    opt => opt.MapFrom(src =>
+                        src.Section.SectionName))
 
                 .ForMember(dest => dest.SubjectName,
-                    opt => opt.MapFrom(src => src.Subject.SubjectName))
+                    opt => opt.MapFrom(src =>
+                        src.Subject.SubjectName))
 
                 .ForMember(dest => dest.AcademicYear,
-                    opt => opt.MapFrom(src => src.AcademicYear.YearName)).ReverseMap();
+                    opt => opt.MapFrom(src =>
+                        src.AcademicYear.YearName))
+
+                .ReverseMap();
 
 
-
-            #region Exam
-
+            // =====================================================
+            // Exam
+            // =====================================================
 
             CreateMap<CreateExamDTO, Exam>();
 
-
             CreateMap<UpdateExamDTO, Exam>();
 
-
             CreateMap<Exam, ExamResponseDTO>();
-
 
             CreateMap<Exam, ExamDropdownDTO>();
 
 
-            #endregion
-
-
-
-            #region Result Batch
-
+            // =====================================================
+            // Result Batch
+            // =====================================================
 
             CreateMap<CreateResultBatchDTO, ResultBatch>()
                 .ForMember(dest => dest.Results,
                     opt => opt.Ignore());
-
 
             CreateMap<ResultBatch, ResultBatchResponseDTO>()
                 .ForMember(dest => dest.AcademicYear,
@@ -227,12 +303,9 @@ namespace CollegeApp.Configuration
                         src.Exam.ExamName));
 
 
-            #endregion
-
-
-
-            #region Result
-
+            // =====================================================
+            // Result
+            // =====================================================
 
             CreateMap<Result, StudentResultDTO>()
 
@@ -246,8 +319,9 @@ namespace CollegeApp.Configuration
 
                 .ForMember(dest => dest.StudentName,
                     opt => opt.MapFrom(src =>
-                        src.Student.FirstName + " " +
-                        src.Student.LastName))
+                        src.Student.FirstName
+                        + " "
+                        + src.Student.LastName))
 
                 .ForMember(dest => dest.AdmissionNumber,
                     opt => opt.MapFrom(src =>
@@ -259,6 +333,7 @@ namespace CollegeApp.Configuration
 
 
             CreateMap<StudentResultDTO, Result>()
+
                 .ForMember(dest => dest.Id,
                     opt => opt.MapFrom(src =>
                         src.ResultId))
@@ -273,12 +348,9 @@ namespace CollegeApp.Configuration
                     opt => opt.Ignore());
 
 
-            #endregion
-
-
-
-            #region Result Detail
-
+            // =====================================================
+            // Result Detail
+            // =====================================================
 
             CreateMap<ResultDetail, ResultDetailDTO>()
 
@@ -299,14 +371,12 @@ namespace CollegeApp.Configuration
                     opt => opt.Ignore());
 
 
-            #endregion
-
-
-
-            #region Result Upload
-
+            // =====================================================
+            // Result Upload
+            // =====================================================
 
             CreateMap<ResultUploadDTO, Result>()
+
                 .ForMember(dest => dest.Id,
                     opt => opt.MapFrom(src =>
                         src.ResultId))
@@ -315,14 +385,12 @@ namespace CollegeApp.Configuration
                     opt => opt.Ignore());
 
 
-            #endregion
-
-
-
-            #region Student Mark
-
+            // =====================================================
+            // Student Mark
+            // =====================================================
 
             CreateMap<StudentMarkDTO, Result>()
+
                 .ForMember(dest => dest.Id,
                     opt => opt.Ignore())
 
@@ -330,10 +398,85 @@ namespace CollegeApp.Configuration
                     opt => opt.Ignore());
 
 
-            #endregion
+            // =====================================================
+            // Attendance
+            // =====================================================
+
+            // -----------------------------------------------------
+            // Attendance -> AttendanceResponseDTO
+            // -----------------------------------------------------
+
+            CreateMap<Attendance, AttendanceResponseDTO>()
+
+                .ForMember(dest => dest.AttendanceId,
+                    opt => opt.MapFrom(src =>
+                        src.Id))
+
+                .ForMember(dest => dest.Students,
+                    opt => opt.MapFrom(src =>
+                        src.AttendanceDetails));
 
 
+            // -----------------------------------------------------
+            // AttendanceDetail -> AttendanceStudentDTO
+            // -----------------------------------------------------
 
+            CreateMap<AttendanceDetail, AttendanceStudentDTO>()
+
+                // SrNo is UI-only.
+                // It is not stored in database.
+                .ForMember(dest => dest.SrNo,
+                    opt => opt.Ignore())
+
+                .ForMember(dest => dest.StudentId,
+                    opt => opt.MapFrom(src =>
+                        src.StudentId))
+
+                .ForMember(dest => dest.AdmissionNumber,
+                    opt => opt.MapFrom(src =>
+                        src.Student.AdmissionNumber))
+
+                .ForMember(dest => dest.StudentName,
+                    opt => opt.MapFrom(src =>
+                        src.Student.FirstName
+                        + " "
+                        + (src.Student.MiddleName ?? "")
+                        + " "
+                        + src.Student.LastName))
+
+                .ForMember(dest => dest.AttendanceStatus,
+                    opt => opt.MapFrom(src =>
+                        src.AttendanceStatus))
+
+                .ForMember(dest => dest.Remarks,
+                    opt => opt.MapFrom(src =>
+                        src.Remarks));
+
+
+            // -----------------------------------------------------
+            // Notice -> NoticeDTO
+            // -----------------------------------------------------
+
+            CreateMap<CreateNoticeDTO, Notice>()
+                .ForMember(dest => dest.PdfFileName,
+                    opt => opt.Ignore())
+                .ForMember(dest => dest.PdfPath,
+                    opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedBy,
+                    opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedDate,
+                    opt => opt.Ignore())
+                .ForMember(dest => dest.IsPublished,
+                    opt => opt.Ignore())
+                .ForMember(dest => dest.PublishedDate,
+                    opt => opt.Ignore())
+                .ForMember(dest => dest.IsActive,
+                    opt => opt.Ignore());
+
+            CreateMap<Notice, GetNoticeDTO>();
+
+            CreateMap<Notice, NonPublishedNoticeDTO>();
         }
     }
 }
+

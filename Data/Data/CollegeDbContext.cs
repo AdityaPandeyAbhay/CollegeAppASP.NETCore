@@ -5,6 +5,7 @@ using Data.Configuration;
 using Data.Configurations;
 using Data.Data;
 using Microsoft.EntityFrameworkCore;
+using Model.Models.Notice_Model;
 
 namespace CollegeApp.Data
 {
@@ -49,6 +50,8 @@ namespace CollegeApp.Data
 
         public DbSet<ResultDetail> ResultDetails { get; set; }
 
+        public DbSet<Notice> Notices { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -77,6 +80,8 @@ namespace CollegeApp.Data
             modelBuilder.ApplyConfiguration(new ResultBatchConfig());
             modelBuilder.ApplyConfiguration(new ResultConfig());
             modelBuilder.ApplyConfiguration(new ResultDetailConfig());
+
+            modelBuilder.ApplyConfiguration(new NoticeConfig());
 
         }
     }

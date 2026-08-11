@@ -45,20 +45,29 @@ namespace Repository.ClassOfRepository
 
 
         public async Task<List<Attendance>>
-        GetAllAttendanceAsync()
+     GetAllAttendanceAsync()
         {
-
             return await _dbContext.Attendances
 
                 .Include(x => x.TeacherAssignment)
+                    .ThenInclude(x => x.Teacher)
+
+                .Include(x => x.TeacherAssignment)
+                    .ThenInclude(x => x.SchoolClass)
+
+                .Include(x => x.TeacherAssignment)
+                    .ThenInclude(x => x.Section)
+
+                .Include(x => x.TeacherAssignment)
+                    .ThenInclude(x => x.Subject)
 
                 .Include(x => x.AttendanceDetails)
 
-                .OrderByDescending(
-                    x => x.AttendanceDate)
+                .AsNoTracking()
+
+                .OrderByDescending(x => x.AttendanceDate)
 
                 .ToListAsync();
-
         }
 
 

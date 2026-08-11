@@ -1,4 +1,5 @@
-﻿using Model.Models;
+﻿using Data.Data;
+using Model.Models;
 using Model.Models.TeacherAssignment_Model;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,10 @@ namespace Service.InterfaceOfService
         Task<bool> DeleteTeacherAssignmentAsync(int id);
 
         Task<List<DropdownDTO>> GetTeacherDropdownAsync(
-              int? departmentId,
-            int? schoolClassId,
-            int? sectionId,
-             int? subjectId,
-            int? academicYearId);
+    int? departmentId,
+    int? schoolClassId,
+    int? sectionId,
+    int? subjectId,
+    int? academicYearId);
     }
 }

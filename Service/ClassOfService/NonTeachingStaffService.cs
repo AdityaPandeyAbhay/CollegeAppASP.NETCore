@@ -26,42 +26,88 @@ namespace Service.ClassOfService
 
 
 
-        public async Task<GetNonTeachingStaffDTO> CreateNonTeachingStaffAsync(CreateNonTeachingStaffDTO dto)
+       
+public async Task<GetNonTeachingStaffDTO> CreateNonTeachingStaffAsync(
+    CreateNonTeachingStaffDTO dto)
         {
             if (dto == null)
             {
                 throw new ArgumentNullException(nameof(dto));
             }
-            var user = await _userRepository.GetAllByFilterAsync(u => u.Id == dto.UserId);
-            if (user == null)
+
+            // =====================================================
+            // 1. CHECK USER EXISTS
+            // =====================================================
+
+            var users = await _userRepository.GetAllByFilterAsync(
+                u => u.Id == dto.UserId
+            );
+
+            if (users == null || !users.Any())
             {
-                throw new Exception("User not found.");
+                throw new Exception(
+                    $"User with Id '{dto.UserId}' not found."
+                );
             }
-            var isExist = await _nonTeachingStaffRepository.GetAllByFilterAsync(u =>u.UserId == dto.UserId);
-            if (isExist != null)
+
+            // =====================================================
+            // 2. CHECK NON-TEACHING STAFF ALREADY EXISTS
+            // =====================================================
+
+            var existingStaff =
+                await _nonTeachingStaffRepository.GetAllByFilterAsync(
+                    x => x.UserId == dto.UserId
+                );
+
+            if (existingStaff != null && existingStaff.Any())
             {
-                throw new Exception("Teacher already exists for this User.");
+                throw new Exception(
+                    $"Non-Teaching Staff already exists for User '{dto.UserId}'."
+                );
             }
-            // current loggin user 
+
+            // =====================================================
+            // 3. GET CURRENT LOGGED-IN USER
+            // =====================================================
+
             var currentUserId = _currentUserService.UserId;
 
             if (string.IsNullOrEmpty(currentUserId))
             {
-                throw new UnauthorizedAccessException("User is not authenticated.");
+                throw new UnauthorizedAccessException(
+                    "User is not authenticated."
+                );
             }
 
+            // =====================================================
+            // 4. MAP DTO TO ENTITY
+            // =====================================================
+
             var staff = _mapper.Map<NonTeachingStaff>(dto);
+
+            // =====================================================
+            // 5. AUDIT FIELDS
+            // =====================================================
+
             staff.CreatedBy = currentUserId;
             staff.CreatedDate = DateTime.UtcNow;
-            staff.UpdatedDate = DateTime.UtcNow;
             staff.UpdatedBy = currentUserId;
+            staff.UpdatedDate = DateTime.UtcNow;
+
+            // =====================================================
+            // 6. CREATE NON-TEACHING STAFF
+            // =====================================================
 
             await _nonTeachingStaffRepository.CreateAsync(staff);
 
+            // =====================================================
+            // 7. RETURN CREATED STAFF
+            // =====================================================
 
             return _mapper.Map<GetNonTeachingStaffDTO>(staff);
-
         }
+
+
 
 
         public async Task<List<GetNonTeachingStaffDTO>> GetNonTeachingStaffAsync()
@@ -71,40 +117,108 @@ namespace Service.ClassOfService
 
         }
 
-
+        // =====================================================
+        // GET BY STAFF CODE
+        // =====================================================
         public async Task<GetNonTeachingStaffDTO> GetNonTeachingStaffByCodeAsync(string code)
         {
-            var staff = await _nonTeachingStaffRepository.GetAllByFilterAsync(u => u.StaffCode == code);
+            if (string.IsNullOrWhiteSpace(code))
+            {
+                throw new ArgumentException("Staff code is required.");
+            }
 
-            return _mapper.Map<GetNonTeachingStaffDTO>(staff);
+            code = code.Trim();
 
-        }
-
-        public async Task<List<GetNonTeachingStaffDTO>> GetNonTeachingStaffByNameAsync(string name)
-        {
-            var staff = await _nonTeachingStaffRepository.GetAllByFilterAsync(x =>
-                x.FirstName.ToLower().Contains(name.ToLower()) ||
-
-                (x.MiddleName != null &&
-                 x.MiddleName.ToLower().Contains(name.ToLower())) ||
-
-                x.LastName.ToLower().Contains(name.ToLower()) ||
-
-                (x.FirstName + " " + x.LastName)
-                    .ToLower()
-                    .Contains(name.ToLower()) ||
-
-                (x.FirstName + " " +
-                 (x.MiddleName ?? "") + " " +
-                 x.LastName)
-                    .ToLower()
-                    .Contains(name.ToLower())
+            var staff = await _nonTeachingStaffRepository.GetAsync(
+                x => x.StaffCode == code
             );
 
-            return _mapper.Map<List<GetNonTeachingStaffDTO>>(staff) ;
+            if (staff == null)
+            {
+                throw new KeyNotFoundException(
+                    $"Staff with code '{code}' not found."
+                );
+            }
+
+            return _mapper.Map<GetNonTeachingStaffDTO>(staff);
         }
 
-         
+
+        // =====================================================
+        // GET BY STAFF NAME
+        // =====================================================
+        public async Task<List<GetNonTeachingStaffDTO>> GetNonTeachingStaffByNameAsync(
+            string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentException("Name is required.");
+            }
+
+            var searchName = name.Trim().ToLower();
+
+            var staff = await _nonTeachingStaffRepository.GetAllByFilterAsync(x =>
+                x.FirstName.ToLower().Contains(searchName)
+
+                || x.LastName.ToLower().Contains(searchName)
+
+                || (
+                    x.MiddleName != null &&
+                    x.MiddleName.ToLower().Contains(searchName)
+                )
+
+                || (
+                    (x.FirstName + " " + x.LastName)
+                        .ToLower()
+                        .Contains(searchName)
+                )
+
+                || (
+                    (x.FirstName + " " +
+                     (x.MiddleName ?? "") + " " +
+                     x.LastName)
+                        .ToLower()
+                        .Contains(searchName)
+                )
+            );
+
+            if (staff == null || !staff.Any())
+            {
+                return new List<GetNonTeachingStaffDTO>();
+            }
+
+            return _mapper.Map<List<GetNonTeachingStaffDTO>>(staff);
+        }
+
+
+        // =====================================================
+        // GET NON-TEACHING STAFF DROPDOWN
+        // =====================================================
+        public async Task<List<DropdownDTO>> GetNonTeachingStaffDropdownAsync()
+        {
+            var staff = await _nonTeachingStaffRepository.GetAllByFilterAsync(
+                x => x.IsActive
+            );
+
+            if (staff == null || !staff.Any())
+            {
+                return new List<DropdownDTO>();
+            }
+
+            return staff
+                .Select(x => new DropdownDTO
+                {
+                    Id = x.Id,
+                    Code = x.StaffCode,
+                    Text = $"{x.FirstName} " +
+                           $"{(string.IsNullOrWhiteSpace(x.MiddleName) ? "" : x.MiddleName + " ")}" +
+                           $"{x.LastName}".Trim()
+                })
+                .ToList();
+        }
+
+
+
         public async Task<bool> UpdateNonTeachingStaffAsync(int id,UpdateNonTeachingStaffDTO dto)
         {
             var user = await _nonTeachingStaffRepository.GetAsync(u => u.Id == id);
@@ -144,32 +258,7 @@ namespace Service.ClassOfService
             return true;
 
         }
-        public async Task<List<DropdownDTO>> GetNonTeachingStaffDropdownAsync()
-        {
-            var staff = await _nonTeachingStaffRepository.GetAllAsync();
-
-
-            if (staff == null || !staff.Any())
-            {
-                return new List<DropdownDTO>();
-            }
-
-
-            var dropdown = staff
-                .Where(x => x.IsActive)
-                .Select(x => new DropdownDTO
-                {
-                    Id = x.Id,
-
-                    Code = x.StaffCode,
-
-                    Text = $"{x.FirstName} {x.LastName}"
-                })
-                .ToList();
-
-
-            return dropdown;
-        }
+       
 
     }
 }

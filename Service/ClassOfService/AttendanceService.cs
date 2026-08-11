@@ -163,12 +163,27 @@ namespace Service.ClassOfService
 
 
             await _attendanceRepository
-                .CreateAsync(attendance);
+     .CreateAsync(attendance);
 
+            var savedAttendance =
+                await _attendanceRepository
+                    .GetAttendanceWithDetailsAsync(
+                        attendance.Id);
 
+            if (savedAttendance == null)
+                throw new Exception(
+                    "Attendance could not be loaded after creation.");
 
-            return _mapper.Map<AttendanceResponseDTO>(
-                attendance);
+            var response =
+                _mapper.Map<AttendanceResponseDTO>(
+                    savedAttendance);
+
+            for (int i = 0; i < response.Students.Count; i++)
+            {
+                response.Students[i].SrNo = i + 1;
+            }
+
+            return response;
 
         }
 
@@ -184,47 +199,53 @@ namespace Service.ClassOfService
 
 
         public async Task<List<AttendanceListDTO>>
-            GetAllAttendanceAsync()
+      GetAllAttendanceAsync()
         {
-
             var data =
                 await _attendanceRepository
-                .GetAllAttendanceAsync();
-
-
+                    .GetAllAttendanceAsync();
 
             return data.Select(x => new AttendanceListDTO
             {
-
                 AttendanceId = x.Id,
 
-                AttendanceDate = x.AttendanceDate,
+                AttendanceDate =
+                    x.AttendanceDate,
 
+                TeacherName =
+                    x.TeacherAssignment.Teacher.FirstName
+                    + " "
+                    + (x.TeacherAssignment.Teacher.MiddleName ?? "")
+                    + " "
+                    + x.TeacherAssignment.Teacher.LastName,
+
+                ClassName =
+                    x.TeacherAssignment.SchoolClass.ClassName,
+
+                SectionName =
+                    x.TeacherAssignment.Section.SectionName,
+
+                SubjectName =
+                    x.TeacherAssignment.Subject.SubjectName,
 
                 PresentCount =
                     x.AttendanceDetails
-                    .Count(a => a.AttendanceStatus == "Present"),
-
+                        .Count(a => a.AttendanceStatus == "Present"),
 
                 AbsentCount =
                     x.AttendanceDetails
-                    .Count(a => a.AttendanceStatus == "Absent"),
-
+                        .Count(a => a.AttendanceStatus == "Absent"),
 
                 LeaveCount =
                     x.AttendanceDetails
-                    .Count(a => a.AttendanceStatus == "Leave"),
-
+                        .Count(a => a.AttendanceStatus == "Leave"),
 
                 LateCount =
                     x.AttendanceDetails
-                    .Count(a => a.AttendanceStatus == "Late")
-
+                        .Count(a => a.AttendanceStatus == "Late")
 
             }).ToList();
-
         }
-
 
 
 

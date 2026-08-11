@@ -38,7 +38,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetAllSubject")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -76,7 +76,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetSubjectByCode/{code}")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -122,7 +122,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetSubjectByName/{name}")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
 
@@ -170,7 +170,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("Dropdown")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 
@@ -213,7 +213,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("DropdownByDepartment/{departmentId:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
 
         public async Task<ActionResult<APIResponse>> GetDropdownByDepartmentAsync(int departmentId)
         {
@@ -254,7 +254,7 @@ namespace CollegeApp.Controllers
 
         [HttpPost]
         [Route("CreateSubject")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
 
         public async Task<ActionResult<APIResponse>> CreateSubjectAsync(CreateSubjectDTO dto)
         {
@@ -296,7 +296,7 @@ namespace CollegeApp.Controllers
 
         [HttpPut]
         [Route("UpdateSubject/{id:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
 
 
         public async Task<ActionResult<APIResponse>> UpdateSubjectAsync(int id, UpdateSubjectDTO dto)
@@ -339,7 +339,7 @@ namespace CollegeApp.Controllers
 
         [HttpDelete]
         [Route("DeleteSubject/{code}")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
 
 
         public async Task<ActionResult<APIResponse>> DeleteSubjectAsync(string code)

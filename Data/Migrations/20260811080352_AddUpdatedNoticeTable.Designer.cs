@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(CollegeDBContext))]
-    [Migration("20260805064058_AddAttendanceModule")]
-    partial class AddAttendanceModule
+    [Migration("20260811080352_AddUpdatedNoticeTable")]
+    partial class AddUpdatedNoticeTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -223,32 +223,6 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UserTypes", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Administrator with full access",
-                            Name = "Admin"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Student with limited access",
-                            Name = "Student"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Teacher with specific access",
-                            Name = "Teacher"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "Parent  user with minimal access",
-                            Name = "None_teaching Staff"
-                        });
                 });
 
             modelBuilder.Entity("Data.Data.AcademicYear", b =>
@@ -488,6 +462,48 @@ namespace Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Data.Data.Exam", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("ExamName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExamName")
+                        .IsUnique();
+
+                    b.ToTable("Exams", (string)null);
+                });
+
             modelBuilder.Entity("Data.Data.FeeCategory", b =>
                 {
                     b.Property<int>("Id")
@@ -693,6 +709,165 @@ namespace Data.Migrations
                         .IsUnique();
 
                     b.ToTable("NonTeachingStaffs", (string)null);
+                });
+
+            modelBuilder.Entity("Data.Data.Result", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Grade")
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)");
+
+                    b.Property<decimal>("ObtainedMarks")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<string>("PdfFileName")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("PdfFilePath")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<decimal>("Percentage")
+                        .HasColumnType("decimal(5,2)");
+
+                    b.Property<DateTime?>("PublishedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("Rank")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ResultBatchId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ResultStatus")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalMarks")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("ResultBatchId", "StudentId")
+                        .IsUnique();
+
+                    b.ToTable("Results", (string)null);
+                });
+
+            modelBuilder.Entity("Data.Data.ResultBatch", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AcademicYearId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClassId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ExamId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsPublished")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("SectionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassId");
+
+                    b.HasIndex("ExamId");
+
+                    b.HasIndex("SectionId");
+
+                    b.HasIndex("AcademicYearId", "ClassId", "SectionId", "ExamId")
+                        .IsUnique();
+
+                    b.ToTable("ResultBatches", (string)null);
+                });
+
+            modelBuilder.Entity("Data.Data.ResultDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Grade")
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)");
+
+                    b.Property<decimal>("MaxMarks")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<decimal>("ObtainedMarks")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<string>("Remarks")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("ResultId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubjectId");
+
+                    b.HasIndex("ResultId", "SubjectId")
+                        .IsUnique();
+
+                    b.ToTable("ResultDetails", (string)null);
                 });
 
             modelBuilder.Entity("Data.Data.SchoolClass", b =>
@@ -1302,6 +1477,59 @@ namespace Data.Migrations
                     b.ToTable("TeacherAssignments", (string)null);
                 });
 
+            modelBuilder.Entity("Model.Models.Notice_Model.Notice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsPublished")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("PdfFileName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("PdfPath")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime?>("PublishedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notices", (string)null);
+                });
+
             modelBuilder.Entity("CollegeApp.Data.RolePrivilege", b =>
                 {
                     b.HasOne("CollegeApp.Data.Role", "Role")
@@ -1421,6 +1649,79 @@ namespace Data.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Data.Data.Result", b =>
+                {
+                    b.HasOne("Data.Data.ResultBatch", "ResultBatch")
+                        .WithMany("Results")
+                        .HasForeignKey("ResultBatchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Data.Data.Student", "Student")
+                        .WithMany("Results")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("ResultBatch");
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("Data.Data.ResultBatch", b =>
+                {
+                    b.HasOne("Data.Data.AcademicYear", "AcademicYear")
+                        .WithMany("ResultBatches")
+                        .HasForeignKey("AcademicYearId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Data.Data.SchoolClass", "SchoolClass")
+                        .WithMany("ResultBatches")
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Data.Data.Exam", "Exam")
+                        .WithMany("ResultBatches")
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Data.Data.Section", "Section")
+                        .WithMany("ResultBatches")
+                        .HasForeignKey("SectionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("AcademicYear");
+
+                    b.Navigation("Exam");
+
+                    b.Navigation("SchoolClass");
+
+                    b.Navigation("Section");
+                });
+
+            modelBuilder.Entity("Data.Data.ResultDetail", b =>
+                {
+                    b.HasOne("Data.Data.Result", "Result")
+                        .WithMany("ResultDetails")
+                        .HasForeignKey("ResultId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Data.Data.Subject", "Subject")
+                        .WithMany("ResultDetails")
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Result");
+
+                    b.Navigation("Subject");
                 });
 
             modelBuilder.Entity("Data.Data.SchoolClass", b =>
@@ -1643,6 +1944,8 @@ namespace Data.Migrations
                 {
                     b.Navigation("FeeStructures");
 
+                    b.Navigation("ResultBatches");
+
                     b.Navigation("TeacherAssignments");
                 });
 
@@ -1666,6 +1969,11 @@ namespace Data.Migrations
                     b.Navigation("Teachers");
                 });
 
+            modelBuilder.Entity("Data.Data.Exam", b =>
+                {
+                    b.Navigation("ResultBatches");
+                });
+
             modelBuilder.Entity("Data.Data.FeeCategory", b =>
                 {
                     b.Navigation("FeeStructures");
@@ -1676,9 +1984,21 @@ namespace Data.Migrations
                     b.Navigation("StudentFees");
                 });
 
+            modelBuilder.Entity("Data.Data.Result", b =>
+                {
+                    b.Navigation("ResultDetails");
+                });
+
+            modelBuilder.Entity("Data.Data.ResultBatch", b =>
+                {
+                    b.Navigation("Results");
+                });
+
             modelBuilder.Entity("Data.Data.SchoolClass", b =>
                 {
                     b.Navigation("FeeStructures");
+
+                    b.Navigation("ResultBatches");
 
                     b.Navigation("Sections");
 
@@ -1689,6 +2009,8 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Data.Data.Section", b =>
                 {
+                    b.Navigation("ResultBatches");
+
                     b.Navigation("Students");
 
                     b.Navigation("TeacherAssignments");
@@ -1698,11 +2020,15 @@ namespace Data.Migrations
                 {
                     b.Navigation("AttendanceDetails");
 
+                    b.Navigation("Results");
+
                     b.Navigation("StudentFees");
                 });
 
             modelBuilder.Entity("Data.Data.Subject", b =>
                 {
+                    b.Navigation("ResultDetails");
+
                     b.Navigation("TeacherAssignments");
                 });
 

@@ -30,20 +30,28 @@ namespace Service.ClassOfService
 
 
 
-        public async Task<GetTeacherDTO> CreateTeacherAsync(CreateTeacherDTO dto)
-        {
-            var user = await _userRepository.GetAllByFilterAsync(u => u.Id == dto.UserId);
-            if (user == null)
+       
+       public async Task<GetTeacherDTO> CreateTeacherAsync(CreateTeacherDTO dto)
+           {
+            ArgumentNullException.ThrowIfNull(dto);
+
+            // Check whether User exists
+            var users = await _userRepository.GetAllByFilterAsync(
+                u => u.Id == dto.UserId);
+
+            if (users == null || !users.Any())
             {
                 throw new Exception("User not found.");
             }
-            var IsExiting = await _teacherRepository.GetAllByFilterAsync(u => u.UserId == dto.UserId);
-            if (IsExiting != null)
+
+            // Check whether Teacher already exists for this User
+            var existingTeachers = await _teacherRepository.GetAllByFilterAsync(
+                t => t.UserId == dto.UserId);
+
+            if (existingTeachers != null && existingTeachers.Any())
             {
                 throw new Exception("Teacher already exists for this User.");
             }
-
-
 
             // Get logged-in user
             var currentUserId = _currentUserService.UserId;
@@ -53,18 +61,23 @@ namespace Service.ClassOfService
                 throw new UnauthorizedAccessException("User is not authenticated.");
             }
 
+            // Map DTO to Entity
             var teacher = _mapper.Map<Teacher>(dto);
+
+            // Audit fields
             teacher.CreatedBy = currentUserId;
             teacher.CreatedDate = DateTime.UtcNow;
-
             teacher.UpdatedBy = currentUserId;
             teacher.UpdatedDate = DateTime.UtcNow;
-            //teacher.CreatedBy = ;
+
+            // Save Teacher
             await _teacherRepository.CreateAsync(teacher);
 
-
+            // Return created Teacher
             return _mapper.Map<GetTeacherDTO>(teacher);
         }
+
+
 
 
 
@@ -75,15 +88,21 @@ namespace Service.ClassOfService
         }
 
 
-        public async Task<GetTeacherDTO> GetByTeacherCodeAsync(string code)
+        public async Task<GetTeacherDTO?> GetByTeacherCodeAsync(string code)
         {
+            var teachers = await _teacherRepository.GetAllByFilterAsync(
+                x => x.TeacherCode.ToLower().Contains(code.ToLower())
+            );
 
-            var teacher = await _teacherRepository.GetAllByFilterAsync(t => t.TeacherCode == code, true);
+            var teacher = teachers.FirstOrDefault();
+
+            if (teacher == null)
+            {
+                return null;
+            }
 
             return _mapper.Map<GetTeacherDTO>(teacher);
-
         }
-
 
 
         public async Task<List<GetTeacherDTO>> GetTeacherByNameAsync(string name)

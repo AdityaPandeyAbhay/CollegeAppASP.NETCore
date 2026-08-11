@@ -26,6 +26,7 @@ namespace CollegeApp.Controllers
 
         [HttpPost]
         [Route("Create")]
+        [Authorize(Roles = "Super Admin,Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
         [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
         [ProducesResponseType(StatusCodes.Status400BadRequest)]  // Invalid Request
@@ -173,7 +174,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("dropdown")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> GetRoleDropdown()
@@ -255,6 +256,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpDelete("{Id}", Name = "DeleteRoleById")]
+        [Authorize(Roles = "Super Admin,Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
         [ProducesResponseType(StatusCodes.Status400BadRequest)]  // Invalid Request
         [ProducesResponseType(StatusCodes.Status401Unauthorized)] // Authentication Failed

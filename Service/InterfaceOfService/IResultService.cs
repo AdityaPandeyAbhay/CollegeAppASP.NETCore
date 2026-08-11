@@ -1,4 +1,5 @@
-﻿using Model.Models.Result_Model;
+﻿using Model.Models;
+using Model.Models.Result_Model;
 
 namespace Service.InterfaceOfService
 {
@@ -66,5 +67,19 @@ namespace Service.InterfaceOfService
         Task<List<ResultDetailDTO>> GetResultDetailsAsync(int resultId);
 
         #endregion
+
+
+
+
+        Task<List<DropdownDTO>> GetExamDropdownAsync();
+
+        Task<List<DropdownDTO>> GetResultBatchDropdownAsync(
+            int examId);
+
+        Task<List<DropdownDTO>> GetResultDropdownAsync(
+            int resultBatchId);
+
+        Task<List<DropdownDTO>> GetResultDetailDropdownAsync(
+            int resultId);
     }
 }

@@ -19,12 +19,12 @@ namespace CollegeApp.Controllers
     {
 
         private readonly IMapper _mapper;
-        private readonly ILogger _logger;
+        private readonly ILogger<NonTeachingStaffController> _logger;
         private readonly INonTeachingStaffService _service;
         private readonly APIResponse _apiResponse;
         private readonly ICurrentUserServices _currentUserService;
 
-        public NonTeachingStaffController(IMapper mapper, ILogger logger, INonTeachingStaffService service, ICurrentUserServices currentUserService)
+        public NonTeachingStaffController(IMapper mapper, ILogger<NonTeachingStaffController> logger, INonTeachingStaffService service, ICurrentUserServices currentUserService)
         {
             _mapper = mapper;
             _logger = logger;
@@ -35,7 +35,7 @@ namespace CollegeApp.Controllers
         }
         [HttpPost]
         [Route("CreateStaff")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
 
         [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
@@ -77,7 +77,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("AllNonTeachingStoff")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
 
         [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
@@ -115,132 +115,159 @@ namespace CollegeApp.Controllers
 
 
 
-        [HttpGet("StaffCode/{Code}")]
-        [Authorize(Roles = "SuperAdmin,Admin,NonTeachingStaff")]
-        [ProducesResponseType(StatusCodes.Status200OK)]          // Success
-
-        [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
-
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]  // Invalid Request
-
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)] // Authentication Failed
-
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]   // Access Denied
-
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)] // Server Error
-
-        public async Task<ActionResult<APIResponse>> GetTeacherByCodeAsync(string code)
+        // =====================================================
+        // GET BY STAFF CODE
+        // =====================================================
+        [HttpGet("StaffCode/{code}")]
+        [Authorize(Roles = "Super Admin,Admin,NonTeachingStaff")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<APIResponse>> GetNonTeachingStaffByCodeAsync(
+            string code)
         {
             try
             {
-
                 var staff = await _service.GetNonTeachingStaffByCodeAsync(code);
 
                 if (staff == null)
                 {
-                    throw new Exception($"User are not found on {code} code");
+                    _apiResponse.Status = false;
+                    _apiResponse.StatusCode = HttpStatusCode.NotFound;
+                    _apiResponse.Errors.Add(
+                        $"Staff with code '{code}' not found."
+                    );
+
+                    return NotFound(_apiResponse);
                 }
 
-                // SuperAdmin/Admin can access all staff
-                if (!_currentUserService.IsInRole("SuperAdmin") &&
+                // SuperAdmin and Admin can access all staff
+                if (!_currentUserService.IsInRole("Super Admin") &&
                     !_currentUserService.IsInRole("Admin"))
                 {
-                    // Teacher can access only their own record
+                    // NonTeachingStaff can access only their own record
                     if (staff.UserId != _currentUserService.UserId)
                     {
                         return Forbid();
                     }
                 }
 
-
                 _apiResponse.Data = staff;
                 _apiResponse.Status = true;
                 _apiResponse.StatusCode = HttpStatusCode.OK;
 
                 return Ok(_apiResponse);
             }
+            catch (ArgumentException ex)
+            {
+                _apiResponse.Status = false;
+                _apiResponse.StatusCode = HttpStatusCode.BadRequest;
+                _apiResponse.Errors.Add(ex.Message);
+
+                return BadRequest(_apiResponse);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                _apiResponse.Status = false;
+                _apiResponse.StatusCode = HttpStatusCode.NotFound;
+                _apiResponse.Errors.Add(ex.Message);
+
+                return NotFound(_apiResponse);
+            }
             catch (Exception ex)
             {
                 _apiResponse.Status = false;
-                _apiResponse.Errors.Add(ex.Message);
                 _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+                _apiResponse.Errors.Add(ex.Message);
 
-                return _apiResponse;
+                return StatusCode(
+                    StatusCodes.Status500InternalServerError,
+                    _apiResponse
+                );
             }
         }
 
 
-
-        [HttpGet("Name/{Name}")]
-        [Authorize(Roles = "SuperAdmin,Admin,NonTeachingStaff")]
-        [ProducesResponseType(StatusCodes.Status200OK)]          // Success
-
-        [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
-
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]  // Invalid Request
-
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)] // Authentication Failed
-
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]   // Access Denied
-
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)] // Server Error
-
-        public async Task<ActionResult<APIResponse>> GetNonTeachingStaffByNameAsync(string Name)
+        // =====================================================
+        // GET BY STAFF NAME
+        // =====================================================
+        [HttpGet("Name/{name}")]
+        [Authorize(Roles = "Super Admin,Admin,NonTeachingStaff")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<APIResponse>> GetNonTeachingStaffByNameAsync(
+            string name)
         {
             try
             {
-                var staff = await _service.GetNonTeachingStaffByNameAsync(Name);
+                var staff = await _service.GetNonTeachingStaffByNameAsync(name);
 
                 if (staff == null || !staff.Any())
                 {
-                    return NotFound();
+                    _apiResponse.Status = false;
+                    _apiResponse.StatusCode = HttpStatusCode.NotFound;
+                    _apiResponse.Errors.Add(
+                        $"No staff found with name '{name}'."
+                    );
+
+                    return NotFound(_apiResponse);
                 }
 
-                if (!_currentUserService.IsInRole("SuperAdmin") &&
+                // SuperAdmin and Admin can access all staff
+                if (!_currentUserService.IsInRole("Super Admin") &&
                     !_currentUserService.IsInRole("Admin"))
                 {
-                    if (staff.Any(x => x.UserId != _currentUserService.UserId))
+                    // NonTeachingStaff can access only their own record
+                    if (staff.Any(x =>
+                        x.UserId != _currentUserService.UserId))
                     {
                         return Forbid();
                     }
                 }
 
-
-
                 _apiResponse.Data = staff;
                 _apiResponse.Status = true;
                 _apiResponse.StatusCode = HttpStatusCode.OK;
 
-
                 return Ok(_apiResponse);
+            }
+            catch (ArgumentException ex)
+            {
+                _apiResponse.Status = false;
+                _apiResponse.StatusCode = HttpStatusCode.BadRequest;
+                _apiResponse.Errors.Add(ex.Message);
+
+                return BadRequest(_apiResponse);
             }
             catch (Exception ex)
             {
                 _apiResponse.Status = false;
-                _apiResponse.Errors.Add(ex.Message);
                 _apiResponse.StatusCode = HttpStatusCode.InternalServerError;
+                _apiResponse.Errors.Add(ex.Message);
 
-                return _apiResponse;
+                return StatusCode(
+                    StatusCodes.Status500InternalServerError,
+                    _apiResponse
+                );
             }
         }
 
-
+        // =====================================================
+        // GET NON-TEACHING STAFF DROPDOWN
+        // =====================================================
         [HttpGet("dropdown")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
-
-        [Authorize(Roles = "SuperAdmin,Admin,NonTeachingStaff")]
-        [ProducesResponseType(StatusCodes.Status200OK)]          // Success
-
-        [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
-
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]  // Invalid Request
-
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)] // Authentication Failed
-
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]   // Access Denied
-
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)] // Server Error
-
+        [Authorize(Roles = "Super Admin,Admin")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> GetNonTeachingStaffDropdown()
         {
             try
@@ -248,23 +275,24 @@ namespace CollegeApp.Controllers
                 var staff =
                     await _service.GetNonTeachingStaffDropdownAsync();
 
-
                 _apiResponse.Data = staff;
                 _apiResponse.Status = true;
                 _apiResponse.StatusCode = HttpStatusCode.OK;
-
 
                 return Ok(_apiResponse);
             }
             catch (Exception ex)
             {
                 _apiResponse.Status = false;
-                _apiResponse.Errors.Add(ex.Message);
                 _apiResponse.StatusCode =
                     HttpStatusCode.InternalServerError;
 
+                _apiResponse.Errors.Add(ex.Message);
 
-                return _apiResponse;
+                return StatusCode(
+                    StatusCodes.Status500InternalServerError,
+                    _apiResponse
+                );
             }
         }
 
@@ -272,9 +300,8 @@ namespace CollegeApp.Controllers
 
 
 
-
         [HttpPut("UpdateStaff/{id:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
 
         [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
@@ -315,7 +342,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpDelete("DeleteStaff/{code}")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
 
         [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created

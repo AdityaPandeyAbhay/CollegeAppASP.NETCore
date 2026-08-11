@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CollegeApp.Data;
 using CollegeApp.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Model.Models;
 using Repository.InterfaceOfRepository;
@@ -14,59 +15,296 @@ namespace CollegeApp.Services
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
         private readonly ICollegeRepository<UserRoleMapping> _userRoleRepository;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
 
-        public UserService(IUserRepository userRepository,IMapper mapper, ICollegeRepository<UserRoleMapping> userRoleRepository)
+        public UserService(IUserRepository userRepository,IMapper mapper, ICollegeRepository<UserRoleMapping> userRoleRepository, IHttpContextAccessor httpContextAccessor)
         {
             _userRepository = userRepository;
             _mapper = mapper;
             _userRoleRepository = userRoleRepository;
+            _httpContextAccessor = httpContextAccessor;
         }
 
 
+       
+       
         public async Task<bool> CreateUserAsync(UserDTO userDTO)
         {
-            ArgumentNullException.ThrowIfNull(userDTO, $"the argumen {nameof(userDTO)} is null");
+            ArgumentNullException.ThrowIfNull(
+                userDTO,
+                $"The argument {nameof(userDTO)} is null"
+            );
 
-            var existingUser = await _userRepository.GetAsync(u => u.Username == userDTO.Username);
-            if (existingUser != null) 
+            // =====================================================
+            // 1. VALIDATE USER ID
+            // =====================================================
+
+            if (string.IsNullOrWhiteSpace(userDTO.Id))
             {
-                throw new Exception($"User with username {userDTO.Username} already exists.");
+                throw new ArgumentException(
+                    "User Id is required."
+                );
             }
 
+            // =====================================================
+            // 2. VALIDATE USERNAME
+            // =====================================================
+
+            if (string.IsNullOrWhiteSpace(userDTO.Username))
+            {
+                throw new ArgumentException(
+                    "Username is required."
+                );
+            }
+
+            // =====================================================
+            // 3. VALIDATE PASSWORD
+            // =====================================================
+
+            if (string.IsNullOrWhiteSpace(userDTO.Password))
+            {
+                throw new ArgumentException(
+                    "Password cannot be null or empty."
+                );
+            }
+
+            // =====================================================
+            // 4. VALIDATE USER TYPE
+            //
+            // 1 = Super Admin
+            // 2 = Admin
+            // 3 = Teacher
+            // 4 = Non Teaching Staff
+            // 5 = Student
+            // =====================================================
+
+            if (userDTO.UserTypeId < 1 || userDTO.UserTypeId > 5)
+            {
+                throw new ArgumentException(
+                    "Invalid UserTypeId. Valid values are 1 to 5."
+                );
+            }
+
+            // =====================================================
+            // 5. CHECK WHETHER THIS IS THE FIRST USER
+            // =====================================================
+
+            var existingUsers = await _userRepository.GetAllAsync();
+
+            bool isFirstUser = existingUsers.Count == 0;
+
+            // =====================================================
+            // 6. FIRST USER = SUPER ADMIN ONLY
+            // =====================================================
+
+            if (isFirstUser)
+            {
+                if (userDTO.UserTypeId != 1)
+                {
+                    throw new UnauthorizedAccessException(
+                        "The first user must be a Super Admin."
+                    );
+                }
+
+                // Super Admin Role = 1
+                if (userDTO.RoleIds == null ||
+                    !userDTO.RoleIds.Contains(1))
+                {
+                    throw new ArgumentException(
+                        "The first Super Admin must have Super Admin role."
+                    );
+                }
+            }
+            else
+            {
+                // =================================================
+                // 7. AFTER FIRST USER, JWT AUTHENTICATION REQUIRED
+                // =================================================
+
+                var currentUserId =
+                    _httpContextAccessor.HttpContext?
+                        .User
+                        .FindFirst("UserId")?
+                        .Value;
+
+                if (string.IsNullOrWhiteSpace(currentUserId))
+                {
+                    throw new UnauthorizedAccessException(
+                        "User is not authenticated."
+                    );
+                }
+
+                // =================================================
+                // 8. GET CURRENT LOGGED-IN USER
+                // =================================================
+
+                var currentUser = await _userRepository.GetAsync(
+                    u => u.Id == currentUserId
+                );
+
+                if (currentUser == null)
+                {
+                    throw new UnauthorizedAccessException(
+                        "Logged-in user not found."
+                    );
+                }
+
+                // =================================================
+                // 9. CURRENT USER MUST BE ACTIVE
+                // =================================================
+
+                if (!currentUser.IsActive || currentUser.IsDeleted)
+                {
+                    throw new UnauthorizedAccessException(
+                        "Logged-in user is inactive or deleted."
+                    );
+                }
+
+                // =================================================
+                // 10. PREVENT CREATION OF ANOTHER SUPER ADMIN
+                // =================================================
+
+                if (userDTO.UserTypeId == 1)
+                {
+                    throw new UnauthorizedAccessException(
+                        "Another Super Admin cannot be created."
+                    );
+                }
+
+                // =================================================
+                // 11. ADMIN CAN ONLY BE CREATED BY SUPER ADMIN
+                // =================================================
+
+                if (userDTO.UserTypeId == 2)
+                {
+                    if (currentUser.UserTypeId != 1)
+                    {
+                        throw new UnauthorizedAccessException(
+                            "Only Super Admin can create an Admin user."
+                        );
+                    }
+
+                    // Admin Role = 2
+                    if (userDTO.RoleIds == null ||
+                        !userDTO.RoleIds.Contains(2))
+                    {
+                        throw new ArgumentException(
+                            "Admin user must have Admin role."
+                        );
+                    }
+                }
+
+                // =================================================
+                // 12. SUPER ADMIN CAN CREATE ALL OTHER USERS
+                // 13. ADMIN CAN CREATE NON-SUPER-ADMIN USERS
+                // =================================================
+
+                if (currentUser.UserTypeId != 1 &&
+                    currentUser.UserTypeId != 2)
+                {
+                    throw new UnauthorizedAccessException(
+                        "Only Super Admin or Admin can create users."
+                    );
+                }
+            }
+
+            // =====================================================
+            // 14. CHECK DUPLICATE USER ID
+            // =====================================================
+
+            var existingUserId = await _userRepository.GetAsync(
+                u => u.Id == userDTO.Id
+            );
+
+            if (existingUserId != null)
+            {
+                throw new Exception(
+                    $"User with Id '{userDTO.Id}' already exists."
+                );
+            }
+
+            // =====================================================
+            // 15. CHECK DUPLICATE USERNAME
+            // =====================================================
+
+            var existingUsername = await _userRepository.GetAsync(
+                u => u.Username == userDTO.Username
+            );
+
+            if (existingUsername != null)
+            {
+                throw new Exception(
+                    $"User with username '{userDTO.Username}' already exists."
+                );
+            }
+
+            // =====================================================
+            // 16. CREATE USER ENTITY
+            // =====================================================
+
             User user = _mapper.Map<User>(userDTO);
+
+            // ID is manually entered
+            user.Id = userDTO.Id;
+
+            // =====================================================
+            // 17. DEFAULT VALUES
+            // =====================================================
+
+            user.IsActive = true;
             user.IsDeleted = false;
             user.CreatedDate = DateTime.UtcNow;
             user.ModifyDate = DateTime.UtcNow;
 
-            if (!string.IsNullOrEmpty(userDTO.Password))
-            {
-                var (passwordHash, salt) = CreatePasswordHashWithSalt(userDTO.Password);
-                user.Password = passwordHash;
-                user.PasswordSalt = salt;
-            }
-            else
-            {
-                throw new ArgumentException("Password cannot be null or empty.");
-            }
+            // =====================================================
+            // 18. HASH PASSWORD
+            // =====================================================
+
+            var (passwordHash, salt) =
+                CreatePasswordHashWithSalt(userDTO.Password);
+
+            user.Password = passwordHash;
+            user.PasswordSalt = salt;
+
+            // =====================================================
+            // 19. SAVE USER
+            // =====================================================
 
             await _userRepository.CreateAsync(user);
 
-            foreach (var roleId in userDTO.RoleIds)
+            // =====================================================
+            // 20. SAVE USER ROLES
+            // =====================================================
+
+            if (userDTO.RoleIds != null &&
+                userDTO.RoleIds.Count > 0)
             {
-                var mapping = new UserRoleMapping
+                foreach (var roleId in userDTO.RoleIds.Distinct())
                 {
-                    UserId = user.Id,
-                    RoleId = roleId
-                };
+                    // Valid role IDs in your current design
+                    if (roleId < 1)
+                    {
+                        throw new ArgumentException(
+                            $"Invalid RoleId: {roleId}"
+                        );
+                    }
 
-                await _userRoleRepository.CreateAsync(mapping);
+                    var mapping = new UserRoleMapping
+                    {
+                        UserId = user.Id,
+                        RoleId = roleId
+                    };
+
+                    await _userRoleRepository.CreateAsync(mapping);
+                }
             }
-
-
 
             return true;
         }
+
+
+
 
 
 
@@ -147,14 +385,77 @@ namespace CollegeApp.Services
 
         public async Task<bool> DeleteUserAsync(string Id)
         {
-            var user = await _userRepository.GetAsync(u => u.Id.Equals(Id));
+            // User to delete
+            var user = await _userRepository.GetAsync(
+                u => u.Id == Id
+            );
+
             if (user == null)
             {
-                throw new Exception($"USer {Id} not  Exist");  
+                throw new Exception($"User {Id} does not exist.");
             }
-            await _userRepository.DeleteAsync(user);
-            return true;
 
+            // Logged-in user
+            var currentUserId =
+                _httpContextAccessor.HttpContext?.User.FindFirst("UserId")?.Value;
+
+            if (string.IsNullOrEmpty(currentUserId))
+            {
+                throw new UnauthorizedAccessException(
+                    "User is not authenticated."
+                );
+            }
+
+            var currentUser = await _userRepository.GetAsync(
+                u => u.Id == currentUserId
+            );
+
+            if (currentUser == null)
+            {
+                throw new UnauthorizedAccessException(
+                    "Logged-in user not found."
+                );
+            }
+
+            // =====================================================
+            // NEVER DELETE ABHAY SUPER ADMIN
+            // =====================================================
+
+            if (user.Username.Equals(
+                    "Abhay",
+                    StringComparison.OrdinalIgnoreCase)
+                && user.UserTypeId == 1)
+            {
+                throw new UnauthorizedAccessException(
+                    "The permanent Super Admin account cannot be deleted."
+                );
+            }
+
+            // =====================================================
+            // ONLY SUPER ADMIN CAN DELETE ADMIN
+            // =====================================================
+
+            if (user.UserTypeId == 2) // Admin
+            {
+                if (currentUser.UserTypeId != 1)
+                {
+                    throw new UnauthorizedAccessException(
+                        "Only Super Admin can delete an Admin."
+                    );
+                }
+            }
+
+            // =====================================================
+            // SOFT DELETE
+            // =====================================================
+
+            user.IsActive = false;
+            user.IsDeleted = true;
+            user.ModifyDate = DateTime.UtcNow;
+
+            await _userRepository.UpdateAsync(user);
+
+            return true;
         }
 
         public async Task<List<DropdownDTO>> GetUserDropdownAsync()

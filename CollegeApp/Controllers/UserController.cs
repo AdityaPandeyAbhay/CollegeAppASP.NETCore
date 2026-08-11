@@ -39,7 +39,9 @@ namespace CollegeApp.Controllers
 
         [HttpPost]
         [Route("CreateUser")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin,Operator")]
+        
+       
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
 
         [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
@@ -91,7 +93,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("All")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
 
         [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
@@ -137,6 +139,7 @@ namespace CollegeApp.Controllers
         // ===============================
 
         [HttpGet("id/{Id}")]
+        [Authorize(Roles = "Super Admin,Admin,Operator")]
 
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
 
@@ -160,7 +163,7 @@ namespace CollegeApp.Controllers
 
 
                 // Admin can view anyone
-                if (role != "SuperAdmin" && role != "Admin")
+                if (role != "Super Admin" && role != "Admin")
                 {
                     // User can view only himself
                     if (currentUserId != Id)
@@ -205,6 +208,7 @@ namespace CollegeApp.Controllers
         // ===============================
 
         [HttpGet("Name/{Name}")]
+        [Authorize(Roles = "Super Admin,Admin,Operator")]
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
 
         [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
@@ -224,7 +228,7 @@ namespace CollegeApp.Controllers
                 var currentUsername = User.FindFirst(ClaimTypes.Name)?.Value;
                 var role = User.FindFirst(ClaimTypes.Role)?.Value;
 
-                if (role != "SuperAdmin" && role != "Admin")
+                if (role != "Super Admin" && role != "Admin")
                 {
                     if (!string.Equals(currentUsername, Name, StringComparison.OrdinalIgnoreCase))
                     {
@@ -261,7 +265,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("dropdown")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin,Operator")]
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
 
         [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
@@ -317,6 +321,7 @@ namespace CollegeApp.Controllers
 
         [HttpPut]
         [Route("UpdateUser")]
+        [Authorize(Roles = "Super Admin,Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
 
         [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
@@ -399,8 +404,9 @@ namespace CollegeApp.Controllers
         //
         // ===============================
 
-        [HttpDelete("{Id}")] 
-         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
+        [HttpDelete("{Id}")]
+        [Authorize(Roles = "Super Admin,Admin")]
+        [ProducesResponseType(StatusCodes.Status200OK)]          // Success
 
         [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
 

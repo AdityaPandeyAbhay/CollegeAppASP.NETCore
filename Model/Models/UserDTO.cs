@@ -13,8 +13,13 @@ namespace CollegeApp.Models
         public bool IsActive { get; set; } // Indicates if the user is active or not
         [Required]
 
-        public int UserTypeId { get; set; } // 1 for Admin, 2 for Student, 3 for Teacher
-
+        
+        public int UserTypeId { get; set; }
+        // 1 = Super Admin
+        // 2 = Admin
+        // 3 = Teacher
+        // 4 = Non Teaching Staff
+        // 5 = Student
         public List<int> RoleIds { get; set; } = new();
     }
 }

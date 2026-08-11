@@ -32,7 +32,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetAllFeeStructures")]
-        [Authorize(Roles = "SuperAdmin,Admin,Accountant")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetAllFeeStructures()
         {
@@ -62,7 +62,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetFeeStructureById/{id:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin,Accountant")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant")]
         public async Task<ActionResult<APIResponse>> GetFeeStructureById(int id)
         {
             try
@@ -91,7 +91,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetFeeStructureByCategory/{feeCategoryId:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin,Accountant")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant")]
         public async Task<ActionResult<APIResponse>> GetFeeStructureByCategory(int feeCategoryId)
         {
             try
@@ -120,7 +120,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetFeeStructureByClass/{classId:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin,Accountant")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant")]
         public async Task<ActionResult<APIResponse>> GetFeeStructureByClass(int classId)
         {
             try
@@ -149,7 +149,7 @@ namespace CollegeApp.Controllers
 
         [HttpPost]
         [Route("CreateFeeStructure")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         public async Task<ActionResult<APIResponse>> CreateFeeStructure(CreateFeeStructureDTO dto)
         {
             try
@@ -180,7 +180,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("Dropdown")]
-        [Authorize(Roles = "SuperAdmin,Admin,Accountant")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetFeeStructureDropdown()
         {
@@ -214,7 +214,7 @@ namespace CollegeApp.Controllers
 
         [HttpPut]
         [Route("UpdateFeeStructure/{id:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         public async Task<ActionResult<APIResponse>> UpdateFeeStructure(int id, UpdateFeeStructureDTO dto)
         {
             try
@@ -243,7 +243,7 @@ namespace CollegeApp.Controllers
 
         [HttpDelete]
         [Route("DeleteFeeStructure/{id:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         public async Task<ActionResult<APIResponse>> DeleteFeeStructure(int id)
         {
             try

@@ -16,7 +16,7 @@ namespace Repository.InterfaceOfRepository
 
 
 
-        Task<List<Attendance>> GetAllAttendanceAsync();
+        Task<List<Attendance>>GetAllAttendanceAsync();
 
 
 

@@ -220,32 +220,6 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UserTypes", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Administrator with full access",
-                            Name = "Admin"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Student with limited access",
-                            Name = "Student"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Teacher with specific access",
-                            Name = "Teacher"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "Parent  user with minimal access",
-                            Name = "None_teaching Staff"
-                        });
                 });
 
             modelBuilder.Entity("Data.Data.AcademicYear", b =>
@@ -1498,6 +1472,59 @@ namespace Data.Migrations
                         .IsUnique();
 
                     b.ToTable("TeacherAssignments", (string)null);
+                });
+
+            modelBuilder.Entity("Model.Models.Notice_Model.Notice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsPublished")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("PdfFileName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("PdfPath")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime?>("PublishedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notices", (string)null);
                 });
 
             modelBuilder.Entity("CollegeApp.Data.RolePrivilege", b =>

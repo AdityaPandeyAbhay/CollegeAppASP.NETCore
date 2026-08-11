@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Data.Data;
+using Model.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
-
-using Data.Data;
 
 namespace Repository.InterfaceOfRepository
 {
@@ -62,5 +62,15 @@ namespace Repository.InterfaceOfRepository
             int sectionId);
 
         #endregion
+
+
+        ///DropDown
+        Task<List<DropdownDTO>> GetExamDropdownAsync();
+
+        Task<List<DropdownDTO>> GetResultBatchDropdownAsync(int examId);
+
+        Task<List<DropdownDTO>> GetResultDropdownAsync(int resultBatchId);
+
+        Task<List<DropdownDTO>> GetResultDetailDropdownAsync(int resultId);
     }
 }

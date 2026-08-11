@@ -1,6 +1,7 @@
 ﻿using CollegeApp.Data;
 using Data.Data;
 using Microsoft.EntityFrameworkCore;
+using Model.Models;
 using Repository.InterfaceOfRepository;
 using System;
 using System.Collections.Generic;
@@ -206,6 +207,104 @@ namespace Repository.ClassOfRepository
                 .ToListAsync();
         }
 
+
+
         #endregion
+
+
+
+        // ----------------------------------------------------
+        // Exam Dropdown
+        // ----------------------------------------------------
+        public async Task<List<DropdownDTO>> GetExamDropdownAsync()
+        {
+            return await _dbContext.Exams
+                .AsNoTracking()
+                .Where(x => x.IsActive)
+                .OrderBy(x => x.ExamName)
+                .Select(x => new DropdownDTO
+                {
+                    Id = x.Id,
+                    Code = null,
+                    Text = x.ExamName
+                })
+                .ToListAsync();
+        }
+
+
+        // ----------------------------------------------------
+        // Result Batch Dropdown
+        // ----------------------------------------------------
+        public async Task<List<DropdownDTO>> GetResultBatchDropdownAsync(
+            int examId)
+        {
+            return await _dbContext.ResultBatches
+                .AsNoTracking()
+                .Where(x => x.ExamId == examId)
+                .Include(x => x.AcademicYear)
+                .Include(x => x.SchoolClass)
+                .Include(x => x.Section)
+                .Select(x => new DropdownDTO
+                {
+                    Id = x.Id,
+                    Code = null,
+
+                    // Use IDs here until we use the actual
+                    // display-name properties from your entities.
+                    Text =
+                        "Academic Year ID: " + x.AcademicYearId
+                        + " - Class ID: " + x.ClassId
+                        + " - Section ID: " + x.SectionId
+                })
+                .OrderBy(x => x.Text)
+                .ToListAsync();
+        }
+
+
+        // ----------------------------------------------------
+        // Result / Student Dropdown
+        // ----------------------------------------------------
+        public async Task<List<DropdownDTO>> GetResultDropdownAsync(
+            int resultBatchId)
+        {
+            return await _dbContext.Results
+                .AsNoTracking()
+                .Where(x => x.ResultBatchId == resultBatchId)
+                .Include(x => x.Student)
+                .OrderBy(x => x.Student.FirstName)
+                .Select(x => new DropdownDTO
+                {
+                    Id = x.Id,
+
+                    Code = x.Student.AdmissionNumber,
+
+                    Text =
+                        x.Student.FirstName
+                        + " "
+                        + (x.Student.LastName ?? "")
+                })
+                .ToListAsync();
+        }
+
+
+        // ----------------------------------------------------
+        // Result Detail / Subject Dropdown
+        // ----------------------------------------------------
+        public async Task<List<DropdownDTO>> GetResultDetailDropdownAsync(
+            int resultId)
+        {
+            return await _dbContext.ResultDetails
+                .AsNoTracking()
+                .Where(x => x.ResultId == resultId)
+                .Include(x => x.Subject)
+                .OrderBy(x => x.Subject.SubjectName)
+                .Select(x => new DropdownDTO
+                {
+                    Id = x.Id,
+                    Code = null,
+                    Text = x.Subject.SubjectName
+                })
+                .ToListAsync();
+        }
     }
 }

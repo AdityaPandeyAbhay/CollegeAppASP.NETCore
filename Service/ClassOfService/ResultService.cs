@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AutoMapper;
+﻿using AutoMapper;
 using CollegeApp.Data;
 using Data.Data;
+using Model.Models;
 using Model.Models.Result_Model;
 using Repository.InterfaceOfRepository;
 using Service.InterfaceOfService;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Service.ClassOfService
 {
@@ -466,6 +467,50 @@ namespace Service.ClassOfService
 
             return "F";
         }
+
         #endregion
+
+
+
+        public async Task<List<DropdownDTO>> GetExamDropdownAsync()
+        {
+            return await _resultRepository
+                .GetExamDropdownAsync();
+        }
+
+
+        public async Task<List<DropdownDTO>> GetResultBatchDropdownAsync(
+            int examId)
+        {
+            if (examId <= 0)
+                throw new ArgumentException("Invalid Exam Id.");
+
+            return await _resultRepository
+                .GetResultBatchDropdownAsync(examId);
+        }
+
+
+        public async Task<List<DropdownDTO>> GetResultDropdownAsync(
+            int resultBatchId)
+        {
+            if (resultBatchId <= 0)
+                throw new ArgumentException(
+                    "Invalid Result Batch Id.");
+
+            return await _resultRepository
+                .GetResultDropdownAsync(resultBatchId);
+        }
+
+
+        public async Task<List<DropdownDTO>> GetResultDetailDropdownAsync(
+            int resultId)
+        {
+            if (resultId <= 0)
+                throw new ArgumentException(
+                    "Invalid Result Id.");
+
+            return await _resultRepository
+                .GetResultDetailDropdownAsync(resultId);
+        }
     }
 }

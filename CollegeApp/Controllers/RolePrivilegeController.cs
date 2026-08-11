@@ -31,6 +31,7 @@ namespace CollegeApp.Controllers
 
         [HttpPost]
         [Route("CreateRolePrivilege")]
+        [Authorize(Roles = "Super Admin,Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
         [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
         [ProducesResponseType(StatusCodes.Status400BadRequest)]  // Invalid Request
@@ -187,7 +188,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("Dropdown")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -231,6 +232,7 @@ namespace CollegeApp.Controllers
 
         [HttpPut]
         [Route("UpdateRolePrivilege")]
+        [Authorize(Roles = "Super Admin,Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
         [ProducesResponseType(StatusCodes.Status400BadRequest)]  // Invalid Request
         [ProducesResponseType(StatusCodes.Status401Unauthorized)] // Authentication Failed
@@ -278,6 +280,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpDelete("{Id}", Name = "DeleteRolePrivilegeById")]
+             [Authorize(Roles = "Super Admin,Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
         [ProducesResponseType(StatusCodes.Status400BadRequest)]  // Invalid Request
         [ProducesResponseType(StatusCodes.Status401Unauthorized)] // Authentication Failed

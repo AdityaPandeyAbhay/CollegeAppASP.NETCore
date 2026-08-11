@@ -13,7 +13,8 @@ namespace Service.InterfaceOfService
 
 
 
-        Task<List<AttendanceListDTO>> GetAllAttendanceAsync();
+        Task<List<AttendanceListDTO>>
+     GetAllAttendanceAsync();
 
 
 

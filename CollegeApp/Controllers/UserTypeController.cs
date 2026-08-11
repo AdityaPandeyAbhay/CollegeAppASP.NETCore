@@ -32,7 +32,7 @@ namespace CollegeApp.Controllers
         // Get All User Types
         [HttpGet]
         [Route("All")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
 
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
         [ProducesResponseType(StatusCodes.Status400BadRequest)]  // Invalid Request
@@ -64,7 +64,7 @@ namespace CollegeApp.Controllers
 
         // Get By Id
         [HttpGet("Id/{id:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
 
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
         [ProducesResponseType(StatusCodes.Status400BadRequest)]  // Invalid Request
@@ -99,7 +99,7 @@ namespace CollegeApp.Controllers
 
         // Get By Name
         [HttpGet("Name/{name}")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
 
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
         [ProducesResponseType(StatusCodes.Status400BadRequest)]  // Invalid Request
@@ -135,7 +135,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("Dropdown")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
 
 
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success

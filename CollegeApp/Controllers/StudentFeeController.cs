@@ -32,7 +32,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetAllStudentFees")]
-        [Authorize(Roles = "SuperAdmin,Admin,Accountant")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetAllStudentFees()
         {
@@ -62,7 +62,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetStudentFeeById/{id:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin,Accountant,Student")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant,Student")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> GetStudentFeeById(int id)
@@ -93,7 +93,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetStudentFeeByStudentId/{studentId:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin,Accountant,Student")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant,Student")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> GetStudentFeeByStudentId(int studentId)
@@ -124,7 +124,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetStudentFeeByStudentName/{studentName}")]
-        [Authorize(Roles = "SuperAdmin,Admin,Accountant")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> GetStudentFeeByStudentName(string studentName)
@@ -155,7 +155,7 @@ namespace CollegeApp.Controllers
 
         [HttpPost]
         [Route("CreateStudentFee")]
-        [Authorize(Roles = "SuperAdmin,Admin,Accountant")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<APIResponse>> CreateStudentFee(CreateStudentFeeDTO dto)
@@ -187,7 +187,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("Dropdown")]
-        [Authorize(Roles = "SuperAdmin,Admin,Accountant")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetStudentFeeDropdown()
         {
@@ -217,7 +217,7 @@ namespace CollegeApp.Controllers
 
         [HttpPut]
         [Route("UpdateStudentFee/{id:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin,Accountant")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<APIResponse>> UpdateStudentFee(int id, UpdateStudentFeeDTO dto)
@@ -248,7 +248,7 @@ namespace CollegeApp.Controllers
 
         [HttpDelete]
         [Route("DeleteStudentFee/{id:int}")]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> DeleteStudentFee(int id)

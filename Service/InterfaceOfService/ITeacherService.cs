@@ -11,7 +11,7 @@ namespace Service.InterfaceOfService
         Task<GetTeacherDTO> CreateTeacherAsync(CreateTeacherDTO dto);
         Task<bool> DeleteTeacherAsync(string code);
         Task<List<GetTeacherDTO>> GetAllTeacherAsync();
-        Task<GetTeacherDTO> GetByTeacherCodeAsync(string code);
+        Task<GetTeacherDTO?> GetByTeacherCodeAsync(string code);
         Task<List<GetTeacherDTO>> GetTeacherByNameAsync(string name);
         Task<bool> UpdateTeacherAsync(int id, UpdateTeacherDTO dto);
 
