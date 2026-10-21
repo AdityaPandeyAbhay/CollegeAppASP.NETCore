@@ -1,0 +1,681 @@
+/* =====================================================
+   UPDATE FEE STRUCTURE
+   ===================================================== */
+
+.fee-structure-update-container {
+  width: 100%;
+  padding: 125px 25px 40px;
+  box-sizing: border-box;
+}
+
+.fee-structure-update-card {
+  max-width: 1100px;
+  margin: auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+}
+
+.fee-structure-update-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.fee-structure-update-header h2 {
+  margin: 0 0 6px;
+  font-size: 24px;
+}
+
+.fee-structure-update-header p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+/* =====================================================
+   TOP RIGHT ACTIONS & BUTTONS
+   ===================================================== */
+
+.fee-header-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fee-top-search-bar {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.fee-top-search-bar:focus-within {
+  border-color: #1976d2;
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+}
+
+.fee-top-search-input {
+  padding: 8px 12px;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  width: 220px;
+  color: #1e293b;
+  background: transparent;
+}
+
+.fee-top-search-btn {
+  padding: 8px 14px;
+  border: none;
+  background: #1976d2;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.fee-top-search-btn:hover {
+  background: #1565c0;
+}
+
+.fee-structure-refresh-btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  background: #1976d2;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.fee-structure-refresh-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   FILTER BOX & GRID (SEARCH BEFORE SELECTING)
+   ===================================================== */
+
+.fee-update-filter-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 18px;
+  margin-bottom: 25px;
+}
+
+.fee-update-filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.fee-update-filter-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #334155;
+}
+
+.fee-update-filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 14px;
+}
+
+.fee-update-filter-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.fee-update-filter-item label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #475569;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+
+.fee-update-filter-item input,
+.fee-update-filter-item select {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 13px;
+  background-color: #fff;
+  color: #1e293b;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.fee-update-filter-item input:focus,
+.fee-update-filter-item select:focus {
+  border-color: #1976d2;
+}
+
+.fee-update-filter-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px dashed #cbd5e1;
+}
+
+.fee-filter-action-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.fee-filter-apply-btn {
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  background: #10b981;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 5px rgba(16, 185, 129, 0.25);
+}
+
+.fee-filter-apply-btn:hover {
+  background: #059669;
+  box-shadow: 0 4px 8px rgba(16, 185, 129, 0.35);
+}
+
+.fee-update-clear-btn {
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #fff;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.fee-update-clear-btn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+  border-color: #94a3b8;
+}
+
+.fee-update-count-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #0284c7;
+}
+
+.fee-filter-prompt-box {
+  padding: 35px 25px;
+  background: #f8fafc;
+  border: 2px dashed #cbd5e1;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.fee-filter-prompt-box p {
+  margin: 0;
+  font-size: 15px;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.fee-filter-prompt-box strong {
+  color: #1e293b;
+}
+
+/* =====================================================
+   FEEDBACK MESSAGES
+   ===================================================== */
+
+.fee-structure-update-success,
+.fee-structure-update-error,
+.fee-structure-loading {
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.fee-structure-loading {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.fee-structure-update-success {
+  background: #e8f7e8;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.fee-structure-update-error {
+  background: #fdeaea;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+/* =====================================================
+   DIRECT AVAILABLE RECORDS TABLE
+   ===================================================== */
+
+.fee-update-table-section {
+  margin-bottom: 30px;
+}
+
+.fee-update-table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.fee-update-table-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #1e293b;
+}
+
+.fee-update-instruction {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.fee-structure-empty-table {
+  padding: 30px;
+  text-align: center;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.fee-update-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.fee-update-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+}
+
+.fee-update-table th,
+.fee-update-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.fee-update-table th {
+  background-color: #f8fafc;
+  font-weight: 700;
+  color: #475569;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+.fee-update-table tbody tr {
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.fee-update-table tbody tr:hover {
+  background-color: #f1f5f9;
+}
+
+.fee-row-selected {
+  background-color: #eff6ff !important;
+  border-left: 4px solid #3b82f6;
+}
+
+.fee-table-select-btn {
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  border: none;
+  border-radius: 4px;
+  background: #3b82f6;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.fee-table-select-btn:hover {
+  background: #2563eb;
+}
+
+.fee-table-select-btn.selected {
+  background: #16a34a;
+}
+
+/* =====================================================
+   STATUS BADGES
+   ===================================================== */
+
+.fee-status-active,
+.fee-status-inactive {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.fee-status-active {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.fee-status-inactive {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+/* =====================================================
+   EDIT FORM CARD (APPEARS ON CLICK)
+   ===================================================== */
+
+.fee-structure-edit-form-card {
+  margin-top: 25px;
+  padding: 25px;
+  background: #ffffff;
+  border: 2px solid #3b82f6;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fee-edit-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.fee-edit-form-header h3 {
+  margin: 0 0 4px;
+  font-size: 18px;
+  color: #1e293b;
+}
+
+.fee-edit-form-subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.fee-edit-cancel-top-btn {
+  padding: 6px 14px;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.fee-edit-cancel-top-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.fee-structure-update-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.fee-structure-update-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.fee-structure-update-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.fee-structure-update-group label {
+  margin-bottom: 7px;
+  font-weight: 600;
+  color: #334155;
+  font-size: 14px;
+}
+
+.fee-structure-update-group input,
+.fee-structure-update-group select,
+.fee-structure-update-group textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+  outline: none;
+  background-color: #fff;
+  transition: border-color 0.2s;
+}
+
+.fee-structure-update-group input:focus,
+.fee-structure-update-group select:focus,
+.fee-structure-update-group textarea:focus {
+  border-color: #1976d2;
+}
+
+.fee-structure-update-group textarea {
+  resize: vertical;
+}
+
+/* =====================================================
+   IS ACTIVE CHECKBOX (GREEN TICK WHEN ACTIVE, BLANK WHEN INACTIVE)
+   ===================================================== */
+
+.fee-structure-checkbox-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background-color: #f8fafc;
+  border: 1px solid #d1d5db;
+  transition: all 0.2s ease;
+  width: fit-content;
+}
+
+.fee-structure-checkbox-wrapper:hover {
+  background-color: #f1f5f9;
+  border-color: #9ca3af;
+}
+
+.fee-structure-checkbox-wrapper:focus-visible {
+  outline: 2px solid #16a34a;
+  outline-offset: 2px;
+}
+
+.fee-structure-custom-checkbox {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  border: 2px solid #cbd5e1;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.fee-structure-custom-checkbox.active {
+  border-color: #16a34a;
+  background-color: #ffffff;
+}
+
+.fee-structure-custom-checkbox.inactive {
+  border-color: #cbd5e1;
+  background-color: #ffffff;
+}
+
+.fee-structure-green-tick {
+  color: #16a34a;
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fee-structure-status-text {
+  font-size: 15px;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.fee-structure-status-text.active {
+  color: #16a34a;
+}
+
+.fee-structure-status-text.inactive {
+  color: #64748b;
+}
+
+/* =====================================================
+   FORM ACTIONS
+   ===================================================== */
+
+.fee-structure-update-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.fee-edit-cancel-btn {
+  padding: 11px 22px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #fff;
+  color: #475569;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.fee-edit-cancel-btn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.fee-structure-submit-btn {
+  padding: 11px 24px;
+  border: none;
+  border-radius: 6px;
+  background: #1976d2;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.fee-structure-submit-btn:hover {
+  background: #1565c0;
+}
+
+.fee-structure-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 700px) {
+  .fee-structure-update-container {
+    padding: 15px;
+  }
+
+  .fee-structure-update-card {
+    padding: 20px;
+  }
+
+  .fee-structure-update-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .fee-header-right-actions {
+    justify-content: flex-end;
+  }
+
+  .fee-structure-update-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fee-structure-update-group.full-width {
+    grid-column: auto;
+  }
+
+  .fee-structure-update-actions {
+    flex-direction: column;
+  }
+
+  .fee-structure-update-actions button {
+    width: 100%;
+  }
+
+  .fee-update-filter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fee-update-filter-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}

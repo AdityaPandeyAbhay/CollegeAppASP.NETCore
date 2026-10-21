@@ -1,0 +1,485 @@
+.nts-create-page {
+  min-height: 100vh;
+  padding: 125px 30px 40px;
+  background: #f1f5f9;
+}
+
+.nts-create-container {
+  max-width: 1100px;
+  margin: auto;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.nts-create-header {
+  margin-bottom: 25px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 15px;
+}
+
+.nts-create-header h2 {
+  margin: 0;
+  color: #1e293b;
+  font-size: 26px;
+}
+
+.nts-create-header p {
+  margin-top: 6px;
+  color: #64748b;
+}
+
+.nts-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.nts-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.nts-form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.nts-form-group input,
+.nts-form-group select,
+.nts-form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  font-size: 14px;
+  outline: none;
+  background: #fff;
+}
+
+.nts-form-group input:focus,
+.nts-form-group select:focus,
+.nts-form-group textarea:focus {
+  border-color: #2563eb;
+}
+
+.nts-form-group select:disabled {
+  background: #f8fafc;
+  color: #475569;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.nts-form-group textarea {
+  resize: vertical;
+}
+
+.nts-full-width {
+  grid-column: 1 / -1;
+}
+
+.nts-form-actions {
+  margin-top: 25px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nts-form-actions button {
+  border: none;
+  background: #2563eb;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 7px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.nts-form-actions button:hover {
+  background: #1d4ed8;
+}
+
+.nts-form-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.nts-success {
+  background: #dcfce7;
+  color: #166534;
+  padding: 12px;
+  border-radius: 7px;
+  margin-bottom: 20px;
+}
+
+.nts-error {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 12px;
+  border-radius: 7px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 700px) {
+
+  .nts-create-page {
+    padding: 125px 15px 40px;
+  }
+
+  .nts-create-container {
+    padding: 20px;
+  }
+
+  .nts-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nts-full-width {
+    grid-column: auto;
+  }
+
+}
+
+/* =====================================================
+   EXTRA FIELDS STYLES (Photo, Father, Mother, Education PDF)
+===================================================== */
+.teacher-file-uploader-box, .nts-file-uploader-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #f8fafc;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px dashed #cbd5e1;
+}
+
+.teacher-file-input, .nts-file-input {
+  font-size: 13px;
+  color: #475569;
+  cursor: pointer;
+}
+
+.teacher-file-loading, .nts-file-loading {
+  font-size: 12px;
+  color: #2563eb;
+  font-weight: 500;
+}
+
+.teacher-file-preview-bar, .nts-file-preview-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  flex-wrap: wrap;
+}
+
+.teacher-file-name, .nts-file-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.teacher-preview-btn, .nts-preview-btn {
+  background: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.teacher-preview-btn:hover, .nts-preview-btn:hover {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.teacher-remove-btn, .nts-remove-btn {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.teacher-remove-btn:hover, .nts-remove-btn:hover {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+/* Avatar thumbnails in tables & cards */
+.teacher-avatar-thumb, .nts-avatar-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #3b82f6;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.teacher-avatar-thumb:hover, .nts-avatar-thumb:hover {
+  transform: scale(1.1);
+}
+
+.teacher-avatar-placeholder, .nts-avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #94a3b8;
+  border: 1px solid #cbd5e1;
+}
+
+.teacher-photo-card-banner, .nts-photo-card-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.teacher-detail-photo, .nts-detail-photo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #3b82f6;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+  transition: transform 0.2s ease;
+}
+
+.teacher-detail-photo:hover, .nts-detail-photo:hover {
+  transform: scale(1.05);
+}
+
+.teacher-detail-photo-placeholder, .nts-detail-photo-placeholder {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: #94a3b8;
+  border: 2px dashed #cbd5e1;
+}
+
+/* PDF View Buttons in Table / Grid */
+.teacher-view-pdf-btn, .nts-view-pdf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fca5a5;
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.teacher-view-pdf-btn:hover, .nts-view-pdf-btn:hover {
+  background: #b91c1c;
+  color: #ffffff;
+  border-color: #b91c1c;
+}
+
+/* =====================================================
+   STEP 2 SECTION HEADER STYLES
+   ===================================================== */
+.step-2-section-header {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.step-2-badge {
+  background: #059669 !important;
+  color: #ffffff !important;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  box-shadow: 0 2px 6px rgba(5, 150, 105, 0.3) !important;
+  margin-top: 2px;
+}
+
+.step-2-section-header h2 {
+  margin: 0 0 4px 0 !important;
+  font-size: 20px !important;
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}
+
+.step-2-desc {
+  margin: 0;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* User Role Indicator Badges in Step 2 */
+.nts-user-role-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.nts-role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #334155;
+  font-weight: 600;
+}
+
+.nts-role-badge.type-badge strong {
+  color: #2563eb;
+}
+
+.nts-role-badge.role-badge strong {
+  color: #7c3aed;
+}
+
+/* =====================================================
+   POPUP NOTIFICATION (MATCHING TEACHER POPUP)
+===================================================== */
+
+.teacher-popup,
+.nts-popup {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  width: 390px;
+  max-width: calc(100% - 40px);
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 16px;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.18);
+  z-index: 9999;
+  animation: ntsPopupSlide 0.3s ease;
+}
+
+@keyframes ntsPopupSlide {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.teacher-popup-success,
+.nts-popup-success {
+  border-left: 5px solid #16a34a;
+}
+
+.teacher-popup-error,
+.nts-popup-error {
+  border-left: 5px solid #dc2626;
+}
+
+.teacher-popup-icon,
+.nts-popup-icon {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #16a34a;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.teacher-popup-error .teacher-popup-icon,
+.nts-popup-error .nts-popup-icon {
+  background: #dc2626;
+}
+
+.teacher-popup-content,
+.nts-popup-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.teacher-popup-content strong,
+.nts-popup-content strong {
+  font-size: 14px;
+  color: #111827;
+}
+
+.teacher-popup-content span,
+.nts-popup-content span {
+  font-size: 13px;
+  color: #4b5563;
+  line-height: 1.4;
+}
+
+.teacher-popup-close,
+.nts-popup-close {
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  color: #6b7280;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.teacher-popup-close:hover,
+.nts-popup-close:hover {
+  color: #111827;
+}
+
+

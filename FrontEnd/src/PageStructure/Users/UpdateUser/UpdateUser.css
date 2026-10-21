@@ -1,0 +1,364 @@
+/* =====================================================
+   UPDATE USER PAGE & CARD
+===================================================== */
+
+.update-user-page {
+  min-height: calc(100vh - 52px);
+  padding: 125px 30px 40px;
+  background-color: #f1f5f9;
+  display: flex;
+  justify-content: center;
+}
+
+.update-user-card {
+  width: 100%;
+  max-width: 950px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 32px;
+  border: 1px solid #e2e8f0;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.update-user-header {
+  margin-bottom: 24px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 16px;
+}
+
+.update-user-header h1 {
+  margin: 0 0 6px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.update-user-header p {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+/* =====================================================
+   SELECTION & SEARCH SECTION
+===================================================== */
+
+.update-user-selection-section {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 22px;
+  margin-bottom: 24px;
+}
+
+.update-user-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 16px;
+}
+
+.update-user-form-group:last-child {
+  margin-bottom: 0;
+}
+
+.update-user-form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-badge {
+  font-size: 12px;
+  font-weight: 600;
+  color: #2563eb;
+  background: #dbeafe;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.update-user-form-group input,
+.update-user-form-group select {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #1e293b;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.update-user-form-group input:focus,
+.update-user-form-group select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.update-user-form-group input:disabled,
+.update-user-form-group select:disabled {
+  background-color: #f1f5f9;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   DIVIDER & TWO COLUMN LAYOUT
+===================================================== */
+
+.update-user-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 18px 0;
+  position: relative;
+}
+
+.update-user-divider::before,
+.update-user-divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.update-user-divider span {
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.update-user-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.update-user-filter-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.2fr;
+  gap: 16px;
+  align-items: flex-end;
+}
+
+.filter-clear-wrapper {
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.clear-filter-btn {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.clear-filter-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+/* Search Input with Button */
+.search-input-wrapper {
+  display: flex;
+  gap: 8px;
+}
+
+.search-input-wrapper input {
+  flex: 1;
+}
+
+.search-btn {
+  padding: 0 20px;
+  min-height: 44px;
+  border: none;
+  border-radius: 8px;
+  background: #3b82f6;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.search-btn:hover:not(:disabled) {
+  background: #2563eb;
+}
+
+.search-btn:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   MESSAGES
+===================================================== */
+
+.update-user-success {
+  padding: 14px 18px;
+  background: #dcfce7;
+  border: 1px solid #86efac;
+  color: #166534;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.update-user-error {
+  padding: 14px 18px;
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+  color: #b91c1c;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* =====================================================
+   UPDATE FORM & SUMMARY BAR
+===================================================== */
+
+.update-user-form {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.update-user-summary-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #334155;
+}
+
+.summary-badge {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.badge-active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge-inactive {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.role-helper-text {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+.role-change-indicator {
+  color: #d97706;
+  font-weight: 600;
+}
+
+/* =====================================================
+   CHECKBOX & SUBMIT BUTTON
+===================================================== */
+
+.update-user-checkbox-group {
+  margin: 8px 0;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.checkbox-container input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #2563eb;
+  cursor: pointer;
+}
+
+.checkbox-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.update-user-submit-btn {
+  min-height: 46px;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  background: #16a34a;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  align-self: flex-end;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.update-user-submit-btn:hover:not(:disabled) {
+  background: #15803d;
+}
+
+.update-user-submit-btn:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 768px) {
+  .update-user-page {
+    padding: 110px 16px 30px;
+  }
+
+  .update-user-card {
+    padding: 20px;
+  }
+
+  .update-user-two-col,
+  .update-user-filter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .update-user-submit-btn {
+    width: 100%;
+  }
+}

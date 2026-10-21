@@ -1,0 +1,211 @@
+
+/* =====================================================
+   SIDEBAR DROPDOWN BUTTON
+===================================================== */
+
+.sidebar-dropdown-button {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  width: 100%;
+
+}
+
+
+/* =====================================================
+   DROPDOWN ARROW
+===================================================== */
+
+.dropdown-icon {
+
+  font-size: 12px;
+
+  margin-left: auto;
+
+  transition: transform 0.2s ease;
+
+}
+
+
+/* =====================================================
+   DROPDOWN BOX
+===================================================== */
+
+.sidebar-dropdown-box {
+
+  width: calc(100% - 20px);
+
+  margin: 2px 10px 10px 10px;
+
+  padding: 8px;
+
+  background-color: #ffffff;
+
+  border-radius: 8px;
+
+  border: 1px solid #d9dee7;
+
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.12),
+    0 8px 20px rgba(0, 0, 0, 0.08);
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+
+  box-sizing: border-box;
+
+}
+
+
+/* =====================================================
+   DROPDOWN ITEMS
+===================================================== */
+
+.sidebar-dropdown-box button {
+
+  width: 100%;
+
+  padding: 9px 10px;
+
+  border: none;
+
+  border-radius: 5px;
+
+  background-color: transparent;
+
+  color: #26344d;
+
+  text-align: left;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    padding-left 0.2s ease;
+
+}
+
+
+/* =====================================================
+   DROPDOWN ITEM HOVER
+===================================================== */
+
+.sidebar-dropdown-box button:hover {
+
+  background-color: #eef2f7;
+
+  padding-left: 15px;
+
+}
+
+
+/* =====================================================
+   OPTIONAL:
+   KEEP DROPDOWN BUTTON CONSISTENT
+===================================================== */
+
+.sidebar-dropdown-button {
+
+  cursor: pointer;
+
+}
+
+
+/* =====================================================
+   NOTICE DROPDOWN
+   Uses the same style as:
+   Users
+   Non Teaching Staff
+===================================================== */
+
+.sidebar-dropdown-box button:focus {
+
+  outline: none;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE DROPDOWN
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .sidebar-dropdown-box {
+
+    width: calc(100% - 16px);
+
+    margin-left: 8px;
+
+    margin-right: 8px;
+
+  }
+
+
+  .sidebar-dropdown-box button {
+
+    font-size: 13px;
+
+    padding: 8px;
+
+  }
+
+  .sidebar-nested-dropdown-box button {
+
+    font-size: 12px !important;
+
+    padding: 7px 8px !important;
+
+  }
+
+}
+
+/* =====================================================
+   NESTED DROPDOWN (STUDENT FEE -> FEE CATEGORY)
+===================================================== */
+
+.sidebar-nested-dropdown-button {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  font-weight: 600;
+  color: #1e293b !important;
+  padding: 9px 10px !important;
+}
+
+.sidebar-nested-dropdown-box {
+  width: 100%;
+  margin: 3px 0 6px 0;
+  padding: 4px 6px;
+  background-color: #f8fafc;
+  border-left: 3px solid #3b82f6;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  box-sizing: border-box;
+}
+
+.sidebar-nested-dropdown-box button {
+  font-size: 13px !important;
+  padding: 7px 10px !important;
+  color: #475569 !important;
+  border-radius: 4px !important;
+}
+
+.sidebar-nested-dropdown-box button:hover {
+  background-color: #e2e8f0 !important;
+  color: #0f172a !important;
+  padding-left: 14px !important;
+}
+
+

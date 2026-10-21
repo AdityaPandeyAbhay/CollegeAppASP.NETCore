@@ -1,0 +1,166 @@
+/* =====================================================
+   NOTICE DROPDOWN PAGE
+===================================================== */
+
+.notice-dropdown-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 125px 30px 40px;
+  box-sizing: border-box;
+  background: #f5f7fb;
+}
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.notice-dropdown-container {
+  width: 100%;
+  max-width: 750px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 35px;
+  border-radius: 12px;
+  box-sizing: border-box;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.notice-dropdown-header {
+  margin-bottom: 30px;
+}
+
+.notice-dropdown-header h1 {
+  margin: 0 0 8px;
+  color: #1f2937;
+  font-size: 27px;
+}
+
+.notice-dropdown-header p {
+  margin: 0;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+.notice-dropdown-error {
+  margin-bottom: 20px;
+  padding: 14px 16px;
+  border-radius: 7px;
+  background: #fef2f2;
+  border: 1px solid #ef4444;
+  color: #b91c1c;
+}
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.notice-dropdown-form-group {
+  margin-bottom: 20px;
+}
+
+.notice-dropdown-form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.notice-dropdown-form-group select {
+  width: 100%;
+  padding: 13px 14px;
+  box-sizing: border-box;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  outline: none;
+  background: #ffffff;
+  color: #111827;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.notice-dropdown-form-group select:focus {
+  border-color: #2563eb;
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* =====================================================
+   SELECTED
+===================================================== */
+
+.notice-dropdown-selected {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 8px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+}
+
+.notice-dropdown-selected span {
+  color: #1e40af;
+  font-weight: 500;
+}
+
+.notice-dropdown-selected strong {
+  color: #1e3a8a;
+}
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.notice-dropdown-empty {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  background: #f9fafb;
+  color: #6b7280;
+}
+
+/* =====================================================
+   COUNT
+===================================================== */
+
+.notice-dropdown-count {
+  margin-top: 20px;
+  padding: 14px;
+  border-radius: 7px;
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 768px) {
+  .notice-dropdown-page {
+    padding: 125px 20px 40px;
+  }
+
+  .notice-dropdown-container {
+    padding: 25px 20px;
+  }
+
+  .notice-dropdown-header h1 {
+    font-size: 23px;
+  }
+
+  .notice-dropdown-selected {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

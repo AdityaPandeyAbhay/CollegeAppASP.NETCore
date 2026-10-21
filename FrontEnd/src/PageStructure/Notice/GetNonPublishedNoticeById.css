@@ -1,0 +1,549 @@
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.notice-by-id-page {
+
+  width: 100%;
+
+  min-height: 100vh;
+
+  padding: 125px 30px 40px;
+
+  box-sizing: border-box;
+
+  background: #f5f7fb;
+
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.notice-by-id-container {
+
+  width: 100%;
+
+  max-width: 1000px;
+
+  margin: 0 auto;
+
+  background: #ffffff;
+
+  border-radius: 12px;
+
+  padding: 30px;
+
+  box-sizing: border-box;
+
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.08);
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.notice-by-id-header {
+
+  margin-bottom: 25px;
+
+  border-bottom: 1px solid #e3e7ed;
+
+  padding-bottom: 20px;
+
+}
+
+
+.notice-by-id-header h1 {
+
+  margin: 0 0 8px 0;
+
+  color: #26344d;
+
+  font-size: 28px;
+
+}
+
+
+.notice-by-id-header p {
+
+  margin: 0;
+
+  color: #6b7280;
+
+  font-size: 15px;
+
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+.notice-error-message {
+
+  margin-bottom: 20px;
+
+  padding: 12px 15px;
+
+  background: #fff1f2;
+
+  color: #b42318;
+
+  border: 1px solid #f5c2c7;
+
+  border-radius: 7px;
+
+  font-size: 14px;
+
+}
+
+
+/* =====================================================
+   SUCCESS
+===================================================== */
+
+.notice-success-message {
+
+  margin-bottom: 20px;
+
+  padding: 12px 15px;
+
+  background: #ecfdf3;
+
+  color: #067647;
+
+  border: 1px solid #abefc6;
+
+  border-radius: 7px;
+
+  font-size: 14px;
+
+}
+
+
+/* =====================================================
+   SEARCH SECTION
+===================================================== */
+
+.notice-search-section {
+
+  padding: 20px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e3e7ed;
+
+  border-radius: 10px;
+
+}
+
+
+/* =====================================================
+   FORM GROUP
+===================================================== */
+
+.notice-form-group {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+
+}
+
+
+.notice-form-group label {
+
+  color: #26344d;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+}
+
+
+.required {
+
+  color: #dc2626;
+
+  margin-left: 4px;
+
+}
+
+
+/* =====================================================
+   SELECT
+===================================================== */
+
+.notice-form-group select {
+
+  width: 100%;
+
+  padding: 12px 14px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 7px;
+
+  background: #ffffff;
+
+  color: #26344d;
+
+  font-size: 14px;
+
+  outline: none;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+}
+
+
+.notice-form-group select:focus {
+
+  border-color: #2563eb;
+
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.10);
+
+}
+
+
+.notice-form-group select:disabled {
+
+  background: #f1f5f9;
+
+  cursor: not-allowed;
+
+}
+
+
+/* =====================================================
+   ACTION BUTTONS
+===================================================== */
+
+.notice-action-buttons {
+
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 20px;
+
+}
+
+
+/* =====================================================
+   SEARCH BUTTON
+===================================================== */
+
+.notice-search-button {
+
+  padding: 11px 22px;
+
+  border: none;
+
+  border-radius: 7px;
+
+  background: #2563eb;
+
+  color: #ffffff;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+
+}
+
+
+.notice-search-button:hover:not(:disabled) {
+
+  background: #1d4ed8;
+
+  transform: translateY(-1px);
+
+}
+
+
+.notice-search-button:disabled {
+
+  background: #94a3b8;
+
+  cursor: not-allowed;
+
+}
+
+
+/* =====================================================
+   CLEAR BUTTON
+===================================================== */
+
+.notice-clear-button {
+
+  padding: 11px 22px;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 7px;
+
+  background: #ffffff;
+
+  color: #334155;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+
+}
+
+
+.notice-clear-button:hover {
+
+  background: #f1f5f9;
+
+  border-color: #94a3b8;
+
+}
+
+
+/* =====================================================
+   DETAILS CARD
+===================================================== */
+
+.notice-details-card {
+
+  margin-top: 25px;
+
+  border: 1px solid #d9dee7;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+}
+
+
+/* =====================================================
+   DETAILS HEADER
+===================================================== */
+
+.notice-details-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 18px 20px;
+
+  background: #f8fafc;
+
+  border-bottom: 1px solid #e3e7ed;
+
+}
+
+
+.notice-details-header h2 {
+
+  margin: 0;
+
+  color: #26344d;
+
+  font-size: 20px;
+
+}
+
+
+/* =====================================================
+   DRAFT BADGE
+===================================================== */
+
+.draft-badge {
+
+  padding: 5px 12px;
+
+  border-radius: 20px;
+
+  background: #fff7ed;
+
+  color: #c2410c;
+
+  border: 1px solid #fed7aa;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+}
+
+
+/* =====================================================
+   DETAIL ROW
+===================================================== */
+
+.notice-detail-row {
+
+  display: grid;
+
+  grid-template-columns: 220px 1fr;
+
+  border-bottom: 1px solid #edf0f4;
+
+}
+
+
+.notice-detail-row:last-child {
+
+  border-bottom: none;
+
+}
+
+
+/* =====================================================
+   DETAIL LABEL
+===================================================== */
+
+.notice-detail-label {
+
+  padding: 15px 18px;
+
+  background: #f8fafc;
+
+  color: #475569;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+}
+
+
+/* =====================================================
+   DETAIL VALUE
+===================================================== */
+
+.notice-detail-value {
+
+  padding: 15px 18px;
+
+  color: #26344d;
+
+  font-size: 14px;
+
+  word-break: break-word;
+
+}
+
+
+/* =====================================================
+   DESCRIPTION
+===================================================== */
+
+.notice-description-row {
+
+  min-height: 100px;
+
+}
+
+
+.notice-description {
+
+  white-space: pre-wrap;
+
+  line-height: 1.6;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .notice-by-id-page {
+
+    padding: 125px 20px 40px;
+
+  }
+
+
+  .notice-by-id-container {
+
+    padding: 20px;
+
+  }
+
+
+  .notice-by-id-header h1 {
+
+    font-size: 23px;
+
+  }
+
+
+  .notice-detail-row {
+
+    grid-template-columns: 1fr;
+
+  }
+
+
+  .notice-detail-label {
+
+    padding-bottom: 7px;
+
+  }
+
+
+  .notice-detail-value {
+
+    padding-top: 7px;
+
+  }
+
+
+  .notice-action-buttons {
+
+    flex-direction: column;
+
+  }
+
+
+  .notice-search-button,
+  .notice-clear-button {
+
+    width: 100%;
+
+  }
+
+}
+

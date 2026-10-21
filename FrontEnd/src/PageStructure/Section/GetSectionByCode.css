@@ -1,0 +1,203 @@
+/* =====================================================
+   GET SECTION BY CODE
+   ===================================================== */
+
+.get-section-code-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 125px 25px 40px;
+  background: #f5f7fb;
+  box-sizing: border-box;
+}
+
+.get-section-code-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.get-section-code-header {
+  margin-bottom: 25px;
+}
+
+.get-section-code-header h1 {
+  margin: 0 0 7px;
+  color: #1f2937;
+}
+
+.get-section-code-header p {
+  margin: 0;
+  color: #6b7280;
+}
+
+
+/* =====================================================
+   SEARCH
+   ===================================================== */
+
+.get-section-code-search {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.get-section-code-search input {
+  flex: 1;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  outline: none;
+  font-size: 14px;
+}
+
+.get-section-code-search input:focus {
+  border-color: #2563eb;
+}
+
+.get-section-code-search button {
+  padding: 12px 22px;
+  border: none;
+  border-radius: 7px;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.get-section-code-search button:hover {
+  background: #1d4ed8;
+}
+
+.get-section-code-search button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+/* =====================================================
+   ERROR
+   ===================================================== */
+
+.get-section-code-error {
+  padding: 12px 15px;
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+  border-radius: 7px;
+}
+
+
+/* =====================================================
+   LOADING
+   ===================================================== */
+
+.get-section-code-loading {
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #6b7280;
+}
+
+.get-section-code-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e5e7eb;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: getSectionCodeSpin 0.8s linear infinite;
+}
+
+@keyframes getSectionCodeSpin {
+
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+
+}
+
+
+/* =====================================================
+   CARD
+   ===================================================== */
+
+.get-section-code-card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+.get-section-code-card-header {
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.get-section-code-card-header h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #1f2937;
+}
+
+
+/* =====================================================
+   GRID
+   ===================================================== */
+
+.get-section-code-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.get-section-code-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.get-section-code-item span {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.get-section-code-item strong {
+  color: #1f2937;
+  font-size: 15px;
+}
+
+.get-section-code-item strong.active {
+  color: #15803d;
+}
+
+.get-section-code-item strong.inactive {
+  color: #dc2626;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 650px) {
+
+  .get-section-code-page {
+    padding: 125px 12px 30px;
+  }
+
+  .get-section-code-search {
+    flex-direction: column;
+  }
+
+  .get-section-code-grid {
+    grid-template-columns: 1fr;
+  }
+
+}

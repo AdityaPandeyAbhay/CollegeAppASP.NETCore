@@ -1,0 +1,174 @@
+/* =====================================================
+   FEE POPUP MODAL (SUCCESS & FAILURE)
+   ===================================================== */
+
+@keyframes feePopupFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes feePopupScaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.fee-popup-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(15, 23, 42, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  animation: feePopupFadeIn 0.2s ease-out;
+}
+
+.fee-popup-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 16px;
+  max-width: 440px;
+  width: 100%;
+  padding: 32px 28px 24px;
+  box-sizing: border-box;
+  text-align: center;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+  animation: feePopupScaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fee-popup-card.fee-popup-success {
+  border-top: 5px solid #16a34a;
+}
+
+.fee-popup-card.fee-popup-error {
+  border-top: 5px solid #dc2626;
+}
+
+.fee-popup-close-x {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  line-height: 1;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.fee-popup-close-x:hover {
+  color: #1f2937;
+  background: #f3f4f6;
+}
+
+.fee-popup-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.fee-popup-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.fee-popup-icon.success {
+  background: #ecfdf5;
+  color: #16a34a;
+  border: 3px solid #86efac;
+}
+
+.fee-popup-icon.error {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 3px solid #fca5a5;
+}
+
+.fee-popup-title {
+  margin: 0 0 10px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.fee-popup-message {
+  margin: 0 0 24px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #4b5563;
+  word-break: break-word;
+}
+
+.fee-popup-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.fee-popup-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 32px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 110px;
+}
+
+.fee-popup-btn-success {
+  background: #16a34a;
+  color: #ffffff;
+}
+
+.fee-popup-btn-success:hover {
+  background: #15803d;
+}
+
+.fee-popup-btn-error {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.fee-popup-btn-error:hover {
+  background: #b91c1c;
+}
+
+@media (max-width: 480px) {
+  .fee-popup-card {
+    padding: 24px 20px 20px;
+  }
+
+  .fee-popup-icon {
+    width: 54px;
+    height: 54px;
+    font-size: 26px;
+  }
+
+  .fee-popup-title {
+    font-size: 18px;
+  }
+}
+

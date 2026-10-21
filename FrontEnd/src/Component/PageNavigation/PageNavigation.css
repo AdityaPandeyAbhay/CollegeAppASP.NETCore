@@ -1,0 +1,184 @@
+/* =====================================================
+   PAGE NAVIGATION
+===================================================== */
+
+.page-navigation {
+  position: fixed;
+
+  top: 52px;
+
+  left: 0;
+
+  right: 0;
+
+  width: 100%;
+
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 0 25px;
+
+  box-sizing: border-box;
+
+  background: transparent;
+
+  z-index: 1000;
+
+  pointer-events: none;
+}
+
+
+/* =====================================================
+   DASHBOARD NAVIGATION
+   Sidebar width = 240px
+   Prev button on Left, Next button on Right
+===================================================== */
+
+.dashboard-navigation {
+  left: 240px;
+
+  width: calc(100% - 240px);
+
+  padding-left: 30px;
+
+  padding-right: 35px;
+
+  justify-content: space-between;
+}
+
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+.page-navigation-button {
+  pointer-events: auto;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  padding: 5px 11px;
+
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  border: 1px solid rgba(64, 79, 104, 0.3);
+
+  border-radius: 5px;
+
+  color: #334155;
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+
+/* =====================================================
+   HOVER
+===================================================== */
+
+.page-navigation-button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.98);
+
+  border-color: rgba(64, 79, 104, 0.6);
+
+  color: #0f172a;
+
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* =====================================================
+   CLICK
+===================================================== */
+
+.page-navigation-button:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+
+/* =====================================================
+   DISABLED
+===================================================== */
+
+.page-navigation-button:disabled {
+  opacity: 0.25;
+
+  cursor: not-allowed;
+}
+
+
+/* =====================================================
+   ICON
+===================================================== */
+
+.navigation-icon {
+  font-size: 16px;
+
+  line-height: 1;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1000px) {
+  .dashboard-navigation {
+    left: 210px;
+    width: calc(100% - 210px);
+    padding-left: 20px;
+    padding-right: 25px;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 700px) {
+  .page-navigation {
+    top: 48px;
+    height: 36px;
+    padding: 0 16px;
+  }
+
+  .dashboard-navigation {
+    left: 0;
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 400px) {
+  .page-navigation {
+    top: 46px;
+    height: 34px;
+    padding: 0 12px;
+  }
+
+  .dashboard-navigation {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .page-navigation-button {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}

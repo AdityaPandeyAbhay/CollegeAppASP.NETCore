@@ -1,0 +1,383 @@
+/* =====================================================
+   FEE STRUCTURE BY CLASS
+   ===================================================== */
+
+.fee-class-search-container {
+  width: 100%;
+  padding: 125px 25px 40px;
+  box-sizing: border-box;
+}
+
+.fee-class-search-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+}
+
+.fee-class-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.fee-class-header h2 {
+  margin-top: 0;
+  margin-bottom: 6px;
+}
+
+.fee-class-header p {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.fee-search-top-right-btn {
+  padding: 10px 24px;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 6px rgba(25, 118, 210, 0.25);
+  white-space: nowrap;
+}
+
+.fee-search-top-right-btn:hover:not(:disabled) {
+  background: #1565c0;
+  box-shadow: 0 4px 10px rgba(25, 118, 210, 0.35);
+}
+
+.fee-search-top-right-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* SEARCH FORM */
+.fee-class-search-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) auto;
+  align-items: flex-end;
+  gap: 15px;
+  margin: 22px 0;
+  background: #f8fafc;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.fee-class-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fee-class-form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.fee-class-form-group select {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #ffffff;
+  color: #1e293b;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.fee-class-form-group select:focus {
+  border-color: #3b82f6;
+}
+
+.fee-class-search-btn {
+  padding: 10px 22px;
+  border: none;
+  border-radius: 6px;
+  background: #1976d2;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  height: 38px;
+}
+
+.fee-class-search-btn:hover {
+  background: #1565c0;
+}
+
+.fee-class-search-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ERROR & EMPTY */
+.fee-class-error,
+.fee-class-empty {
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.fee-class-error {
+  background: #fdeaea;
+  color: #c62828;
+}
+
+.fee-class-empty {
+  background: #f8fafc;
+  color: #64748b;
+  text-align: center;
+  border: 1px dashed #cbd5e1;
+  font-size: 14px;
+}
+
+/* RESULTS SECTION HEADER & SEARCH BAR */
+.fee-results-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.fee-results-top-bar h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #1e293b;
+}
+
+.fee-top-search-bar {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.fee-top-search-bar:focus-within {
+  border-color: #1976d2;
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+}
+
+.fee-top-search-input {
+  padding: 8px 12px;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  width: 200px;
+  color: #1e293b;
+  background: transparent;
+}
+
+.fee-top-search-btn {
+  padding: 8px 14px;
+  border: none;
+  background: #1976d2;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.fee-top-search-btn:hover {
+  background: #1565c0;
+}
+
+/* IN-TABLE FILTER BAR */
+.fee-class-filter-bar {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.fee-class-filter-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 170px;
+}
+
+.fee-class-filter-item label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.fee-class-filter-item input,
+.fee-class-filter-item select {
+  padding: 7px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 13px;
+  background: #ffffff;
+  color: #1e293b;
+  outline: none;
+}
+
+.fee-class-filter-item input:focus,
+.fee-class-filter-item select:focus {
+  border-color: #3b82f6;
+}
+
+.fee-class-filter-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.fee-class-count-badge {
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.fee-class-clear-btn {
+  padding: 6px 12px;
+  background: #e2e8f0;
+  color: #334155;
+  border: none;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.fee-class-clear-btn:hover {
+  background: #cbd5e1;
+}
+
+/* TABLE */
+.fee-class-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.fee-class-table {
+  width: 100%;
+  min-width: 1000px;
+  border-collapse: collapse;
+}
+
+.fee-class-table th,
+.fee-class-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.fee-class-table th {
+  background: #f8fafc;
+  font-weight: 600;
+  color: #334155;
+}
+
+.fee-class-table tbody tr:hover {
+  background: #fafafa;
+}
+
+/* STATUS BADGES */
+.fee-status-active,
+.fee-status-inactive {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.fee-status-active {
+  background: #e5f7e5;
+  color: #238323;
+}
+
+.fee-status-inactive {
+  background: #fde8e8;
+  color: #c62828;
+}
+
+/* ACTION BUTTONS */
+.fee-class-action-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.fee-action-edit-btn,
+.fee-action-delete-btn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.fee-action-edit-btn {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.fee-action-edit-btn:hover {
+  background-color: #2563eb;
+}
+
+.fee-action-delete-btn {
+  background-color: #ef4444;
+  color: white;
+}
+
+.fee-action-delete-btn:hover {
+  background-color: #dc2626;
+}
+
+@media (max-width: 700px) {
+  .fee-class-search-container {
+    padding: 15px;
+  }
+
+  .fee-class-search-card {
+    padding: 20px;
+  }
+
+  .fee-class-search-form {
+    grid-template-columns: 1fr;
+  }
+
+  .fee-class-search-btn {
+    width: 100%;
+  }
+
+  .fee-class-filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .fee-class-filter-actions {
+    margin-left: 0;
+    justify-content: space-between;
+  }
+}

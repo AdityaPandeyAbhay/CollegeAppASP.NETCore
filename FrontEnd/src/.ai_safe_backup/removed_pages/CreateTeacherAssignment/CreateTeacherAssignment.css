@@ -1,0 +1,182 @@
+/* =====================================================
+   CREATE TEACHER ASSIGNMENT PAGE
+===================================================== */
+
+.teacher-assignment-create-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 125px 30px 40px;
+  box-sizing: border-box;
+  background: #f5f7fb;
+}
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.teacher-assignment-create-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+}
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.teacher-assignment-create-title {
+  margin: 0 0 25px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.teacher-assignment-create-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* =====================================================
+   FORM GROUP
+===================================================== */
+
+.teacher-assignment-create-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.teacher-assignment-create-group.full-width {
+  grid-column: span 2;
+}
+
+/* =====================================================
+   LABEL
+===================================================== */
+
+.teacher-assignment-create-group label {
+  margin-bottom: 7px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* =====================================================
+   INPUT / SELECT
+===================================================== */
+
+.teacher-assignment-create-group input,
+.teacher-assignment-create-group select {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  outline: none;
+  font-size: 14px;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+.teacher-assignment-create-group input:focus,
+.teacher-assignment-create-group select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+/* =====================================================
+   CHECKBOX
+===================================================== */
+
+.teacher-assignment-create-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+}
+
+.teacher-assignment-create-checkbox input {
+  width: 18px;
+  height: 18px;
+}
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+.teacher-assignment-create-button {
+  grid-column: span 2;
+  width: 100%;
+  min-height: 46px;
+  border: none;
+  border-radius: 7px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.teacher-assignment-create-button:hover {
+  background: #1d4ed8;
+}
+
+.teacher-assignment-create-button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.teacher-assignment-create-message {
+  margin-bottom: 20px;
+  padding: 12px 15px;
+  border-radius: 7px;
+  font-size: 14px;
+}
+
+.teacher-assignment-create-success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.teacher-assignment-create-error {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 768px) {
+  .teacher-assignment-create-page {
+    padding: 125px 20px 40px;
+  }
+
+  .teacher-assignment-create-container {
+    padding: 20px;
+  }
+
+  .teacher-assignment-create-form {
+    grid-template-columns: 1fr;
+  }
+
+  .teacher-assignment-create-group.full-width,
+  .teacher-assignment-create-button {
+    grid-column: span 1;
+  }
+}

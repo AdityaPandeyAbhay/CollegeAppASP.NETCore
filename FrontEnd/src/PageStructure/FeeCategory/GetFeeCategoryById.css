@@ -1,0 +1,159 @@
+
+/* =====================================================
+   GET FEE CATEGORY BY ID
+   ===================================================== */
+
+.fee-category-id-container {
+  width: 100%;
+  padding: 125px 25px 40px;
+  box-sizing: border-box;
+}
+
+.fee-category-id-card {
+  max-width: 900px;
+  margin: 0 auto;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+}
+
+.fee-category-id-header {
+  margin-bottom: 25px;
+}
+
+.fee-category-id-header h2 {
+  margin: 0 0 6px;
+}
+
+.fee-category-id-header p {
+  margin: 0;
+  color: #666;
+}
+
+.fee-category-id-search {
+  display: flex;
+  align-items: flex-end;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.fee-category-id-input-group {
+  flex: 1;
+}
+
+.fee-category-id-input-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.fee-category-id-input-group input {
+  width: 100%;
+  padding: 11px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.fee-category-id-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.fee-category-id-buttons button {
+  padding: 11px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.fee-category-id-search-btn {
+  background: #007bff;
+  color: white;
+}
+
+.fee-category-id-clear-btn {
+  background: #6c757d;
+  color: white;
+}
+
+.fee-category-id-error {
+  padding: 12px;
+  margin-bottom: 20px;
+  background: #f8d7da;
+  color: #721c24;
+  border-radius: 6px;
+}
+
+.fee-category-id-result {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+}
+
+.fee-category-id-result h3 {
+  margin-bottom: 20px;
+}
+
+.fee-category-id-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.fee-category-id-details > div {
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 6px;
+}
+
+.fee-category-id-details label {
+  display: block;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.fee-category-id-details p {
+  margin: 0;
+}
+
+.fee-category-status-active,
+.fee-category-status-inactive {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.fee-category-status-active {
+  background: #d4edda;
+  color: #155724;
+}
+
+.fee-category-status-inactive {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+@media (max-width: 650px) {
+  .fee-category-id-container {
+    padding: 15px;
+  }
+
+  .fee-category-id-card {
+    padding: 20px;
+  }
+
+  .fee-category-id-search {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .fee-category-id-details {
+    grid-template-columns: 1fr;
+  }
+}
+

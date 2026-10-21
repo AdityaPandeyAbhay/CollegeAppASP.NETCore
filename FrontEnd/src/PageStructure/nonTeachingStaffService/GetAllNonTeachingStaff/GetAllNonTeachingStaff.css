@@ -1,0 +1,467 @@
+/* =====================================================
+   PAGE
+===================================================== */
+
+.all-nts-page {
+
+  min-height: calc(100vh - 52px);
+
+  padding: 125px 30px 40px;
+
+  background: #f1f5f9;
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.all-nts-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 25px;
+
+}
+
+
+.all-nts-header h1 {
+
+  margin: 0;
+
+  color: #1e293b;
+
+}
+
+
+.all-nts-header p {
+
+  margin-top: 6px;
+
+  color: #64748b;
+
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.all-nts-search {
+
+  width: 250px;
+
+  padding: 11px;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 7px;
+
+  outline: none;
+
+}
+
+
+.all-nts-search:focus {
+
+  border-color: #64748b;
+
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.all-nts-card {
+
+  background: white;
+
+  border-radius: 10px;
+
+  padding: 25px;
+
+  box-shadow:
+    0 3px 12px rgba(0, 0, 0, 0.07);
+
+}
+
+
+/* =====================================================
+   TABLE CONTAINER
+===================================================== */
+
+.all-nts-table-container {
+
+  overflow-x: auto;
+
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.all-nts-table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+  min-width: 1100px;
+
+}
+
+
+/* =====================================================
+   TABLE CELLS
+===================================================== */
+
+.all-nts-table th,
+.all-nts-table td {
+
+  padding: 14px;
+
+  text-align: left;
+
+  border-bottom: 1px solid #e2e8f0;
+
+}
+
+
+/* =====================================================
+   TABLE HEADER
+===================================================== */
+
+.all-nts-table th {
+
+  background: #f8fafc;
+
+  color: #475569;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+
+}
+
+
+/* =====================================================
+   TABLE DATA
+===================================================== */
+
+.all-nts-table td {
+
+  color: #334155;
+
+  white-space: nowrap;
+
+}
+
+
+/* =====================================================
+   ROW HOVER
+===================================================== */
+
+.all-nts-table tbody tr:hover {
+
+  background: #f8fafc;
+
+}
+
+
+/* =====================================================
+   ACTIVE STATUS
+===================================================== */
+
+.all-nts-active,
+.all-nts-inactive {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: default;
+  transition: all 0.2s ease;
+}
+
+.all-nts-active {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1.5px solid #22c55e;
+  box-shadow: 0 1px 3px rgba(34, 197, 94, 0.2);
+}
+
+.all-nts-inactive {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1.5px solid #ef4444;
+  box-shadow: 0 1px 3px rgba(239, 68, 68, 0.2);
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.all-nts-loading,
+.all-nts-empty {
+
+  padding: 40px;
+
+  text-align: center;
+
+  color: #64748b;
+
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+.all-nts-error {
+
+  margin-bottom: 20px;
+
+  padding: 12px;
+
+  background: #fee2e2;
+
+  color: #991b1b;
+
+  border-radius: 7px;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+  .all-nts-page {
+
+    padding: 125px 15px 40px;
+
+  }
+
+
+  .all-nts-header {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 15px;
+
+  }
+
+
+  .all-nts-search {
+
+    width: 100%;
+
+  }
+
+
+  .all-nts-card {
+
+    padding: 15px;
+
+  }
+
+}
+
+/* =====================================================
+   EXTRA FIELDS STYLES (Photo, Father, Mother, Education PDF)
+===================================================== */
+.teacher-file-uploader-box, .nts-file-uploader-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #f8fafc;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px dashed #cbd5e1;
+}
+
+.teacher-file-input, .nts-file-input {
+  font-size: 13px;
+  color: #475569;
+  cursor: pointer;
+}
+
+.teacher-file-loading, .nts-file-loading {
+  font-size: 12px;
+  color: #2563eb;
+  font-weight: 500;
+}
+
+.teacher-file-preview-bar, .nts-file-preview-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  flex-wrap: wrap;
+}
+
+.teacher-file-name, .nts-file-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.teacher-preview-btn, .nts-preview-btn {
+  background: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.teacher-preview-btn:hover, .nts-preview-btn:hover {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.teacher-remove-btn, .nts-remove-btn {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.teacher-remove-btn:hover, .nts-remove-btn:hover {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+/* Avatar thumbnails in tables & cards */
+.teacher-avatar-thumb, .nts-avatar-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #3b82f6;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.teacher-avatar-thumb:hover, .nts-avatar-thumb:hover {
+  transform: scale(1.1);
+}
+
+.teacher-avatar-placeholder, .nts-avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #94a3b8;
+  border: 1px solid #cbd5e1;
+}
+
+.teacher-photo-card-banner, .nts-photo-card-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.teacher-detail-photo, .nts-detail-photo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #3b82f6;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+  transition: transform 0.2s ease;
+}
+
+.teacher-detail-photo:hover, .nts-detail-photo:hover {
+  transform: scale(1.05);
+}
+
+.teacher-detail-photo-placeholder, .nts-detail-photo-placeholder {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: #94a3b8;
+  border: 2px dashed #cbd5e1;
+}
+
+/* PDF View Buttons in Table / Grid */
+.teacher-view-pdf-btn, .nts-view-pdf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fca5a5;
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.teacher-view-pdf-btn:hover, .nts-view-pdf-btn:hover {
+  background: #b91c1c;
+  color: #ffffff;
+  border-color: #b91c1c;
+}
+
+.nts-role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f3e8ff;
+  border: 1px solid #d8b4fe;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #6b21a8;
+  font-weight: 700;
+  white-space: nowrap;
+}

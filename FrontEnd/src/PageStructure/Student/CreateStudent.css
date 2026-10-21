@@ -1,0 +1,613 @@
+/* =====================================================
+   CREATE STUDENT
+   ===================================================== */
+
+.student-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 125px 25px 40px;
+  background: #f5f7fb;
+  box-sizing: border-box;
+}
+
+.student-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.student-header {
+  margin-bottom: 25px;
+}
+
+.student-header h1 {
+  margin: 0;
+  font-size: 30px;
+  color: #1f2937;
+}
+
+.student-header p {
+  margin: 7px 0 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* =====================================================
+   FORM
+   ===================================================== */
+
+.student-form {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 25px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* =====================================================
+   SECTION
+   ===================================================== */
+
+.student-section {
+  margin-bottom: 30px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.student-section:last-of-type {
+  border-bottom: none;
+}
+
+.student-section h2 {
+  margin: 0 0 20px;
+  font-size: 20px;
+  color: #111827;
+  font-weight: 700;
+}
+
+/* =====================================================
+   GRID
+   ===================================================== */
+
+.student-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 22px;
+}
+
+/* =====================================================
+   FIELD
+   ===================================================== */
+
+.student-field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.student-full-width {
+  grid-column: 1 / -1;
+}
+
+/* =====================================================
+   LABEL
+   ===================================================== */
+
+.student-field label {
+  margin-bottom: 7px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.student-field label span {
+  color: #dc2626;
+}
+
+/* =====================================================
+   INPUT / SELECT / TEXTAREA
+   ===================================================== */
+
+.student-field input,
+.student-field select,
+.student-field textarea {
+  width: 100%;
+  min-height: 42px;
+  box-sizing: border-box;
+
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+
+  padding: 11px 12px;
+
+  font-family: inherit;
+  font-size: 14px;
+  color: #111827;
+
+  background: #ffffff;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+/* =====================================================
+   PLACEHOLDER
+   ===================================================== */
+
+.student-field input::placeholder,
+.student-field textarea::placeholder {
+  color: #9ca3af;
+}
+
+/* =====================================================
+   FOCUS
+   ===================================================== */
+
+.student-field input:focus,
+.student-field select:focus,
+.student-field textarea:focus {
+  border-color: #2563eb;
+
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* =====================================================
+   SELECT
+   ===================================================== */
+
+.student-field select {
+  cursor: pointer;
+}
+
+/* =====================================================
+   DISABLED
+   ===================================================== */
+
+.student-field input:disabled,
+.student-field select:disabled,
+.student-field textarea:disabled {
+  background: #f3f4f6;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   TEXTAREA
+   ===================================================== */
+
+.student-field textarea {
+  min-height: 110px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* =====================================================
+   FILE INPUT
+   ===================================================== */
+
+.student-field input[type="file"] {
+  height: auto;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.student-field input[type="file"]::file-selector-button {
+  margin-right: 10px;
+
+  padding: 7px 12px;
+
+  border: none;
+  border-radius: 5px;
+
+  background: #e5e7eb;
+  color: #374151;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: background 0.2s ease;
+}
+
+.student-field input[type="file"]::file-selector-button:hover {
+  background: #d1d5db;
+}
+
+/* =====================================================
+   FILE NAME
+   ===================================================== */
+
+.student-file-name {
+  display: block;
+
+  margin-top: 6px;
+
+  color: #6b7280;
+  font-size: 12px;
+
+  word-break: break-word;
+}
+
+/* =====================================================
+   PHOTO FILE SELECTOR & PREVIEW BAR
+   ===================================================== */
+
+.student-photo-selector-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.student-file-input {
+  padding: 8px 12px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.student-file-input:hover {
+  border-color: #3b82f6;
+}
+
+.student-photo-loading {
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.student-photo-preview-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 8px 14px;
+}
+
+.student-photo-name {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1e293b;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.student-photo-preview-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease;
+}
+
+.student-photo-preview-btn:hover {
+  background: #1d4ed8;
+}
+
+.student-photo-remove-btn {
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.student-photo-remove-btn:hover {
+  background: #fecaca;
+}
+
+/* =====================================================
+   HELP TEXT
+   ===================================================== */
+
+.student-help,
+.student-help-text {
+  display: block;
+
+  margin-top: 6px;
+
+  color: #6b7280;
+  font-size: 12px;
+}
+
+/* =====================================================
+   ALERT
+   ===================================================== */
+
+.student-alert {
+  margin-bottom: 20px;
+
+  padding: 12px 15px;
+
+  border-radius: 7px;
+
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* =====================================================
+   ERROR
+   ===================================================== */
+
+.student-error {
+  color: #991b1b;
+
+  background: #fee2e2;
+
+  border: 1px solid #fecaca;
+}
+
+/* =====================================================
+   SUCCESS
+   ===================================================== */
+
+.student-success {
+  color: #166534;
+
+  background: #dcfce7;
+
+  border: 1px solid #bbf7d0;
+}
+
+/* =====================================================
+   ACTIONS
+   ===================================================== */
+
+.student-actions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 12px;
+
+  margin-top: 10px;
+}
+
+/* =====================================================
+   BUTTON
+   ===================================================== */
+
+.student-btn {
+  border: none;
+
+  border-radius: 7px;
+
+  padding: 11px 22px;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.student-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   PRIMARY BUTTON
+   ===================================================== */
+
+.student-btn-primary {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.student-btn-primary:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.student-btn-primary:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+/* =====================================================
+   SECONDARY BUTTON
+   ===================================================== */
+
+.student-btn-secondary {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.student-btn-secondary:hover:not(:disabled) {
+  background: #d1d5db;
+}
+
+.student-btn-secondary:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+/* =====================================================
+   TABLET
+   ===================================================== */
+
+@media (max-width: 900px) {
+
+  .student-page {
+    padding: 125px 15px 30px;
+  }
+
+  .student-form {
+    padding: 22px;
+  }
+
+  .student-grid {
+    gap: 16px;
+  }
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 768px) {
+
+  .student-page {
+    padding: 125px 12px 30px;
+  }
+
+  .student-form {
+    padding: 18px;
+    border-radius: 10px;
+  }
+
+  .student-header h1 {
+    font-size: 26px;
+  }
+
+  .student-header p {
+    font-size: 13px;
+  }
+
+  .student-section {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+  }
+
+  .student-section h2 {
+    font-size: 18px;
+    margin-bottom: 17px;
+  }
+
+  .student-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .student-full-width {
+    grid-column: auto;
+  }
+
+  .student-actions {
+    flex-direction: column-reverse;
+  }
+
+  .student-btn {
+    width: 100%;
+  }
+}
+
+/* =====================================================
+   SMALL MOBILE
+   ===================================================== */
+
+@media (max-width: 480px) {
+
+  .student-page {
+    padding: 125px 8px 30px;
+  }
+
+  .student-form {
+    padding: 15px;
+    border-radius: 8px;
+  }
+
+  .student-header {
+    margin-bottom: 18px;
+  }
+
+  .student-header h1 {
+    font-size: 23px;
+  }
+
+  .student-header p {
+    font-size: 13px;
+  }
+
+  .student-section h2 {
+    font-size: 17px;
+  }
+
+  .student-field input,
+  .student-field select,
+  .student-field textarea {
+    min-height: 40px;
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .student-field textarea {
+    min-height: 100px;
+  }
+
+  .student-alert {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+
+  .student-btn {
+    padding: 10px 18px;
+    font-size: 13px;
+  }
+}
+
+/* =====================================================
+   STEP 2 SECTION HEADER STYLES
+   ===================================================== */
+.step-2-section-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.step-2-badge {
+  background: #059669 !important;
+  color: #ffffff !important;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  box-shadow: 0 2px 6px rgba(5, 150, 105, 0.3) !important;
+  margin-top: 2px;
+}
+
+.step-2-section-header h2 {
+  margin: 0 0 4px 0 !important;
+  font-size: 20px !important;
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}
+
+.step-2-desc {
+  margin: 0;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}

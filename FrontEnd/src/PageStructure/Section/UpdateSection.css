@@ -1,0 +1,260 @@
+/* =====================================================
+   UPDATE SECTION PAGE
+   ===================================================== */
+
+.update-section-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 125px 25px 40px;
+  background: #f5f7fb;
+  box-sizing: border-box;
+}
+
+.update-section-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.update-section-header {
+  margin-bottom: 25px;
+}
+
+.update-section-header h1 {
+  margin: 0 0 7px;
+  color: #1f2937;
+}
+
+.update-section-header p {
+  margin: 0;
+  color: #6b7280;
+}
+
+
+/* =====================================================
+   SEARCH
+   ===================================================== */
+
+.update-section-search {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.update-section-search input {
+  flex: 1;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  outline: none;
+}
+
+.update-section-search input:focus {
+  border-color: #2563eb;
+}
+
+.update-section-search button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 7px;
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.update-section-search button:hover {
+  background: #1d4ed8;
+}
+
+.update-section-search button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+/* =====================================================
+   ALERTS
+   ===================================================== */
+
+.update-section-error,
+.update-section-success {
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border-radius: 7px;
+}
+
+.update-section-error {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.update-section-success {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+
+/* =====================================================
+   CURRENT CLASS
+   ===================================================== */
+
+.update-section-current-class {
+  padding: 15px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.update-section-current-class span {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.update-section-current-class strong {
+  font-size: 16px;
+  color: #1f2937;
+}
+
+
+/* =====================================================
+   FORM
+   ===================================================== */
+
+.update-section-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.update-section-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.update-section-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.update-section-form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+
+/* =====================================================
+   INPUTS
+   ===================================================== */
+
+.update-section-form-group input,
+.update-section-form-group select,
+.update-section-form-group textarea {
+  width: 100%;
+  padding: 11px 13px;
+  box-sizing: border-box;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  outline: none;
+  font-size: 14px;
+}
+
+.update-section-form-group input:focus,
+.update-section-form-group select:focus,
+.update-section-form-group textarea:focus {
+  border-color: #2563eb;
+}
+
+.update-section-form-group textarea {
+  resize: vertical;
+}
+
+
+/* =====================================================
+   CHECKBOX
+   ===================================================== */
+
+.update-section-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.update-section-checkbox input {
+  width: 17px;
+  height: 17px;
+}
+
+.update-section-checkbox label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+
+/* =====================================================
+   SUBMIT
+   ===================================================== */
+
+.update-section-submit {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 7px;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.update-section-submit:hover {
+  background: #1d4ed8;
+}
+
+.update-section-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 700px) {
+
+  .update-section-page {
+    padding: 125px 12px 30px;
+  }
+
+  .update-section-container {
+    padding: 20px;
+  }
+
+  .update-section-search {
+    flex-direction: column;
+  }
+
+  .update-section-form-row {
+    grid-template-columns: 1fr;
+  }
+
+}

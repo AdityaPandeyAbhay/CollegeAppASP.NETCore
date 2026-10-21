@@ -1,0 +1,336 @@
+/* =====================================================
+   DELETE USER PAGE & CARD
+===================================================== */
+
+.delete-user-page {
+  min-height: calc(100vh - 52px);
+  padding: 125px 30px 40px;
+  background: #f1f5f9;
+  display: flex;
+  justify-content: center;
+}
+
+.delete-user-card {
+  width: 100%;
+  max-width: 850px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 32px;
+  border: 1px solid #e2e8f0;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.delete-user-header {
+  margin-bottom: 24px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 16px;
+}
+
+.delete-user-header h1 {
+  margin: 0 0 6px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.delete-user-header p {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+/* =====================================================
+   CONTROLS & FIELDS
+===================================================== */
+
+.delete-user-controls {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 22px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.delete-user-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.delete-user-field label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.delete-user-field select,
+.delete-user-field input {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #1e293b;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.delete-user-field select:focus,
+.delete-user-field input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.delete-user-field select:disabled,
+.delete-user-field input:disabled {
+  background-color: #f1f5f9;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+.delete-filter-badge {
+  font-size: 12px;
+  font-weight: 600;
+  color: #dc2626;
+  background: #fee2e2;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.delete-user-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 8px 0;
+  position: relative;
+}
+
+.delete-user-divider::before,
+.delete-user-divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.delete-user-divider span {
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.delete-user-filter-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.2fr;
+  gap: 16px;
+  align-items: flex-end;
+}
+
+.delete-filter-clear-wrapper {
+  margin-top: 6px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.delete-clear-filter-btn {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.delete-clear-filter-btn:hover {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-color: #fca5a5;
+}
+
+/* Search Box with Button */
+.delete-user-search-box {
+  display: flex;
+  gap: 8px;
+}
+
+.delete-user-search-box input {
+  flex: 1;
+}
+
+.delete-user-search-box button {
+  padding: 0 20px;
+  min-height: 44px;
+  border: none;
+  border-radius: 8px;
+  background: #3b82f6;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.delete-user-search-box button:hover:not(:disabled) {
+  background: #2563eb;
+}
+
+.delete-user-search-box button:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   MESSAGES
+===================================================== */
+
+.delete-user-success {
+  padding: 14px 18px;
+  background: #dcfce7;
+  border: 1px solid #86efac;
+  color: #166534;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.delete-user-error {
+  padding: 14px 18px;
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+  color: #b91c1c;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* =====================================================
+   DETAILS CARD & PREVIEW
+===================================================== */
+
+.delete-user-details-card {
+  background: #ffffff;
+  border: 1px solid #fee2e2;
+  border-radius: 10px;
+  padding: 24px;
+  box-shadow: 0 2px 10px rgba(220, 38, 38, 0.06);
+}
+
+.delete-user-details-card h2 {
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #b91c1c;
+}
+
+.delete-user-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 14px;
+}
+
+.delete-user-row:last-of-type {
+  border-bottom: none;
+}
+
+.delete-user-row strong {
+  color: #64748b;
+  font-weight: 600;
+}
+
+.delete-user-row span {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.status-active {
+  background: #dcfce7;
+  color: #166534 !important;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.status-inactive {
+  background: #fee2e2;
+  color: #991b1b !important;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* =====================================================
+   ACTIONS & DELETE BUTTON
+===================================================== */
+
+.delete-user-action-row {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.delete-user-btn {
+  min-height: 46px;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  background: #dc2626;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.delete-user-btn:hover:not(:disabled) {
+  background: #b91c1c;
+}
+
+.delete-user-btn:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 768px) {
+  .delete-user-page {
+    padding: 110px 16px 30px;
+  }
+
+  .delete-user-card {
+    padding: 20px;
+  }
+
+  .delete-user-filter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .delete-user-btn {
+    width: 100%;
+  }
+}

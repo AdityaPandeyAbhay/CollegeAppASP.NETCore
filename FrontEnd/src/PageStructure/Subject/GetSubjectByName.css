@@ -1,0 +1,195 @@
+/* =====================================================
+   GET SUBJECT BY NAME
+   ===================================================== */
+
+.subject-name-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 125px 25px 40px;
+  background: #f5f7fb;
+  box-sizing: border-box;
+}
+
+.subject-name-container {
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.subject-name-header {
+  margin-bottom: 25px;
+}
+
+.subject-name-header h2 {
+  margin: 0 0 6px;
+  color: #1f2937;
+}
+
+.subject-name-header p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+
+/* =====================================================
+   SEARCH
+   ===================================================== */
+
+.subject-name-search {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.subject-name-input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.subject-name-input-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.subject-name-input-group input {
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.subject-name-input-group input:focus {
+  border-color: #2563eb;
+}
+
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.subject-name-search button {
+  height: 42px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 7px;
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.subject-name-search button:hover {
+  background: #1d4ed8;
+}
+
+.subject-name-search button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.subject-name-search .subject-name-clear {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.subject-name-search .subject-name-clear:hover {
+  background: #d1d5db;
+}
+
+
+/* =====================================================
+   ERROR / EMPTY
+   ===================================================== */
+
+.subject-name-error {
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  background: #fee2e2;
+  color: #b91c1c;
+  border-radius: 7px;
+}
+
+.subject-name-empty {
+  padding: 40px;
+  text-align: center;
+  color: #6b7280;
+}
+
+
+/* =====================================================
+   TABLE
+   ===================================================== */
+
+.subject-name-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.subject-name-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+}
+
+.subject-name-table th,
+.subject-name-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+  font-size: 13px;
+}
+
+.subject-name-table th {
+  background: #f8fafc;
+  font-weight: 700;
+  color: #374151;
+  white-space: nowrap;
+}
+
+.subject-name-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 650px) {
+
+  .subject-name-page {
+    padding: 125px 10px 30px;
+  }
+
+  .subject-name-container {
+    padding: 20px;
+  }
+
+  .subject-name-search {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .subject-name-search button {
+    width: 100%;
+  }
+
+}

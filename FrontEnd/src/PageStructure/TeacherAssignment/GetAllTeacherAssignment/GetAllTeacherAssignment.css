@@ -1,0 +1,130 @@
+/* =====================================================
+   GET ALL TEACHER ASSIGNMENT PAGE
+===================================================== */
+
+.teacher-assignment-all-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 125px 30px 40px;
+  box-sizing: border-box;
+  background: #f5f7fb;
+}
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.teacher-assignment-all-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+  overflow-x: auto;
+}
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.teacher-assignment-all-title {
+  margin: 0 0 25px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.teacher-assignment-all-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+.teacher-assignment-all-table th {
+  padding: 13px 12px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.teacher-assignment-all-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+  color: #374151;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.teacher-assignment-all-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.teacher-assignment-status-active {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: #dcfce7;
+  color: #166534;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.teacher-assignment-status-inactive {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: #fee2e2;
+  color: #991b1b;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.teacher-assignment-all-message {
+  padding: 14px;
+  margin-bottom: 20px;
+  border-radius: 7px;
+  text-align: center;
+}
+
+.teacher-assignment-all-error {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.teacher-assignment-all-empty {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 768px) {
+  .teacher-assignment-all-page {
+    padding: 125px 20px 40px;
+  }
+
+  .teacher-assignment-all-container {
+    padding: 20px;
+  }
+}

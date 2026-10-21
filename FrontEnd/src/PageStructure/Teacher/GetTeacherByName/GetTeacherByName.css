@@ -1,0 +1,511 @@
+/* =====================================================
+   GET TEACHER BY NAME
+===================================================== */
+
+.teacher-name-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 125px 30px 40px;
+  background: #f5f7fb;
+  box-sizing: border-box;
+}
+
+.teacher-name-container {
+  max-width: 1500px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 35px;
+  border-radius: 14px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.teacher-name-header {
+  margin-bottom: 25px;
+}
+
+.teacher-name-header h1 {
+  margin: 0 0 7px;
+  font-size: 30px;
+  color: #1f2937;
+}
+
+.teacher-name-header p {
+  margin: 0;
+  color: #6b7280;
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.teacher-name-search {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.teacher-name-search input {
+  flex: 1;
+  padding: 13px 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+}
+
+.teacher-name-search input:focus {
+  border-color: #2563eb;
+}
+
+.teacher-name-search button {
+  padding: 13px 25px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.teacher-name-search button:hover {
+  background: #1d4ed8;
+}
+
+.teacher-name-search button:disabled {
+  opacity: 0.6;
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.teacher-name-message {
+  padding: 13px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.teacher-name-message.success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.teacher-name-message.error {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.teacher-name-table-wrapper {
+  overflow-x: auto;
+}
+
+.teacher-name-table {
+  width: 100%;
+  min-width: 1250px;
+  border-collapse: collapse;
+}
+
+.teacher-name-table th {
+  background: #f3f4f6;
+  padding: 13px;
+  text-align: left;
+  font-size: 13px;
+  color: #374151;
+  white-space: nowrap;
+}
+
+.teacher-name-table td {
+  padding: 13px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 13px;
+  color: #4b5563;
+  white-space: nowrap;
+}
+
+.teacher-name-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+
+/* =====================================================
+   POPUP
+===================================================== */
+
+.teacher-name-popup {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  z-index: 9999;
+  width: 390px;
+  max-width: calc(100% - 40px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.teacher-name-popup-success {
+  border-left: 5px solid #16a34a;
+}
+
+.teacher-name-popup-error {
+  border-left: 5px solid #dc2626;
+}
+
+.teacher-name-popup-icon {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #16a34a;
+  color: #ffffff;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+.teacher-name-popup-error .teacher-name-popup-icon {
+  background: #dc2626;
+}
+
+.teacher-name-popup-content {
+  flex: 1;
+}
+
+.teacher-name-popup-content strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.teacher-name-popup-content span {
+  font-size: 13px;
+  color: #4b5563;
+}
+
+.teacher-name-popup-close {
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .teacher-name-page {
+    padding: 125px 20px 40px;
+  }
+
+  .teacher-name-container {
+    padding: 20px;
+  }
+
+  .teacher-name-search {
+    flex-direction: column;
+  }
+
+  .teacher-name-search button {
+    width: 100%;
+  }
+}
+
+/* =====================================================
+   EXTRA FIELDS STYLES (Photo, Father, Mother, Education PDF)
+===================================================== */
+.teacher-file-uploader-box, .nts-file-uploader-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #f8fafc;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px dashed #cbd5e1;
+}
+
+.teacher-file-input, .nts-file-input {
+  font-size: 13px;
+  color: #475569;
+  cursor: pointer;
+}
+
+.teacher-file-loading, .nts-file-loading {
+  font-size: 12px;
+  color: #2563eb;
+  font-weight: 500;
+}
+
+.teacher-file-preview-bar, .nts-file-preview-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  flex-wrap: wrap;
+}
+
+.teacher-file-name, .nts-file-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.teacher-preview-btn, .nts-preview-btn {
+  background: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.teacher-preview-btn:hover, .nts-preview-btn:hover {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.teacher-remove-btn, .nts-remove-btn {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.teacher-remove-btn:hover, .nts-remove-btn:hover {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+/* Avatar thumbnails in tables & cards */
+.teacher-avatar-thumb, .nts-avatar-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #3b82f6;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.teacher-avatar-thumb:hover, .nts-avatar-thumb:hover {
+  transform: scale(1.1);
+}
+
+.teacher-avatar-placeholder, .nts-avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #94a3b8;
+  border: 1px solid #cbd5e1;
+}
+
+.teacher-photo-card-banner, .nts-photo-card-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.teacher-detail-photo, .nts-detail-photo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #3b82f6;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+  transition: transform 0.2s ease;
+}
+
+.teacher-detail-photo:hover, .nts-detail-photo:hover {
+  transform: scale(1.05);
+}
+
+.teacher-detail-photo-placeholder, .nts-detail-photo-placeholder {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: #94a3b8;
+  border: 2px dashed #cbd5e1;
+}
+
+/* PDF View Buttons in Table / Grid */
+.teacher-view-pdf-btn, .nts-view-pdf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fca5a5;
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.teacher-view-pdf-btn:hover, .nts-view-pdf-btn:hover {
+  background: #b91c1c;
+  color: #ffffff;
+  border-color: #b91c1c;
+}
+
+/* =====================================================
+   MULTI-DEPARTMENT & MULTI-SUBJECT TABLE TAGS
+===================================================== */
+.teacher-table-tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  max-width: 260px;
+}
+
+.teacher-tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  line-height: 1.2;
+}
+
+.teacher-tag-chip.primary-dept {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border-color: #bfdbfe;
+  font-weight: 700;
+}
+
+.teacher-tag-chip.additional-dept {
+  background: #f1f5f9;
+  color: #475569;
+  border-color: #e2e8f0;
+}
+
+.teacher-tag-chip.primary-subj {
+  background: #f0fdf4;
+  color: #15803d;
+  border-color: #bbf7d0;
+  font-weight: 700;
+}
+
+.teacher-tag-chip.additional-subj {
+  background: #faf5ff;
+  color: #7e22ce;
+  border-color: #e9d5ff;
+}
+
+.teacher-pills-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+  max-width: 280px;
+}
+
+.teacher-dept-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: #eff6ff;
+  color: #1e40af;
+  border: 1px solid #bfdbfe;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 11.5px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.teacher-dept-pill.primary {
+  background: #e0e7ff;
+  color: #3730a3;
+  border-color: #a5b4fc;
+  font-weight: 700;
+}
+
+.teacher-subject-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: #f0fdf4;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 11.5px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.teacher-subject-pill.primary {
+  background: #dcfce7;
+  color: #14532d;
+  border-color: #86efac;
+  font-weight: 700;
+}
+
+.teacher-pill-star {
+  color: #eab308;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.teacher-text-muted {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+

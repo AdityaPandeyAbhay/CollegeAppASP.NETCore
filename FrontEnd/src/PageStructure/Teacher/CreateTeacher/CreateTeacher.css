@@ -1,0 +1,643 @@
+
+/* =====================================================
+   CREATE TEACHER PAGE
+===================================================== */
+
+.teacher-create-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 125px 30px 40px;
+  box-sizing: border-box;
+  background: #f5f7fb;
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.teacher-create-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 35px;
+  box-sizing: border-box;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.teacher-create-header {
+  margin-bottom: 30px;
+}
+
+.teacher-create-header h1 {
+  margin: 0 0 8px;
+  font-size: 30px;
+  color: #1f2937;
+}
+
+.teacher-create-header p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 15px;
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.teacher-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+
+/* =====================================================
+   FORM GROUP
+===================================================== */
+
+.teacher-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.teacher-form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.teacher-form-group label span {
+  color: #dc2626;
+}
+
+
+/* =====================================================
+   INPUT / SELECT / TEXTAREA
+===================================================== */
+
+.teacher-form-group input,
+.teacher-form-group select,
+.teacher-form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-family: inherit;
+  background: #ffffff;
+  color: #1f2937;
+  outline: none;
+  transition: 0.2s;
+}
+
+.teacher-form-group input:focus,
+.teacher-form-group select:focus,
+.teacher-form-group textarea:focus {
+  border-color: #2563eb;
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.teacher-form-group input:disabled,
+.teacher-form-group select:disabled,
+.teacher-form-group textarea:disabled {
+  background: #f3f4f6;
+  cursor: not-allowed;
+}
+
+
+/* =====================================================
+   SELECT
+===================================================== */
+
+.teacher-form-group select {
+  cursor: pointer;
+}
+
+
+/* =====================================================
+   FULL WIDTH
+===================================================== */
+
+.teacher-full-width {
+  grid-column: 1 / -1;
+}
+
+
+/* =====================================================
+   CHECKBOX
+===================================================== */
+
+.teacher-checkbox-group {
+  margin-top: 5px;
+}
+
+.teacher-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #374151;
+  font-weight: 600;
+}
+
+.teacher-checkbox-label input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.teacher-form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+
+/* =====================================================
+   SUBMIT BUTTON
+===================================================== */
+
+.teacher-submit-btn {
+  min-width: 170px;
+  border: none;
+  border-radius: 8px;
+  padding: 13px 28px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.teacher-submit-btn:hover {
+  background: #1d4ed8;
+}
+
+.teacher-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.teacher-message {
+  padding: 13px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.teacher-success-message {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #86efac;
+}
+
+.teacher-error-message {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+}
+
+
+/* =====================================================
+   POPUP
+===================================================== */
+
+.teacher-popup {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  width: 390px;
+  max-width: calc(100% - 40px);
+
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  padding: 16px;
+
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.18);
+
+  z-index: 9999;
+
+  animation:
+    teacherPopupSlide 0.3s ease;
+}
+
+
+/* =====================================================
+   POPUP ANIMATION
+===================================================== */
+
+@keyframes teacherPopupSlide {
+
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+}
+
+
+/* =====================================================
+   SUCCESS POPUP
+===================================================== */
+
+.teacher-popup-success {
+  border-left: 5px solid #16a34a;
+}
+
+
+/* =====================================================
+   ERROR POPUP
+===================================================== */
+
+.teacher-popup-error {
+  border-left: 5px solid #dc2626;
+}
+
+
+/* =====================================================
+   POPUP ICON
+===================================================== */
+
+.teacher-popup-icon {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #16a34a;
+  color: #ffffff;
+
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.teacher-popup-error .teacher-popup-icon {
+  background: #dc2626;
+}
+
+
+/* =====================================================
+   POPUP CONTENT
+===================================================== */
+
+.teacher-popup-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.teacher-popup-content strong {
+  font-size: 14px;
+  color: #111827;
+}
+
+.teacher-popup-content span {
+  font-size: 13px;
+  color: #4b5563;
+  line-height: 1.4;
+}
+
+
+/* =====================================================
+   POPUP CLOSE
+===================================================== */
+
+.teacher-popup-close {
+  border: none;
+  background: transparent;
+
+  font-size: 22px;
+
+  color: #6b7280;
+
+  cursor: pointer;
+
+  line-height: 1;
+}
+
+.teacher-popup-close:hover {
+  color: #111827;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .teacher-create-page {
+    padding: 125px 20px 40px;
+  }
+
+  .teacher-create-container {
+    padding: 22px;
+  }
+
+  .teacher-form {
+    grid-template-columns: 1fr;
+  }
+
+  .teacher-full-width {
+    grid-column: auto;
+  }
+
+  .teacher-form-actions {
+    grid-column: auto;
+  }
+
+  .teacher-submit-btn {
+    width: 100%;
+  }
+
+  .teacher-popup {
+    top: 15px;
+    right: 15px;
+    width: calc(100% - 30px);
+    max-width: none;
+  }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 480px) {
+
+  .teacher-create-page {
+    padding: 125px 12px 40px;
+  }
+
+  .teacher-create-container {
+    padding: 18px;
+    border-radius: 10px;
+  }
+
+  .teacher-create-header h1 {
+    font-size: 24px;
+  }
+
+  .teacher-form {
+    gap: 17px;
+  }
+
+}
+
+
+
+/* =====================================================
+   EXTRA FIELDS STYLES (Photo, Father, Mother, Education PDF)
+===================================================== */
+.teacher-file-uploader-box, .nts-file-uploader-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #f8fafc;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px dashed #cbd5e1;
+}
+
+.teacher-file-input, .nts-file-input {
+  font-size: 13px;
+  color: #475569;
+  cursor: pointer;
+}
+
+.teacher-file-loading, .nts-file-loading {
+  font-size: 12px;
+  color: #2563eb;
+  font-weight: 500;
+}
+
+.teacher-file-preview-bar, .nts-file-preview-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  flex-wrap: wrap;
+}
+
+.teacher-file-name, .nts-file-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.teacher-preview-btn, .nts-preview-btn {
+  background: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.teacher-preview-btn:hover, .nts-preview-btn:hover {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.teacher-remove-btn, .nts-remove-btn {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.teacher-remove-btn:hover, .nts-remove-btn:hover {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+/* Avatar thumbnails in tables & cards */
+.teacher-avatar-thumb, .nts-avatar-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #3b82f6;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.teacher-avatar-thumb:hover, .nts-avatar-thumb:hover {
+  transform: scale(1.1);
+}
+
+.teacher-avatar-placeholder, .nts-avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #94a3b8;
+  border: 1px solid #cbd5e1;
+}
+
+.teacher-photo-card-banner, .nts-photo-card-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.teacher-detail-photo, .nts-detail-photo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #3b82f6;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+  transition: transform 0.2s ease;
+}
+
+.teacher-detail-photo:hover, .nts-detail-photo:hover {
+  transform: scale(1.05);
+}
+
+.teacher-detail-photo-placeholder, .nts-detail-photo-placeholder {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: #94a3b8;
+  border: 2px dashed #cbd5e1;
+}
+
+/* PDF View Buttons in Table / Grid */
+.teacher-view-pdf-btn, .nts-view-pdf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fca5a5;
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.teacher-view-pdf-btn:hover, .nts-view-pdf-btn:hover {
+  background: #b91c1c;
+  color: #ffffff;
+  border-color: #b91c1c;
+}
+
+/* =====================================================
+   STEP 2 SECTION HEADER STYLES
+   ===================================================== */
+.step-2-section-header {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.step-2-badge {
+  background: #059669 !important;
+  color: #ffffff !important;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  box-shadow: 0 2px 6px rgba(5, 150, 105, 0.3) !important;
+  margin-top: 2px;
+}
+
+.step-2-section-header h2 {
+  margin: 0 0 4px 0 !important;
+  font-size: 20px !important;
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}
+
+.step-2-desc {
+  margin: 0;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+

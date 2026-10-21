@@ -1,0 +1,212 @@
+.nts-dropdown-page {
+  min-height: 100vh;
+  padding: 125px 30px 40px;
+  background: #f1f5f9;
+}
+
+.nts-dropdown-container {
+  max-width: 950px;
+  margin: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.nts-dropdown-container h2 {
+  color: #1e293b;
+  margin-top: 0;
+}
+
+.nts-dropdown-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 25px;
+}
+
+.nts-dropdown-group label {
+  font-weight: 600;
+  color: #334155;
+}
+
+.nts-dropdown-group select {
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  outline: none;
+  background: white;
+  font-size: 14px;
+}
+
+.nts-dropdown-group select:focus {
+  border-color: #2563eb;
+}
+
+.nts-dropdown-error {
+  margin-top: 20px;
+  padding: 12px;
+  background: #fee2e2;
+  color: #991b1b;
+  border-radius: 7px;
+}
+
+.nts-dropdown-loading {
+  margin-top: 20px;
+  color: #64748b;
+}
+
+.nts-dropdown-card {
+  margin-top: 25px;
+  padding: 25px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+}
+
+.nts-dropdown-card h3 {
+  margin-top: 0;
+  color: #1e293b;
+}
+
+.nts-dropdown-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px 25px;
+}
+
+.nts-dropdown-details div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nts-dropdown-details strong {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.nts-dropdown-details span {
+  color: #1e293b;
+  font-size: 14px;
+  word-break: break-word;
+}
+
+@media (max-width: 600px) {
+  .nts-dropdown-page {
+    padding: 125px 15px 40px;
+  }
+
+  .nts-dropdown-container {
+    padding: 20px;
+  }
+
+  .nts-dropdown-details {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =====================================================
+   EXTRA FIELDS STYLES (Photo, Father, Mother, Education PDF)
+===================================================== */
+.teacher-photo-card-banner, .nts-photo-card-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.teacher-detail-photo, .nts-detail-photo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #3b82f6;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+  transition: transform 0.2s ease;
+}
+
+.teacher-detail-photo:hover, .nts-detail-photo:hover {
+  transform: scale(1.05);
+}
+
+.teacher-detail-photo-placeholder, .nts-detail-photo-placeholder {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: #94a3b8;
+  border: 2px dashed #cbd5e1;
+}
+
+.teacher-view-pdf-btn, .nts-view-pdf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fca5a5;
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.teacher-view-pdf-btn:hover, .nts-view-pdf-btn:hover {
+  background: #b91c1c;
+  color: #ffffff;
+  border-color: #b91c1c;
+}
+
+.nts-role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f3e8ff;
+  border: 1px solid #d8b4fe;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #6b21a8;
+  font-weight: 700;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.all-nts-active,
+.all-nts-inactive {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: default;
+  width: fit-content;
+}
+
+.all-nts-active {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1.5px solid #22c55e;
+}
+
+.all-nts-inactive {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1.5px solid #ef4444;
+}

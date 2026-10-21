@@ -1,0 +1,765 @@
+/* =====================================================
+   DELETE TEACHER
+===================================================== */
+
+.teacher-delete-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 125px 30px 40px;
+  background: #f5f7fb;
+  box-sizing: border-box;
+}
+
+.teacher-delete-container {
+  width: 100%;
+  max-width: 950px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 35px;
+  border-radius: 14px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.teacher-delete-header {
+  margin-bottom: 25px;
+}
+
+.teacher-delete-header h1 {
+  margin: 0 0 7px;
+  color: #1f2937;
+  font-size: 30px;
+}
+
+.teacher-delete-header p {
+  margin: 0;
+  color: #6b7280;
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.teacher-delete-search {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.teacher-delete-search input {
+  flex: 1;
+  padding: 13px 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+}
+
+.teacher-delete-search input:focus {
+  border-color: #2563eb;
+}
+
+.teacher-delete-search button {
+  padding: 13px 25px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.teacher-delete-search button:hover {
+  background: #1d4ed8;
+}
+
+.teacher-delete-search button:disabled {
+  opacity: 0.6;
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.teacher-delete-message {
+  padding: 13px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.teacher-delete-message.success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.teacher-delete-message.error {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.teacher-delete-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+
+/* =====================================================
+   WARNING
+===================================================== */
+
+.teacher-delete-warning {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: #fff7ed;
+  border-bottom: 1px solid #fed7aa;
+  color: #9a3412;
+}
+
+.teacher-delete-warning strong {
+  font-size: 15px;
+}
+
+.teacher-delete-warning span {
+  font-size: 13px;
+}
+
+
+/* =====================================================
+   DETAILS
+===================================================== */
+
+.teacher-delete-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.teacher-delete-details > div {
+  padding: 18px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.teacher-delete-details label {
+  display: block;
+  margin-bottom: 6px;
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.teacher-delete-details p {
+  margin: 0;
+  color: #1f2937;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.teacher-delete-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 20px;
+  background: #f9fafb;
+}
+
+.teacher-cancel-delete-btn,
+.teacher-confirm-delete-btn {
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.teacher-cancel-delete-btn {
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #374151;
+}
+
+.teacher-cancel-delete-btn:hover {
+  background: #f3f4f6;
+}
+
+.teacher-confirm-delete-btn {
+  border: none;
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.teacher-confirm-delete-btn:hover {
+  background: #b91c1c;
+}
+
+.teacher-confirm-delete-btn:disabled,
+.teacher-cancel-delete-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+/* =====================================================
+   POPUP
+===================================================== */
+
+.teacher-delete-popup {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  z-index: 9999;
+  width: 390px;
+  max-width: calc(100% - 40px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.teacher-delete-popup-success {
+  border-left: 5px solid #16a34a;
+}
+
+.teacher-delete-popup-error {
+  border-left: 5px solid #dc2626;
+}
+
+.teacher-delete-popup-icon {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #16a34a;
+  color: #ffffff;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+.teacher-delete-popup-error .teacher-delete-popup-icon {
+  background: #dc2626;
+}
+
+.teacher-delete-popup-content {
+  flex: 1;
+}
+
+.teacher-delete-popup-content strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.teacher-delete-popup-content span {
+  font-size: 13px;
+  color: #4b5563;
+}
+
+.teacher-delete-popup-close {
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .teacher-delete-page {
+    padding: 125px 20px 40px;
+  }
+
+  .teacher-delete-container {
+    padding: 20px;
+  }
+
+  .teacher-delete-search {
+    flex-direction: column;
+  }
+
+  .teacher-delete-search button {
+    width: 100%;
+  }
+
+  .teacher-delete-details {
+    grid-template-columns: 1fr;
+  }
+
+  .teacher-delete-actions {
+    flex-direction: column;
+  }
+
+  .teacher-cancel-delete-btn,
+  .teacher-confirm-delete-btn {
+    width: 100%;
+  }
+}
+
+/* =====================================================
+   EXTRA FIELDS STYLES (Photo, Father, Mother, Education PDF)
+===================================================== */
+.teacher-file-uploader-box, .nts-file-uploader-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #f8fafc;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px dashed #cbd5e1;
+}
+
+.teacher-file-input, .nts-file-input {
+  font-size: 13px;
+  color: #475569;
+  cursor: pointer;
+}
+
+.teacher-file-loading, .nts-file-loading {
+  font-size: 12px;
+  color: #2563eb;
+  font-weight: 500;
+}
+
+.teacher-file-preview-bar, .nts-file-preview-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  flex-wrap: wrap;
+}
+
+.teacher-file-name, .nts-file-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.teacher-preview-btn, .nts-preview-btn {
+  background: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.teacher-preview-btn:hover, .nts-preview-btn:hover {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.teacher-remove-btn, .nts-remove-btn {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.teacher-remove-btn:hover, .nts-remove-btn:hover {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+/* Avatar thumbnails in tables & cards */
+.teacher-avatar-thumb, .nts-avatar-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #3b82f6;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.teacher-avatar-thumb:hover, .nts-avatar-thumb:hover {
+  transform: scale(1.1);
+}
+
+.teacher-avatar-placeholder, .nts-avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #94a3b8;
+  border: 1px solid #cbd5e1;
+}
+
+.teacher-photo-card-banner, .nts-photo-card-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.teacher-detail-photo, .nts-detail-photo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #3b82f6;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+  transition: transform 0.2s ease;
+}
+
+.teacher-detail-photo:hover, .nts-detail-photo:hover {
+  transform: scale(1.05);
+}
+
+.teacher-detail-photo-placeholder, .nts-detail-photo-placeholder {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: #94a3b8;
+  border: 2px dashed #cbd5e1;
+}
+
+/* PDF View Buttons in Table / Grid */
+.teacher-view-pdf-btn, .nts-view-pdf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fca5a5;
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.teacher-view-pdf-btn:hover, .nts-view-pdf-btn:hover {
+  background: #b91c1c;
+  color: #ffffff;
+  border-color: #b91c1c;
+}
+
+
+/* =====================================================
+   CUSTOM SOFT DELETE CONFIRMATION MODAL
+===================================================== */
+.custom-delete-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  padding: 20px;
+  animation: fadeInModal 0.2s ease-out;
+}
+
+.custom-delete-modal-card {
+  background: #ffffff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.25), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border: 1px solid #fee2e2;
+  animation: scaleUpModal 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.custom-delete-modal-header {
+  padding: 18px 24px;
+  background: #fef2f2;
+  border-bottom: 1px solid #fee2e2;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.custom-delete-warning-icon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.custom-delete-modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #991b1b;
+}
+
+.custom-delete-modal-body {
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.custom-delete-confirm-text {
+  font-size: 15px;
+  color: #374151;
+  margin: 0;
+  font-weight: 500;
+}
+
+.custom-delete-info-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.custom-delete-info-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13.5px;
+}
+
+.custom-delete-info-label {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.custom-delete-info-value {
+  color: #0f172a;
+  font-weight: 600;
+  text-align: right;
+}
+
+.custom-delete-note {
+  font-size: 12.5px;
+  color: #6b7280;
+  background: #fffbeb;
+  border: 1px solid #fef3c7;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin: 0;
+  line-height: 1.45;
+}
+
+.custom-delete-note strong {
+  color: #92400e;
+}
+
+.custom-delete-modal-footer {
+  padding: 16px 24px;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.custom-delete-btn-cancel {
+  padding: 9px 18px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.custom-delete-btn-cancel:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.custom-delete-btn-danger {
+  padding: 9px 20px;
+  background: #dc2626;
+  border: 1px solid #b91c1c;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 1px 2px rgba(220, 38, 38, 0.2);
+}
+
+.custom-delete-btn-danger:hover {
+  background: #b91c1c;
+}
+
+.custom-delete-btn-danger:disabled,
+.custom-delete-btn-cancel:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@keyframes fadeInModal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUpModal {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* =====================================================
+   MULTI-DEPARTMENT & MULTI-SUBJECT TAGS
+===================================================== */
+.teacher-table-tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-width: 100%;
+}
+
+.teacher-tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  line-height: 1.2;
+}
+
+.teacher-tag-chip.primary-dept {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border-color: #bfdbfe;
+  font-weight: 700;
+}
+
+.teacher-tag-chip.additional-dept {
+  background: #f1f5f9;
+  color: #475569;
+  border-color: #e2e8f0;
+}
+
+.teacher-tag-chip.primary-subj {
+  background: #f0fdf4;
+  color: #15803d;
+  border-color: #bbf7d0;
+  font-weight: 700;
+}
+
+.teacher-tag-chip.additional-subj {
+  background: #faf5ff;
+  color: #7e22ce;
+  border-color: #e9d5ff;
+}
+
+.teacher-pills-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+  max-width: 100%;
+}
+
+.teacher-dept-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: #eff6ff;
+  color: #1e40af;
+  border: 1px solid #bfdbfe;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 11.5px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.teacher-dept-pill.primary {
+  background: #e0e7ff;
+  color: #3730a3;
+  border-color: #a5b4fc;
+  font-weight: 700;
+}
+
+.teacher-subject-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: #f0fdf4;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 11.5px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.teacher-subject-pill.primary {
+  background: #dcfce7;
+  color: #14532d;
+  border-color: #86efac;
+  font-weight: 700;
+}
+
+.teacher-pill-star {
+  color: #eab308;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.teacher-text-muted {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+

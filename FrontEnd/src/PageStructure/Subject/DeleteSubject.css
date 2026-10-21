@@ -1,0 +1,247 @@
+/* =====================================================
+   DELETE SUBJECT
+   ===================================================== */
+
+.subject-delete-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 125px 25px 40px;
+  background: #f5f7fb;
+  box-sizing: border-box;
+}
+
+.subject-delete-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.subject-delete-header {
+  margin-bottom: 25px;
+}
+
+.subject-delete-header h2 {
+  margin: 0 0 6px;
+  color: #1f2937;
+}
+
+.subject-delete-header p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+
+/* =====================================================
+   SEARCH
+   ===================================================== */
+
+.subject-delete-search {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.subject-delete-input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.subject-delete-input-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.subject-delete-input-group input {
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.subject-delete-input-group input:focus {
+  border-color: #2563eb;
+}
+
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.subject-delete-search button {
+  height: 42px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 7px;
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.subject-delete-search button:hover {
+  background: #1d4ed8;
+}
+
+.subject-delete-search button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.subject-delete-search .subject-delete-clear {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+
+/* =====================================================
+   ALERTS
+   ===================================================== */
+
+.subject-delete-error {
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  background: #fee2e2;
+  color: #b91c1c;
+  border-radius: 7px;
+}
+
+.subject-delete-success {
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  background: #dcfce7;
+  color: #15803d;
+  border-radius: 7px;
+}
+
+
+/* =====================================================
+   RESULT
+   ===================================================== */
+
+.subject-delete-result {
+  margin-top: 25px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.subject-delete-result h3 {
+  margin: 0;
+  padding: 15px 18px;
+  background: #f8fafc;
+  color: #1f2937;
+}
+
+.subject-delete-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.subject-delete-details > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 18px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.subject-delete-details strong {
+  font-size: 12px;
+  color: #6b7280;
+  text-transform: uppercase;
+}
+
+.subject-delete-details span {
+  font-size: 14px;
+  color: #1f2937;
+}
+
+
+/* =====================================================
+   WARNING
+   ===================================================== */
+
+.subject-delete-warning {
+  margin: 20px;
+  padding: 12px 15px;
+  border-radius: 7px;
+  background: #fff7ed;
+  color: #c2410c;
+  font-size: 13px;
+}
+
+
+/* =====================================================
+   DELETE BUTTON
+   ===================================================== */
+
+.subject-delete-button {
+  margin: 0 20px 20px;
+  padding: 11px 22px;
+  border: none;
+  border-radius: 7px;
+  background: #dc2626;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.subject-delete-button:hover {
+  background: #b91c1c;
+}
+
+.subject-delete-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 650px) {
+
+  .subject-delete-page {
+    padding: 125px 10px 30px;
+  }
+
+  .subject-delete-container {
+    padding: 20px;
+  }
+
+  .subject-delete-search {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .subject-delete-search button {
+    width: 100%;
+  }
+
+  .subject-delete-details {
+    grid-template-columns: 1fr;
+  }
+
+  .subject-delete-button {
+    width: calc(100% - 40px);
+  }
+
+}

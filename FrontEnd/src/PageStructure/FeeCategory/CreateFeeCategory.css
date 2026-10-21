@@ -1,0 +1,206 @@
+
+/* =====================================================
+   CREATE FEE CATEGORY
+   ===================================================== */
+
+.fee-category-create-container {
+  width: 100%;
+  padding: 125px 25px 40px;
+  box-sizing: border-box;
+}
+
+.fee-category-create-card {
+  max-width: 700px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+}
+
+.fee-category-create-header {
+  margin-bottom: 25px;
+}
+
+.fee-category-create-header h2 {
+  margin: 0 0 6px;
+  font-size: 25px;
+}
+
+.fee-category-create-header p {
+  margin: 0;
+  color: #666;
+}
+
+.fee-category-create-form-group {
+  margin-bottom: 20px;
+}
+
+.fee-category-create-form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.fee-category-create-form-group label span {
+  color: red;
+}
+
+.fee-category-create-form-group input,
+.fee-category-create-form-group textarea,
+.fee-category-create-form-group select {
+  width: 100%;
+  padding: 11px 12px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  outline: none;
+}
+
+.fee-category-create-form-group input:focus,
+.fee-category-create-form-group textarea:focus,
+.fee-category-create-form-group select:focus {
+  border-color: #007bff;
+}
+
+.fee-category-create-form-group textarea {
+  resize: vertical;
+}
+
+.fee-category-create-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.fee-category-create-buttons button {
+  padding: 11px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.fee-category-create-submit {
+  background: #007bff;
+  color: white;
+}
+
+.fee-category-create-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.fee-category-create-reset {
+  background: #6c757d;
+  color: white;
+}
+
+.fee-category-create-success {
+  margin-bottom: 18px;
+  padding: 12px;
+  border-radius: 6px;
+  background: #d4edda;
+  color: #155724;
+}
+
+.fee-category-create-error {
+  margin-bottom: 18px;
+  padding: 12px;
+  border-radius: 6px;
+  background: #f8d7da;
+  color: #721c24;
+}
+
+@media (max-width: 600px) {
+  .fee-category-create-container {
+    padding: 15px;
+  }
+
+  .fee-category-create-card {
+    padding: 20px;
+  }
+
+  .fee-category-create-buttons {
+    flex-direction: column;
+  }
+}
+
+/* =====================================================
+   IS ACTIVE CHECKBOX (GREEN TICK WHEN ACTIVE, BLANK WHEN INACTIVE)
+   ===================================================== */
+
+.fee-category-checkbox-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background-color: #f8fafc;
+  border: 1px solid #d1d5db;
+  transition: all 0.2s ease;
+  width: auto;
+}
+
+.fee-category-checkbox-wrapper:hover {
+  background-color: #f1f5f9;
+  border-color: #9ca3af;
+}
+
+.fee-category-checkbox-wrapper:focus-visible {
+  outline: 2px solid #16a34a;
+  outline-offset: 2px;
+}
+
+.fee-category-custom-checkbox {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  border: 2px solid #cbd5e1;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.fee-category-custom-checkbox.active {
+  border-color: #16a34a;
+  background-color: #ffffff;
+}
+
+.fee-category-custom-checkbox.inactive {
+  border-color: #cbd5e1;
+  background-color: #ffffff;
+}
+
+.fee-category-green-tick {
+  color: #16a34a;
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fee-category-status-text {
+  font-size: 15px;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.fee-category-status-text.active {
+  color: #16a34a;
+}
+
+.fee-category-status-text.inactive {
+  color: #64748b;
+}
+
+

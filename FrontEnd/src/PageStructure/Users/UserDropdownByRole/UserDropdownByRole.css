@@ -1,0 +1,59 @@
+.user-role-dropdown-page {
+  min-height: calc(100vh - 52px);
+  padding: 140px;
+  background: #f1f5f9;
+}
+
+.user-role-dropdown-card {
+  max-width: 650px;
+  margin: auto;
+  padding: 30px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.user-role-dropdown-card h1 {
+  margin: 0;
+  color: #1e293b;
+}
+
+.user-role-dropdown-card > p {
+  color: #64748b;
+}
+
+.user-role-group {
+  display: flex;
+  flex-direction: column;
+  margin-top: 25px;
+}
+
+.user-role-group label {
+  margin-bottom: 7px;
+  color: #334155;
+  font-weight: 600;
+}
+
+.user-role-group select {
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  outline: none;
+}
+
+.user-role-dropdown-error {
+  margin-top: 20px;
+  padding: 12px;
+  background: #fee2e2;
+  color: #991b1b;
+  border-radius: 7px;
+}
+
+.no-role-users {
+  margin-top: 20px;
+  padding: 15px;
+  text-align: center;
+  background: #f8fafc;
+  color: #64748b;
+  border-radius: 7px;
+}

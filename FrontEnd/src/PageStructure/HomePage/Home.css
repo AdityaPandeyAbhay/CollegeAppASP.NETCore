@@ -1,0 +1,1028 @@
+/* =====================================================
+   HOME PAGE
+===================================================== */
+
+.home-page {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+
+/* =====================================================
+   HERO SECTION
+===================================================== */
+
+.hero-section {
+  position: relative;
+
+  /*
+    Navbar is fixed at 65px + PageNavigation 45px = 110px.
+    Start page content safely below it.
+  */
+  min-height: calc(100vh - 52px);
+  padding-top: 50px;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb7P-WOXiH2ivGNSZnbH44ZHrJO0qNQnPLLCcc3OXSqg&s=10");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+/* =====================================================
+   HERO OVERLAY
+===================================================== */
+
+.hero-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.78) 0%,
+      rgba(0, 0, 0, 0.55) 45%,
+      rgba(0, 0, 0, 0.20) 100%
+    );
+}
+
+
+/* =====================================================
+   HERO CONTENT
+===================================================== */
+
+.hero-content {
+  position: relative;
+
+  z-index: 2;
+
+  width: 90%;
+
+  max-width: 1150px;
+
+  margin: 0 auto;
+
+  padding: 90px 0 80px;
+
+  color: white;
+}
+
+
+.hero-small-title {
+  margin: 0 0 15px;
+
+  font-size: 18px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.5px;
+
+  color: #60a5fa;
+}
+
+
+.hero-content h1 {
+  margin: 0;
+
+  max-width: 700px;
+
+  font-size: clamp(42px, 6vw, 72px);
+
+  line-height: 1.1;
+
+  font-weight: 800;
+}
+
+
+.hero-content h1 span {
+  display: block;
+
+  color: #2196f3;
+}
+
+
+.hero-description {
+  max-width: 620px;
+
+  margin: 25px 0;
+
+  font-size: 18px;
+
+  line-height: 1.7;
+
+  color: #f3f4f6;
+}
+
+
+/* =====================================================
+   HERO BUTTONS
+===================================================== */
+
+.hero-buttons {
+  display: flex;
+
+  gap: 15px;
+
+  margin-top: 30px;
+}
+
+
+.hero-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  padding: 13px 22px;
+
+  border-radius: 6px;
+
+  text-decoration: none;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  transition: 0.25s ease;
+}
+
+
+.primary-button {
+  background-color: #2196f3;
+
+  color: white;
+}
+
+
+.primary-button:hover {
+  background-color: #1976d2;
+
+  transform: translateY(-2px);
+}
+
+
+.secondary-button {
+  background-color: transparent;
+
+  color: white;
+
+  border: 1px solid white;
+}
+
+
+.secondary-button:hover {
+  background-color: white;
+
+  color: #1f2937;
+
+  transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   NOTICE TICKER
+===================================================== */
+
+.notice-ticker-section {
+  position: relative;
+
+  z-index: 5;
+
+  margin-top: -35px;
+
+  padding: 0 20px;
+
+  background: transparent;
+}
+
+
+.notice-ticker {
+  max-width: 1100px;
+
+  min-height: 65px;
+
+  margin: auto;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 20px;
+
+  padding: 10px 15px;
+
+  background-color: rgb(238, 154, 154);
+
+  border-radius: 10px;
+
+  box-shadow:
+    0 5px 20px rgba(0, 0, 0, 0.12);
+
+  box-sizing: border-box;
+}
+
+
+.notice-label {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  min-width: 150px;
+
+  color: #03070c;
+
+  font-size: 14px;
+}
+
+
+.notice-megaphone {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 38px;
+
+  height: 38px;
+
+  min-width: 38px;
+
+  border-radius: 6px;
+
+  background-color: #e3f2fd;
+
+  font-size: 18px;
+}
+
+
+/* =====================================================
+   NOTICE SCROLL
+===================================================== */
+
+.notice-scroll-wrapper {
+  flex: 1;
+
+  min-width: 0;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+}
+
+
+.notice-scroll-content {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  animation:
+    noticeScroll 22s linear infinite;
+}
+
+
+.notice-scroll-content:hover {
+  animation-play-state: paused;
+}
+
+
+.notice-scroll-content a {
+  color: #374151;
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  white-space: nowrap;
+}
+
+
+.notice-scroll-content a:hover {
+  color: #1976d2;
+}
+
+
+.notice-scroll-content span {
+  color: #9ca3af;
+}
+
+
+@keyframes noticeScroll {
+
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+
+}
+
+
+/* =====================================================
+   NOTICE VIEW ALL
+===================================================== */
+
+.notice-view-all {
+  flex-shrink: 0;
+
+  color: #1976d2;
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+
+.notice-view-all:hover {
+  text-decoration: underline;
+}
+
+
+/* =====================================================
+   EDUCATION SECTION
+===================================================== */
+
+.education-section {
+  padding: 90px 20px 70px;
+
+  background-color: #ebdfdf;
+}
+
+
+/* =====================================================
+   SECTION HEADING
+===================================================== */
+
+.section-heading {
+  max-width: 750px;
+
+  margin: 0 auto 45px;
+
+  text-align: center;
+}
+
+
+.section-heading > span {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #1976d2;
+
+  font-size: 15px;
+
+  font-weight: 700;
+}
+
+
+.section-heading h2 {
+  margin: 0;
+
+  color: #172033;
+
+  font-size: 36px;
+
+  font-weight: 800;
+}
+
+
+.heading-line {
+  width: 55px;
+
+  height: 3px;
+
+  margin: 15px auto;
+
+  background-color: #2196f3;
+
+  border-radius: 5px;
+}
+
+
+.section-heading p {
+  margin: 0 auto;
+
+  max-width: 700px;
+
+  color: #3a3f47;
+
+  font-size: 16px;
+
+  line-height: 1.7;
+}
+
+
+/* =====================================================
+   EDUCATION CARDS
+===================================================== */
+
+.education-cards {
+  width: 100%;
+
+  max-width: 1100px;
+
+  margin: auto;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 25px;
+
+  box-sizing: border-box;
+}
+
+
+.education-card {
+  padding: 30px 22px;
+
+  text-align: center;
+
+  background-color: rgb(250, 212, 212);
+
+  border: 1px solid #f7ade0;
+
+  border-radius: 10px;
+
+  box-shadow:
+    0 3px 15px rgba(247, 177, 177, 0.05);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.education-card:hover {
+  transform: translateY(-7px);
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.10);
+}
+
+
+.education-icon {
+  width: 65px;
+
+  height: 65px;
+
+  margin: 0 auto 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background-color: #d7e0f0;
+
+  font-size: 28px;
+}
+
+
+.education-card h3 {
+  margin: 0 0 12px;
+
+  color: #0e131f;
+
+  font-size: 19px;
+}
+
+
+.education-card p {
+  margin: 0;
+
+  color: #222730;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+
+/* =====================================================
+   COLLEGE SECTION
+===================================================== */
+
+.college-section {
+  padding: 80px 20px;
+
+  background-color: #b3bee0;
+}
+
+
+/* =====================================================
+   COLLEGE INFORMATION
+===================================================== */
+
+.college-information {
+  width: 100%;
+
+  max-width: 1050px;
+
+  height: 230px;
+
+  margin: auto;
+
+  padding: 25px 30px;
+
+  overflow-y: auto;
+
+  background-color: rgba(248, 222, 222, 0.767);
+
+  border: 1px solid #f8beba;
+
+  border-radius: 10px;
+
+  box-shadow:
+    0 3px 15px rgba(0, 0, 0, 0.05);
+
+  box-sizing: border-box;
+}
+
+
+.college-information p {
+  margin: 0 0 18px;
+
+  color: #5556a0;
+
+  font-size: 15px;
+
+  line-height: 1.8;
+}
+
+
+.college-information p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* =====================================================
+   CUSTOM SCROLLBAR
+===================================================== */
+
+.college-information::-webkit-scrollbar {
+  width: 7px;
+}
+
+
+.college-information::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+
+  border-radius: 10px;
+}
+
+
+.college-information::-webkit-scrollbar-thumb {
+  background-color: #9ca3af;
+
+  border-radius: 10px;
+}
+
+
+.college-information::-webkit-scrollbar-thumb:hover {
+  background-color: #6b7280;
+}
+
+
+/* =====================================================
+   CALL TO ACTION
+===================================================== */
+
+.home-cta {
+  padding: 75px 20px;
+
+  background:
+    linear-gradient(
+      158deg,
+      #819ad2,
+      #293352,
+      #b9c8f4
+    );
+
+  color: white;
+
+  text-align: center;
+}
+
+
+.cta-content {
+  max-width: 750px;
+
+  margin: auto;
+}
+
+
+.cta-content h2 {
+  margin: 0 0 15px;
+
+  font-size: 34px;
+}
+
+
+.cta-content p {
+  margin: 0 0 25px;
+
+  color: #dbeafe;
+
+  font-size: 16px;
+
+  line-height: 1.6;
+}
+
+
+.cta-button {
+  display: inline-block;
+
+  padding: 12px 24px;
+
+  border-radius: 6px;
+
+  background-color: #64b0ee;
+
+  color: white;
+
+  text-decoration: none;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  transition: 0.25s ease;
+}
+
+
+.cta-button:hover {
+  background-color: #5aaef3;
+
+  transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+  .education-cards {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+
+  .notice-label {
+    min-width: auto;
+  }
+
+
+  .notice-view-all {
+    display: none;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  /* Hero */
+
+  .hero-section {
+
+    min-height: calc(100vh - 48px);
+
+    margin-top: 48px;
+
+    background-position: center;
+  }
+
+
+  .hero-content {
+
+    width: 100%;
+
+    padding: 55px 20px;
+
+    box-sizing: border-box;
+  }
+
+
+  .hero-small-title {
+
+    font-size: 14px;
+
+    margin-bottom: 12px;
+  }
+
+
+  .hero-content h1 {
+
+    font-size: clamp(
+      36px,
+      11vw,
+      52px
+    );
+
+    line-height: 1.1;
+  }
+
+
+  .hero-description {
+
+    margin: 20px 0;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+  }
+
+
+  /* Hero buttons */
+
+  .hero-buttons {
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 12px;
+
+    margin-top: 25px;
+  }
+
+
+  .hero-button {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    justify-content: center;
+  }
+
+
+  /* Notice */
+
+  .notice-ticker-section {
+
+    margin-top: -20px;
+
+    padding: 0 10px;
+  }
+
+
+  .notice-ticker {
+
+    gap: 10px;
+
+    min-height: 55px;
+
+    padding: 8px 10px;
+  }
+
+
+  .notice-label {
+
+    min-width: 38px;
+
+    flex-shrink: 0;
+  }
+
+
+  .notice-label strong {
+
+    display: none;
+  }
+
+
+  .notice-megaphone {
+
+    width: 36px;
+
+    height: 36px;
+
+    min-width: 36px;
+  }
+
+
+  .notice-scroll-content a {
+
+    font-size: 13px;
+  }
+
+
+  /* Education */
+
+  .education-section {
+
+    padding: 60px 15px 50px;
+  }
+
+
+  .section-heading {
+
+    margin-bottom: 35px;
+  }
+
+
+  .section-heading > span {
+
+    font-size: 14px;
+  }
+
+
+  .section-heading h2 {
+
+    font-size: 28px;
+
+    line-height: 1.25;
+  }
+
+
+  .section-heading p {
+
+    font-size: 14px;
+
+    line-height: 1.6;
+  }
+
+
+  .education-cards {
+
+    grid-template-columns: 1fr;
+
+    gap: 15px;
+  }
+
+
+  .education-card {
+
+    padding: 25px 20px;
+  }
+
+
+  /* College */
+
+  .college-section {
+
+    padding: 60px 15px;
+  }
+
+
+  .college-information {
+
+    height: 280px;
+
+    padding: 20px;
+  }
+
+
+  .college-information p {
+
+    font-size: 14px;
+
+    line-height: 1.7;
+  }
+
+
+  /* CTA */
+
+  .home-cta {
+
+    padding: 60px 20px;
+  }
+
+
+  .cta-content h2 {
+
+    font-size: 27px;
+
+    line-height: 1.3;
+  }
+
+
+  .cta-content p {
+
+    font-size: 14px;
+
+    line-height: 1.6;
+  }
+
+
+  .cta-button {
+
+    width: 100%;
+
+    box-sizing: border-box;
+  }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+
+  .hero-section {
+
+    min-height: calc(100vh - 46px);
+
+    margin-top: 46px;
+  }
+
+
+  .hero-content {
+
+    padding: 45px 16px;
+  }
+
+
+  .hero-content h1 {
+
+    font-size: 35px;
+  }
+
+
+  .hero-description {
+
+    font-size: 14px;
+  }
+
+
+  .notice-ticker-section {
+
+    padding: 0 7px;
+  }
+
+
+  .notice-ticker {
+
+    padding: 7px;
+  }
+
+
+  .education-section {
+
+    padding: 50px 12px 40px;
+  }
+
+
+  .section-heading h2 {
+
+    font-size: 25px;
+  }
+
+
+  .college-section {
+
+    padding: 50px 12px;
+  }
+
+
+  .college-information {
+
+    height: 260px;
+
+    padding: 16px;
+  }
+
+
+  .home-cta {
+
+    padding: 50px 15px;
+  }
+
+
+  .cta-content h2 {
+
+    font-size: 24px;
+  }
+
+}

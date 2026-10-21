@@ -1,0 +1,26 @@
+/* =====================================================
+   UPDATE ACADEMIC YEAR STYLES
+===================================================== */
+
+.academic-year-select-section {
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-bottom: 26px;
+}
+
+.academic-year-select-prompt {
+  padding: 40px 20px;
+  text-align: center;
+  background-color: #f8fafc;
+  border: 1.5px dashed #cbd5e1;
+  border-radius: 10px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.academic-year-select-prompt p {
+  margin: 0;
+}
+

@@ -1,0 +1,272 @@
+/* =====================================================
+   GET DEPARTMENT BY NAME
+===================================================== */
+
+.department-name-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 125px 30px 40px;
+  box-sizing: border-box;
+  background: #f5f7fb;
+}
+
+.department-name-container {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 35px;
+  box-sizing: border-box;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.department-name-header {
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.department-name-header h1 {
+  margin: 0 0 7px;
+  color: #1f2937;
+  font-size: 28px;
+}
+
+.department-name-header p {
+  margin: 0;
+  color: #6b7280;
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.department-name-search {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.department-name-input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.department-name-input-group label {
+  margin-bottom: 8px;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.department-name-input-group input {
+  height: 44px;
+  padding: 10px 13px;
+  box-sizing: border-box;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  outline: none;
+}
+
+.department-name-input-group input:focus {
+  border-color: #2563eb;
+}
+
+.department-name-search button {
+  height: 44px;
+  padding: 0 22px;
+  border: none;
+  border-radius: 7px;
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.department-name-search button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.department-name-search .department-name-reset {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+
+/* =====================================================
+   RESULTS
+===================================================== */
+
+.department-name-results h2 {
+  margin: 0 0 18px;
+  font-size: 20px;
+  color: #1f2937;
+}
+
+.department-name-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.department-name-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+}
+
+.department-name-table th {
+  padding: 13px;
+  background: #f3f4f6;
+  text-align: left;
+  color: #374151;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.department-name-table td {
+  padding: 12px;
+  border-top: 1px solid #e5e7eb;
+  color: #4b5563;
+  font-size: 13px;
+}
+
+.department-name-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.department-name-code {
+  font-weight: 700;
+  color: #2563eb !important;
+}
+
+.department-name-title {
+  font-weight: 600;
+  color: #111827 !important;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.department-name-active,
+.department-name-inactive {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.department-name-active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.department-name-inactive {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.department-name-empty {
+  padding: 40px;
+  text-align: center;
+  color: #6b7280;
+}
+
+
+/* =====================================================
+   POPUP
+===================================================== */
+
+.department-name-popup {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  z-index: 9999;
+  min-width: 320px;
+  max-width: 450px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px;
+  background: #ffffff;
+  border-left: 5px solid #dc2626;
+  border-radius: 8px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+}
+
+.department-name-popup-icon {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.department-name-popup-text {
+  flex: 1;
+  color: #374151;
+  font-size: 14px;
+}
+
+.department-name-popup button {
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .department-name-page {
+    padding: 125px 20px 40px;
+  }
+
+  .department-name-container {
+    padding: 22px;
+  }
+
+  .department-name-search {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .department-name-search button {
+    width: 100%;
+  }
+
+  .department-name-popup {
+    left: 15px;
+    right: 15px;
+    min-width: auto;
+  }
+
+}

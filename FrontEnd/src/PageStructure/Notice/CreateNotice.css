@@ -1,0 +1,495 @@
+
+/* =====================================================
+   CREATE NOTICE PAGE
+===================================================== */
+
+.notice-create-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 125px 30px 40px;
+  box-sizing: border-box;
+  background: #f5f7fb;
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.notice-create-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 35px;
+  border-radius: 12px;
+  box-sizing: border-box;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.notice-create-header {
+  margin-bottom: 30px;
+}
+
+.notice-create-header h1 {
+  margin: 0 0 10px;
+  font-size: 30px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.notice-create-header p {
+  margin: 0;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+
+/* =====================================================
+   NORMAL SUCCESS MESSAGE
+===================================================== */
+
+.notice-success {
+  margin-bottom: 20px;
+  padding: 14px 18px;
+  border-radius: 7px;
+  background: #ecfdf5;
+  border: 1px solid #10b981;
+  color: #047857;
+  font-size: 15px;
+}
+
+
+/* =====================================================
+   NORMAL ERROR MESSAGE
+===================================================== */
+
+.notice-error {
+  margin-bottom: 20px;
+  padding: 14px 18px;
+  border-radius: 7px;
+  background: #fef2f2;
+  border: 1px solid #ef4444;
+  color: #b91c1c;
+  font-size: 15px;
+}
+
+
+/* =====================================================
+   POPUP MESSAGE
+===================================================== */
+
+.notice-popup {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+
+  width: 380px;
+  max-width: calc(100vw - 40px);
+
+  min-height: 75px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 15px 18px;
+
+  border-radius: 10px;
+
+  z-index: 9999;
+
+  box-sizing: border-box;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.15);
+
+  animation:
+    notice-popup-slide-in 0.35s ease-out;
+}
+
+
+/* =====================================================
+   POPUP SUCCESS
+===================================================== */
+
+.notice-popup-success {
+  background: #ffffff;
+  border-left: 5px solid #10b981;
+}
+
+
+/* =====================================================
+   POPUP ERROR
+===================================================== */
+
+.notice-popup-error {
+  background: #ffffff;
+  border-left: 5px solid #ef4444;
+}
+
+
+/* =====================================================
+   POPUP ICON
+===================================================== */
+
+.notice-popup-icon {
+  width: 36px;
+  height: 36px;
+
+  min-width: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  margin-right: 13px;
+
+  font-size: 20px;
+  font-weight: 700;
+}
+
+
+/* SUCCESS ICON */
+
+.notice-popup-success .notice-popup-icon {
+  background: #d1fae5;
+  color: #047857;
+}
+
+
+/* ERROR ICON */
+
+.notice-popup-error .notice-popup-icon {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+
+/* =====================================================
+   POPUP CONTENT
+===================================================== */
+
+.notice-popup-content {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  min-width: 0;
+}
+
+.notice-popup-content strong {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.notice-popup-content span {
+  font-size: 14px;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+
+/* SUCCESS TEXT */
+
+.notice-popup-success .notice-popup-content strong {
+  color: #047857;
+}
+
+
+/* ERROR TEXT */
+
+.notice-popup-error .notice-popup-content strong {
+  color: #b91c1c;
+}
+
+
+/* =====================================================
+   POPUP CLOSE BUTTON
+===================================================== */
+
+.notice-popup-close {
+  width: 30px;
+  height: 30px;
+
+  margin-left: 10px;
+
+  border: none;
+  background: transparent;
+
+  color: #6b7280;
+
+  font-size: 24px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  border-radius: 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: 0.2s;
+}
+
+.notice-popup-close:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+
+/* =====================================================
+   POPUP ANIMATION
+===================================================== */
+
+@keyframes notice-popup-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.notice-create-form {
+  width: 100%;
+}
+
+.notice-form-group {
+  margin-bottom: 24px;
+}
+
+
+/* =====================================================
+   LABEL
+===================================================== */
+
+.notice-form-group label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  color: #374151;
+}
+
+.notice-form-group label span {
+  color: #dc2626;
+  margin-left: 4px;
+}
+
+
+/* =====================================================
+   INPUT
+===================================================== */
+
+.notice-form-group input[type="text"],
+.notice-form-group textarea,
+.notice-form-group input[type="file"] {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.notice-form-group input[type="text"],
+.notice-form-group textarea {
+  padding: 13px 14px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+
+  font-size: 15px;
+
+  outline: none;
+
+  background: #ffffff;
+  color: #111827;
+}
+
+.notice-form-group textarea {
+  resize: vertical;
+  min-height: 150px;
+  font-family: inherit;
+}
+
+
+/* =====================================================
+   INPUT FOCUS
+===================================================== */
+
+.notice-form-group input[type="text"]:focus,
+.notice-form-group textarea:focus {
+  border-color: #2563eb;
+
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+
+/* =====================================================
+   FILE INPUT
+===================================================== */
+
+.notice-form-group input[type="file"] {
+  padding: 11px;
+
+  border: 1px dashed #9ca3af;
+  border-radius: 7px;
+
+  background: #f9fafb;
+
+  cursor: pointer;
+}
+
+.notice-form-group small {
+  display: block;
+
+  margin-top: 7px;
+
+  color: #6b7280;
+}
+
+
+/* =====================================================
+   SELECTED FILE
+===================================================== */
+
+.notice-selected-file {
+  margin-top: 12px;
+
+  padding: 12px 15px;
+
+  background: #eff6ff;
+
+  border: 1px solid #bfdbfe;
+
+  border-radius: 7px;
+
+  color: #1e40af;
+
+  word-break: break-word;
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.notice-form-actions {
+  display: flex;
+
+  gap: 12px;
+
+  margin-top: 30px;
+}
+
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+.notice-btn {
+  border: none;
+
+  border-radius: 7px;
+
+  padding: 13px 24px;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.notice-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+/* =====================================================
+   PRIMARY BUTTON
+===================================================== */
+
+.notice-btn-primary {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.notice-btn-primary:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+
+/* =====================================================
+   SECONDARY BUTTON
+===================================================== */
+
+.notice-btn-secondary {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.notice-btn-secondary:hover:not(:disabled) {
+  background: #d1d5db;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .notice-create-page {
+    padding: 125px 20px 40px;
+  }
+
+  .notice-create-container {
+    padding: 25px 20px;
+  }
+
+  .notice-create-header h1 {
+    font-size: 25px;
+  }
+
+  .notice-form-actions {
+    flex-direction: column;
+  }
+
+  .notice-btn {
+    width: 100%;
+  }
+
+  /* Popup on mobile */
+
+  .notice-popup {
+    top: 15px;
+    right: 15px;
+    left: 15px;
+
+    width: auto;
+    max-width: none;
+  }
+}

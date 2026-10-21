@@ -1,0 +1,90 @@
+/* =====================================================
+   DELETE ACADEMIC YEAR STYLES & MODAL
+===================================================== */
+
+.academic-year-warning-banner {
+  background-color: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #92400e;
+  padding: 14px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* =====================================================
+   MODAL OVERLAY & CARD
+===================================================== */
+
+.academic-year-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.academic-year-modal-card {
+  background: #ffffff;
+  border-radius: 14px;
+  max-width: 480px;
+  width: 100%;
+  padding: 32px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: modalScale 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.academic-year-modal-warning-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background-color: #fef2f2;
+  color: #ef4444;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px auto;
+  border: 2px solid #fee2e2;
+}
+
+.academic-year-modal-card h2 {
+  margin: 0 0 10px 0;
+  font-size: 20px;
+  color: #1e293b;
+  font-weight: 700;
+}
+
+.academic-year-modal-card p {
+  margin: 0 0 24px 0;
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.academic-year-modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+

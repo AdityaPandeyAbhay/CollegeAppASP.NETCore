@@ -1,0 +1,209 @@
+/* =====================================================
+   GET SUBJECT BY CODE
+   ===================================================== */
+
+.subject-code-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 125px 25px 40px;
+  background: #f5f7fb;
+  box-sizing: border-box;
+}
+
+.subject-code-container {
+  width: 100%;
+  max-width: 950px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.subject-code-header {
+  margin-bottom: 25px;
+}
+
+.subject-code-header h2 {
+  margin: 0 0 6px;
+  color: #1f2937;
+}
+
+.subject-code-header p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+
+/* =====================================================
+   SEARCH
+   ===================================================== */
+
+.subject-code-search {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.subject-code-input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.subject-code-input-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.subject-code-input-group input {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.subject-code-input-group input:focus {
+  border-color: #2563eb;
+}
+
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.subject-code-search button {
+  height: 42px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 7px;
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.subject-code-search button:hover {
+  background: #1d4ed8;
+}
+
+.subject-code-search button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.subject-code-search .subject-code-clear {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.subject-code-search .subject-code-clear:hover {
+  background: #d1d5db;
+}
+
+
+/* =====================================================
+   ERROR
+   ===================================================== */
+
+.subject-code-error {
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border-radius: 7px;
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+
+/* =====================================================
+   RESULT
+   ===================================================== */
+
+.subject-code-result {
+  margin-top: 25px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.subject-code-result h3 {
+  margin: 0;
+  padding: 15px 18px;
+  background: #f8fafc;
+  color: #1f2937;
+  font-size: 18px;
+}
+
+.subject-code-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.subject-code-grid > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 18px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.subject-code-grid strong {
+  font-size: 12px;
+  color: #6b7280;
+  text-transform: uppercase;
+}
+
+.subject-code-grid span {
+  color: #1f2937;
+  font-size: 14px;
+}
+
+.subject-code-description {
+  grid-column: 1 / -1;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 650px) {
+
+  .subject-code-page {
+    padding: 125px 10px 30px;
+  }
+
+  .subject-code-container {
+    padding: 20px;
+  }
+
+  .subject-code-search {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .subject-code-search button {
+    width: 100%;
+  }
+
+  .subject-code-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .subject-code-description {
+    grid-column: auto;
+  }
+
+}

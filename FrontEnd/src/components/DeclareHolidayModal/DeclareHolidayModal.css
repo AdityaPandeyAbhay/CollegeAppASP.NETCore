@@ -1,0 +1,518 @@
+.ath-holiday-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  padding: 20px;
+  box-sizing: border-box;
+  animation: athFadeIn 0.2s ease-out;
+}
+
+.ath-holiday-modal-container {
+  background: #ffffff;
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 640px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.25), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  animation: athScaleUp 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Modal Header */
+.ath-modal-header {
+  padding: 1.1rem 1.4rem;
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ath-modal-title-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ath-holiday-icon-circle {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  background: #fef3c7;
+  color: #d97706;
+  font-size: 1.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1.5px solid #fde68a;
+  box-shadow: 0 1px 3px rgba(217, 119, 6, 0.15);
+}
+
+.ath-modal-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.ath-modal-subtitle {
+  margin: 0.2rem 0 0 0;
+  font-size: 0.75rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.ath-modal-close-btn {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ath-modal-close-btn:hover {
+  background: #fee2e2;
+  color: #dc2626;
+  border-color: #fca5a5;
+}
+
+/* Modal Body */
+.ath-modal-body {
+  padding: 1.25rem 1.4rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* New Declaration Form Card */
+.ath-holiday-form-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.85rem;
+  padding: 1.15rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.ath-holiday-form-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 0.5rem;
+}
+
+.ath-form-header-title {
+  font-weight: 800;
+  color: #1e293b;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ath-holiday-feedback-banner {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #047857;
+  padding: 0.55rem 0.85rem;
+  border-radius: 0.5rem;
+  font-size: 0.775rem;
+  font-weight: 700;
+  margin-bottom: 0.85rem;
+  animation: athFadeIn 0.2s ease-out;
+}
+
+.ath-holiday-feedback-banner.error {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+
+.ath-holiday-grid-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+
+.ath-holiday-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.ath-holiday-field.full-width {
+  grid-column: span 2;
+}
+
+.ath-holiday-field label {
+  font-size: 0.725rem;
+  font-weight: 800;
+  color: #334155;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.ath-holiday-dual-date-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: all 0.15s ease;
+}
+
+.ath-holiday-dual-date-box:focus-within {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.ath-holiday-date-text-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #0f172a;
+  outline: none;
+}
+
+.ath-holiday-picker-btn {
+  width: 2.2rem;
+  height: 2.2rem;
+  border: none;
+  background: #f1f5f9;
+  cursor: pointer;
+  padding: 0;
+  margin-right: 3px;
+  border-radius: 0.35rem;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.ath-holiday-picker-btn:hover {
+  background: #e2e8f0;
+}
+
+.ath-native-date-hidden {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.ath-holiday-quick-chips {
+  display: flex;
+  gap: 0.35rem;
+  margin-top: 0.35rem;
+}
+
+.ath-quick-chip {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ath-quick-chip:hover {
+  background: #dbeafe;
+  color: #1d4ed8;
+  border-color: #bfdbfe;
+}
+
+.ath-holiday-type-radios {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.ath-type-chip {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.35rem;
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 0.5rem;
+  font-size: 0.725rem;
+  font-weight: 700;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.ath-type-chip input {
+  display: none;
+}
+
+.ath-type-chip.active-h {
+  background: #fef3c7;
+  color: #b45309;
+  border-color: #f59e0b;
+}
+
+.ath-type-chip.active-wo {
+  background: #e0f2fe;
+  color: #0369a1;
+  border-color: #38bdf8;
+}
+
+.ath-type-chip.active-exam {
+  background: #f3e8ff;
+  color: #7e22ce;
+  border-color: #c084fc;
+}
+
+.ath-holiday-text-input,
+.ath-holiday-select {
+  width: 100%;
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 0.5rem;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: #0f172a;
+  outline: none;
+  box-sizing: border-box;
+  transition: all 0.15s ease;
+}
+
+.ath-holiday-text-input:focus,
+.ath-holiday-select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.ath-btn-add-holiday {
+  width: 100%;
+  margin-top: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.65rem 1rem;
+  font-size: 0.825rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.25);
+  transition: all 0.15s ease;
+}
+
+.ath-btn-add-holiday:hover {
+  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+  transform: translateY(-1px);
+}
+
+/* Declared Holidays List */
+.ath-declared-list-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.ath-declared-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ath-declared-list-title {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+}
+
+.ath-declared-count-tag {
+  background: #e2e8f0;
+  color: #334155;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 12px;
+}
+
+.ath-declared-empty {
+  padding: 1.5rem;
+  text-align: center;
+  background: #f8fafc;
+  border: 1.5px dashed #cbd5e1;
+  border-radius: 0.75rem;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.ath-declared-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 220px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.ath-declared-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  transition: transform 0.1s ease;
+}
+
+.ath-declared-item:hover {
+  border-color: #cbd5e1;
+}
+
+.ath-declared-item.holiday-h {
+  border-left: 4.5px solid #f59e0b;
+}
+
+.ath-declared-item.holiday-wo {
+  border-left: 4.5px solid #38bdf8;
+}
+
+.ath-declared-item.holiday-exam {
+  border-left: 4.5px solid #a855f7;
+}
+
+.ath-declared-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ath-declared-type-pill {
+  font-size: 0.675rem;
+  font-weight: 800;
+  padding: 0.25rem 0.55rem;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+
+.ath-declared-type-pill.pill-h {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.ath-declared-type-pill.pill-wo {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.ath-declared-type-pill.pill-exam {
+  background: #f3e8ff;
+  color: #7e22ce;
+}
+
+.ath-declared-title {
+  font-size: 0.825rem;
+  margin: 0;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.ath-declared-meta {
+  margin: 0.15rem 0 0 0;
+  font-size: 0.725rem;
+  color: #64748b;
+}
+
+.ath-btn-delete-holiday {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  border-radius: 0.5rem;
+  padding: 0.35rem 0.55rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  transition: all 0.15s ease;
+}
+
+.ath-btn-delete-holiday:hover {
+  background: #dc2626;
+  color: #ffffff;
+  border-color: #dc2626;
+}
+
+/* Modal Footer */
+.ath-modal-footer {
+  padding: 0.9rem 1.4rem;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ath-btn-primary {
+  background: #0f172a;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.55rem 1.2rem;
+  font-size: 0.825rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ath-btn-primary:hover {
+  background: #1e293b;
+}
+
+@keyframes athFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes athScaleUp {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

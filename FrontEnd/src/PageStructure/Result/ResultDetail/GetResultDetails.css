@@ -1,0 +1,1356 @@
+/* =====================================================
+   GET RESULT DETAILS STYLES
+   Cascading Academic Hierarchy & Student Result Details
+   ===================================================== */
+
+.get-result-details-container {
+  width: 100%;
+  padding: 125px 25px 40px;
+  background-color: #f8fafc;
+  min-height: calc(100vh - 70px);
+  box-sizing: border-box;
+}
+
+.get-result-details-card {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 32px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+  box-sizing: border-box;
+}
+
+/* =====================================================
+   HEADER & TOOLS
+   ===================================================== */
+
+.get-result-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.get-result-details-header .header-text h2 {
+  margin: 0 0 6px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.get-result-details-header .header-text p {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.header-tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toggle-manual-search-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 16px;
+  background: #f1f5f9;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.toggle-manual-search-btn:hover {
+  background: #e2e8f0;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+/* =====================================================
+   FEEDBACK ERROR
+   ===================================================== */
+
+.get-result-details-error {
+  margin-bottom: 20px;
+  padding: 14px 18px;
+  border-radius: 8px;
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* =====================================================
+   DIRECT RESULT ID SEARCH DRAWER
+   ===================================================== */
+
+.get-result-details-manual-search {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  margin-bottom: 24px;
+  padding: 16px 20px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.manual-search-input-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.manual-search-input-wrap label {
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.manual-search-input-wrap label span {
+  color: #ef4444;
+}
+
+.manual-search-input-wrap input {
+  height: 42px;
+  padding: 0 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  outline: none;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.manual-search-input-wrap input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.manual-search-btn {
+  height: 42px;
+  padding: 0 22px;
+  border: none;
+  border-radius: 6px;
+  background: #1e293b;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.manual-search-btn:hover:not(:disabled) {
+  background: #0f172a;
+}
+
+.manual-search-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   5-STAGE CASCADING FILTER SECTION
+   ===================================================== */
+
+.get-result-details-filters {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 22px;
+  margin-bottom: 28px;
+}
+
+.filter-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.filter-section-title {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.filter-section-title span {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.filter-section-title small {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.reset-filters-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 14px;
+  background: #ffffff;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.reset-filters-btn:hover {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-color: #fca5a5;
+}
+
+.get-result-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+}
+
+.filter-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-col label {
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.filter-col label span {
+  color: #ef4444;
+}
+
+.filter-col select {
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #1e293b;
+  font-size: 13px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.filter-col select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.filter-col select:disabled {
+  background-color: #e2e8f0;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   PLACEHOLDER & LOADING STATES
+   ===================================================== */
+
+.get-result-details-placeholder {
+  text-align: center;
+  padding: 50px 24px;
+  background: #f8fafc;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.placeholder-icon {
+  font-size: 44px;
+  margin-bottom: 12px;
+}
+
+.get-result-details-placeholder h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.get-result-details-placeholder p {
+  margin: 0 auto;
+  max-width: 540px;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.upload-redirect-btn {
+  margin-top: 18px;
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.upload-redirect-btn:hover {
+  background: #1d4ed8;
+}
+
+.get-result-details-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 60px 20px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.get-result-details-loading .spinner {
+  width: 38px;
+  height: 38px;
+  border: 3px solid #e2e8f0;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: resDetSpin 0.8s linear infinite;
+}
+
+@keyframes resDetSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =====================================================
+   RESULT CARD OUTPUT
+   ===================================================== */
+
+.get-result-details-output {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+/* Student Banner */
+.result-student-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 22px 24px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.banner-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.banner-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+}
+
+.banner-details h3 {
+  margin: 0 0 6px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.banner-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.banner-chips span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #ffffff;
+  padding: 4px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #334155;
+}
+
+.banner-chips span strong {
+  color: #0f172a;
+}
+
+.banner-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.print-action-btn,
+.download-pdf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.print-action-btn {
+  background: #ffffff;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+}
+
+.print-action-btn:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.download-pdf-btn {
+  background: #1e293b;
+  color: #ffffff;
+  border: 1px solid #1e293b;
+}
+
+.download-pdf-btn:hover:not(:disabled) {
+  background: #0f172a;
+}
+
+.download-pdf-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   MULTI-EXAM SELECTOR TABS
+   ===================================================== */
+
+.result-exam-tabs-wrapper {
+  padding: 14px 24px;
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.tabs-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.result-exam-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.exam-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 20px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #334155;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.exam-tab-btn:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.exam-tab-btn.active {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+}
+
+.tab-exam-name {
+  font-weight: 600;
+}
+
+.tab-exam-pct {
+  padding: 2px 7px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.08);
+  font-size: 11px;
+}
+
+.exam-tab-btn.active .tab-exam-pct {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+/* =====================================================
+   SUMMARY SCORE METRICS
+   ===================================================== */
+
+.get-result-details-summary {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.summary-card {
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-right: 1px solid #e2e8f0;
+  background: #ffffff;
+}
+
+.summary-card:last-child {
+  border-right: none;
+}
+
+.summary-card span {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.summary-card strong {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.summary-card.highlight {
+  background: #f0fdf4;
+}
+
+.summary-card.highlight strong {
+  color: #15803d;
+}
+
+.grade-highlight {
+  color: #2563eb !important;
+}
+
+.status-pill {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.status-pill.pass {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-pill.fail {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* =====================================================
+   METADATA GRID
+   ===================================================== */
+
+.get-result-details-main {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  border-bottom: 1px solid #e2e8f0;
+  background: #fafafa;
+}
+
+.get-result-details-main > div {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-right: 1px solid #e2e8f0;
+}
+
+.get-result-details-main > div:last-child {
+  border-right: none;
+}
+
+.get-result-details-main span {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.get-result-details-main strong {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.text-success {
+  color: #15803d !important;
+}
+
+.text-warning {
+  color: #b45309 !important;
+}
+
+/* =====================================================
+   SUBJECT DETAILS TABLE
+   ===================================================== */
+
+.get-result-details-subjects {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.subjects-table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.subjects-table-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.badge-count {
+  display: inline-flex;
+  padding: 3px 8px;
+  border-radius: 12px;
+  background: #e2e8f0;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.get-result-details-table {
+  overflow-x: auto;
+}
+
+.get-result-details-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.get-result-details-table th,
+.get-result-details-table td {
+  padding: 12px 18px;
+  border-bottom: 1px solid #edf2f7;
+  font-size: 13px;
+  text-align: left;
+}
+
+.get-result-details-table th {
+  background: #f1f5f9;
+  color: #334155;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  font-size: 12px;
+}
+
+.get-result-details-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.grade-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-weight: 700;
+  font-size: 12px;
+  border: 1px solid #bfdbfe;
+}
+
+.table-totals-row td {
+  background: #f8fafc;
+  border-top: 2px solid #cbd5e1;
+  font-size: 14px;
+}
+
+/* =====================================================
+   STORED PDF BAR
+   ===================================================== */
+
+.get-result-details-pdf {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 18px 24px;
+  background: #f0fdf4;
+  border-top: 1px solid #bbf7d0;
+}
+
+.pdf-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pdf-info span {
+  font-size: 14px;
+  font-weight: 700;
+  color: #166534;
+}
+
+.pdf-info small {
+  font-size: 12px;
+  color: #15803d;
+}
+
+.view-pdf-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border-radius: 6px;
+  background: #16a34a;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.view-pdf-link:hover {
+  background: #15803d;
+}
+
+/* =====================================================
+   RESPONSIVE LAYOUT
+   ===================================================== */
+
+@media (max-width: 1024px) {
+  .get-result-details-summary {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .get-result-details-main {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .get-result-details-container {
+    padding: 16px 10px;
+  }
+
+  .get-result-details-card {
+    padding: 20px 14px;
+  }
+
+  .result-student-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .banner-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .get-result-details-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .get-result-details-main {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .get-result-details-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .get-result-details-main {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =====================================================
+   PRINT STYLES
+   ===================================================== */
+
+@media print {
+  body {
+    background: #ffffff !important;
+  }
+
+  .get-result-details-container {
+    padding: 0 !important;
+    background: #ffffff !important;
+  }
+
+  .get-result-details-card {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .get-result-details-header,
+  .get-result-details-manual-search,
+  .get-result-details-filters,
+  .result-exam-tabs-wrapper,
+  .banner-actions,
+  .get-result-details-pdf {
+    display: none !important;
+  }
+
+  .get-result-details-output {
+    border: 1px solid #333 !important;
+    box-shadow: none !important;
+  }
+
+  .result-student-banner {
+    background: #ffffff !important;
+    border-bottom: 2px solid #333 !important;
+  }
+
+  .get-result-details-table th {
+    background: #f0f0f0 !important;
+    color: #000 !important;
+  }
+}
+
+/* =====================================================
+   EXAM TABS ENHANCEMENTS (DECLARED & NOT DECLARED)
+   ===================================================== */
+.exam-tab-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+}
+
+.exam-tab-card:hover {
+  border-color: #3b82f6;
+  background: #f8fafc;
+  transform: translateY(-1px);
+}
+
+.exam-tab-card.active {
+  border-color: #2563eb;
+  background: #eff6ff;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.18);
+}
+
+.tab-card-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tab-card-main .tab-exam-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.tab-card-main .tab-exam-pct {
+  font-size: 11px;
+  font-weight: 600;
+  color: #059669;
+}
+
+.tab-pdf-open-btn {
+  background: #dc2626;
+  color: #ffffff;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.tab-pdf-open-btn:hover {
+  background: #b91c1c;
+  transform: scale(1.04);
+}
+
+.exam-tab-card.not-declared {
+  background: #fef2f2;
+  border: 1px dashed #fca5a5;
+  cursor: default;
+  opacity: 0.85;
+}
+
+.exam-tab-card.not-declared:hover {
+  transform: none;
+  border-color: #f87171;
+  background: #fee2e2;
+}
+
+.tab-not-declared-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  color: #991b1b;
+  background: #fee2e2;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+
+/* =====================================================
+   EXAMINATION RESULT PDF CARDS GALLERY (IN A ROW)
+   Cards show prominent PDF logo with Exam Name detail below.
+   Clicking anywhere on each card opens the related PDF in a new tab.
+   ===================================================== */
+.exam-pdf-gallery-section {
+  margin-bottom: 28px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 22px 24px;
+}
+
+.gallery-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.gallery-title-box .gallery-title {
+  margin: 0 0 4px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gallery-title-box .gallery-subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.gallery-stats-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 20px;
+  border: 1px solid #bfdbfe;
+}
+
+/* CARDS ROW */
+.exam-pdf-cards-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: stretch;
+}
+
+/* EXAM CARD BASE */
+.exam-pdf-card {
+  flex: 0 1 calc(25% - 14px);
+  min-width: 220px;
+  max-width: 290px;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+  .exam-pdf-card {
+    flex: 0 1 calc(33.333% - 12px);
+  }
+}
+
+@media (max-width: 768px) {
+  .exam-pdf-card {
+    flex: 0 1 calc(50% - 9px);
+  }
+}
+
+@media (max-width: 500px) {
+  .exam-pdf-card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
+/* TOP STATUS BAR ON CARD */
+.card-top-bar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.status-badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.status-badge.status-pass {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.status-badge.status-fail {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.status-badge.status-pending {
+  background: #f1f5f9;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+}
+
+.active-badge {
+  font-size: 10px;
+  font-weight: 700;
+  background: #2563eb;
+  color: #ffffff;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+/* DECLARED CARD HOVER & ACTIVE */
+.exam-pdf-card.declared-card {
+  border-color: #cbd5e1;
+}
+
+.exam-pdf-card.declared-card:hover {
+  border-color: #dc2626;
+  box-shadow: 0 8px 24px rgba(220, 38, 38, 0.15);
+  transform: translateY(-4px);
+}
+
+.exam-pdf-card.declared-card.selected-card {
+  border-color: #2563eb;
+  background: linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%);
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.18);
+}
+
+/* PROMINENT PDF LOGO */
+.card-pdf-icon-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.pdf-logo-box {
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fef2f2;
+  border-radius: 12px;
+  border: 1px solid #fecaca;
+  transition: transform 0.2s ease;
+}
+
+.exam-pdf-card.declared-card:hover .pdf-logo-box {
+  transform: scale(1.08);
+  background: #fee2e2;
+}
+
+.pdf-open-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  background: #dc2626;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(220, 38, 38, 0.25);
+  transition: all 0.2s ease;
+}
+
+.exam-pdf-card.declared-card:hover .pdf-open-badge {
+  background: #b91c1c;
+  transform: scale(1.05);
+}
+
+/* EXAM NAME DETAIL BELOW PDF LOGO */
+.card-exam-details {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.card-exam-name {
+  margin: 0 0 10px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.3;
+}
+
+.card-exam-metrics {
+  width: 100%;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.metric-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #475569;
+}
+
+.metric-label {
+  font-weight: 500;
+}
+
+.metric-value {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.metric-value.pct-highlight {
+  color: #059669;
+  font-weight: 700;
+}
+
+.metric-value.grade-highlight {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.card-footer-hint {
+  margin-top: auto;
+  font-size: 11px;
+  font-weight: 600;
+  color: #dc2626;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* UNDECLARED CARD */
+.exam-pdf-card.not-declared-card {
+  border: 1.5px dashed #cbd5e1;
+  background: #f8fafc;
+  opacity: 0.85;
+}
+
+.exam-pdf-card.not-declared-card:hover {
+  opacity: 1;
+  border-color: #94a3b8;
+  background: #f1f5f9;
+}
+
+.pdf-logo-box.muted {
+  background: #f1f5f9;
+  border-color: #e2e8f0;
+}
+
+.card-not-declared-pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #991b1b;
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+
+.card-not-declared-subtext {
+  margin: 0;
+  font-size: 11px;
+  color: #64748b;
+}
+
+.placeholder-no-exams-box {
+  text-align: center;
+  padding: 36px 20px;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.placeholder-no-exams-box .placeholder-icon {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.placeholder-no-exams-box h4 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #334155;
+}
+
+.placeholder-no-exams-box p {
+  margin: 0 0 16px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+
+/* CARD DOWNLOAD RESULT BUTTON */
+.card-download-btn {
+  width: 100%;
+  margin: 10px 0 6px;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-shadow: 0 2px 6px rgba(220, 38, 38, 0.28);
+  transition: all 0.2s ease;
+}
+
+.card-download-btn:hover {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  box-shadow: 0 4px 10px rgba(220, 38, 38, 0.4);
+  transform: translateY(-1px);
+}
+
+.card-download-btn:active {
+  transform: translateY(0);
+}
+
+/* RANK BADGE PILL ON CARD */
+.rank-badge-pill {
+  font-size: 10px;
+  font-weight: 700;
+  background: #fef3c7;
+  color: #b45309;
+  border: 1px solid #fde68a;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.rank-highlight {
+  color: #d97706 !important;
+  font-weight: 700;
+}

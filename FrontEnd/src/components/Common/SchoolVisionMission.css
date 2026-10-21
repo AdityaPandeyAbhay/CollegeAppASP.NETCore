@@ -1,0 +1,331 @@
+/* =====================================================
+   SCHOOL VISION, MISSION & VALUES STYLES
+   Responsive, Modern, Elegant Card System
+===================================================== */
+
+.school-vm-container {
+  margin-top: 32px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  animation: fadeInVM 0.4s ease-out;
+}
+
+@keyframes fadeInVM {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =====================================================
+   HERO BANNER
+===================================================== */
+.school-vm-banner {
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%);
+  color: #ffffff;
+  padding: 28px 32px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.25), 0 8px 10px -6px rgba(37, 99, 235, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.school-vm-banner::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.school-vm-banner-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(8px);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.school-vm-emblem {
+  font-size: 1.1rem;
+}
+
+.school-vm-motto {
+  margin: 0 0 8px 0;
+  font-size: 1.55rem;
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: -0.3px;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.school-vm-tagline {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #e0e7ff;
+  max-width: 820px;
+}
+
+/* =====================================================
+   VISION & MISSION DUAL CARDS
+===================================================== */
+.school-vm-duo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.school-vm-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 26px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.school-vm-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.08);
+  border-color: #cbd5e1;
+}
+
+.school-vm-card.vision-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #3b82f6, #06b6d4);
+}
+
+.school-vm-card.mission-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #10b981, #3b82f6);
+}
+
+.school-vm-card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.school-vm-icon-bubble {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+.vision-icon {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+}
+
+.mission-icon {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+}
+
+.school-vm-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #64748b;
+  margin-bottom: 2px;
+}
+
+.school-vm-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.school-vm-body {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #334155;
+  margin: 0 0 20px 0;
+  flex-grow: 1;
+}
+
+.school-vm-card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 14px;
+  border-top: 1px dashed #e2e8f0;
+}
+
+.school-vm-pill {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #334155;
+}
+
+/* =====================================================
+   CORE PILLARS SECTION
+===================================================== */
+.school-vm-pillars-section {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 26px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.school-vm-pillars-header {
+  margin-bottom: 20px;
+}
+
+.school-vm-pillars-title {
+  margin: 0 0 4px 0;
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.school-vm-pillars-subtitle {
+  font-size: 0.88rem;
+  color: #64748b;
+}
+
+.school-vm-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.school-vm-pillar-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 18px 16px;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.school-vm-pillar-card:hover {
+  background: #ffffff;
+  border-color: #3b82f6;
+  box-shadow: 0 8px 16px -4px rgba(59, 130, 246, 0.12);
+  transform: translateY(-2px);
+}
+
+.school-vm-pillar-icon {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+}
+
+.school-vm-pillar-name {
+  margin: 0 0 6px 0;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.school-vm-pillar-desc {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: #64748b;
+}
+
+/* =====================================================
+   CAMPUS COMMITMENT STRIP
+===================================================== */
+.school-vm-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.school-vm-strip-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.school-vm-strip-icon {
+  font-size: 1rem;
+}
+
+.school-vm-strip-divider {
+  color: #cbd5e1;
+}
+
+/* =====================================================
+   RESPONSIVENESS
+===================================================== */
+@media (max-width: 768px) {
+  .school-vm-banner {
+    padding: 20px;
+  }
+  .school-vm-motto {
+    font-size: 1.3rem;
+  }
+  .school-vm-duo-grid {
+    grid-template-columns: 1fr;
+  }
+  .school-vm-pillars-grid {
+    grid-template-columns: 1fr;
+  }
+  .school-vm-strip {
+    justify-content: flex-start;
+  }
+  .school-vm-strip-divider {
+    display: none;
+  }
+}

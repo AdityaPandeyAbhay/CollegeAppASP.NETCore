@@ -1,0 +1,124 @@
+/* =====================================================
+   GET FEE STRUCTURE BY ID
+   ===================================================== */
+
+.fee-structure-id-container {
+  width: 100%;
+  padding: 125px 25px 40px;
+  box-sizing: border-box;
+}
+
+.fee-structure-id-card {
+  max-width: 900px;
+  margin: auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+}
+
+.fee-structure-id-card h2 {
+  margin-top: 0;
+}
+
+.fee-structure-id-search {
+  display: flex;
+  align-items: flex-end;
+  gap: 15px;
+  margin: 25px 0;
+}
+
+.fee-structure-id-search > div {
+  flex: 1;
+}
+
+.fee-structure-id-search label {
+  display: block;
+  margin-bottom: 7px;
+  font-weight: 600;
+}
+
+.fee-structure-id-search input {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.fee-structure-id-search button {
+  padding: 11px 22px;
+  border: none;
+  border-radius: 6px;
+  background: #1976d2;
+  color: white;
+  cursor: pointer;
+}
+
+.fee-structure-id-search button:disabled {
+  opacity: 0.6;
+}
+
+.fee-structure-error {
+  padding: 12px;
+  border-radius: 6px;
+  background: #fdeaea;
+  color: #c62828;
+}
+
+.fee-structure-details {
+  margin-top: 25px;
+}
+
+.fee-structure-details h3 {
+  margin-bottom: 18px;
+}
+
+.fee-structure-details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.fee-structure-details-grid > div {
+  padding: 15px;
+  background: #f7f8fa;
+  border-radius: 7px;
+}
+
+.fee-structure-details-grid strong,
+.fee-structure-details-grid span {
+  display: block;
+}
+
+.fee-structure-details-grid strong {
+  margin-bottom: 6px;
+  color: #555;
+}
+
+.fee-structure-details-grid .full-width {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 650px) {
+  .fee-structure-id-container {
+    padding: 15px;
+  }
+
+  .fee-structure-id-card {
+    padding: 20px;
+  }
+
+  .fee-structure-id-search {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .fee-structure-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fee-structure-details-grid .full-width {
+    grid-column: auto;
+  }
+}

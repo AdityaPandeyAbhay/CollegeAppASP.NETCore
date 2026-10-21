@@ -1,0 +1,216 @@
+
+/* =====================================================
+   UPDATE FEE CATEGORY
+   ===================================================== */
+
+.fee-category-update-container {
+  width: 100%;
+  padding: 125px 25px 40px;
+  box-sizing: border-box;
+}
+
+.fee-category-update-card {
+  max-width: 750px;
+  margin: 0 auto;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+}
+
+.fee-category-update-header {
+  margin-bottom: 25px;
+}
+
+.fee-category-update-header h2 {
+  margin: 0 0 6px;
+}
+
+.fee-category-update-header p {
+  margin: 0;
+  color: #666;
+}
+
+.fee-category-update-search {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.fee-category-update-input-group {
+  flex: 1;
+}
+
+.fee-category-update-input-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.fee-category-update-input-group input,
+.fee-category-update-input-group select {
+  width: 100%;
+  padding: 11px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  background-color: #ffffff;
+  color: #333;
+}
+
+.fee-category-update-input-group select {
+  cursor: pointer;
+}
+
+.fee-category-update-input-group select:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.fee-category-update-search-btn {
+  padding: 11px 20px;
+  border: none;
+  border-radius: 6px;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.fee-category-update-search-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.fee-category-checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.fee-category-custom-checkbox {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  transition: all 0.2s ease-in-out;
+}
+
+.fee-category-custom-checkbox.active {
+  border-color: #28a745;
+}
+
+.fee-category-green-tick {
+  color: #28a745;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.fee-category-status-text {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.fee-category-status-text.active {
+  color: #28a745;
+}
+
+.fee-category-status-text.inactive {
+  color: #6c757d;
+}
+
+.fee-category-update-form-group {
+  margin-bottom: 20px;
+}
+
+.fee-category-update-form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.fee-category-update-form-group label span {
+  color: red;
+}
+
+.fee-category-update-form-group input,
+.fee-category-update-form-group textarea,
+.fee-category-update-form-group select {
+  width: 100%;
+  padding: 11px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.fee-category-update-form-group textarea {
+  resize: vertical;
+}
+
+.fee-category-update-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.fee-category-update-buttons button {
+  padding: 11px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.fee-category-update-submit {
+  background: #28a745;
+  color: white;
+}
+
+.fee-category-update-clear {
+  background: #6c757d;
+  color: white;
+}
+
+.fee-category-update-success {
+  margin-bottom: 18px;
+  padding: 12px;
+  background: #d4edda;
+  color: #155724;
+  border-radius: 6px;
+}
+
+.fee-category-update-error {
+  margin-bottom: 18px;
+  padding: 12px;
+  background: #f8d7da;
+  color: #721c24;
+  border-radius: 6px;
+}
+
+@media (max-width: 600px) {
+  .fee-category-update-container {
+    padding: 15px;
+  }
+
+  .fee-category-update-card {
+    padding: 20px;
+  }
+
+  .fee-category-update-search {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .fee-category-update-buttons {
+    flex-direction: column;
+  }
+}
+

@@ -1,0 +1,243 @@
+/* =====================================================
+   UPDATE CLASS PAGE
+   ===================================================== */
+
+.update-class-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 125px 25px 40px;
+  background: #f5f7fb;
+  box-sizing: border-box;
+}
+
+.update-class-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.update-class-header {
+  margin-bottom: 22px;
+}
+
+.update-class-header h1 {
+  margin: 0 0 7px;
+  color: #1f2937;
+  font-size: 28px;
+}
+
+.update-class-header p {
+  margin: 0;
+  color: #6b7280;
+}
+
+/* =====================================================
+   SEARCH
+   ===================================================== */
+
+.update-class-search {
+  display: flex;
+  gap: 10px;
+  padding: 18px;
+  margin-bottom: 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+}
+
+.update-class-search input {
+  flex: 1;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  outline: none;
+}
+
+.update-class-search input:focus {
+  border-color: #2563eb;
+}
+
+.update-class-search button {
+  padding: 12px 22px;
+  border: none;
+  border-radius: 7px;
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.update-class-search button:hover {
+  background: #1d4ed8;
+}
+
+.update-class-search button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   MESSAGES
+   ===================================================== */
+
+.update-class-error,
+.update-class-success {
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border-radius: 7px;
+}
+
+.update-class-error {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.update-class-success {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+/* =====================================================
+   FORM
+   ===================================================== */
+
+.update-class-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+}
+
+.update-class-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.update-class-full {
+  grid-column: 1 / -1;
+}
+
+.update-class-field label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.update-class-field label span {
+  color: #dc2626;
+  margin-left: 4px;
+}
+
+.update-class-field input,
+.update-class-field select,
+.update-class-field textarea {
+  width: 100%;
+  padding: 11px 13px;
+  box-sizing: border-box;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  outline: none;
+  font-size: 14px;
+  background: #ffffff;
+}
+
+.update-class-field input:focus,
+.update-class-field select:focus,
+.update-class-field textarea:focus {
+  border-color: #2563eb;
+}
+
+.update-class-field textarea {
+  resize: vertical;
+}
+
+/* =====================================================
+   ACTIVE
+   ===================================================== */
+
+.update-class-active {
+  display: flex;
+  align-items: center;
+  padding-top: 27px;
+}
+
+.update-class-active label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.update-class-active input {
+  width: 17px;
+  height: 17px;
+}
+
+/* =====================================================
+   ACTIONS
+   ===================================================== */
+
+.update-class-actions {
+  grid-column: 1 / -1;
+  margin-top: 5px;
+}
+
+.update-class-actions button {
+  padding: 11px 23px;
+  border: none;
+  border-radius: 7px;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.update-class-actions button:hover {
+  background: #1d4ed8;
+}
+
+.update-class-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 700px) {
+
+  .update-class-form {
+    grid-template-columns: 1fr;
+  }
+
+  .update-class-full,
+  .update-class-actions {
+    grid-column: auto;
+  }
+
+}
+
+@media (max-width: 550px) {
+
+  .update-class-page {
+    padding: 125px 10px 30px;
+  }
+
+  .update-class-search {
+    flex-direction: column;
+  }
+
+}

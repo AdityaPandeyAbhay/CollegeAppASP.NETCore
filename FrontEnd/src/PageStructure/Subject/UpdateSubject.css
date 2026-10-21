@@ -1,0 +1,277 @@
+/* =====================================================
+   UPDATE SUBJECT
+   ===================================================== */
+
+.subject-update-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 125px 25px 40px;
+  background: #f5f7fb;
+  box-sizing: border-box;
+}
+
+.subject-update-container {
+  width: 100%;
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.subject-update-header {
+  margin-bottom: 25px;
+}
+
+.subject-update-header h2 {
+  margin: 0 0 6px;
+  color: #1f2937;
+}
+
+.subject-update-header p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+
+/* =====================================================
+   SEARCH
+   ===================================================== */
+
+.subject-update-search {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.subject-update-search-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.subject-update-search-field label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.subject-update-search-field input {
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.subject-update-search-field input:focus {
+  border-color: #2563eb;
+}
+
+.subject-update-search button {
+  height: 42px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 7px;
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.subject-update-search button:hover {
+  background: #1d4ed8;
+}
+
+.subject-update-search button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.subject-update-search .subject-update-clear {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+
+/* =====================================================
+   ALERTS
+   ===================================================== */
+
+.subject-update-error {
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  background: #fee2e2;
+  color: #b91c1c;
+  border-radius: 7px;
+}
+
+.subject-update-success {
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  background: #dcfce7;
+  color: #15803d;
+  border-radius: 7px;
+}
+
+
+/* =====================================================
+   FORM
+   ===================================================== */
+
+.subject-update-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.subject-update-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.subject-update-field label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.subject-update-field label span {
+  color: #dc2626;
+  margin-left: 3px;
+}
+
+.subject-update-field input,
+.subject-update-field select,
+.subject-update-field textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  outline: none;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.subject-update-field textarea {
+  resize: vertical;
+}
+
+.subject-update-field input:focus,
+.subject-update-field select:focus,
+.subject-update-field textarea:focus {
+  border-color: #2563eb;
+}
+
+.subject-update-full {
+  grid-column: 1 / -1;
+}
+
+
+/* =====================================================
+   CHECKBOX
+   ===================================================== */
+
+.subject-update-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.subject-update-checkbox label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.subject-update-checkbox input {
+  width: 17px;
+  height: 17px;
+}
+
+
+/* =====================================================
+   ACTIONS
+   ===================================================== */
+
+.subject-update-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  margin-top: 5px;
+}
+
+.subject-update-submit {
+  padding: 11px 22px;
+  border: none;
+  border-radius: 7px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.subject-update-submit:hover {
+  background: #1d4ed8;
+}
+
+.subject-update-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 700px) {
+
+  .subject-update-page {
+    padding: 125px 10px 30px;
+  }
+
+  .subject-update-container {
+    padding: 20px;
+  }
+
+  .subject-update-search {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .subject-update-search button {
+    width: 100%;
+  }
+
+  .subject-update-form {
+    grid-template-columns: 1fr;
+  }
+
+  .subject-update-full {
+    grid-column: auto;
+  }
+
+  .subject-update-actions {
+    grid-column: auto;
+  }
+
+  .subject-update-submit {
+    width: 100%;
+  }
+
+}

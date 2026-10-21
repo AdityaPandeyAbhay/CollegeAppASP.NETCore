@@ -1,0 +1,317 @@
+/* =========================================
+   LOGIN PAGE
+========================================= */
+
+.login-page {
+  min-height: calc(100vh - 52px);
+
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 90px 20px 40px;
+
+  box-sizing: border-box;
+
+  background-color: #e3edfa;
+}
+
+
+/* =========================================
+   LOGIN FORM
+========================================= */
+
+.login-form {
+  width: 100%;
+
+  max-width: 430px;
+
+  padding: 40px 45px;
+
+  box-sizing: border-box;
+
+  background: rgba(182, 220, 247, 0.95);
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.12);
+
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
+
+.login-form h1 {
+  margin: 0 0 30px;
+
+  text-align: center;
+
+  font-size: 3.5rem;
+
+  font-weight: 700;
+
+  font-family: "Cormorant Infant", serif;
+
+  background: linear-gradient(
+    90deg,
+    #c8a24f,
+    #8b6b1f
+  );
+
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+  background-clip: text;
+}
+
+
+/* =========================================
+   LABEL
+========================================= */
+
+.login-form label {
+  display: block;
+
+  margin-top: 18px;
+
+  margin-bottom: 7px;
+
+  color: #004a99;
+
+  font-size: 15px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================
+   INPUT
+========================================= */
+
+.login-form input {
+  width: 100%;
+
+  padding: 13px 15px;
+
+  border: 1px solid #b8cce5;
+
+  border-radius: 9px;
+
+  outline: none;
+
+  background: #ffffff;
+
+  color: #333;
+
+  font-size: 15px;
+
+  transition: 0.25s ease;
+}
+
+.login-form input::placeholder {
+  color: #8a96a6;
+}
+
+.login-form input:focus {
+  border-color: #0066cc;
+
+  box-shadow:
+    0 0 0 3px rgba(0, 102, 204, 0.12);
+}
+
+
+/* =========================================
+   LOGIN BUTTON
+========================================= */
+
+.login-form button {
+  width: 100%;
+
+  margin-top: 28px;
+
+  padding: 13px 18px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: linear-gradient(
+    90deg,
+    #06397c,
+    #033a61
+  );
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+
+  box-shadow:
+    0 5px 15px rgba(3, 58, 97, 0.2);
+}
+
+.login-form button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(3, 58, 97, 0.3);
+}
+
+.login-form button:active {
+  transform: translateY(0);
+}
+
+.login-form button:disabled {
+  opacity: 0.7;
+
+  cursor: not-allowed;
+
+  transform: none;
+
+  box-shadow: none;
+}
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+.login-error {
+  padding: 12px 14px;
+
+  margin-bottom: 18px;
+
+  border-left: 4px solid #dc2626;
+
+  border-radius: 8px;
+
+  background: #fee2e2;
+
+  color: #b91c1c;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   ANIMATION
+========================================= */
+
+@keyframes fadeIn {
+
+  from {
+    opacity: 0;
+
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 800px) {
+
+  .login-page {
+    padding: 125px 20px 30px;
+  }
+
+  .login-form {
+    max-width: 420px;
+
+    padding: 35px;
+  }
+
+  .login-form h1 {
+    font-size: 3rem;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .login-page {
+    min-height: calc(100vh - 48px);
+
+    padding: 80px 15px 15px;
+  }
+
+  .login-form {
+    width: 100%;
+
+    max-width: 400px;
+
+    padding: 28px 20px;
+
+    border-radius: 14px;
+  }
+
+  .login-form h1 {
+    font-size: 2.5rem;
+
+    margin-bottom: 22px;
+  }
+
+  .login-form label {
+    font-size: 14px;
+  }
+
+  .login-form input {
+    padding: 12px 13px;
+
+    font-size: 14px;
+  }
+
+  .login-form button {
+    padding: 12px;
+
+    font-size: 15px;
+  }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+
+  .login-page {
+    padding: 125px 10px 25px;
+  }
+
+  .login-form {
+    padding: 25px 16px;
+  }
+
+  .login-form h1 {
+    font-size: 2.2rem;
+  }
+}

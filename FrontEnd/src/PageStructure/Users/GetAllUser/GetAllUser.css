@@ -1,0 +1,259 @@
+.all-user-page {
+
+  min-height: calc(100vh - 52px);
+
+  padding: 125px 30px 40px;
+
+  background: #f1f5f9;
+
+}
+
+
+/* ================= HEADER ================= */
+
+.all-user-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 25px;
+
+}
+
+
+.all-user-header h1 {
+
+  margin: 0;
+
+  color: #1e293b;
+
+}
+
+
+.all-user-header p {
+
+  margin-top: 6px;
+
+  color: #64748b;
+
+}
+
+
+/* ================= SEARCH ================= */
+
+.all-user-search {
+
+  width: 250px;
+
+  padding: 11px;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 7px;
+
+  outline: none;
+
+}
+
+
+.all-user-search:focus {
+
+  border-color: #64748b;
+
+}
+
+
+/* ================= CARD ================= */
+
+.all-user-card {
+
+  background: white;
+
+  border-radius: 10px;
+
+  padding: 25px;
+
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+
+}
+
+
+/* ================= TABLE ================= */
+
+.all-user-table-container {
+
+  overflow-x: auto;
+
+}
+
+
+.all-user-table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+}
+
+
+.all-user-table th,
+.all-user-table td {
+
+  padding: 14px;
+
+  text-align: left;
+
+  border-bottom: 1px solid #e2e8f0;
+
+}
+
+
+.all-user-table th {
+
+  background: #f8fafc;
+
+  color: #475569;
+
+  font-weight: 600;
+
+}
+
+
+.all-user-table td {
+
+  color: #334155;
+
+}
+
+
+/* ================= ROW HOVER ================= */
+
+.all-user-table tbody tr:hover {
+
+  background: #f8fafc;
+
+}
+
+
+/* ================= STATUS ================= */
+
+.all-user-active,
+.all-user-inactive {
+
+  display: inline-block;
+
+  padding: 5px 10px;
+
+  border-radius: 20px;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+}
+
+
+.all-user-active {
+
+  background: #dcfce7;
+
+  color: #166534;
+
+}
+
+
+.all-user-inactive {
+
+  background: #fee2e2;
+
+  color: #991b1b;
+
+}
+
+
+/* ================= ROLE BADGE ================= */
+
+.all-user-role-badge {
+
+  display: inline-block;
+
+  padding: 4px 10px;
+
+  border-radius: 6px;
+
+  font-size: 12.5px;
+
+  font-weight: 600;
+
+  background: #ede9fe;
+
+  color: #6d28d9;
+
+  border: 1px solid #ddd6fe;
+
+}
+
+
+/* ================= LOADING ================= */
+
+.all-user-loading,
+.all-user-empty {
+
+  padding: 40px;
+
+  text-align: center;
+
+  color: #64748b;
+
+}
+
+
+/* ================= ERROR ================= */
+
+.all-user-error {
+
+  margin-bottom: 20px;
+
+  padding: 12px;
+
+  background: #fee2e2;
+
+  color: #991b1b;
+
+  border-radius: 7px;
+
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 700px) {
+
+  .all-user-page {
+
+    padding: 125px 15px 40px;
+
+  }
+
+
+  .all-user-header {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 15px;
+
+  }
+
+
+  .all-user-search {
+
+    width: 100%;
+
+  }
+
+}

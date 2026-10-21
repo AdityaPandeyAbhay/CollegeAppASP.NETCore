@@ -1,0 +1,206 @@
+/* =====================================================
+   GET CLASS BY CODE
+   ===================================================== */
+
+.get-class-code-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 125px 25px 40px;
+  background: #f5f7fb;
+  box-sizing: border-box;
+}
+
+.get-class-code-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.get-class-code-header {
+  margin-bottom: 22px;
+}
+
+.get-class-code-header h1 {
+  margin: 0 0 7px;
+  color: #1f2937;
+  font-size: 28px;
+}
+
+.get-class-code-header p {
+  margin: 0;
+  color: #6b7280;
+}
+
+/* =====================================================
+   SEARCH
+   ===================================================== */
+
+.get-class-code-search {
+  display: flex;
+  gap: 10px;
+  background: #ffffff;
+  padding: 18px;
+  border-radius: 10px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+  margin-bottom: 20px;
+}
+
+.get-class-code-search input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  outline: none;
+  font-size: 14px;
+}
+
+.get-class-code-search input:focus {
+  border-color: #2563eb;
+}
+
+.get-class-code-search button {
+  padding: 12px 22px;
+  border: none;
+  border-radius: 7px;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.get-class-code-search button:hover {
+  background: #1d4ed8;
+}
+
+.get-class-code-search button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   ERROR
+   ===================================================== */
+
+.get-class-code-error {
+  padding: 12px 15px;
+  border-radius: 7px;
+  margin-bottom: 20px;
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+/* =====================================================
+   CARD
+   ===================================================== */
+
+.get-class-code-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+}
+
+.get-class-code-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.get-class-code-card-header h2 {
+  margin: 0;
+  color: #1f2937;
+  font-size: 21px;
+}
+
+/* =====================================================
+   STATUS
+   ===================================================== */
+
+.get-class-code-status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.get-class-code-status.active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.get-class-code-status.inactive {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* =====================================================
+   DETAILS
+   ===================================================== */
+
+.get-class-code-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.get-class-code-item {
+  padding: 15px;
+  background: #f9fafb;
+  border-radius: 8px;
+}
+
+.get-class-code-item.full {
+  grid-column: 1 / -1;
+}
+
+.get-class-code-item label {
+  display: block;
+  margin-bottom: 7px;
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.get-class-code-item p {
+  margin: 0;
+  color: #1f2937;
+  font-size: 14px;
+  word-break: break-word;
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 600px) {
+
+  .get-class-code-page {
+    padding: 125px 10px 30px;
+  }
+
+  .get-class-code-search {
+    flex-direction: column;
+  }
+
+  .get-class-code-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .get-class-code-item.full {
+    grid-column: auto;
+  }
+
+  .get-class-code-card-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+}

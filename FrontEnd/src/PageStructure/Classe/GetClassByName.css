@@ -1,0 +1,226 @@
+/* =====================================================
+   GET CLASS BY NAME
+   ===================================================== */
+
+.get-class-name-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 125px 25px 40px;
+  background: #f5f7fb;
+  box-sizing: border-box;
+}
+
+.get-class-name-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.get-class-name-header {
+  margin-bottom: 22px;
+}
+
+.get-class-name-header h1 {
+  margin: 0 0 7px;
+  font-size: 28px;
+  color: #1f2937;
+}
+
+.get-class-name-header p {
+  margin: 0;
+  color: #6b7280;
+}
+
+/* =====================================================
+   SEARCH
+   ===================================================== */
+
+.get-class-name-search {
+  display: flex;
+  gap: 10px;
+  padding: 18px;
+  margin-bottom: 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+}
+
+.get-class-name-search input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  outline: none;
+  font-size: 14px;
+}
+
+.get-class-name-search input:focus {
+  border-color: #2563eb;
+}
+
+.get-class-name-search button {
+  padding: 12px 22px;
+  border: none;
+  border-radius: 7px;
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.get-class-name-search button:hover {
+  background: #1d4ed8;
+}
+
+.get-class-name-search button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   ERROR / EMPTY
+   ===================================================== */
+
+.get-class-name-error {
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border-radius: 7px;
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.get-class-name-empty {
+  padding: 40px;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 10px;
+  color: #6b7280;
+}
+
+/* =====================================================
+   RESULTS
+   ===================================================== */
+
+.get-class-name-results {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+}
+
+.get-class-name-result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.get-class-name-result-header h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #1f2937;
+}
+
+.get-class-name-result-header span {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+/* =====================================================
+   TABLE
+   ===================================================== */
+
+.get-class-name-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.get-class-name-table {
+  width: 100%;
+  min-width: 750px;
+  border-collapse: collapse;
+}
+
+.get-class-name-table th {
+  padding: 13px;
+  background: #f3f4f6;
+  border-bottom: 1px solid #d1d5db;
+  text-align: left;
+  font-size: 13px;
+  color: #374151;
+}
+
+.get-class-name-table td {
+  padding: 13px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.get-class-name-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* =====================================================
+   CODE
+   ===================================================== */
+
+.get-class-name-code {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 5px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* =====================================================
+   STATUS
+   ===================================================== */
+
+.get-class-name-status {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.get-class-name-status.active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.get-class-name-status.inactive {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 600px) {
+
+  .get-class-name-page {
+    padding: 125px 10px 30px;
+  }
+
+  .get-class-name-search {
+    flex-direction: column;
+  }
+
+  .get-class-name-result-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+}

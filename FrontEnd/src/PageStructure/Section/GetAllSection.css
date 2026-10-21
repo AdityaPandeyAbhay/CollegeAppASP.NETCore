@@ -1,0 +1,246 @@
+/* =====================================================
+   GET ALL SECTION PAGE
+   ===================================================== */
+
+.get-all-section-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 125px 25px 40px;
+  background: #f5f7fb;
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   CONTAINER
+   ===================================================== */
+
+.get-all-section-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 25px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.get-all-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.get-all-section-header h1 {
+  margin: 0 0 7px;
+  font-size: 28px;
+  color: #1f2937;
+}
+
+.get-all-section-header p {
+  margin: 0;
+  color: #6b7280;
+}
+
+
+/* =====================================================
+   REFRESH
+   ===================================================== */
+
+.get-all-section-refresh {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 7px;
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.get-all-section-refresh:hover {
+  background: #1d4ed8;
+}
+
+.get-all-section-refresh:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+/* =====================================================
+   ERROR
+   ===================================================== */
+
+.get-all-section-error {
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border-radius: 7px;
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+
+/* =====================================================
+   LOADING
+   ===================================================== */
+
+.get-all-section-loading {
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  color: #6b7280;
+}
+
+.get-all-section-spinner {
+  width: 42px;
+  height: 42px;
+  border: 4px solid #e5e7eb;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: getAllSectionSpin 0.8s linear infinite;
+}
+
+@keyframes getAllSectionSpin {
+
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+
+}
+
+
+/* =====================================================
+   EMPTY
+   ===================================================== */
+
+.get-all-section-empty {
+  padding: 60px 20px;
+  text-align: center;
+  color: #6b7280;
+}
+
+
+/* =====================================================
+   TABLE
+   ===================================================== */
+
+.get-all-section-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.get-all-section-table {
+  width: 100%;
+  min-width: 950px;
+  border-collapse: collapse;
+}
+
+.get-all-section-table th,
+.get-all-section-table td {
+  padding: 13px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.get-all-section-table th {
+  background: #f8fafc;
+  color: #374151;
+  font-size: 13px;
+}
+
+.get-all-section-table td {
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.get-all-section-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+
+/* =====================================================
+   CODE
+   ===================================================== */
+
+.get-all-section-code {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 5px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+
+/* =====================================================
+   STATUS
+   ===================================================== */
+
+.get-all-section-status {
+  display: inline-block;
+  padding: 4px 9px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.get-all-section-status.active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.get-all-section-status.inactive {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+.get-all-section-footer {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #e5e7eb;
+  color: #4b5563;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 700px) {
+
+  .get-all-section-page {
+    padding: 125px 10px 30px;
+  }
+
+  .get-all-section-container {
+    padding: 18px;
+  }
+
+  .get-all-section-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+}

@@ -1,0 +1,154 @@
+/* =====================================================
+   TEACHER DASHBOARD STYLES
+   Clean, organized layout consistent with application standards
+   ===================================================== */
+
+/* Sidebar Dropdown Button */
+.sidebar-dropdown-button,
+.teacher-dropdown-btn {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100% !important;
+  cursor: pointer !important;
+}
+
+.dropdown-icon,
+.teacher-dropdown-icon {
+  font-size: 12px;
+  margin-left: auto;
+  opacity: 0.85;
+  transition: transform 0.2s ease;
+}
+
+/* Sidebar Dropdown Sub-menu Box */
+.sidebar-dropdown-box,
+.teacher-dropdown-box {
+  width: calc(100% - 16px);
+  margin: 2px 8px 8px 8px;
+  padding: 6px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #d9dee7;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  box-sizing: border-box;
+}
+
+.sidebar-dropdown-box button,
+.teacher-dropdown-box button {
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: transparent;
+  color: #26344d;
+  text-align: left;
+  font-size: 13.5px;
+  cursor: pointer;
+  transition: background-color 0.18s ease, padding-left 0.18s ease;
+}
+
+.sidebar-dropdown-box button:hover,
+.teacher-dropdown-box button:hover {
+  background-color: #eef2f7;
+  padding-left: 14px;
+  color: #1e40af;
+}
+
+/* Teacher Class Banner */
+.teacher-class-banner {
+  margin: 15px 0 25px;
+  padding: 16px 20px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.2);
+}
+
+.teacher-class-banner-assigned {
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+}
+
+.teacher-class-banner-unassigned {
+  background: linear-gradient(135deg, #475569 0%, #64748b 100%);
+}
+
+.teacher-banner-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.teacher-banner-icon {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.teacher-banner-title {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.teacher-banner-subtitle {
+  margin: 0;
+  font-size: 13.5px;
+  opacity: 0.92;
+}
+
+.teacher-banner-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(4px);
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+/* Section Groupings in Main Content */
+.teacher-section-title {
+  margin: 25px 0 14px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 6px;
+}
+
+/* Interactive Card Enhancements */
+.teacher-dashboard-card {
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  border: 1px solid #e2e8f0;
+}
+
+.teacher-dashboard-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.1);
+  border-color: #93c5fd;
+}
+
+.teacher-card-badge {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #2563eb;
+  background: #eff6ff;
+  padding: 3px 8px;
+  border-radius: 4px;
+}

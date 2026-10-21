@@ -1,0 +1,194 @@
+/* =====================================================
+   RESULT BATCH LIST
+   ===================================================== */
+
+.result-batch-list-page {
+  width: 100%;
+  padding: 125px 20px 40px;
+  box-sizing: border-box;
+}
+
+.result-batch-list-card {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 25px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.result-batch-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.result-batch-list-header h2 {
+  margin: 0 0 6px;
+  font-size: 25px;
+}
+
+.result-batch-list-header p {
+  margin: 0;
+  color: #666666;
+  font-size: 14px;
+}
+
+.result-refresh-button {
+  height: 40px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 6px;
+  background: #1976d2;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.result-refresh-button:hover {
+  background: #1565c0;
+}
+
+/* =====================================================
+   ALERTS
+   ===================================================== */
+
+.result-list-error,
+.result-list-success {
+  padding: 12px 15px;
+  border-radius: 7px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.result-list-error {
+  background: #ffe8e8;
+  color: #c62828;
+}
+
+.result-list-success {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+/* =====================================================
+   TABLE
+   ===================================================== */
+
+.result-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.result-batch-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+.result-batch-table th,
+.result-batch-table td {
+  padding: 13px 12px;
+  border-bottom: 1px solid #eeeeee;
+  text-align: left;
+  font-size: 14px;
+}
+
+.result-batch-table th {
+  background: #f5f7fa;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.result-batch-table tbody tr:hover {
+  background: #fafafa;
+}
+
+/* =====================================================
+   STATUS
+   ===================================================== */
+
+.result-status {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.result-status.published {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.result-status.pending {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+.already-published {
+  color: #2e7d32;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* =====================================================
+   PUBLISH
+   ===================================================== */
+
+.publish-button {
+  border: none;
+  border-radius: 5px;
+  padding: 8px 13px;
+  background: #2e7d32;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.publish-button:hover {
+  background: #256628;
+}
+
+.publish-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   EMPTY / LOADING
+   ===================================================== */
+
+.result-empty,
+.result-batch-loading {
+  padding: 50px 20px;
+  text-align: center;
+  color: #777777;
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 650px) {
+
+  .result-batch-list-page {
+    padding: 125px 10px 30px;
+  }
+
+  .result-batch-list-card {
+    padding: 18px 12px;
+  }
+
+  .result-batch-list-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .result-refresh-button {
+    width: 100%;
+  }
+}

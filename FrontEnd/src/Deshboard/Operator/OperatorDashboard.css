@@ -1,0 +1,334 @@
+/* =====================================================
+   OPERATOR SIDEBAR PROFILE HEADER & CIRCLE AVATAR
+===================================================== */
+
+.operator-sidebar-profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 16px 12px 14px 12px;
+  margin: 0 10px 14px 10px;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.operator-sidebar-profile-header h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #f8fafc;
+  letter-spacing: 0.5px;
+}
+
+.operator-panel-subtitle {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-top: 2px;
+  margin-bottom: 12px;
+  font-weight: 500;
+  max-width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Round Circle Avatar Container */
+.operator-circle-avatar-container {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 10px auto;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.operator-circle-avatar-container:hover {
+  transform: scale(1.08);
+}
+
+.operator-round-circle-img {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2.5px solid #38bdf8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.45);
+  display: block;
+}
+
+.operator-round-circle-placeholder {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2.5px solid #38bdf8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.45);
+}
+
+/* Online Indicator Dot */
+.avatar-online-dot {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  background-color: #22c55e;
+  border: 2px solid #0f172a;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(34, 197, 94, 0.8);
+}
+
+.operator-view-profile-btn {
+  width: 100%;
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 4px;
+}
+
+.operator-view-profile-btn:hover {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+}
+
+/* Logout Button In Sidebar */
+.sidebar-logout-wrapper {
+  margin-top: auto;
+  padding: 15px 10px;
+}
+
+.sidebar-logout-btn {
+  width: 100%;
+  padding: 10px 14px;
+  background-color: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.sidebar-logout-btn:hover {
+  background-color: #dc2626;
+  color: #ffffff;
+}
+
+/* =====================================================
+   MAIN DASHBOARD WELCOME BANNER & WIDGET
+===================================================== */
+
+.operator-dashboard-welcome-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);
+  color: #ffffff;
+  padding: 24px 30px;
+  border-radius: 16px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 25px rgba(30, 58, 138, 0.2);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.welcome-text-side h1 {
+  margin: 0 0 6px 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.welcome-text-side p {
+  margin: 0;
+  font-size: 14px;
+  color: #bfdbfe;
+  max-width: 580px;
+  line-height: 1.5;
+}
+
+.operator-quick-profile-widget {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 10px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.operator-quick-profile-widget:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateY(-2px);
+}
+
+.widget-avatar-circle {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #ffffff;
+  flex-shrink: 0;
+}
+
+.widget-avatar-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.widget-avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  background: #38bdf8;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.widget-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.widget-user-info strong {
+  font-size: 15px;
+  color: #ffffff;
+}
+
+.widget-user-info span {
+  font-size: 12px;
+  color: #93c5fd;
+  font-weight: 500;
+}
+
+/* =====================================================
+   SIDEBAR DROPDOWN BUTTON
+===================================================== */
+
+.sidebar-dropdown-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* =====================================================
+   DROPDOWN ARROW
+===================================================== */
+
+.dropdown-icon {
+  font-size: 12px;
+  margin-left: auto;
+  transition: transform 0.2s ease;
+}
+
+/* =====================================================
+   DROPDOWN BOX
+===================================================== */
+
+.sidebar-dropdown-box {
+  width: calc(100% - 20px);
+  margin: 2px 10px 10px 10px;
+  padding: 8px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #d9dee7;
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.12),
+    0 8px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-sizing: border-box;
+}
+
+/* =====================================================
+   DROPDOWN ITEMS
+===================================================== */
+
+.sidebar-dropdown-box button {
+  width: 100%;
+  padding: 9px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: transparent;
+  color: #3d609e;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    padding-left 0.2s ease;
+}
+
+/* =====================================================
+   DROPDOWN ITEM HOVER
+===================================================== */
+
+.sidebar-dropdown-box button:hover {
+  background-color: #eef2f7;
+  padding-left: 15px;
+}
+
+/* =====================================================
+   NESTED DROPDOWN BUTTONS & BOXES
+===================================================== */
+
+.sidebar-nested-dropdown-button {
+  background-color: #f1f5f9 !important;
+  color: #1e293b !important;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 8px 10px !important;
+  margin-bottom: 2px;
+}
+
+.sidebar-nested-dropdown-button:hover {
+  background-color: #e2e8f0 !important;
+}
+
+.sidebar-nested-dropdown-box {
+  padding-left: 10px;
+  margin: 2px 0 6px 0;
+  border-left: 2px solid #38bdf8;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebar-nested-dropdown-box button {
+  font-size: 13px !important;
+  padding: 7px 8px !important;
+  color: #475569 !important;
+}
+
+.sidebar-nested-dropdown-box button:hover {
+  color: #0284c7 !important;
+  background-color: #f0f9ff !important;
+}

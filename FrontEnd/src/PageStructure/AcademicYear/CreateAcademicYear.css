@@ -1,0 +1,304 @@
+/* =====================================================
+   CREATE ACADEMIC YEAR PAGE STYLING
+===================================================== */
+
+.academic-year-page {
+  width: 100%;
+  min-height: calc(100vh - 52px);
+  padding: 125px 30px 40px;
+  box-sizing: border-box;
+  background: #f4f6fa;
+}
+
+.academic-year-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 32px 36px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+}
+
+.academic-year-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 24px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid #e2e8f0;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.academic-year-header h1 {
+  margin: 0 0 6px 0;
+  font-size: 26px;
+  color: #1e293b;
+  font-weight: 700;
+}
+
+.academic-year-header p {
+  margin: 0;
+  font-size: 14px;
+  color: #64748b;
+}
+
+/* =====================================================
+   FORM & GROUPS
+===================================================== */
+
+.academic-year-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.academic-year-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 640px) {
+  .academic-year-form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.academic-year-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.academic-year-form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 8px;
+}
+
+.academic-year-form-group label span {
+  color: #ef4444;
+  margin-left: 3px;
+}
+
+.academic-year-form-group input[type="text"],
+.academic-year-form-group input[type="date"],
+.academic-year-form-group select {
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 8px;
+  border: 1.5px solid #cbd5e1;
+  font-size: 14px;
+  color: #1e293b;
+  background-color: #ffffff;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.academic-year-form-group input:focus,
+.academic-year-form-group select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.academic-year-hint {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* =====================================================
+   INTERACTIVE CHECKBOX CARDS (FEE/EXAM MODULE STYLE)
+===================================================== */
+
+.academic-year-checkbox-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 8px;
+  border: 1.5px solid #e2e8f0;
+  background-color: #f8fafc;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.academic-year-checkbox-card:hover {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.academic-year-custom-checkbox {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  border-radius: 5px;
+  border: 2px solid #94a3b8;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffffff;
+  transition: all 0.2s ease;
+}
+
+.academic-year-custom-checkbox.checked {
+  background-color: #10b981;
+  border-color: #10b981;
+}
+
+.academic-year-checkbox-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.academic-year-checkbox-subtitle {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.academic-year-form-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 8px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.academic-year-btn {
+  height: 44px;
+  padding: 0 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+.academic-year-btn-primary {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.academic-year-btn-primary:hover:not(:disabled) {
+  background-color: #1d4ed8;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.academic-year-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.academic-year-btn-secondary {
+  background-color: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+}
+
+.academic-year-btn-secondary:hover:not(:disabled) {
+  background-color: #e2e8f0;
+  color: #1e293b;
+}
+
+.academic-year-btn-danger {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+.academic-year-btn-danger:hover:not(:disabled) {
+  background-color: #dc2626;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+}
+
+/* =====================================================
+   POPUP TOAST
+===================================================== */
+
+.academic-year-popup {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+  font-weight: 500;
+  animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  max-width: 420px;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.academic-year-popup-success {
+  background-color: #065f46;
+  color: #ecfdf5;
+  border: 1px solid #059669;
+}
+
+.academic-year-popup-error {
+  background-color: #991b1b;
+  color: #fef2f2;
+  border: 1px solid #dc2626;
+}
+
+.academic-year-popup-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.academic-year-popup-message {
+  flex: 1;
+  line-height: 1.4;
+}
+
+.academic-year-popup-close {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0 4px;
+  opacity: 0.8;
+}
+
+.academic-year-popup-close:hover {
+  opacity: 1;
+}
+

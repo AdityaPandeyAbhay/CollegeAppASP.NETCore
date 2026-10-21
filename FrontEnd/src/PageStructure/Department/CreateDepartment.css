@@ -1,0 +1,317 @@
+/* =====================================================
+   CREATE DEPARTMENT PAGE
+===================================================== */
+
+.department-create-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 125px 30px 40px;
+  box-sizing: border-box;
+  background: #f5f7fb;
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.department-create-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 35px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.department-page-header {
+  margin-bottom: 30px;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 20px;
+}
+
+.department-page-header h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  color: #1f2937;
+}
+
+.department-page-header p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 15px;
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.department-create-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+
+/* =====================================================
+   FORM GROUP
+===================================================== */
+
+.department-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.department-full-width {
+  grid-column: 1 / -1;
+}
+
+
+/* =====================================================
+   LABEL
+===================================================== */
+
+.department-form-group label {
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.department-form-group label span {
+  color: #dc2626;
+  margin-left: 4px;
+}
+
+
+/* =====================================================
+   INPUT / TEXTAREA
+===================================================== */
+
+.department-form-group input,
+.department-form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  padding: 12px 14px;
+  font-size: 14px;
+  outline: none;
+  background: #ffffff;
+  color: #111827;
+  transition: 0.2s;
+}
+
+.department-form-group input {
+  height: 44px;
+}
+
+.department-form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.department-form-group input:focus,
+.department-form-group textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.department-form-buttons {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.department-btn {
+  border: none;
+  border-radius: 7px;
+  padding: 12px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.department-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.department-btn-primary {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.department-btn-primary:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.department-btn-secondary {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.department-btn-secondary:hover:not(:disabled) {
+  background: #d1d5db;
+}
+
+
+/* =====================================================
+   NORMAL MESSAGE
+===================================================== */
+
+.department-normal-message {
+  margin-top: 20px;
+  padding: 12px 15px;
+  border-radius: 7px;
+  font-size: 14px;
+}
+
+.department-normal-message.success {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #86efac;
+}
+
+.department-normal-message.error {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+}
+
+
+/* =====================================================
+   POPUP
+===================================================== */
+
+.department-popup {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  z-index: 9999;
+  min-width: 320px;
+  max-width: 450px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 16px;
+  border-radius: 9px;
+  background: #ffffff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+  animation: departmentPopupSlide 0.3s ease;
+}
+
+.department-popup-success {
+  border-left: 5px solid #16a34a;
+}
+
+.department-popup-error {
+  border-left: 5px solid #dc2626;
+}
+
+.department-popup-icon {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.department-popup-success .department-popup-icon {
+  background: #16a34a;
+}
+
+.department-popup-error .department-popup-icon {
+  background: #dc2626;
+}
+
+.department-popup-message {
+  flex: 1;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.department-popup button {
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+
+/* =====================================================
+   ANIMATION
+===================================================== */
+
+@keyframes departmentPopupSlide {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .department-create-page {
+    padding: 125px 20px 40px;
+  }
+
+  .department-create-container {
+    padding: 22px;
+  }
+
+  .department-create-form {
+    grid-template-columns: 1fr;
+  }
+
+  .department-full-width {
+    grid-column: auto;
+  }
+
+  .department-form-buttons {
+    grid-column: auto;
+    flex-direction: column;
+  }
+
+  .department-btn {
+    width: 100%;
+  }
+
+  .department-popup {
+    left: 15px;
+    right: 15px;
+    min-width: auto;
+  }
+
+}

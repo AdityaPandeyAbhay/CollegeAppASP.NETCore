@@ -1,0 +1,328 @@
+/* =====================================================
+   FOOTER (Compact, Refined & Adaptive Glassmorphism)
+===================================================== */
+
+.footer {
+  width: 100%;
+  margin-top: 0;
+  color: #e5e7eb;
+  box-sizing: border-box;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+/* =====================================================
+   PAGES VS DASHBOARD ADAPTIVE FOOTER THEME
+===================================================== */
+
+/* Public pages (Home, About, Contact, Notice) */
+.public-footer-wrapper .footer {
+  background: linear-gradient(
+    135deg,
+    rgba(11, 19, 41, 0.94) 0%,
+    rgba(15, 23, 42, 0.96) 50%,
+    rgba(23, 37, 84, 0.94) 100%
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Dashboard pages (SuperAdmin, Admin, Teacher, Student, Operator, Office) */
+.dashboard-footer-wrapper .footer {
+  background: rgba(30, 41, 59, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+
+/* =====================================================
+   FOOTER CONTAINER (Ultra-Compact)
+===================================================== */
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 6px 20px 4px;
+  display: grid;
+  grid-template-columns: 1.2fr 1.1fr 0.9fr 1.1fr;
+  gap: 16px;
+  align-items: start;
+  box-sizing: border-box;
+}
+
+/* =====================================================
+   FOOTER COLUMNS
+===================================================== */
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* =====================================================
+   COLLEGE / ABOUT
+===================================================== */
+
+.footer-about h2 {
+  margin: 0 0 2px;
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #ffffff;
+}
+
+.footer-about p {
+  margin: 0;
+  max-width: 240px;
+  color: #94a3b8;
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+/* =====================================================
+   COLUMN HEADINGS
+===================================================== */
+
+.footer-column h3 {
+  position: relative;
+  margin: 0 0 4px;
+  color: #f1f5f9;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  padding-bottom: 2px;
+}
+
+.footer-column h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 16px;
+  height: 1.5px;
+  background: #3b82f6;
+  border-radius: 2px;
+}
+
+/* =====================================================
+   CONTACT LINKS
+===================================================== */
+
+.footer-column > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 2px;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 11px;
+  line-height: 1.25;
+  transition: all 0.2s ease;
+}
+
+.footer-column > a:hover {
+  color: #60a5fa;
+  transform: translateX(2px);
+}
+
+.footer-address {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 5px;
+  color: #94a3b8;
+  font-size: 11px;
+  line-height: 1.25;
+  max-width: 210px;
+}
+
+/* =====================================================
+   QUICK LINKS
+===================================================== */
+
+.footer-column a[href='/'],
+.footer-column a[href='/about'],
+.footer-column a[href='/contact'],
+.footer-column a[href='/notice'] {
+  width: auto;
+  min-width: 80px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+  padding: 0;
+  margin-bottom: 1.5px;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 11px;
+  transition: all 0.2s ease;
+}
+
+.footer-column a[href='/']:hover,
+.footer-column a[href='/about']:hover,
+.footer-column a[href='/contact']:hover,
+.footer-column a[href='/notice']:hover {
+  color: #60a5fa;
+  transform: translateX(2px);
+}
+
+.footer-column a span {
+  color: #3b82f6;
+  font-size: 11px;
+  transition: transform 0.2s ease;
+}
+
+/* =====================================================
+   SOCIAL MEDIA
+===================================================== */
+
+.social-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.social {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  text-decoration: none;
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social svg {
+  width: 12px;
+  height: 12px;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.social:hover {
+  transform: translateY(-1.5px);
+  color: #ffffff;
+}
+
+.social:hover svg {
+  transform: scale(1.1);
+}
+
+.social.whatsapp:hover {
+  background: #25d366;
+  border-color: #25d366;
+  box-shadow: 0 2px 8px rgba(37, 211, 102, 0.35);
+}
+
+.social.facebook:hover {
+  background: #1877f2;
+  border-color: #1877f2;
+  box-shadow: 0 2px 8px rgba(24, 119, 242, 0.35);
+}
+
+.social.instagram:hover {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  border-color: #d6249f;
+  box-shadow: 0 2px 8px rgba(214, 36, 159, 0.35);
+}
+
+.social.linkedin:hover {
+  background: #0077b5;
+  border-color: #0077b5;
+  box-shadow: 0 2px 8px rgba(0, 119, 181, 0.35);
+}
+
+.social.x-social:hover {
+  background: #000000;
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.15);
+}
+
+.social.youtube:hover {
+  background: #ff0000;
+  border-color: #ff0000;
+  box-shadow: 0 2px 8px rgba(255, 0, 0, 0.35);
+}
+
+/* =====================================================
+   FOOTER BOTTOM
+===================================================== */
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  text-align: center;
+  padding: 3px 14px;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.footer-bottom-text {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 10.5px;
+  letter-spacing: 0.2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.footer-bottom-text .dev-name {
+  color: #60a5fa;
+  font-weight: 600;
+}
+
+.footer-bottom-divider {
+  color: rgba(255, 255, 255, 0.25);
+  font-weight: 300;
+  user-select: none;
+}
+
+/* =====================================================
+   RESPONSIVE (TABLET & MOBILE)
+===================================================== */
+
+@media (max-width: 900px) {
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 16px;
+    padding: 6px 14px 4px;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 6px 12px 4px;
+  }
+
+  .footer-about h2 {
+    font-size: 13.5px;
+  }
+
+  .footer-column h3 {
+    margin-bottom: 2px;
+  }
+
+  .social {
+    width: 22px;
+    height: 22px;
+  }
+
+  .footer-bottom {
+    padding: 2.5px 8px;
+  }
+
+  .footer-bottom-text {
+    font-size: 10px;
+    gap: 3px;
+  }
+}

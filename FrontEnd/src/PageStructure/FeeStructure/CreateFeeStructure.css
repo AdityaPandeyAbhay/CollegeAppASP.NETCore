@@ -1,0 +1,235 @@
+/* =====================================================
+   CREATE FEE STRUCTURE
+   ===================================================== */
+
+.fee-structure-create-container {
+  width: 100%;
+  padding: 125px 25px 40px;
+  box-sizing: border-box;
+}
+
+.fee-structure-create-card {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 30px;
+  box-sizing: border-box;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+}
+
+.fee-structure-create-header {
+  margin-bottom: 25px;
+}
+
+.fee-structure-create-header h2 {
+  margin: 0 0 8px;
+  font-size: 25px;
+}
+
+.fee-structure-create-header p {
+  margin: 0;
+  color: #666;
+}
+
+.fee-structure-loading,
+.fee-structure-success,
+.fee-structure-error {
+  padding: 12px 15px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.fee-structure-loading {
+  background: #f2f2f2;
+  color: #555;
+}
+
+.fee-structure-success {
+  background: #e8f7e8;
+  color: #227522;
+}
+
+.fee-structure-error {
+  background: #fdeaea;
+  color: #c62828;
+}
+
+.fee-structure-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.fee-structure-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.fee-structure-form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.fee-structure-form-group label {
+  margin-bottom: 7px;
+  font-weight: 600;
+  color: #333;
+}
+
+.fee-structure-form-group input,
+.fee-structure-form-group select,
+.fee-structure-form-group textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.fee-structure-form-group input:focus,
+.fee-structure-form-group select:focus,
+.fee-structure-form-group textarea:focus {
+  border-color: #1976d2;
+}
+
+.fee-structure-form-group textarea {
+  resize: vertical;
+}
+
+.fee-structure-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.fee-structure-reset-btn,
+.fee-structure-submit-btn {
+  padding: 11px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.fee-structure-reset-btn {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.fee-structure-submit-btn {
+  background: #1976d2;
+  color: white;
+}
+
+.fee-structure-reset-btn:disabled,
+.fee-structure-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 700px) {
+  .fee-structure-create-container {
+    padding: 15px;
+  }
+
+  .fee-structure-create-card {
+    padding: 20px;
+  }
+
+  .fee-structure-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fee-structure-form-group.full-width {
+    grid-column: auto;
+  }
+
+  .fee-structure-form-actions {
+    flex-direction: column;
+  }
+
+  .fee-structure-reset-btn,
+  .fee-structure-submit-btn {
+    width: 100%;
+  }
+}
+
+/* =====================================================
+   IS ACTIVE CHECKBOX (GREEN TICK WHEN ACTIVE, BLANK WHEN INACTIVE)
+   ===================================================== */
+
+.fee-structure-checkbox-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background-color: #f8fafc;
+  border: 1px solid #d1d5db;
+  transition: all 0.2s ease;
+  width: fit-content;
+}
+
+.fee-structure-checkbox-wrapper:hover {
+  background-color: #f1f5f9;
+  border-color: #9ca3af;
+}
+
+.fee-structure-checkbox-wrapper:focus-visible {
+  outline: 2px solid #16a34a;
+  outline-offset: 2px;
+}
+
+.fee-structure-custom-checkbox {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  border: 2px solid #cbd5e1;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.fee-structure-custom-checkbox.active {
+  border-color: #16a34a;
+  background-color: #ffffff;
+}
+
+.fee-structure-custom-checkbox.inactive {
+  border-color: #cbd5e1;
+  background-color: #ffffff;
+}
+
+.fee-structure-green-tick {
+  color: #16a34a;
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fee-structure-status-text {
+  font-size: 15px;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.fee-structure-status-text.active {
+  color: #16a34a;
+}
+
+.fee-structure-status-text.inactive {
+  color: #64748b;
+}
