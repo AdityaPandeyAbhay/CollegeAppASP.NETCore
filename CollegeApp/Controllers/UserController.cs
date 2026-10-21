@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using CollegeApp.Models;
 using CollegeApp.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -64,8 +64,7 @@ namespace CollegeApp.Controllers
 
                 var userCreated = await _userService.CreateUserAsync(dto);
 
-
-                _apiResponse.Data = userCreated;
+                _apiResponse.Data = new { id = dto.Id, username = dto.Username, userTypeId = dto.UserTypeId, roleIds = dto.RoleIds, isSuccess = userCreated };
                 _apiResponse.Status = true;
                 _apiResponse.StatusCode = HttpStatusCode.Created;
 

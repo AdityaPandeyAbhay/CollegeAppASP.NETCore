@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,6 +11,10 @@ namespace Model.Models.Student_Model
         public string? MiddleName { get; set; }
 
         public string? LastName { get; set; }
+
+        public string? FatherName { get; set; }
+
+        public string? MotherName { get; set; }
 
         public string? Email { get; set; }
 

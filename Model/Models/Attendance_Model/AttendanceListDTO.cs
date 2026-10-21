@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,6 +7,14 @@ namespace Model.Models.Attendance_Model
     public class AttendanceListDTO
     {
         public int AttendanceId { get; set; }
+
+        public int TeacherAssignmentId { get; set; }
+
+        public int SchoolClassId { get; set; }
+
+        public int SectionId { get; set; }
+
+        public int AcademicYearId { get; set; }
 
         public DateOnly AttendanceDate { get; set; }
 
@@ -18,6 +26,8 @@ namespace Model.Models.Attendance_Model
 
         public string SubjectName { get; set; } = string.Empty;
 
+        public string? Remarks { get; set; }
+
         public int PresentCount { get; set; }
 
         public int AbsentCount { get; set; }
@@ -25,5 +35,7 @@ namespace Model.Models.Attendance_Model
         public int LeaveCount { get; set; }
 
         public int LateCount { get; set; }
+
+        public List<AttendanceStudentDTO> Students { get; set; } = new();
     }
 }

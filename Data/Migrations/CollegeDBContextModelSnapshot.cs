@@ -633,8 +633,19 @@ namespace Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("EducationFileName")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("EducationPdf")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("FatherName")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -666,10 +677,17 @@ namespace Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("MotherName")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("Photo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Qualification")
                         .IsRequired()
@@ -1058,6 +1076,10 @@ namespace Data.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
+                    b.Property<string>("FatherName")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -1082,6 +1104,10 @@ namespace Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("MotherName")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("Nationality")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -1092,8 +1118,7 @@ namespace Data.Migrations
                         .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("Photo")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Religion")
                         .HasMaxLength(100)
@@ -1143,6 +1168,86 @@ namespace Data.Migrations
                     b.HasIndex("SchoolClassId", "SectionId");
 
                     b.ToTable("Students", (string)null);
+                });
+
+            modelBuilder.Entity("Data.Data.StudentAcademicYear", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AcademicYearId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EnrollmentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsPromoted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<DateTime?>("PromotionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Remarks")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("RollNumber")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("SchoolClassId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SectionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasDefaultValue("Active");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AcademicYearId");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("SchoolClassId");
+
+                    b.HasIndex("SectionId");
+
+                    b.HasIndex("StudentId", "AcademicYearId")
+                        .IsUnique();
+
+                    b.ToTable("StudentAcademicYears", (string)null);
                 });
 
             modelBuilder.Entity("Data.Data.StudentFee", b =>
@@ -1793,6 +1898,49 @@ namespace Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Data.Data.StudentAcademicYear", b =>
+                {
+                    b.HasOne("Data.Data.AcademicYear", "AcademicYear")
+                        .WithMany("StudentAcademicYears")
+                        .HasForeignKey("AcademicYearId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Data.Data.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Data.Data.SchoolClass", "SchoolClass")
+                        .WithMany("StudentAcademicYears")
+                        .HasForeignKey("SchoolClassId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Data.Data.Section", "Section")
+                        .WithMany("StudentAcademicYears")
+                        .HasForeignKey("SectionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Data.Data.Student", "Student")
+                        .WithMany("StudentAcademicYears")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("AcademicYear");
+
+                    b.Navigation("Department");
+
+                    b.Navigation("SchoolClass");
+
+                    b.Navigation("Section");
+
+                    b.Navigation("Student");
+                });
+
             modelBuilder.Entity("Data.Data.StudentFee", b =>
                 {
                     b.HasOne("Data.Data.FeeStructure", "FeeStructure")
@@ -1943,6 +2091,8 @@ namespace Data.Migrations
 
                     b.Navigation("ResultBatches");
 
+                    b.Navigation("StudentAcademicYears");
+
                     b.Navigation("TeacherAssignments");
                 });
 
@@ -1999,6 +2149,8 @@ namespace Data.Migrations
 
                     b.Navigation("Sections");
 
+                    b.Navigation("StudentAcademicYears");
+
                     b.Navigation("Students");
 
                     b.Navigation("TeacherAssignments");
@@ -2007,6 +2159,8 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Data.Section", b =>
                 {
                     b.Navigation("ResultBatches");
+
+                    b.Navigation("StudentAcademicYears");
 
                     b.Navigation("Students");
 
@@ -2018,6 +2172,8 @@ namespace Data.Migrations
                     b.Navigation("AttendanceDetails");
 
                     b.Navigation("Results");
+
+                    b.Navigation("StudentAcademicYears");
 
                     b.Navigation("StudentFees");
                 });

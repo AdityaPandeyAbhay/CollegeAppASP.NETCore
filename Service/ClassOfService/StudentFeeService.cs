@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -107,7 +107,12 @@ namespace Service.ClassOfService
 
             await _studentFeeRepository.CreateAsync(studentFee);
 
-            return _mapper.Map<GetStudentFeeDTO>(studentFee);
+            studentFee.Student = student;
+            studentFee.FeeStructure = feeStructure;
+
+            var result = _mapper.Map<GetStudentFeeDTO>(studentFee);
+            result.StudentName = $"{student.FirstName} {(student.MiddleName ?? "")} {student.LastName}".Replace("  ", " ").Trim();
+            return result;
         }
 
 
@@ -115,8 +120,26 @@ namespace Service.ClassOfService
         public async Task<List<GetStudentFeeDTO>> GetAllStudentFeeAsync()
         {
             var studentFees = await _studentFeeRepository.GetAllAsync();
+            var dtos = _mapper.Map<List<GetStudentFeeDTO>>(studentFees);
 
-            return _mapper.Map<List<GetStudentFeeDTO>>(studentFees);
+            var missingIds = dtos.Where(d => string.IsNullOrEmpty(d.StudentName)).Select(d => d.StudentId).Distinct().ToList();
+            if (missingIds.Any())
+            {
+                var students = await _studentRepository.GetAllByFilterAsync(s => missingIds.Contains(s.Id));
+                var studentMap = students.ToDictionary(
+                    s => s.Id,
+                    s => $"{s.FirstName} {(s.MiddleName ?? "")} {s.LastName}".Replace("  ", " ").Trim());
+
+                foreach (var dto in dtos)
+                {
+                    if (string.IsNullOrEmpty(dto.StudentName) && studentMap.TryGetValue(dto.StudentId, out var sName))
+                    {
+                        dto.StudentName = sName;
+                    }
+                }
+            }
+
+            return dtos;
         }
 
         public async Task<GetStudentFeeDTO> GetStudentFeeByIdAsync(int id)
@@ -130,7 +153,17 @@ namespace Service.ClassOfService
                 throw new Exception($"Student Fee not found with Id : {id}");
             }
 
-            return _mapper.Map<GetStudentFeeDTO>(studentFee);
+            var dto = _mapper.Map<GetStudentFeeDTO>(studentFee);
+            if (string.IsNullOrEmpty(dto.StudentName))
+            {
+                var student = await _studentRepository.GetAsync(s => s.Id == studentFee.StudentId);
+                if (student != null)
+                {
+                    dto.StudentName = $"{student.FirstName} {(student.MiddleName ?? "")} {student.LastName}".Replace("  ", " ").Trim();
+                }
+            }
+
+            return dto;
         }
 
         public async Task<List<GetStudentFeeDTO>> GetStudentFeeByStudentAsync(int studentId)
@@ -138,7 +171,21 @@ namespace Service.ClassOfService
             var studentFees = await _studentFeeRepository.GetAllByFilterAsync(
                 x => x.StudentId == studentId);
 
-            return _mapper.Map<List<GetStudentFeeDTO>>(studentFees);
+            var dtos = _mapper.Map<List<GetStudentFeeDTO>>(studentFees);
+            var student = await _studentRepository.GetAsync(s => s.Id == studentId);
+            if (student != null)
+            {
+                var sName = $"{student.FirstName} {(student.MiddleName ?? "")} {student.LastName}".Replace("  ", " ").Trim();
+                foreach (var dto in dtos)
+                {
+                    if (string.IsNullOrEmpty(dto.StudentName))
+                    {
+                        dto.StudentName = sName;
+                    }
+                }
+            }
+
+            return dtos;
         }
 
         public async Task<bool> UpdateStudentFeeAsync(int id, UpdateStudentFeeDTO dto)
@@ -233,7 +280,25 @@ namespace Service.ClassOfService
                     .Contains(studentName.ToLower())
             );
 
-            return _mapper.Map<List<GetStudentFeeDTO>>(studentFees);
+            var dtos = _mapper.Map<List<GetStudentFeeDTO>>(studentFees);
+            var studentIds = dtos.Select(d => d.StudentId).Distinct().ToList();
+            if (studentIds.Any())
+            {
+                var students = await _studentRepository.GetAllByFilterAsync(s => studentIds.Contains(s.Id));
+                var studentMap = students.ToDictionary(
+                    s => s.Id,
+                    s => $"{s.FirstName} {(s.MiddleName ?? "")} {s.LastName}".Replace("  ", " ").Trim());
+
+                foreach (var dto in dtos)
+                {
+                    if (studentMap.TryGetValue(dto.StudentId, out var sName))
+                    {
+                        dto.StudentName = sName;
+                    }
+                }
+            }
+
+            return dtos;
         }
 
 
@@ -257,11 +322,19 @@ namespace Service.ClassOfService
         public async Task<List<StudentFeeDropdownDTO>> GetStudentFeeDropdownAsync()
         {
             var studentFees = await _studentFeeRepository.GetAllByFilterAsync(x => true);
+            var students = await _studentRepository.GetAllAsync();
+            var studentMap = students.ToDictionary(
+                s => s.Id,
+                s => $"{s.FirstName} {(s.MiddleName ?? "")} {s.LastName}".Replace("  ", " ").Trim());
 
-            return studentFees.Select(x => new StudentFeeDropdownDTO
+            return studentFees.Select(x =>
             {
-                Id = x.Id,
-                DisplayName = $"{x.InvoiceNo} - {x.Student.FirstName} {x.Student.LastName}"
+                studentMap.TryGetValue(x.StudentId, out var sName);
+                return new StudentFeeDropdownDTO
+                {
+                    Id = x.Id,
+                    DisplayName = $"{x.InvoiceNo} - {(sName ?? $"Student #{x.StudentId}")}"
+                };
             }).ToList();
         }
     }

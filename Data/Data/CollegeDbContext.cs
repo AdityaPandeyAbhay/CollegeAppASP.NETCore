@@ -18,6 +18,7 @@ namespace CollegeApp.Data
 
         // DbSet
         public DbSet<Student> Students { get; set; }
+        public DbSet<StudentAcademicYear> StudentAcademicYears { get; set; }
         public DbSet<Department> Department { get; set; }
 
         public DbSet<User> Users { get; set; } // Add this line for the User entity
@@ -58,6 +59,7 @@ namespace CollegeApp.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new StudentConfig());
+            modelBuilder.ApplyConfiguration(new StudentAcademicYearConfig());
             modelBuilder.ApplyConfiguration(new DepartmentConfig());
             modelBuilder.ApplyConfiguration(new UserConfig());
             modelBuilder.ApplyConfiguration(new RoleConfig());

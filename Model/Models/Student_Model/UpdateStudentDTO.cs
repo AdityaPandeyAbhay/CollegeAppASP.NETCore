@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -17,6 +17,10 @@ namespace Model.Models.Student_Model
         [Required]
         public int SectionId { get; set; }
 
+        public int? AcademicYearId { get; set; }
+
+        [StringLength(50)]
+        public string? RollNumber { get; set; }
 
         [Required]
         public string AdmissionNumber { get; set; } = string.Empty;
@@ -31,6 +35,12 @@ namespace Model.Models.Student_Model
 
         [Required]
         public string LastName { get; set; } = string.Empty;
+
+        [StringLength(100)]
+        public string? FatherName { get; set; }
+
+        [StringLength(100)]
+        public string? MotherName { get; set; }
 
         [Required]
         public DateTime DOB { get; set; }
@@ -64,5 +74,6 @@ namespace Model.Models.Student_Model
         public string Address { get; set; } = string.Empty;
 
         public bool IsActive { get; set; }
+        public string? UpdatedBy { get; set; }
     }
 }

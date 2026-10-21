@@ -165,7 +165,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidAudience = builder.Configuration["JwtSettings:Audience"],
 
             IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"]))
+                Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"] ?? "DefaultCollegeAppJwtSecretKeyShouldBeLongEnoughForValidation1234567890!"))
         };
     });
 builder.Services.AddAuthorization();
@@ -175,11 +175,13 @@ builder.Services.AddAuthorization();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// Enable Swagger in all environments so https://localhost:7164/swagger/index.html is always accessible
+app.UseSwagger();
+app.UseSwaggerUI(options =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "CollegeApp API v1");
+    options.RoutePrefix = "swagger"; // Serves Swagger UI at /swagger
+});
 
 app.UseHttpsRedirection();
 

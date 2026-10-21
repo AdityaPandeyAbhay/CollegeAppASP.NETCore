@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
@@ -17,10 +17,15 @@ namespace Model.Models.Student_Model
             public int SchoolClassId { get; set; }
 
 
-             [Required]
-             public int SectionId { get; set; }
+            [Required]
+            public int SectionId { get; set; }
 
-        [Required]
+            public int? AcademicYearId { get; set; }
+
+            [StringLength(50)]
+            public string? RollNumber { get; set; }
+
+            [Required]
             [StringLength(20)]
             public string AdmissionNumber { get; set; } = string.Empty;
 
@@ -37,6 +42,12 @@ namespace Model.Models.Student_Model
             [Required]
             [StringLength(50)]
             public string LastName { get; set; } = string.Empty;
+
+            [StringLength(100)]
+            public string? FatherName { get; set; }
+
+            [StringLength(100)]
+            public string? MotherName { get; set; }
 
             [Required]
             public DateTime DOB { get; set; }

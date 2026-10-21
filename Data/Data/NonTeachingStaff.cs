@@ -1,4 +1,4 @@
-﻿using CollegeApp.Data;
+using CollegeApp.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -41,6 +41,19 @@ namespace Data.Data
 
         [MaxLength(15)]
         public string AlternatePhoneNumber { get; set; } = string.Empty;
+
+        [MaxLength(100)]
+        public string? FatherName { get; set; }
+
+        [MaxLength(100)]
+        public string? MotherName { get; set; }
+
+        public string? Photo { get; set; }
+
+        public string? EducationPdf { get; set; }
+
+        [MaxLength(200)]
+        public string? EducationFileName { get; set; }
 
         [MaxLength(300)]
         public string Address { get; set; } = string.Empty;

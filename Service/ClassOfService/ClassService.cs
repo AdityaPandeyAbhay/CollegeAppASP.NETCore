@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Data.Data;
 using Model.Models;
 using Model.Models.Class_Model;

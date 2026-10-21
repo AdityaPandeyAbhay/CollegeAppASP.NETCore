@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using CollegeApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -37,7 +37,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetAllSection")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -71,7 +71,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetSectionByCode/{code}")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> GetSectionByCode(string code)
@@ -104,7 +104,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetSectionByName/{name}")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> GetSectionByName(string name)
@@ -137,7 +137,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("Dropdown")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> GetDropdown()
@@ -168,6 +168,7 @@ namespace CollegeApp.Controllers
 
         [HttpPost]
         [Route("CreateSection")]
+        [Authorize(Roles = "Super Admin,Admin,Operator")]
         [Authorize(Roles = "Super Admin,Admin")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -201,6 +202,7 @@ namespace CollegeApp.Controllers
 
         [HttpPut]
         [Route("UpdateSection/{id:int}")]
+        [Authorize(Roles = "Super Admin,Admin,Operator")]
         [Authorize(Roles = "Super Admin,Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -234,6 +236,7 @@ namespace CollegeApp.Controllers
 
         [HttpDelete]
         [Route("DeleteSection/{code}")]
+        [Authorize(Roles = "Super Admin,Admin,Operator")]
         [Authorize(Roles = "Super Admin,Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

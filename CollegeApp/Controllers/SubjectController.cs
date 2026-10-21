@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using CollegeApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -38,7 +38,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetAllSubject")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -76,7 +76,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetSubjectByCode/{code}")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -122,7 +122,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetSubjectByName/{name}")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
 
@@ -170,7 +170,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("Dropdown")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 
@@ -213,7 +213,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("DropdownByDepartment/{departmentId:int}")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator")]
 
         public async Task<ActionResult<APIResponse>> GetDropdownByDepartmentAsync(int departmentId)
         {
@@ -254,6 +254,7 @@ namespace CollegeApp.Controllers
 
         [HttpPost]
         [Route("CreateSubject")]
+        [Authorize(Roles = "Super Admin,Admin,Operator")]
         [Authorize(Roles = "Super Admin,Admin")]
 
         public async Task<ActionResult<APIResponse>> CreateSubjectAsync(CreateSubjectDTO dto)
@@ -296,6 +297,7 @@ namespace CollegeApp.Controllers
 
         [HttpPut]
         [Route("UpdateSubject/{id:int}")]
+        [Authorize(Roles = "Super Admin,Admin,Operator")]
         [Authorize(Roles = "Super Admin,Admin")]
 
 
@@ -339,6 +341,7 @@ namespace CollegeApp.Controllers
 
         [HttpDelete]
         [Route("DeleteSubject/{code}")]
+        [Authorize(Roles = "Super Admin,Admin,Operator")]
         [Authorize(Roles = "Super Admin,Admin")]
 
 

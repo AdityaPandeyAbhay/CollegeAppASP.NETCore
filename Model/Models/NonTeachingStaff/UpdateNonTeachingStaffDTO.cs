@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -24,13 +24,21 @@ namespace Model.Models.NonTeachingStaff
 
         public string? Address { get; set; }
 
-        public int DepartmentId { get; set; }
-
         public string Designation { get; set; } = string.Empty;
 
         public string Qualification { get; set; } = string.Empty;
 
-        public string JoiningDate { get; set; }
+        public string? FatherName { get; set; }
+
+        public string? MotherName { get; set; }
+
+        public string? Photo { get; set; }
+
+        public string? EducationPdf { get; set; }
+
+        public string? EducationFileName { get; set; }
+
+        public DateTime JoiningDate { get; set; }
 
         public decimal Salary { get; set; }
 

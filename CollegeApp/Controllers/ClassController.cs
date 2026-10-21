@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using CollegeApp.Models;
 using CollegeApp.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -37,7 +37,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetAllClass")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator,Office Employee")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -71,7 +71,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetClassByCode/{code}")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator,Office Employee")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> GetClassByCode(string code)
@@ -104,7 +104,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetClassByName/{name}")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator,Office Employee")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> GetClassByName(string name)
@@ -171,7 +171,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("Dropdown")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator,Office Employee")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetDropdown()
         {

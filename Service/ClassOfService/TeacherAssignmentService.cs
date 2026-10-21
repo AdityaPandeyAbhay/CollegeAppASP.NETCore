@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Data.Data;
 using Microsoft.EntityFrameworkCore;
 using Model.Models;

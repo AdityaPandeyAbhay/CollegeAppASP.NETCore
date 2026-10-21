@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using CollegeApp.Models;
@@ -35,7 +35,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetAllTeacherAssignments")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> GetAllTeacherAssignments()
@@ -68,7 +68,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetTeacherAssignmentById/{id:int}")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> GetTeacherAssignmentById(int id)
@@ -101,7 +101,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetTeacherAssignmentByTeacher/{teacherId:int}")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> GetTeacherAssignmentByTeacher(int teacherId)
@@ -134,7 +134,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetTeacherAssignmentByClass/{classId:int}")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> GetTeacherAssignmentByClass(int classId)
@@ -167,7 +167,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetTeacherAssignmentBySubject/{subjectId:int}")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> GetTeacherAssignmentBySubject(int subjectId)
@@ -200,7 +200,7 @@ namespace CollegeApp.Controllers
 
         [HttpPost]
         [Route("CreateTeacherAssignment")]
-        [Authorize(Roles = "Super Admin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin,Operator")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<APIResponse>> CreateTeacherAssignment(CreateTeacherAssignmentDTO dto)
@@ -232,7 +232,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("dropdown/teacher")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator")]
 
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -284,7 +284,7 @@ namespace CollegeApp.Controllers
 
         [HttpPut]
         [Route("UpdateTeacherAssignment/{id:int}")]
-        [Authorize(Roles = "Super Admin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin,Operator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<APIResponse>> UpdateTeacherAssignment(int id, UpdateTeacherAssignmentDTO dto)
@@ -317,7 +317,7 @@ namespace CollegeApp.Controllers
 
         [HttpDelete]
         [Route("DeleteTeacherAssignment/{id:int}")]
-        [Authorize(Roles = "Super Admin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin,Operator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> DeleteTeacherAssignment(int id)

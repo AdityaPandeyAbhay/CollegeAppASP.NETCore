@@ -29,6 +29,7 @@ namespace Model.Models.Result_Model
 
         public string ResultStatus { get; set; } = string.Empty;
 
+
         public string? PdfFileName { get; set; }
 
         public string? PdfFilePath { get; set; }

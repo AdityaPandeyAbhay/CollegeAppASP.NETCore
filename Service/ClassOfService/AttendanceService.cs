@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Data.Data;
 using Model.Models.Attendance_Model;
 using Repository.InterfaceOfRepository;
@@ -40,151 +40,114 @@ namespace Service.ClassOfService
         public async Task<AttendanceResponseDTO> TakeAttendanceAsync(
             TakeAttendanceDTO dto)
         {
-
             ArgumentNullException.ThrowIfNull(dto);
 
-
             var userId = _currentUserService.UserId;
-
-
             if (string.IsNullOrEmpty(userId))
                 throw new UnauthorizedAccessException();
-
-
-
-            var teacher =
-                await _teacherRepository.GetAsync(
-                    x => x.UserId == userId);
-
-
-
-            if (teacher == null)
-                throw new Exception("Teacher not found.");
-
-
-
 
             var assignment =
                 await _teacherAssignmentRepository.GetAsync(
                     x => x.Id == dto.TeacherAssignmentId);
 
-
+            bool isSuperAdminOrAdmin = _currentUserService.IsInRole("Super Admin") || _currentUserService.IsInRole("Admin") || _currentUserService.IsInRole("Operator");
 
             if (assignment == null)
-                throw new Exception("Teacher Assignment not found.");
+            {
+                if (isSuperAdminOrAdmin)
+                {
+                    assignment = await _teacherAssignmentRepository.GetAsync(x => x.IsActive);
+                    if (assignment != null)
+                    {
+                        dto.TeacherAssignmentId = assignment.Id;
+                    }
+                }
 
+                if (assignment == null)
+                    throw new Exception("Teacher Assignment not found.");
+            }
 
+            if (!isSuperAdminOrAdmin)
+            {
+                var teacher =
+                    await _teacherRepository.GetAsync(
+                        x => x.UserId == userId);
 
+                if (teacher == null)
+                    throw new Exception("Teacher profile not found.");
 
-            if (assignment.TeacherId != teacher.Id)
-                throw new Exception(
-                    "You are not authorized.");
+                if (assignment.TeacherId != teacher.Id)
+                    throw new Exception(
+                        "You are not authorized to mark attendance for this class.");
+            }
 
-
-
-
-            var exists =
+            var existingAttendance =
                 await _attendanceRepository
-                .AttendanceExistsAsync(
+                .GetAttendanceByDateAsync(
                     dto.TeacherAssignmentId,
                     dto.AttendanceDate);
 
+            if (existingAttendance != null)
+            {
+                existingAttendance.Remarks = dto.Remarks;
+                existingAttendance.ModifiedBy = userId;
+                existingAttendance.ModifiedDate = DateTime.UtcNow;
 
+                foreach (var student in dto.Students)
+                {
+                    var detail = existingAttendance.AttendanceDetails
+                        .FirstOrDefault(x => x.StudentId == student.StudentId);
 
-            if (exists)
-                throw new Exception(
-                    "Attendance already exists.");
+                    if (detail != null)
+                    {
+                        detail.AttendanceStatus = student.AttendanceStatus;
+                        detail.Remarks = student.Remarks;
+                        detail.ModifiedBy = userId;
+                        detail.ModifiedDate = DateTime.UtcNow;
+                    }
+                    else
+                    {
+                        existingAttendance.AttendanceDetails.Add(new AttendanceDetail
+                        {
+                            AttendanceId = existingAttendance.Id,
+                            StudentId = student.StudentId,
+                            AttendanceStatus = student.AttendanceStatus,
+                            Remarks = student.Remarks,
+                            CreatedBy = userId,
+                            CreatedDate = DateTime.UtcNow
+                        });
+                    }
+                }
 
-
-
+                await _attendanceRepository.UpdateAsync(existingAttendance);
+                return _mapper.Map<AttendanceResponseDTO>(existingAttendance);
+            }
 
             var attendance = new Attendance
             {
-
-                TeacherAssignmentId =
-                    dto.TeacherAssignmentId,
-
-
-                AttendanceDate =
-                    dto.AttendanceDate,
-
-
-                Remarks =
-                    dto.Remarks,
-
-
-                Status =
-                    "Submitted",
-
-
-                CreatedBy =
-                    userId,
-
-
-                CreatedDate =
-                    DateTime.UtcNow
-
+                TeacherAssignmentId = dto.TeacherAssignmentId,
+                AttendanceDate = dto.AttendanceDate,
+                Remarks = dto.Remarks,
+                Status = "Submitted",
+                CreatedBy = userId,
+                CreatedDate = DateTime.UtcNow
             };
-
-
-
 
             foreach (var student in dto.Students)
             {
-
                 attendance.AttendanceDetails.Add(
                     new AttendanceDetail
                     {
-
-                        StudentId =
-                            student.StudentId,
-
-
-                        AttendanceStatus =
-                            student.AttendanceStatus,
-
-
-                        Remarks =
-                            student.Remarks,
-
-
-                        CreatedBy =
-                            userId,
-
-
-                        CreatedDate =
-                            DateTime.UtcNow
-
+                        StudentId = student.StudentId,
+                        AttendanceStatus = student.AttendanceStatus,
+                        Remarks = student.Remarks,
+                        CreatedBy = userId,
+                        CreatedDate = DateTime.UtcNow
                     });
-
             }
 
-
-
-
-            await _attendanceRepository
-     .CreateAsync(attendance);
-
-            var savedAttendance =
-                await _attendanceRepository
-                    .GetAttendanceWithDetailsAsync(
-                        attendance.Id);
-
-            if (savedAttendance == null)
-                throw new Exception(
-                    "Attendance could not be loaded after creation.");
-
-            var response =
-                _mapper.Map<AttendanceResponseDTO>(
-                    savedAttendance);
-
-            for (int i = 0; i < response.Students.Count; i++)
-            {
-                response.Students[i].SrNo = i + 1;
-            }
-
-            return response;
-
+            var result = await _attendanceRepository.CreateAsync(attendance);
+            return _mapper.Map<AttendanceResponseDTO>(result);
         }
 
 
@@ -209,40 +172,63 @@ namespace Service.ClassOfService
             {
                 AttendanceId = x.Id,
 
+                TeacherAssignmentId = x.TeacherAssignmentId,
+
+                SchoolClassId = x.TeacherAssignment?.SchoolClassId ?? 0,
+
+                SectionId = x.TeacherAssignment?.SectionId ?? 0,
+
+                AcademicYearId = x.TeacherAssignment?.AcademicYearId ?? 0,
+
                 AttendanceDate =
                     x.AttendanceDate,
 
                 TeacherName =
-                    x.TeacherAssignment.Teacher.FirstName
-                    + " "
-                    + (x.TeacherAssignment.Teacher.MiddleName ?? "")
-                    + " "
-                    + x.TeacherAssignment.Teacher.LastName,
+                    x.TeacherAssignment?.Teacher != null
+                        ? (x.TeacherAssignment.Teacher.FirstName
+                            + " "
+                            + (x.TeacherAssignment.Teacher.MiddleName ?? "")
+                            + " "
+                            + x.TeacherAssignment.Teacher.LastName).Trim()
+                        : "Unknown",
 
                 ClassName =
-                    x.TeacherAssignment.SchoolClass.ClassName,
+                    x.TeacherAssignment?.SchoolClass?.ClassName ?? "",
 
                 SectionName =
-                    x.TeacherAssignment.Section.SectionName,
+                    x.TeacherAssignment?.Section?.SectionName ?? "",
 
                 SubjectName =
-                    x.TeacherAssignment.Subject.SubjectName,
+                    x.TeacherAssignment?.Subject?.SubjectName ?? "",
+
+                Remarks = x.Remarks,
 
                 PresentCount =
-                    x.AttendanceDetails
-                        .Count(a => a.AttendanceStatus == "Present"),
+                    x.AttendanceDetails?
+                        .Count(a => a.AttendanceStatus == "Present" || a.AttendanceStatus == "Exam-P") ?? 0,
 
                 AbsentCount =
-                    x.AttendanceDetails
-                        .Count(a => a.AttendanceStatus == "Absent"),
+                    x.AttendanceDetails?
+                        .Count(a => a.AttendanceStatus == "Absent" || a.AttendanceStatus == "Exam-A") ?? 0,
 
                 LeaveCount =
-                    x.AttendanceDetails
-                        .Count(a => a.AttendanceStatus == "Leave"),
+                    x.AttendanceDetails?
+                        .Count(a => a.AttendanceStatus == "Leave") ?? 0,
 
                 LateCount =
-                    x.AttendanceDetails
-                        .Count(a => a.AttendanceStatus == "Late")
+                    x.AttendanceDetails?
+                        .Count(a => a.AttendanceStatus == "Late") ?? 0,
+
+                Students = x.AttendanceDetails?.Select(d => new AttendanceStudentDTO
+                {
+                    StudentId = d.StudentId,
+                    StudentName = d.Student != null
+                        ? (d.Student.FirstName + " " + (d.Student.MiddleName ?? "") + " " + d.Student.LastName).Trim()
+                        : "",
+                    AdmissionNumber = d.Student?.AdmissionNumber ?? "",
+                    AttendanceStatus = d.AttendanceStatus ?? "Present",
+                    Remarks = d.Remarks
+                }).ToList() ?? new List<AttendanceStudentDTO>()
 
             }).ToList();
         }
@@ -356,50 +342,41 @@ namespace Service.ClassOfService
 
 
 
-            attendance.Remarks =
-                dto.Remarks;
+            attendance.Remarks = dto.Remarks;
+            attendance.Status = !string.IsNullOrEmpty(dto.Status) ? dto.Status : attendance.Status;
+            attendance.ModifiedBy = _currentUserService.UserId;
+            attendance.ModifiedDate = DateTime.UtcNow;
 
+            var userId = _currentUserService.UserId;
 
-            attendance.Status =
-                dto.Status;
-
-
-
-            foreach (var detail in attendance.AttendanceDetails)
+            foreach (var student in dto.Students)
             {
+                var detail = attendance.AttendanceDetails
+                    .FirstOrDefault(x => x.StudentId == student.StudentId);
 
-
-                var student =
-                    dto.Students
-                    .FirstOrDefault(
-                        x => x.StudentId ==
-                        detail.StudentId);
-
-
-
-                if (student != null)
+                if (detail != null)
                 {
-
-                    detail.AttendanceStatus =
-                        student.AttendanceStatus;
-
-
-                    detail.Remarks =
-                        student.Remarks;
-
+                    detail.AttendanceStatus = student.AttendanceStatus;
+                    detail.Remarks = student.Remarks;
+                    detail.ModifiedBy = userId;
+                    detail.ModifiedDate = DateTime.UtcNow;
                 }
-
+                else
+                {
+                    attendance.AttendanceDetails.Add(new AttendanceDetail
+                    {
+                        AttendanceId = attendance.Id,
+                        StudentId = student.StudentId,
+                        AttendanceStatus = student.AttendanceStatus,
+                        Remarks = student.Remarks,
+                        CreatedBy = userId,
+                        CreatedDate = DateTime.UtcNow
+                    });
+                }
             }
 
-
-
-            await _attendanceRepository
-                .UpdateAsync(attendance);
-
-
-
+            await _attendanceRepository.UpdateAsync(attendance);
             return true;
-
         }
 
 

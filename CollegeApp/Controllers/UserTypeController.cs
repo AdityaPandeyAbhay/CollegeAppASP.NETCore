@@ -1,9 +1,8 @@
-﻿using AutoMapper;
+using AutoMapper;
 using CollegeApp.Data;
 using CollegeApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc;
 using Model.Models;
 using Repository.InterfaceOfRepository;
@@ -135,7 +134,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("Dropdown")]
-        [Authorize(Roles = "Super Admin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin,Operator")]
 
 
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success

@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using CollegeApp.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Model.Models.Fee_Model;
 using Service.InterfaceOfService;
 using System.Net;
@@ -32,7 +31,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetAllStudentFees")]
-        [Authorize(Roles = "Super Admin,Admin,Accountant")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant,Teacher")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetAllStudentFees()
         {
@@ -62,7 +61,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetStudentFeeById/{id:int}")]
-        [Authorize(Roles = "Super Admin,Admin,Accountant,Student")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant,Student,Teacher")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> GetStudentFeeById(int id)
@@ -93,7 +92,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetStudentFeeByStudentId/{studentId:int}")]
-        [Authorize(Roles = "Super Admin,Admin,Accountant,Student")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant,Student,Teacher")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> GetStudentFeeByStudentId(int studentId)
@@ -124,7 +123,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetStudentFeeByStudentName/{studentName}")]
-        [Authorize(Roles = "Super Admin,Admin,Accountant")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant,Teacher")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> GetStudentFeeByStudentName(string studentName)
@@ -187,7 +186,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("Dropdown")]
-        [Authorize(Roles = "Super Admin,Admin,Accountant")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant,Teacher")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetStudentFeeDropdown()
         {

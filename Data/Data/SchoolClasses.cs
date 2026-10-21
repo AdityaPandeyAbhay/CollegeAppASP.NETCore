@@ -40,8 +40,8 @@ namespace Data.Data
        public virtual ICollection<TeacherAssignment> TeacherAssignments { get; set; }
            = new List<TeacherAssignment>();
 
-        //public virtual ICollection<StudentAcademicYear> StudentAcademicYears { get; set; }
-        //    = new List<StudentAcademicYear>();
+        public virtual ICollection<StudentAcademicYear> StudentAcademicYears { get; set; }
+            = new List<StudentAcademicYear>();
 
         //public virtual ICollection<FeeStructure> FeeStructures { get; set; }
         //    = new List<FeeStructure>();

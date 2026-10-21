@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Data.Data;
 using Model.Models.Fee_Model;
 using Repository.InterfaceOfRepository;
@@ -85,21 +85,20 @@ namespace Service.ClassOfService
 
             await _feeStructureRepository.CreateAsync(feeStructure);
 
-            return _mapper.Map<GetFeeStructureDTO>(feeStructure);
+            var createdWithDetails = await _feeStructureRepository.GetByIdWithDetailsAsync(feeStructure.Id);
+            return _mapper.Map<GetFeeStructureDTO>(createdWithDetails ?? feeStructure);
         }
 
         public async Task<List<GetFeeStructureDTO>> GetAllFeeStructureAsync()
         {
-            var feeStructures = await _feeStructureRepository.GetAllAsync();
+            var feeStructures = await _feeStructureRepository.GetAllWithDetailsAsync();
 
             return _mapper.Map<List<GetFeeStructureDTO>>(feeStructures);
         }
 
         public async Task<GetFeeStructureDTO> GetFeeStructureByIdAsync(int id)
         {
-            var feeStructure = await _feeStructureRepository.GetAsync(
-                x => x.Id == id,
-                true);
+            var feeStructure = await _feeStructureRepository.GetByIdWithDetailsAsync(id);
 
             if (feeStructure == null)
             {
@@ -111,16 +110,14 @@ namespace Service.ClassOfService
 
         public async Task<List<GetFeeStructureDTO>> GetFeeStructureByCategoryAsync(int feeCategoryId)
         {
-            var feeStructures = await _feeStructureRepository.GetAllByFilterAsync(
-                x => x.FeeCategoryId == feeCategoryId);
+            var feeStructures = await _feeStructureRepository.GetByCategoryWithDetailsAsync(feeCategoryId);
 
             return _mapper.Map<List<GetFeeStructureDTO>>(feeStructures);
         }
 
         public async Task<List<GetFeeStructureDTO>> GetFeeStructureByClassAsync(int classId)
         {
-            var feeStructures = await _feeStructureRepository.GetAllByFilterAsync(
-                x => x.ClassId == classId);
+            var feeStructures = await _feeStructureRepository.GetByClassWithDetailsAsync(classId);
 
             return _mapper.Map<List<GetFeeStructureDTO>>(feeStructures);
         }
@@ -217,11 +214,17 @@ namespace Service.ClassOfService
         public async Task<List<FeeStructureDropdownDTO>> GetFeeStructureDropdownAsync()
         {
             var feeStructures = await _feeStructureRepository.GetAllByFilterAsync(x => x.IsActive);
+            var categories = await _feeCategoryRepository.GetAllAsync();
+            var categoryMap = categories.ToDictionary(c => c.Id, c => c.CategoryName);
 
-            return feeStructures.Select(x => new FeeStructureDropdownDTO
+            return feeStructures.Select(x =>
             {
-                Id = x.Id,
-                Name = $"{x.FeeCategory.CategoryName} - {x.Amount}"
+                categoryMap.TryGetValue(x.FeeCategoryId, out var catName);
+                return new FeeStructureDropdownDTO
+                {
+                    Id = x.Id,
+                    Name = $"{(catName ?? "Fee")} - ₹{x.Amount}"
+                };
             }).ToList();
         }
     }

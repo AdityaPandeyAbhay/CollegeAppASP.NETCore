@@ -1,4 +1,4 @@
-﻿using CollegeApp.Data;
+using CollegeApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Repository.InterfaceOfRepository;
 

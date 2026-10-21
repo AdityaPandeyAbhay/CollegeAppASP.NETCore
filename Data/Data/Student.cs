@@ -1,4 +1,4 @@
-﻿using CollegeApp.Data;
+using CollegeApp.Data;
 
 namespace Data.Data
 {
@@ -36,6 +36,10 @@ namespace Data.Data
         public string? MiddleName { get; set; }
 
         public string LastName { get; set; } = string.Empty;
+
+        public string? FatherName { get; set; }
+
+        public string? MotherName { get; set; }
 
         public DateTime DOB { get; set; }
 
@@ -80,8 +84,8 @@ namespace Data.Data
 
         public virtual ICollection<StudentFee> StudentFees { get; set; }
                = new List<StudentFee>();
-        //public virtual ICollection<StudentAcademicYear> StudentAcademicYears { get; set; }
-        //    = new List<StudentAcademicYear>();
+        public virtual ICollection<StudentAcademicYear> StudentAcademicYears { get; set; }
+            = new List<StudentAcademicYear>();
 
         //public virtual ICollection<StudentFee> StudentFees { get; set; }
         //    = new List<StudentFee>();

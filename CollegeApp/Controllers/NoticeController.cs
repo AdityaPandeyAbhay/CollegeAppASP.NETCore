@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using CollegeApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -36,7 +36,7 @@ namespace CollegeApp.Controllers
 
         [HttpPost]
         [Route("CreateNotice")]
-        [Authorize(Roles = "Super Admin,Admin,Operator")]
+        [Authorize(Roles = "Super Admin,Admin,Operator,Teacher")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -71,8 +71,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("GetNonPublished")]
-
-        [Authorize(Roles = "Super Admin,Admin,Operator")]
+        [Authorize(Roles = "Super Admin,Admin,Operator,Teacher")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -103,7 +102,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("GetNonPublishedById/{id}")]
-        [Authorize(Roles = "Super Admin,Admin,Operator")]
+        [Authorize(Roles = "Super Admin,Admin,Operator,Teacher")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -141,7 +140,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpPut("Publish/{id}")]
-        [Authorize(Roles = "Super Admin,Admin,Operator")]
+        [Authorize(Roles = "Super Admin,Admin,Operator,Teacher")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -201,7 +200,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("GetNonPublishedDropdown")]
-        [Authorize(Roles = "Super Admin,Admin,Operator")]
+        [Authorize(Roles = "Super Admin,Admin,Operator,Teacher")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]

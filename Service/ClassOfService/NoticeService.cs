@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -112,7 +112,7 @@ namespace Service.ClassOfService
             // NOTICE BUSINESS LOGIC
             // ============================
 
-            notice.CreatedBy = _currentUserServices.UserId;
+            notice.CreatedBy = _currentUserServices.UserId ?? string.Empty;
 
             notice.CreatedDate = DateTime.UtcNow;
 

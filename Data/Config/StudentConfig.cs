@@ -1,4 +1,4 @@
-﻿using Data.Data;
+using Data.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -48,6 +48,12 @@ namespace CollegeApp.Data.Config
                    .IsRequired()
                    .HasMaxLength(100);
 
+            builder.Property(x => x.FatherName)
+                   .HasMaxLength(100);
+
+            builder.Property(x => x.MotherName)
+                   .HasMaxLength(100);
+
             builder.Property(x => x.DOB)
                    .IsRequired();
 
@@ -59,7 +65,7 @@ namespace CollegeApp.Data.Config
                    .HasMaxLength(10);
 
             builder.Property(x => x.Photo)
-                   .HasMaxLength(500);
+                   .HasColumnType("nvarchar(max)");
 
             builder.Property(x => x.AadhaarNumber)
                    .HasMaxLength(20);

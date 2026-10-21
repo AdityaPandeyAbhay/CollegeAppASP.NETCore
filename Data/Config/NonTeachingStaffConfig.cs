@@ -1,4 +1,4 @@
-﻿using Data.Data;
+using Data.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -70,6 +70,21 @@ namespace Data.Config
 
             builder.Property(x => x.AlternatePhoneNumber)
                    .HasMaxLength(15);
+
+            builder.Property(x => x.FatherName)
+                   .HasMaxLength(100);
+
+            builder.Property(x => x.MotherName)
+                   .HasMaxLength(100);
+
+            builder.Property(x => x.Photo)
+                   .HasColumnType("nvarchar(max)");
+
+            builder.Property(x => x.EducationPdf)
+                   .HasColumnType("nvarchar(max)");
+
+            builder.Property(x => x.EducationFileName)
+                   .HasMaxLength(200);
 
             builder.Property(x => x.Address)
                    .HasMaxLength(300);

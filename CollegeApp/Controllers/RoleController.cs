@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using CollegeApp.Data;
 using CollegeApp.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -174,7 +174,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("dropdown")]
-        [Authorize(Roles = "Super Admin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin,Operator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> GetRoleDropdown()

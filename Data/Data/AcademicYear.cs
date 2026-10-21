@@ -28,8 +28,8 @@ namespace Data.Data
 
         // Navigation
 
-        //public virtual ICollection<StudentAcademicYear> StudentAcademicYears { get; set; }
-        //    = new List<StudentAcademicYear>();
+        public virtual ICollection<StudentAcademicYear> StudentAcademicYears { get; set; }
+            = new List<StudentAcademicYear>();
 
         public virtual ICollection<TeacherAssignment> TeacherAssignments { get; set; }
             = new List<TeacherAssignment>();

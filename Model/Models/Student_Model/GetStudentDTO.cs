@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -25,6 +25,10 @@ namespace Model.Models.Student_Model
         public string? MiddleName { get; set; }
 
         public string LastName { get; set; } = string.Empty;
+
+        public string? FatherName { get; set; }
+
+        public string? MotherName { get; set; }
 
         public DateTime DOB { get; set; }
 
@@ -54,10 +58,28 @@ namespace Model.Models.Student_Model
 
         public string CreatedBy { get; set; } = string.Empty;
 
+        public string? CreatedByName { get; set; }
+
         public DateTime CreatedDate { get; set; }
 
         public string? UpdatedBy { get; set; }
 
+        public string? UpdatedByName { get; set; }
+
         public DateTime? UpdatedDate { get; set; }
+
+        public string? DepartmentName { get; set; }
+
+        public string? ClassName { get; set; }
+
+        public string? SectionName { get; set; }
+
+        public int? AcademicYearId { get; set; }
+
+        public string? AcademicYearName { get; set; }
+
+        public string? RollNumber { get; set; }
+
+        public List<StudentAcademicYearDTO> AcademicHistory { get; set; } = new List<StudentAcademicYearDTO>();
     }
 }

@@ -59,7 +59,6 @@ namespace Service.InterfaceOfService
 
 
         #region Result Detail
-
         Task<bool> UploadStudentResultAsync(ResultUploadDTO dto);
 
         Task<bool> UpdateStudentResultAsync(ResultUploadDTO dto);
@@ -78,6 +77,8 @@ namespace Service.InterfaceOfService
 
         Task<List<DropdownDTO>> GetResultDropdownAsync(
             int resultBatchId);
+
+        Task<List<DropdownDTO>> GetStudentResultDropdownAsync(int resultBatchId);
 
         Task<List<DropdownDTO>> GetResultDetailDropdownAsync(
             int resultId);

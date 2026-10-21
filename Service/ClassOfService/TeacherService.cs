@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using CollegeApp.Data;
 using CollegeApp.Models;
 using Data.Data;

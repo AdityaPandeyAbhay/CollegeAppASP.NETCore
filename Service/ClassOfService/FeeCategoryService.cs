@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Data.Data;
 using Model.Models;
 using Model.Models.Fee_Model;
@@ -30,10 +30,10 @@ namespace Service.ClassOfService
         {
             ArgumentNullException.ThrowIfNull(dto);
 
-            var category = await _feeCategoryRepository.GetAllByFilterAsync(
-                x => x.CategoryName.ToLower() == dto.CategoryName.ToLower());
+            var existingActive = await _feeCategoryRepository.GetAllByFilterAsync(
+                x => x.CategoryName.ToLower() == dto.CategoryName.ToLower() && x.IsActive);
 
-            if (category.Any())
+            if (existingActive.Any())
             {
                 throw new Exception("Fee Category already exists.");
             }
@@ -43,6 +43,21 @@ namespace Service.ClassOfService
             if (string.IsNullOrEmpty(currentUser))
             {
                 throw new UnauthorizedAccessException("User is not authenticated.");
+            }
+
+            var existingInactive = (await _feeCategoryRepository.GetAllByFilterAsync(
+                x => x.CategoryName.ToLower() == dto.CategoryName.ToLower() && !x.IsActive)).FirstOrDefault();
+
+            if (existingInactive != null)
+            {
+                _mapper.Map(dto, existingInactive);
+                existingInactive.IsActive = true;
+                existingInactive.ModifiedBy = currentUser;
+                existingInactive.ModifiedDate = DateTime.UtcNow;
+
+                await _feeCategoryRepository.UpdateAsync(existingInactive);
+
+                return _mapper.Map<FeeCategoryDTO>(existingInactive);
             }
 
             var feeCategory = _mapper.Map<FeeCategory>(dto);
@@ -100,7 +115,8 @@ namespace Service.ClassOfService
 
             var duplicate = await _feeCategoryRepository.GetAllByFilterAsync(
                 x => x.Id != id &&
-                     x.CategoryName.ToLower() == dto.CategoryName.ToLower());
+                     x.CategoryName.ToLower() == dto.CategoryName.ToLower() &&
+                     x.IsActive);
 
             if (duplicate.Any())
             {
@@ -114,7 +130,14 @@ namespace Service.ClassOfService
                 throw new UnauthorizedAccessException("User is not authenticated.");
             }
 
+            var originalCreatedBy = category.CreatedBy;
+            var originalCreatedDate = category.CreatedDate;
+
             _mapper.Map(dto, category);
+
+            // Always preserve original CreatedBy and CreatedDate
+            category.CreatedBy = originalCreatedBy;
+            category.CreatedDate = originalCreatedDate;
 
             category.ModifiedBy = currentUser;
             category.ModifiedDate = DateTime.UtcNow;
@@ -135,9 +158,20 @@ namespace Service.ClassOfService
                 throw new Exception($"Fee Category not found with Id : {id}");
             }
 
-            await _feeCategoryRepository.DeleteAsync(category);
-
-            return true;
+            try
+            {
+                await _feeCategoryRepository.DeleteAsync(category);
+                return true;
+            }
+            catch (Exception)
+            {
+                // If referenced in other tables, deactivate instead of permanent delete
+                category.IsActive = false;
+                category.ModifiedBy = _currentUserService.UserId ?? "System";
+                category.ModifiedDate = DateTime.UtcNow;
+                await _feeCategoryRepository.UpdateAsync(category);
+                return false;
+            }
         }
 
         public async Task<List<DropdownDTO>> GetFeeCategoryDropdownAsync()

@@ -1,4 +1,4 @@
-﻿using CollegeApp.Models;
+using CollegeApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Model.Models.Result_Model;
@@ -28,7 +28,13 @@ namespace CollegeApp.Controllers
 
 
         [HttpPost("CreateExam")]
-        [Authorize(Roles = "Super Admin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> CreateExam(CreateExamDTO dto)
         {
             try
@@ -54,7 +60,13 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("AllExam")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator,Office Employee")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> GetAllExam()
         {
             try
@@ -80,7 +92,13 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("Exam/{id:int}")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator,Office Employee")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> GetExamById(int id)
         {
             try
@@ -109,7 +127,13 @@ namespace CollegeApp.Controllers
 
 
         [HttpPut("UpdateExam/{id:int}")]
-        [Authorize(Roles = "Super Admin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> UpdateExam(
             int id,
             UpdateExamDTO dto)
@@ -140,6 +164,12 @@ namespace CollegeApp.Controllers
 
         [HttpDelete("DeleteExam/{id:int}")]
         [Authorize(Roles = "Super Admin,Admin")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> DeleteExam(int id)
         {
             try
@@ -174,7 +204,13 @@ namespace CollegeApp.Controllers
 
 
         [HttpPost("CreateResultBatch")]
-        [Authorize(Roles = "Super Admin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> CreateResultBatch(
             CreateResultBatchDTO dto)
         {
@@ -204,7 +240,13 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("AllResultBatch")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator,Office Employee")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> GetAllResultBatch()
         {
             try
@@ -234,7 +276,13 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("ResultBatch/{id:int}")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator,Office Employee")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> GetResultBatchById(int id)
         {
             try
@@ -263,7 +311,13 @@ namespace CollegeApp.Controllers
 
 
         [HttpPut("PublishResultBatch/{id:int}")]
-        [Authorize(Roles = "Super Admin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> PublishResultBatch(int id)
         {
             try
@@ -299,6 +353,14 @@ namespace CollegeApp.Controllers
 
         [HttpPost("UploadStudentResult")]
         [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Consumes("multipart/form-data")]
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> UploadStudentResult(
             ResultUploadDTO dto)
         {
@@ -330,6 +392,12 @@ namespace CollegeApp.Controllers
 
         [HttpPut("UpdateStudentResult")]
         [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> UpdateStudentResult(
             ResultUploadDTO dto)
         {
@@ -367,7 +435,13 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("StudentResult/{resultBatchId}/{studentId}")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher,Student")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Student,Operator,Office Employee")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> GetStudentResult(
             int resultBatchId,
             int studentId)
@@ -401,7 +475,13 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("BatchResult/{resultBatchId:int}")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator,Office Employee")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> GetBatchResult(
             int resultBatchId)
         {
@@ -431,7 +511,13 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("PreviousResult/{studentId:int}")]
-        [Authorize(Roles = "Super Admin,Admin,Student")]
+        [Authorize(Roles = "Super Admin,Admin,Student,Teacher,Operator,Office Employee")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> PreviousResult(
             int studentId)
         {
@@ -468,7 +554,13 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("ResultDetails/{resultId:int}")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Student,Operator,Office Employee")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> GetResultDetails(int resultId)
         {
             try
@@ -500,6 +592,12 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("Dropdown/Exam")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetExamDropdown()
         {
             var data = await _service.GetExamDropdownAsync();
@@ -514,8 +612,13 @@ namespace CollegeApp.Controllers
         }
 
         [HttpGet("Dropdown/ResultBatch/{examId}")]
-        public async Task<IActionResult> GetResultBatchDropdown(
-         int examId)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetResultBatchDropdown(int examId)
         {
             var data =
                 await _service
@@ -530,7 +633,19 @@ namespace CollegeApp.Controllers
             });
         }
 
+
+
+        
+
+
+
         [HttpGet("Dropdown/Result/{resultBatchId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetResultDropdown(
         int resultBatchId)
         {
@@ -548,6 +663,47 @@ namespace CollegeApp.Controllers
         }
 
 
+
+
+
+
+        [HttpGet("Dropdown/StudentResult/{resultBatchId:int}")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Student,Operator,Office Employee")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetStudentResultDropdown(int resultBatchId)
+        {
+            try
+            {
+                var data =
+                    await _service.GetStudentResultDropdownAsync(
+                        resultBatchId);
+
+                return Ok(new
+                {
+                    status = true,
+                    statusCode = 200,
+                    data = data,
+                    errors = Array.Empty<string>()
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(
+                    StatusCodes.Status500InternalServerError,
+                    new
+                    {
+                        status = false,
+                        statusCode = 500,
+                        data = (object?)null,
+                        errors = new[] { ex.Message }
+                    });
+            }
+        }
 
 
     }

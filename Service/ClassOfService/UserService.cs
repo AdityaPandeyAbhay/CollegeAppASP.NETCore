@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using CollegeApp.Data;
 using CollegeApp.Models;
 using Microsoft.AspNetCore.Http;
@@ -126,6 +126,18 @@ namespace CollegeApp.Services
                     _httpContextAccessor.HttpContext?
                         .User
                         .FindFirst("UserId")?
+                        .Value
+                    ?? _httpContextAccessor.HttpContext?
+                        .User
+                        .FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?
+                        .Value
+                    ?? _httpContextAccessor.HttpContext?
+                        .User
+                        .FindFirst("nameid")?
+                        .Value
+                    ?? _httpContextAccessor.HttpContext?
+                        .User
+                        .FindFirst(System.Security.Claims.ClaimTypes.Name)?
                         .Value;
 
                 if (string.IsNullOrWhiteSpace(currentUserId))
@@ -140,7 +152,7 @@ namespace CollegeApp.Services
                 // =================================================
 
                 var currentUser = await _userRepository.GetAsync(
-                    u => u.Id == currentUserId
+                    u => u.Id.ToLower() == currentUserId.ToLower() || (u.Username != null && u.Username.ToLower() == currentUserId.ToLower())
                 );
 
                 if (currentUser == null)
@@ -161,11 +173,20 @@ namespace CollegeApp.Services
                     );
                 }
 
+                var userRoles = await _userRoleRepository.GetAllByFilterAsync(
+                    m => m.UserId.ToLower() == currentUser.Id.ToLower()
+                );
+                var userRoleIds = userRoles?.Select(m => m.RoleId).Distinct().ToList() ?? new List<int>();
+
+                bool isSuperAdmin = currentUser.UserTypeId == 1 || userRoleIds.Contains(1) || (_httpContextAccessor.HttpContext?.User.IsInRole("Super Admin") ?? false);
+                bool isAdmin = currentUser.UserTypeId == 2 || userRoleIds.Contains(2) || (_httpContextAccessor.HttpContext?.User.IsInRole("Admin") ?? false);
+                bool isOperator = currentUser.UserTypeId == 4 || userRoleIds.Contains(6) || (_httpContextAccessor.HttpContext?.User.IsInRole("Operator") ?? false);
+
                 // =================================================
                 // 10. PREVENT CREATION OF ANOTHER SUPER ADMIN
                 // =================================================
 
-                if (userDTO.UserTypeId == 1)
+                if (userDTO.UserTypeId == 1 || (userDTO.RoleIds != null && userDTO.RoleIds.Contains(1)))
                 {
                     throw new UnauthorizedAccessException(
                         "Another Super Admin cannot be created."
@@ -176,9 +197,9 @@ namespace CollegeApp.Services
                 // 11. ADMIN CAN ONLY BE CREATED BY SUPER ADMIN
                 // =================================================
 
-                if (userDTO.UserTypeId == 2)
+                if (userDTO.UserTypeId == 2 || (userDTO.RoleIds != null && userDTO.RoleIds.Contains(2)))
                 {
-                    if (currentUser.UserTypeId != 1)
+                    if (!isSuperAdmin)
                     {
                         throw new UnauthorizedAccessException(
                             "Only Super Admin can create an Admin user."
@@ -196,22 +217,55 @@ namespace CollegeApp.Services
                 }
 
                 // =================================================
-                // 12. SUPER ADMIN CAN CREATE ALL OTHER USERS
-                // 13. ADMIN CAN CREATE NON-SUPER-ADMIN USERS
+                // 12. OPERATOR ROLE RESTRICTIONS
+                // Operator can only create Office Staff (7) and Other Non Teaching Staff (4), Teacher (3), Student (5)
+                // Operator cannot create Operator (6), Admin (2), or Super Admin (1)
                 // =================================================
 
-                if (currentUser.UserTypeId != 1 &&
-                    currentUser.UserTypeId != 2)
+                if (isOperator && !isSuperAdmin && !isAdmin)
+                {
+                    if (userDTO.RoleIds != null && userDTO.RoleIds.Contains(4))
+                    {
+                        throw new UnauthorizedAccessException(
+                            "Operators cannot create other Operator accounts. Only Office Staff and Other Non Teaching Staff can be created."
+                        );
+                    }
+
+                    if (userDTO.UserTypeId == 1 || userDTO.UserTypeId == 2 || (userDTO.RoleIds != null && (userDTO.RoleIds.Contains(1) || userDTO.RoleIds.Contains(2))))
+                    {
+                        throw new UnauthorizedAccessException(
+                            "Operators cannot create Admin or Super Admin accounts."
+                        );
+                    }
+                }
+
+                // =================================================
+                // 13. AUTHORIZATION CHECK: ONLY SUPER ADMIN, ADMIN, OR OPERATOR
+                // =================================================
+
+                if (!isSuperAdmin && !isAdmin && !isOperator)
                 {
                     throw new UnauthorizedAccessException(
-                        "Only Super Admin or Admin can create users."
+                        "Only Super Admin, Admin, or Operator can create users."
                     );
                 }
             }
 
             // =====================================================
-            // 14. CHECK DUPLICATE USER ID
+            // 14. AUTO-GENERATE USER ID IF NOT PROVIDED & CHECK DUPLICATE
             // =====================================================
+
+            if (string.IsNullOrWhiteSpace(userDTO.Id))
+            {
+                string prefix = userDTO.UserTypeId switch
+                {
+                    1 => "ADM",
+                    2 => "STU",
+                    3 => "TCH",
+                    _ => "USR"
+                };
+                userDTO.Id = $"{prefix}_{Guid.NewGuid().ToString("N")[..8].ToUpper()}_{DateTime.UtcNow:yyyyMMddHHmmss}";
+            }
 
             var existingUserId = await _userRepository.GetAsync(
                 u => u.Id == userDTO.Id
@@ -311,23 +365,54 @@ namespace CollegeApp.Services
         public async Task<List<UserDTO>> GetUser()
         {
             var user = await _userRepository.GetAllAsync();
-          
-            return _mapper.Map<List<UserDTO>>(user);
+            var dtos = _mapper.Map<List<UserDTO>>(user);
+
+            var allMappings = await _userRoleRepository.GetAllAsync();
+            var mappingsByUser = allMappings
+                .Where(m => !string.IsNullOrEmpty(m.UserId))
+                .GroupBy(m => m.UserId.Trim(), StringComparer.OrdinalIgnoreCase)
+                .ToDictionary(
+                    g => g.Key,
+                    g => g.Select(m => m.RoleId).Distinct().ToList(),
+                    StringComparer.OrdinalIgnoreCase
+                );
+
+            foreach (var dto in dtos)
+            {
+                if (!string.IsNullOrEmpty(dto.Id) && mappingsByUser.TryGetValue(dto.Id.Trim(), out var rIds))
+                {
+                    dto.RoleIds = rIds;
+                }
+                else
+                {
+                    dto.RoleIds = new List<int>();
+                }
+            }
+
+            return dtos;
         }
 
 
         public async Task<UserDTO> GetUserByIdAsync(string Id)
         {
+            if (string.IsNullOrWhiteSpace(Id)) return null!;
             var user = await _userRepository.GetAsync(u => u.Id.Equals(Id));
-           
-            return _mapper.Map<UserDTO>(user);
+            if (user == null) return null!;
+            var dto = _mapper.Map<UserDTO>(user);
+            var mappings = await _userRoleRepository.GetAllByFilterAsync(m => m.UserId.ToLower() == Id.Trim().ToLower());
+            dto.RoleIds = mappings.Select(m => m.RoleId).Distinct().ToList();
+            return dto;
         }
 
         public async Task<UserDTO> GetUserByNameAsync(string UserName)
         {
+            if (string.IsNullOrWhiteSpace(UserName)) return null!;
             var user = await _userRepository.GetAsync(u => u.Username.Equals(UserName));
-
-            return _mapper.Map<UserDTO>(user);
+            if (user == null) return null!;
+            var dto = _mapper.Map<UserDTO>(user);
+            var mappings = await _userRoleRepository.GetAllByFilterAsync(m => m.UserId.ToLower() == user.Id.Trim().ToLower());
+            dto.RoleIds = mappings.Select(m => m.RoleId).Distinct().ToList();
+            return dto;
         }
 
 
@@ -340,22 +425,46 @@ namespace CollegeApp.Services
             {
                 throw new Exception($"User not found with UserId : {userdto.Id} ");
             }
-            var userToUpdate =_mapper.Map<User>(userdto);
+            var userToUpdate = _mapper.Map<User>(userdto);
             userToUpdate.ModifyDate = DateTime.Now;
 
-
-            // only update user not password 
-            //only demo update the password
-
+            // Only update password if new password is provided; otherwise retain existing
             if (!string.IsNullOrEmpty(userdto.Password))
             {
                 var (passwordHash, salt) = CreatePasswordHashWithSalt(userdto.Password);
                 userToUpdate.Password = passwordHash;
                 userToUpdate.PasswordSalt = salt;
             }
-
+            else
+            {
+                userToUpdate.Password = existingUser.Password;
+                userToUpdate.PasswordSalt = existingUser.PasswordSalt;
+            }
 
             await _userRepository.UpdateAsync(userToUpdate);
+
+            // Update user roles if provided
+            if (userdto.RoleIds != null && userdto.RoleIds.Count > 0)
+            {
+                var existingRoles = await _userRoleRepository.GetAllByFilterAsync(m => m.UserId == userdto.Id);
+                foreach (var mapping in existingRoles)
+                {
+                    await _userRoleRepository.DeleteAsync(mapping);
+                }
+
+                foreach (var roleId in userdto.RoleIds.Distinct())
+                {
+                    if (roleId > 0)
+                    {
+                        var newMapping = new UserRoleMapping
+                        {
+                            UserId = userdto.Id,
+                            RoleId = roleId
+                        };
+                        await _userRoleRepository.CreateAsync(newMapping);
+                    }
+                }
+            }
 
             return true;
         }

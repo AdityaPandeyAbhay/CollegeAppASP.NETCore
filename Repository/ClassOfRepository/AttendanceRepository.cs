@@ -1,4 +1,4 @@
-﻿using CollegeApp.Data;
+using CollegeApp.Data;
 using Data.Data;
 using Microsoft.EntityFrameworkCore;
 using Repository.InterfaceOfRepository;
@@ -10,11 +10,9 @@ namespace Repository.ClassOfRepository
 {
     public class AttendanceRepository : CollegeRepository<Attendance>, IAttendanceRepository
     {
-        private readonly CollegeDBContext _dbContext;
         public AttendanceRepository(CollegeDBContext dbContext)
             : base(dbContext)
         {
-            _dbContext = dbContext;
         }
 
       
@@ -48,25 +46,18 @@ namespace Repository.ClassOfRepository
      GetAllAttendanceAsync()
         {
             return await _dbContext.Attendances
-
                 .Include(x => x.TeacherAssignment)
                     .ThenInclude(x => x.Teacher)
-
                 .Include(x => x.TeacherAssignment)
                     .ThenInclude(x => x.SchoolClass)
-
                 .Include(x => x.TeacherAssignment)
                     .ThenInclude(x => x.Section)
-
                 .Include(x => x.TeacherAssignment)
                     .ThenInclude(x => x.Subject)
-
                 .Include(x => x.AttendanceDetails)
-
+                    .ThenInclude(x => x.Student)
                 .AsNoTracking()
-
                 .OrderByDescending(x => x.AttendanceDate)
-
                 .ToListAsync();
         }
 

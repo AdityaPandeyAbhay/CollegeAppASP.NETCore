@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 
 namespace CollegeApp.Models
 {
@@ -7,7 +7,7 @@ namespace CollegeApp.Models
         public bool Status { get; set; }
         public HttpStatusCode StatusCode { get; set; }
 
-        public dynamic Data {  get; set; }
+        public dynamic? Data { get; set; }
 
         public List<string> Errors { get; set; } = new List<string>();
 

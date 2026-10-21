@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using CollegeApp.Models;
 using CollegeApp.Services;
 using Data.Data;
@@ -40,7 +40,7 @@ namespace CollegeApp.Controllers
 
         [HttpPost]
         [Route("CreateTeacher")]
-        [Authorize(Roles = "Super Admin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin,Operator")]
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
 
         [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
@@ -86,7 +86,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("AllTeacher")]
-        [Authorize(Roles = "Super Admin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator")]
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
 
         [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
@@ -123,7 +123,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("TeacherCode/{code}")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -142,7 +142,8 @@ namespace CollegeApp.Controllers
                 }
 
                 if (!_currentUserService.IsInRole("Super Admin") &&
-                    !_currentUserService.IsInRole("Admin"))
+                    !_currentUserService.IsInRole("Admin") &&
+                    !_currentUserService.IsInRole("Operator"))
                 {
                     if (teacher.UserId != _currentUserService.UserId)
                     {
@@ -169,7 +170,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("Name/{Name}")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator")]
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
 
         [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
@@ -194,7 +195,8 @@ namespace CollegeApp.Controllers
                 }
 
                 if (!_currentUserService.IsInRole("Super Admin") &&
-                    !_currentUserService.IsInRole("Admin"))
+                    !_currentUserService.IsInRole("Admin") &&
+                    !_currentUserService.IsInRole("Operator"))
                 {
                     if (teachers.Any(x => x.UserId != _currentUserService.UserId))
                     {
@@ -222,7 +224,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpGet("dropdown")]
-        [Authorize(Roles = "Super Admin,Admin,Teacher")]
+        [Authorize(Roles = "Super Admin,Admin,Teacher,Operator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -269,7 +271,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpPut("UpdateTeacher/{id:int}")]
-        [Authorize(Roles = "Super Admin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin,Operator")]
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
 
         [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created
@@ -309,7 +311,7 @@ namespace CollegeApp.Controllers
 
 
         [HttpDelete("DeleteTeacher/{code}")]
-        [Authorize(Roles = "Super Admin,Admin")]
+        [Authorize(Roles = "Super Admin,Admin,Operator")]
         [ProducesResponseType(StatusCodes.Status200OK)]          // Success
 
         [ProducesResponseType(StatusCodes.Status201Created)]     // Resource Created

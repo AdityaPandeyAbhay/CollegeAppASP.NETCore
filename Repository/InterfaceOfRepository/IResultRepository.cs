@@ -6,8 +6,7 @@ using System.Text;
 
 namespace Repository.InterfaceOfRepository
 {
-    public interface IResultRepository
-    {
+    public interface IResultRepository     {
         #region Exam
 
         Task<List<Exam>> GetAllExamsAsync();
@@ -70,6 +69,8 @@ namespace Repository.InterfaceOfRepository
         Task<List<DropdownDTO>> GetResultBatchDropdownAsync(int examId);
 
         Task<List<DropdownDTO>> GetResultDropdownAsync(int resultBatchId);
+
+        Task<List<DropdownDTO>> GetStudentResultDropdownAsync(int resultBatchId,int studentId);
 
         Task<List<DropdownDTO>> GetResultDetailDropdownAsync(int resultId);
     }

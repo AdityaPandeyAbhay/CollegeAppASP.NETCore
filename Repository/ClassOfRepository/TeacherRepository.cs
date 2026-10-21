@@ -1,4 +1,4 @@
-﻿using CollegeApp.Data;
+using CollegeApp.Data;
 using Data.Data;
 using Repository.InterfaceOfRepository;
 

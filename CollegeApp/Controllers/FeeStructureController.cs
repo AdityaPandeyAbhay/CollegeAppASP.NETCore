@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using CollegeApp.Models;
@@ -32,7 +32,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetAllFeeStructures")]
-        [Authorize(Roles = "Super Admin,Admin,Accountant")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant,Operator,Office Employee,Teacher")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetAllFeeStructures()
         {
@@ -62,7 +62,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetFeeStructureById/{id:int}")]
-        [Authorize(Roles = "Super Admin,Admin,Accountant")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant,Operator,Office Employee,Teacher")]
         public async Task<ActionResult<APIResponse>> GetFeeStructureById(int id)
         {
             try
@@ -91,7 +91,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetFeeStructureByCategory/{feeCategoryId:int}")]
-        [Authorize(Roles = "Super Admin,Admin,Accountant")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant,Operator,Office Employee,Teacher")]
         public async Task<ActionResult<APIResponse>> GetFeeStructureByCategory(int feeCategoryId)
         {
             try
@@ -120,7 +120,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("GetFeeStructureByClass/{classId:int}")]
-        [Authorize(Roles = "Super Admin,Admin,Accountant")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant,Operator,Office Employee,Teacher")]
         public async Task<ActionResult<APIResponse>> GetFeeStructureByClass(int classId)
         {
             try
@@ -180,7 +180,7 @@ namespace CollegeApp.Controllers
 
         [HttpGet]
         [Route("Dropdown")]
-        [Authorize(Roles = "Super Admin,Admin,Accountant")]
+        [Authorize(Roles = "Super Admin,Admin,Accountant,Operator,Office Employee,Teacher")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetFeeStructureDropdown()
         {

@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace Model.Models.Result_Model
 {
@@ -17,5 +18,10 @@ namespace Model.Models.Result_Model
         public int StudentId { get; set; }
 
         public List<ResultDetailDTO> Subjects { get; set; } = new();
+        // Result PDF
+        public IFormFile? PdfFile { get; set; }
+
+
+
     }
 }

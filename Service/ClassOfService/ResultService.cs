@@ -1,8 +1,10 @@
-﻿using AutoMapper;
+using AutoMapper;
 using CollegeApp.Data;
 using Data.Data;
+using Microsoft.AspNetCore.Hosting;
 using Model.Models;
 using Model.Models.Result_Model;
+using Repository.ClassOfRepository;
 using Repository.InterfaceOfRepository;
 using Service.InterfaceOfService;
 using System;
@@ -20,6 +22,10 @@ namespace Service.ClassOfService
         private readonly ICollegeRepository<ResultDetail> _resultDetailRepository;
         private readonly ICurrentUserServices _currentUserService;
         private readonly IMapper _mapper;
+        private readonly IWebHostEnvironment _environment;
+        private readonly IStudentRepository _studentRepository;
+        private readonly IUserRepository _userRepository;
+        
 
         public ResultService(
             IResultRepository resultRepository,
@@ -28,7 +34,7 @@ namespace Service.ClassOfService
             ICollegeRepository<Result> resultCrudRepository,
             ICollegeRepository<ResultDetail> resultDetailRepository,
             ICurrentUserServices currentUserService,
-            IMapper mapper)
+            IMapper mapper, IWebHostEnvironment environment,IUserRepository userRepository,IStudentRepository studentRepository            )
         {
             _resultRepository = resultRepository;
             _examRepository = examRepository;
@@ -37,6 +43,9 @@ namespace Service.ClassOfService
             _resultDetailRepository = resultDetailRepository;
             _currentUserService = currentUserService;
             _mapper = mapper;
+            _environment = environment;
+            _studentRepository = studentRepository;
+            _userRepository = userRepository;
         }
 
         #region Exam
@@ -254,20 +263,88 @@ namespace Service.ClassOfService
 
             return _mapper.Map<StudentResultDTO>(result);
         }
-        public async Task<StudentResultDTO?> GetStudentResultAsync(
-    int resultBatchId,
-    int studentId)
+        public async Task<StudentResultDTO?> GetStudentResultAsync(int resultBatchId,int studentId)
         {
+            var currentUserId = _currentUserService.UserId;
+
+            if (string.IsNullOrWhiteSpace(currentUserId))
+            {
+                throw new UnauthorizedAccessException(
+                    "User is not authenticated.");
+            }
+
+            // Get logged-in user's Studentrecord using UserId
+            var loggedInStudent = await _studentRepository. GetAsync(
+                x => x.UserId == currentUserId);
+
+            if (loggedInStudent == null)
+            {
+                throw new Exception(
+                    "Student record not found for the logged-in user.");
+            }
+
+            // Check whether logged-in user is Student
+            var user = await _userRepository.GetAsync(
+                x => x.Id == currentUserId);
+
+            if (user == null)
+            {
+                throw new Exception("User not found.");
+            }
+
+            // If logged-in user is Student,
+            // force studentId to his own StudentId.
+            if (user.UserTypeId == 5) // Student UserType
+            {
+                if (loggedInStudent.Id != studentId)
+                {
+                    throw new UnauthorizedAccessException(
+                        "You are not authorized to view another student's result.");
+                }
+            }
+
+            // Existing flow
             var result = await _resultRepository.GetStudentResultAsync(
                 resultBatchId,
                 studentId);
 
             if (result == null)
             {
-                throw new Exception("Student result not found.");
+                return null;
             }
 
-            return _mapper.Map<StudentResultDTO>(result);
+            return new StudentResultDTO
+            {
+                ResultId = result.Id,
+                StudentId = result.StudentId,
+
+                AdmissionNumber =
+                    result.Student.AdmissionNumber ?? string.Empty,
+
+                StudentName =
+                    $"{result.Student.FirstName} {result.Student.LastName}".Trim(),
+
+                TotalMarks = result.TotalMarks,
+                ObtainedMarks = result.ObtainedMarks,
+                Percentage = result.Percentage,
+                Grade = result.Grade,
+                Rank = result.Rank,
+                ResultStatus = result.ResultStatus,
+
+                PdfFileName = result.PdfFileName,
+                PdfFilePath = result.PdfFilePath,
+                PublishedDate = result.PublishedDate,
+
+                Subjects = result.ResultDetails.Select(x => new ResultDetailDTO
+                {
+                    SubjectId = x.SubjectId,
+                    SubjectName = x.Subject.SubjectName,
+                    MaxMarks = x.MaxMarks,
+                    ObtainedMarks = x.ObtainedMarks,
+                    Grade = x.Grade,
+                    Remarks = x.Remarks
+                }).ToList()
+            };
         }
         public async Task<List<StudentResultDTO>> GetBatchResultsAsync(int resultBatchId)
         {
@@ -286,10 +363,65 @@ namespace Service.ClassOfService
         #region Result Detail
         public async Task<List<ResultDetailDTO>> GetResultDetailsAsync(int resultId)
         {
+            var currentUserId = _currentUserService.UserId;
+
+            if (string.IsNullOrWhiteSpace(currentUserId))
+            {
+                throw new UnauthorizedAccessException(
+                    "User is not authenticated.");
+            }
+
+            // Get result first
+            var result = await _resultRepository.GetResultByIdAsync(resultId);
+
+            if (result == null)
+            {
+                throw new Exception("Result not found.");
+            }
+
+            // Get logged-in student
+            var loggedInStudent = await _studentRepository.GetAsync(
+                x => x.UserId == currentUserId);
+
+            if (loggedInStudent == null)
+            {
+                throw new Exception(
+                    "Student record not found for the logged-in user.");
+            }
+
+            // Get logged-in user
+            var user = await _userRepository.GetAsync(
+                x => x.Id == currentUserId);
+
+            if (user == null)
+            {
+                throw new Exception("User not found.");
+            }
+
+            // Student can only see his own Result Detail
+            if (user.UserTypeId == 5)
+            {
+                if (result.StudentId != loggedInStudent.Id)
+                {
+                    throw new UnauthorizedAccessException(
+                        "You are not authorized to view another student's result details.");
+                }
+            }
+
+            // Existing Result Detail flow
             var details = await _resultRepository.GetResultDetailsAsync(resultId);
 
-            return _mapper.Map<List<ResultDetailDTO>>(details);
+            return details.Select(x => new ResultDetailDTO
+            {
+                SubjectId = x.SubjectId,
+                SubjectName = x.Subject.SubjectName,
+                MaxMarks = x.MaxMarks,
+                ObtainedMarks = x.ObtainedMarks,
+                Grade = x.Grade,
+                Remarks = x.Remarks
+            }).ToList();
         }
+
 
         public async Task<bool> UploadStudentResultAsync(ResultUploadDTO dto)
         {
@@ -333,6 +465,10 @@ namespace Service.ClassOfService
             };
 
 
+            // ==========================================
+            // CALCULATE TOTAL MARKS
+            // ==========================================
+
             result.TotalMarks =
                 dto.Subjects.Sum(x => x.MaxMarks);
 
@@ -341,15 +477,27 @@ namespace Service.ClassOfService
                 dto.Subjects.Sum(x => x.ObtainedMarks);
 
 
+            // ==========================================
+            // CALCULATE PERCENTAGE
+            // ==========================================
+
             result.Percentage =
                 result.TotalMarks == 0
                 ? 0
                 : (result.ObtainedMarks / result.TotalMarks) * 100;
 
 
+            // ==========================================
+            // CALCULATE GRADE
+            // ==========================================
+
             result.Grade =
                 CalculateGrade(result.Percentage);
 
+
+            // ==========================================
+            // RESULT STATUS
+            // ==========================================
 
             result.ResultStatus =
                 result.Percentage >= 33
@@ -357,9 +505,121 @@ namespace Service.ClassOfService
                 : "Fail";
 
 
+            // ==========================================
+            // PDF UPLOAD
+            // ==========================================
+
+            if (dto.PdfFile != null && dto.PdfFile.Length > 0)
+            {
+                // Only PDF allowed
+                if (!string.Equals(
+                        Path.GetExtension(dto.PdfFile.FileName),
+                        ".pdf",
+                        StringComparison.OrdinalIgnoreCase))
+                {
+                    throw new Exception("Only PDF files are allowed.");
+                }
+
+
+                // Maximum 10 MB
+                const long maxFileSize = 10 * 1024 * 1024;
+
+                if (dto.PdfFile.Length > maxFileSize)
+                {
+                    throw new Exception(
+                        "PDF file size cannot exceed 10 MB.");
+                }
+
+
+                // ==========================================
+                // WWWROOT PATH
+                // ==========================================
+
+                string webRootPath = _environment.WebRootPath;
+
+                if (string.IsNullOrWhiteSpace(webRootPath))
+                {
+                    webRootPath = Path.Combine(
+                        _environment.ContentRootPath,
+                        "wwwroot");
+                }
+
+
+                // ==========================================
+                // RESULTS FOLDER
+                // ==========================================
+
+                string resultsFolder = Path.Combine(
+                    webRootPath,
+                    "Results");
+
+
+                if (!Directory.Exists(resultsFolder))
+                {
+                    Directory.CreateDirectory(resultsFolder);
+                }
+
+
+                // ==========================================
+                // ORIGINAL FILE NAME
+                // ==========================================
+
+                string originalFileName =
+                    Path.GetFileName(dto.PdfFile.FileName);
+
+
+                // ==========================================
+                // UNIQUE FILE NAME
+                // ==========================================
+
+                string storedFileName =
+                    $"{Guid.NewGuid()}.pdf";
+
+
+                // ==========================================
+                // PHYSICAL FILE PATH
+                // ==========================================
+
+                string physicalFilePath =
+                    Path.Combine(
+                        resultsFolder,
+                        storedFileName);
+
+
+                // ==========================================
+                // SAVE PDF
+                // ==========================================
+
+                using (var stream = new FileStream(
+                    physicalFilePath,
+                    FileMode.Create))
+                {
+                    await dto.PdfFile.CopyToAsync(stream);
+                }
+
+
+                // ==========================================
+                // STORE PDF INFORMATION IN DATABASE
+                // ==========================================
+
+                result.PdfFileName =
+                    originalFileName;
+
+                result.PdfFilePath =
+                    $"/Results/{storedFileName}";
+            }
+
+
+            // ==========================================
+            // SAVE RESULT
+            // ==========================================
+
             await _resultCrudRepository.CreateAsync(result);
 
 
+            // ==========================================
+            // RESULT DETAILS
+            // ==========================================
 
             foreach (var item in dto.Subjects)
             {
@@ -375,6 +635,8 @@ namespace Service.ClassOfService
 
             return true;
         }
+
+
 
         public async Task<bool> UpdateStudentResultAsync(ResultUploadDTO dto)
         {
@@ -499,6 +761,40 @@ namespace Service.ClassOfService
 
             return await _resultRepository
                 .GetResultDropdownAsync(resultBatchId);
+        }
+
+
+        public async Task<List<DropdownDTO>> GetStudentResultDropdownAsync(int resultBatchId)
+        {
+            if (resultBatchId <= 0)
+            {
+                throw new ArgumentException(
+                    "Invalid Result Batch Id.");
+            }
+
+            // Logged-in User Id
+            var currentUserId = _currentUserService.UserId;
+
+            if (string.IsNullOrWhiteSpace(currentUserId))
+            {
+                throw new UnauthorizedAccessException(
+                    "User is not authenticated.");
+            }
+
+            // Find Student using UserId
+            var student = await _studentRepository.GetAsync(
+                x => x.UserId == currentUserId);
+
+            if (student == null)
+            {
+                throw new Exception(
+                    "Student record not found for the logged-in user.");
+            }
+
+            // Get only this student's result
+            return await _resultRepository.GetStudentResultDropdownAsync(
+                resultBatchId,
+                student.Id);
         }
 
 

@@ -1,4 +1,4 @@
-﻿
+
 using AutoMapper;
 using CollegeApp.Data;
 using CollegeApp.Models;
@@ -47,6 +47,25 @@ namespace CollegeApp.Configuration
                 .ReverseMap();
 
             CreateMap<Student, GetStudentDTO>()
+                .ForMember(dest => dest.CreatedByName, opt => opt.MapFrom(src => src.CreatedByUser != null ? src.CreatedByUser.Username : src.CreatedBy))
+                .ForMember(dest => dest.UpdatedByName, opt => opt.MapFrom(src => src.UpdatedByUser != null ? src.UpdatedByUser.Username : src.UpdatedBy))
+                .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src.Department != null ? src.Department.DepartmentName : null))
+                .ForMember(dest => dest.ClassName, opt => opt.MapFrom(src => src.SchoolClass != null ? src.SchoolClass.ClassName : null))
+                .ForMember(dest => dest.SectionName, opt => opt.MapFrom(src => src.Section != null ? src.Section.SectionName : null))
+                .ForMember(dest => dest.AcademicYearId, opt => opt.MapFrom(src => src.StudentAcademicYears.OrderByDescending(say => say.AcademicYear != null ? say.AcademicYear.StartDate : DateTime.MinValue).Select(say => (int?)say.AcademicYearId).FirstOrDefault()))
+                .ForMember(dest => dest.AcademicYearName, opt => opt.MapFrom(src => src.StudentAcademicYears.OrderByDescending(say => say.AcademicYear != null ? say.AcademicYear.StartDate : DateTime.MinValue).Select(say => say.AcademicYear != null ? say.AcademicYear.YearName : "").FirstOrDefault()))
+                .ForMember(dest => dest.RollNumber, opt => opt.MapFrom(src => src.StudentAcademicYears.OrderByDescending(say => say.AcademicYear != null ? say.AcademicYear.StartDate : DateTime.MinValue).Select(say => say.RollNumber).FirstOrDefault()))
+                .ForMember(dest => dest.AcademicHistory, opt => opt.MapFrom(src => src.StudentAcademicYears))
+                .ReverseMap();
+
+            CreateMap<StudentAcademicYear, StudentAcademicYearDTO>()
+                .ForMember(dest => dest.StudentName, opt => opt.MapFrom(src => src.Student != null ? (src.Student.FirstName + " " + (src.Student.MiddleName ?? "") + " " + src.Student.LastName).Trim() : ""))
+                .ForMember(dest => dest.AdmissionNumber, opt => opt.MapFrom(src => src.Student != null ? src.Student.AdmissionNumber : ""))
+                .ForMember(dest => dest.Photo, opt => opt.MapFrom(src => src.Student != null ? src.Student.Photo : null))
+                .ForMember(dest => dest.AcademicYearName, opt => opt.MapFrom(src => src.AcademicYear != null ? src.AcademicYear.YearName : ""))
+                .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src.Department != null ? src.Department.DepartmentName : ""))
+                .ForMember(dest => dest.ClassName, opt => opt.MapFrom(src => src.SchoolClass != null ? src.SchoolClass.ClassName : ""))
+                .ForMember(dest => dest.SectionName, opt => opt.MapFrom(src => src.Section != null ? src.Section.SectionName : ""))
                 .ReverseMap();
 
             CreateMap<Student, PatchStudentDTO>()
@@ -91,12 +110,32 @@ namespace CollegeApp.Configuration
             // =====================================================
 
             CreateMap<NonTeachingStaff, GetNonTeachingStaffDTO>()
+                .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => src.DateOfBirth.ToString("yyyy-MM-dd")))
+                .ForMember(dest => dest.JoiningDate, opt => opt.MapFrom(src => src.JoiningDate.ToString("yyyy-MM-ddTHH:mm:ss")))
+                .ForMember(dest => dest.FatherName, opt => opt.MapFrom(src => src.FatherName))
+                .ForMember(dest => dest.MotherName, opt => opt.MapFrom(src => src.MotherName))
+                .ForMember(dest => dest.Photo, opt => opt.MapFrom(src => src.Photo))
+                .ForMember(dest => dest.EducationPdf, opt => opt.MapFrom(src => src.EducationPdf))
+                .ForMember(dest => dest.EducationFileName, opt => opt.MapFrom(src => src.EducationFileName))
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User != null ? src.User.Username : null))
+                .ForMember(dest => dest.RoleName, opt => opt.MapFrom(src => src.User != null && src.User.UserRoleMappings != null && src.User.UserRoleMappings.Any() ? src.User.UserRoleMappings.Select(urm => urm.Role != null ? urm.Role.RoleName : "").FirstOrDefault() : null))
+                .ForMember(dest => dest.RoleName, opt => opt.MapFrom(src => src.User != null && src.User.UserRoleMappings != null && src.User.UserRoleMappings.Any() ? src.User.UserRoleMappings.Where(urm => urm.Role != null && !string.IsNullOrEmpty(urm.Role.RoleName)).Select(urm => urm.Role.RoleName).FirstOrDefault() : null))
                 .ReverseMap();
 
-            CreateMap<NonTeachingStaff, CreateNonTeachingStaffDTO>()
+            CreateMap<CreateNonTeachingStaffDTO, NonTeachingStaff>()
+                .ForMember(dest => dest.FatherName, opt => opt.MapFrom(src => src.FatherName))
+                .ForMember(dest => dest.MotherName, opt => opt.MapFrom(src => src.MotherName))
+                .ForMember(dest => dest.Photo, opt => opt.MapFrom(src => src.Photo))
+                .ForMember(dest => dest.EducationPdf, opt => opt.MapFrom(src => src.EducationPdf))
+                .ForMember(dest => dest.EducationFileName, opt => opt.MapFrom(src => src.EducationFileName))
                 .ReverseMap();
 
             CreateMap<NonTeachingStaff, UpdateNonTeachingStaffDTO>()
+                .ForMember(dest => dest.FatherName, opt => opt.MapFrom(src => src.FatherName))
+                .ForMember(dest => dest.MotherName, opt => opt.MapFrom(src => src.MotherName))
+                .ForMember(dest => dest.Photo, opt => opt.MapFrom(src => src.Photo))
+                .ForMember(dest => dest.EducationPdf, opt => opt.MapFrom(src => src.EducationPdf))
+                .ForMember(dest => dest.EducationFileName, opt => opt.MapFrom(src => src.EducationFileName))
                 .ReverseMap();
 
 
@@ -130,19 +169,19 @@ namespace CollegeApp.Configuration
             CreateMap<FeeStructure, GetFeeStructureDTO>()
                 .ForMember(dest => dest.AcademicYearName,
                     opt => opt.MapFrom(src =>
-                        src.AcademicYear.YearName))
+                        src.AcademicYear != null ? src.AcademicYear.YearName : ""))
 
                 .ForMember(dest => dest.DepartmentName,
                     opt => opt.MapFrom(src =>
-                        src.Department.DepartmentName))
+                        src.Department != null ? src.Department.DepartmentName : ""))
 
                 .ForMember(dest => dest.ClassName,
                     opt => opt.MapFrom(src =>
-                        src.SchoolClass.ClassName))
+                        src.SchoolClass != null ? src.SchoolClass.ClassName : ""))
 
                 .ForMember(dest => dest.FeeCategoryName,
                     opt => opt.MapFrom(src =>
-                        src.FeeCategory.CategoryName))
+                        src.FeeCategory != null ? src.FeeCategory.CategoryName : ""))
 
                 .ReverseMap();
 
@@ -161,13 +200,7 @@ namespace CollegeApp.Configuration
                 .ReverseMap();
 
             CreateMap<StudentFee, GetStudentFeeDTO>()
-                .ForMember(dest => dest.StudentName,
-                    opt => opt.MapFrom(src =>
-                        src.Student.FirstName
-                        + " "
-                        + (src.Student.MiddleName ?? "")
-                        + " "
-                        + src.Student.LastName))
+                .ForMember(dest => dest.StudentName, opt => opt.Ignore())
                 .ReverseMap();
 
 
@@ -422,32 +455,22 @@ namespace CollegeApp.Configuration
             // -----------------------------------------------------
 
             CreateMap<AttendanceDetail, AttendanceStudentDTO>()
-
-                // SrNo is UI-only.
-                // It is not stored in database.
                 .ForMember(dest => dest.SrNo,
                     opt => opt.Ignore())
-
                 .ForMember(dest => dest.StudentId,
                     opt => opt.MapFrom(src =>
                         src.StudentId))
-
                 .ForMember(dest => dest.AdmissionNumber,
                     opt => opt.MapFrom(src =>
-                        src.Student.AdmissionNumber))
-
+                        src.Student != null ? src.Student.AdmissionNumber : ""))
                 .ForMember(dest => dest.StudentName,
                     opt => opt.MapFrom(src =>
-                        src.Student.FirstName
-                        + " "
-                        + (src.Student.MiddleName ?? "")
-                        + " "
-                        + src.Student.LastName))
-
+                        src.Student != null
+                            ? (src.Student.FirstName + " " + (src.Student.MiddleName ?? "") + " " + src.Student.LastName).Trim()
+                            : ""))
                 .ForMember(dest => dest.AttendanceStatus,
                     opt => opt.MapFrom(src =>
                         src.AttendanceStatus))
-
                 .ForMember(dest => dest.Remarks,
                     opt => opt.MapFrom(src =>
                         src.Remarks));

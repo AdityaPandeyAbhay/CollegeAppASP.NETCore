@@ -1,4 +1,4 @@
-﻿using CollegeApp.Data;
+using CollegeApp.Data;
 using Data.Data;
 using Microsoft.EntityFrameworkCore;
 using Model.Models;
@@ -248,13 +248,9 @@ namespace Repository.ClassOfRepository
                 {
                     Id = x.Id,
                     Code = null,
-
-                    // Use IDs here until we use the actual
-                    // display-name properties from your entities.
-                    Text =
-                        "Academic Year ID: " + x.AcademicYearId
-                        + " - Class ID: " + x.ClassId
-                        + " - Section ID: " + x.SectionId
+                    Text = (x.AcademicYear != null ? x.AcademicYear.YearName : "")
+                        + " - " + (x.SchoolClass != null ? x.SchoolClass.ClassName : "")
+                        + " - " + (x.Section != null ? x.Section.SectionName : "")
                 })
                 .OrderBy(x => x.Text)
                 .ToListAsync();
@@ -272,6 +268,33 @@ namespace Repository.ClassOfRepository
                 .Where(x => x.ResultBatchId == resultBatchId)
                 .Include(x => x.Student)
                 .OrderBy(x => x.Student.FirstName)
+                .Select(x => new DropdownDTO
+                {
+                    Id = x.Id,
+
+                    Code = x.Student.AdmissionNumber,
+
+                    Text =
+                        x.Student.FirstName
+                        + " "
+                        + (x.Student.LastName ?? "")
+                })
+                .ToListAsync();
+        }
+
+        // Only for the specific student, to avoid duplicates in the dropdown
+
+
+        public async Task<List<DropdownDTO>> GetStudentResultDropdownAsync(
+    int resultBatchId,
+    int studentId)
+        {
+            return await _dbContext.Results
+                .AsNoTracking()
+                .Where(x =>
+                    x.ResultBatchId == resultBatchId &&
+                    x.StudentId == studentId)
+                .Include(x => x.Student)
                 .Select(x => new DropdownDTO
                 {
                     Id = x.Id,
