@@ -14,7 +14,7 @@ import {
 } from "../../Services/nonTeachingStaffService";
 import { getAllStudents } from "../../Services/studentService";
 import { formatFileUrl } from "../../Utils/fileHelper";
-import UserProfileModal from "../../Components/Common/UserProfileModal";
+import UserProfileModal from "../../components/Common/UserProfileModal";
 
 import "./Navbar.css";
 

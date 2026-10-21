@@ -26,7 +26,7 @@ import {
   openPhotoInNewTab,
   openPdfInNewTab,
 } from "../../../Utils/fileHelper";
-import QuickRegisterUserCard from "../../../Components/Common/QuickRegisterUserCard";
+import QuickRegisterUserCard from "../../../components/Common/QuickRegisterUserCard";
 import "./CreateTeacher.css";
 
 const CreateTeacher = () => {

@@ -28,7 +28,7 @@ import {
   generateFeeReceiptPdf,
   generateFeeStatementPdf,
 } from "../../Utils/generateFeeReceiptPdf";
-import UserProfileModal from "../../Components/Common/UserProfileModal";
+import UserProfileModal from "../../components/Common/UserProfileModal";
 
 function StudentDashboard() {
   const navigate = useNavigate();

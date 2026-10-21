@@ -52,7 +52,7 @@ import AdminDashboard from "./Deshboard/Admin/AdminDashboard.jsx";
 
 import TeacherDashboard from "./Deshboard/Teacher/TeacherDashboard.jsx";
 
-import StudentDashboard from "./Deshboard/Student/StudentDashBoard.jsx";
+import StudentDashboard from "./Deshboard/Student/StudentDashboard.jsx";
 
 import OperatorDashboard from "./Deshboard/Operator/OperatorDashboard.jsx";
 

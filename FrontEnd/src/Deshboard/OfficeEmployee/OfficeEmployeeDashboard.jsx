@@ -10,7 +10,7 @@ import {
   getSavedStaffExtraFields,
 } from "../../Services/nonTeachingStaffService";
 import { formatFileUrl } from "../../Utils/fileHelper";
-import UserProfileModal from "../../Components/Common/UserProfileModal";
+import UserProfileModal from "../../components/Common/UserProfileModal";
 import SchoolVisionMission from "../../components/Common/SchoolVisionMission";
 
 function OfficeEmployeeDashboard() {

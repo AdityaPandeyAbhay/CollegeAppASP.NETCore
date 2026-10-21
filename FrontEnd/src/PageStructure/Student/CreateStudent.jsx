@@ -34,7 +34,7 @@ import {
 } from "../../Services/nonTeachingStaffService";
 
 import { getAllAcademicYear } from "../../Services/academicYearService";
-import QuickRegisterUserCard from "../../Components/Common/QuickRegisterUserCard";
+import QuickRegisterUserCard from "../../components/Common/QuickRegisterUserCard";
 import "./CreateStudent.css";
 
 const CreateStudent = () => {

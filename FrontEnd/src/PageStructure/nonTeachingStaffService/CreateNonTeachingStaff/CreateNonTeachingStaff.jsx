@@ -30,7 +30,7 @@ import {
   openPdfInNewTab,
 } from "../../../Utils/fileHelper";
 import { isOperatorRole, isOperatorRecord } from "../../../Utils/auth";
-import QuickRegisterUserCard from "../../../Components/Common/QuickRegisterUserCard";
+import QuickRegisterUserCard from "../../../components/Common/QuickRegisterUserCard";
 import "./CreateNonTeachingStaff.css";
 
 const NON_TEACHING_STAFF_USER_TYPE_ID = 4;
