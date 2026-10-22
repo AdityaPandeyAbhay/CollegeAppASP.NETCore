@@ -474,41 +474,6 @@ function OfficeEmployeeDashboard() {
           SIDEBAR
       ===================================================== */}
       <aside className="dashboard-sidebar">
-        {/* EMPLOYEE TITLE & PROFILE CARD */}
-        <div className="office-sidebar-profile-header">
-          <h2>Office Panel</h2>
-          <span className="office-panel-subtitle">{employeeFullName}</span>
-
-          {/* CIRCLE PROFILE BUTTON */}
-          <div
-            className="office-circle-avatar-container"
-            onClick={() => setProfileModalOpen(true)}
-            title="Click to view full Office Employee Profile"
-          >
-            {employeePhoto ? (
-              <img
-                src={formatFileUrl(employeePhoto)}
-                alt={employeeFullName}
-                className="office-round-circle-img"
-              />
-            ) : (
-              <div className="office-round-circle-placeholder">
-                {String(employeeFullName || username || "E")
-                  .charAt(0)
-                  .toUpperCase()}
-              </div>
-            )}
-            <span className="avatar-online-dot"></span>
-          </div>
-          <button
-            type="button"
-            className="office-view-profile-btn"
-            onClick={() => setProfileModalOpen(true)}
-          >
-            👤 My Profile
-          </button>
-        </div>
-
         {/* DASHBOARD LINK */}
         <button onClick={() => navigate("/dashboard/office-employee")}>
           Dashboard
@@ -999,45 +964,6 @@ function OfficeEmployeeDashboard() {
           MAIN DASHBOARD CONTENT
       ===================================================== */}
       <main className="dashboard-content">
-        <div className="office-dashboard-welcome-banner">
-          <div className="welcome-text-side">
-            <h1>
-              Welcome, {employeeFullName || username || "Office Employee"}
-            </h1>
-            <p>
-              Office Staff Control Center - Full access to institutional
-              records, student management, attendance, fee collections, and
-              examination results.
-            </p>
-          </div>
-
-          {/* Quick Profile Widget */}
-          <div
-            className="office-quick-profile-widget"
-            onClick={() => setProfileModalOpen(true)}
-            title="Click to view Office Employee Profile Card"
-          >
-            <div className="widget-avatar-circle">
-              {employeePhoto ? (
-                <img
-                  src={formatFileUrl(employeePhoto)}
-                  alt={employeeFullName}
-                />
-              ) : (
-                <div className="widget-avatar-placeholder">
-                  {String(employeeFullName || username || "E")
-                    .charAt(0)
-                    .toUpperCase()}
-                </div>
-              )}
-            </div>
-            <div className="widget-user-info">
-              <strong>{employeeFullName}</strong>
-              <span>🏷️ Office Profile ➔</span>
-            </div>
-          </div>
-        </div>
-
         <SchoolVisionMission />
       </main>
 

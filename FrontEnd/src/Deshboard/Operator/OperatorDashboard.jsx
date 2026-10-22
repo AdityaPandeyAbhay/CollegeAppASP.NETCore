@@ -469,41 +469,6 @@ function OperatorDashboard() {
           SIDEBAR
       ===================================================== */}
       <aside className="dashboard-sidebar">
-        {/* OPERATOR TITLE & PROFILE CARD */}
-        <div className="operator-sidebar-profile-header">
-          <h2>Operator Panel</h2>
-          <span className="operator-panel-subtitle">{operatorFullName}</span>
-
-          {/* CIRCLE PROFILE BUTTON (Between Dashboard Header & Controls) */}
-          <div
-            className="operator-circle-avatar-container"
-            onClick={() => setProfileModalOpen(true)}
-            title="Click to view full 75% Operator Profile"
-          >
-            {operatorPhoto ? (
-              <img
-                src={formatFileUrl(operatorPhoto)}
-                alt={operatorFullName}
-                className="operator-round-circle-img"
-              />
-            ) : (
-              <div className="operator-round-circle-placeholder">
-                {String(operatorFullName || username || "O")
-                  .charAt(0)
-                  .toUpperCase()}
-              </div>
-            )}
-            <span className="avatar-online-dot"></span>
-          </div>
-          <button
-            type="button"
-            className="operator-view-profile-btn"
-            onClick={() => setProfileModalOpen(true)}
-          >
-            👤 My Profile
-          </button>
-        </div>
-
         {/* DASHBOARD LINK */}
         <button onClick={() => navigate("/dashboard/operator")}>
           Dashboard
@@ -1003,42 +968,6 @@ function OperatorDashboard() {
           MAIN DASHBOARD CONTENT
       ===================================================== */}
       <main className="dashboard-content">
-        <div className="operator-dashboard-welcome-banner">
-          <div className="welcome-text-side">
-            <h1>Welcome, {operatorFullName || username || "Operator"}</h1>
-            <p>
-              Operator Control Center - Manage academic records, student
-              results, departments, staff, and institutional operations.
-            </p>
-          </div>
-
-          {/* Quick Profile Widget (Between Dashboard Title & Metrics) */}
-          <div
-            className="operator-quick-profile-widget"
-            onClick={() => setProfileModalOpen(true)}
-            title="Click to view 75% Operator Profile Card"
-          >
-            <div className="widget-avatar-circle">
-              {operatorPhoto ? (
-                <img
-                  src={formatFileUrl(operatorPhoto)}
-                  alt={operatorFullName}
-                />
-              ) : (
-                <div className="widget-avatar-placeholder">
-                  {String(operatorFullName || username || "O")
-                    .charAt(0)
-                    .toUpperCase()}
-                </div>
-              )}
-            </div>
-            <div className="widget-user-info">
-              <strong>{operatorFullName}</strong>
-              <span>🏷️ Operator Profile ➔</span>
-            </div>
-          </div>
-        </div>
-
         <SchoolVisionMission />
       </main>
 
