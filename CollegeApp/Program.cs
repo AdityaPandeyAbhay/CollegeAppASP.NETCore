@@ -183,13 +183,23 @@ app.UseSwaggerUI(options =>
     options.RoutePrefix = "swagger"; // Serves Swagger UI at /swagger
 });
 
-app.UseHttpsRedirection();
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path == "/" || string.IsNullOrEmpty(context.Request.Path.Value))
+    {
+        context.Response.Redirect("/swagger/index.html", permanent: false);
+        return;
+    }
+    await next();
+});
+
+// app.UseHttpsRedirection(); // Disabled for free hosting HTTP compatibility
 
 app.UseCors("AllowFrontend");
+app.UseDefaultFiles();
 app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
-
 
 app.MapGet("/", () => Results.Redirect("/swagger/index.html"));
 app.MapControllers();
