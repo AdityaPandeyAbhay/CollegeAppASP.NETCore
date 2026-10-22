@@ -250,7 +250,7 @@ import { getToken } from "../Utils/auth";
 // BASE API URL
 // =====================================================
 
-const API_URL = "https://localhost:7164/api/";
+const API_URL = "/api/";
 
 // =====================================================
 // COMMON JSON HEADERS

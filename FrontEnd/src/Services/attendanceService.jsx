@@ -4,7 +4,7 @@
 
 import { getToken } from "../Utils/auth";
 
-const API_URL = "https://localhost:7164/api/Attendance/";
+const API_URL = "/api/Attendance/";
 
 const getHeaders = () => {
   const token = getToken();

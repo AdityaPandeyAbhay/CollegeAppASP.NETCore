@@ -3,7 +3,7 @@
 // Handles Image Compression, PDF Base64 Reading, and Safe Previews
 // =====================================================
 
-const API_BASE_URL = "https://localhost:7164";
+const API_BASE_URL = "";
 
 /**
  * Format relative photo/document URLs into full URL or data URI

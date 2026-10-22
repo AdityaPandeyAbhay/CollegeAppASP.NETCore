@@ -1,4 +1,4 @@
-const API_URL = "https://localhost:7164/api";
+const API_URL = "/api";
 
 export const loginUser = async (loginData) => {
 

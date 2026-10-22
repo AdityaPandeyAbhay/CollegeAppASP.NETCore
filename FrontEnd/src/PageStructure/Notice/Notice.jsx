@@ -10,7 +10,7 @@ function Notice() {
   // Backend API URL
   // Change this according to your ASP.NET Core API port
   // =====================================================
-  const API_URL = "https://localhost:7164";
+  const API_URL = "";
 
   // =====================================================
   // Get All Published Notices

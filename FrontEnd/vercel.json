@@ -1,6 +1,18 @@
 {
   "rewrites": [
     {
+      "source": "/api/:path*",
+      "destination": "http://collegeapp-api.runasp.net/api/:path*"
+    },
+    {
+      "source": "/Notices/:path*",
+      "destination": "http://collegeapp-api.runasp.net/Notices/:path*"
+    },
+    {
+      "source": "/Results/:path*",
+      "destination": "http://collegeapp-api.runasp.net/Results/:path*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

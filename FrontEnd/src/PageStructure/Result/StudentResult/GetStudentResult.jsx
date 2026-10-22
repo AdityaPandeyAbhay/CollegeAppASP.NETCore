@@ -723,7 +723,7 @@ const GetStudentResult = () => {
     ) {
       const fullUrl = serverPath.startsWith("http")
         ? serverPath
-        : `https://localhost:7164${serverPath.startsWith("/") ? "" : "/"}${serverPath}`;
+        : `${serverPath.startsWith("/") ? "" : "/"}${serverPath}`;
       window.open(fullUrl, "_blank");
       return;
     }

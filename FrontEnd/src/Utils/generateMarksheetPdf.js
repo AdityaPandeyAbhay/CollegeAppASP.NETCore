@@ -88,7 +88,7 @@ export const convertImageToDataUrl = async (url) => {
   const fullUrl =
     trimmed.startsWith("http://") || trimmed.startsWith("https://") || trimmed.startsWith("blob:")
       ? trimmed
-      : `https://localhost:7164/${trimmed.startsWith("/") ? trimmed.slice(1) : trimmed}`;
+      : `/${trimmed.startsWith("/") ? trimmed.slice(1) : trimmed}`;
 
   if (typeof window === "undefined" || typeof Image === "undefined") return null;
 

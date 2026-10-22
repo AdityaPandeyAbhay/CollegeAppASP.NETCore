@@ -11,5 +11,19 @@ export default defineConfig({
       usePolling: true,
       interval: 100,
     },
+    proxy: {
+      '/api': {
+        target: 'http://collegeapp-api.runasp.net',
+        changeOrigin: true,
+      },
+      '/Notices': {
+        target: 'http://collegeapp-api.runasp.net',
+        changeOrigin: true,
+      },
+      '/Results': {
+        target: 'http://collegeapp-api.runasp.net',
+        changeOrigin: true,
+      },
+    },
   },
 })

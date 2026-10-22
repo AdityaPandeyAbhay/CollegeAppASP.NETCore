@@ -182,7 +182,7 @@ import { enrollStudent } from "./studentPromotionService";
 // BASE API URL
 // =====================================================
 
-const API_URL = "https://localhost:7164/api/";
+const API_URL = "/api/";
 
 // =====================================================
 // COMMON HEADERS
@@ -736,7 +736,7 @@ export const formatPhotoUrl = (photo) => {
 
   const cleanPath = trimmed.startsWith("/") ? trimmed.substring(1) : trimmed;
 
-  return `https://localhost:7164/${cleanPath}`;
+  return `/${cleanPath}`;
 };
 
 // =====================================================
@@ -844,7 +844,7 @@ export const openPhotoInNewTab = (photoUrl) => {
   ) {
     const cleanPath = url.startsWith("/") ? url.substring(1) : url;
 
-    url = `https://localhost:7164/${cleanPath}`;
+    url = `/${cleanPath}`;
   }
 
   const newWindow = window.open("", "_blank");
