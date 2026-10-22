@@ -174,6 +174,8 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
+app.UseDeveloperExceptionPage();
+
 // Configure the HTTP request pipeline.
 // Enable Swagger in all environments so https://localhost:7164/swagger/index.html is always accessible
 app.UseSwagger();
